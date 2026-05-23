@@ -76,6 +76,11 @@ fn show_shortcuts_placement(app: tauri::AppHandle) {
 }
 
 #[tauri::command]
+fn show_settings_window(app: tauri::AppHandle) {
+    show_settings(&app);
+}
+
+#[tauri::command]
 fn hide_shortcuts(app: tauri::AppHandle) {
     if let Some(window) = app.get_webview_window("shortcuts") {
         let _ = window.hide();
@@ -144,6 +149,7 @@ pub fn run() {
             open_latest_release,
             open_repository,
             show_shortcuts_placement,
+            show_settings_window,
             hide_shortcuts
         ])
         .run(tauri::generate_context!())

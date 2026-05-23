@@ -193,6 +193,14 @@ async function openRepository(): Promise<void> {
   }
 }
 
+async function showSettingsWindow(): Promise<void> {
+  try {
+    await invoke("show_settings_window");
+  } catch {
+    // The browser preview has no native settings window.
+  }
+}
+
 async function checkForUpdates(silent = false): Promise<void> {
   if (!isSettingsWindow) {
     return;
@@ -264,6 +272,16 @@ async function handleUpdateAction(): Promise<void> {
 
 function formatUpdateLabel(template: string): string {
   return template.replace("{version}", updateVersion ?? appInfo.version);
+}
+
+function updateStatusClassName(): string {
+  const classes = [updateStateClass(updateStatus)];
+
+  if (updateStatus === "checking" || updateStatus === "installing") {
+    classes.push("state-progress");
+  }
+
+  return classes.filter(Boolean).join(" ");
 }
 
 function updateStatusText(): string {
@@ -426,8 +444,11 @@ function renderSettings(): string {
             .join("")}
         </nav>
         <button type="button" class="settings-sidebar-footer" id="check-update-sidebar">
-          <span>${labels.settings.update}</span>
-          <small class="${updateStateClass(updateStatus)}">${formatUpdateLabel(labels.settings.updateCheck)}</small>
+          <span class="settings-sidebar-update-title">
+            <span>${labels.settings.update}</span>
+            <small class="settings-sidebar-version">Version ${appInfo.version}</small>
+          </span>
+          <small class="${updateStatusClassName()}">${updateStatusText()}</small>
         </button>
       </aside>
       <main class="settings-page">
@@ -527,7 +548,7 @@ function renderSettingsTab(): string {
         ${renderLinkRow(labels.settings.repository, repositoryUrl, "open-repository")}
         <button type="button" class="link-button settings-update" id="check-update">
           <span>${labels.settings.update}</span>
-          <small class="${updateStateClass(updateStatus)}">${updateStatusText()}</small>
+          <small class="${updateStatusClassName()}">${updateStatusText()}</small>
         </button>
       </section>
     `;
@@ -664,6 +685,7 @@ async function confirmPlacement(): Promise<void> {
   panelMode = "shortcuts";
   await setPanelKeepVisible(false);
   await hideShortcutsWindow();
+  await showSettingsWindow();
 }
 
 async function cancelPlacement(): Promise<void> {
