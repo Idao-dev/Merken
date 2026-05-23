@@ -1,0 +1,81 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Merken",
+  "version": "0.1.0",
+  "identifier": "fr.merken.desktop",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devUrl": "http://127.0.0.1:1420",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "shortcuts",
+        "title": "Merken",
+        "width": 540,
+        "height": 680,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "alwaysOnTop": true,
+        "shadow": false
+      },
+      {
+        "label": "settings",
+        "title": "Merken Options",
+        "width": 860,
+        "height": 640,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "alwaysOnTop": true,
+        "shadow": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["nsis"],
+    "licenseFile": "../EULA-installer.txt",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "publisher": "Idao",
+    "category": "Utility",
+    "shortDescription": "Assistant flottant de raccourcis clavier",
+    "longDescription": "Merken affiche des fiches de raccourcis clavier locales depuis la zone de notification.",
+    "windows": {
+      "nsis": {
+        "displayLanguageSelector": true,
+        "installMode": "currentUser",
+        "installerIcon": "icons/icon.ico",
+        "uninstallerIcon": "icons/icon.ico",
+        "languages": ["French", "English"]
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDhBNEQwMDczMjg4RUQwMEIKUldRTDBJNG9jd0JOaXF4YUNyeVhSQmdyOFFLODBhM29GZXF3L0tsT3Jjd29XU1BnWVNvTFFmOXQK",
+      "endpoints": [
+        "https://github.com/Idao-dev/Merken/releases/latest/download/latest.json"
+      ],
+      "windows": {
+        "installMode": "passive"
+      }
+    }
+  }
+}

@@ -1,0 +1,170 @@
+CONTRAT DE LICENCE UTILISATEUR FINAL - MERKEN
+
+Copyright (c) 2026 Eric Boyer. Tous droits reserves.
+
+1. Acceptation
+
+En installant ou en utilisant Merken, vous acceptez le present contrat de licence utilisateur final.
+
+Si vous n'acceptez pas ces conditions, vous ne devez pas installer ni utiliser le logiciel.
+
+2. Logiciel concerne
+
+Le present contrat concerne Merken, ci-apres "le Logiciel".
+
+Le Logiciel comprend les executables, l'installateur, l'interface, les textes, la documentation, les fichiers de raccourcis clavier et les contenus fournis avec les versions officielles.
+
+3. Utilisation gratuite
+
+Le Logiciel est distribue gratuitement.
+
+Vous pouvez installer et utiliser gratuitement les versions officielles du Logiciel, a titre personnel ou professionnel.
+
+Vous pouvez recommander le Logiciel librement.
+
+4. Code source consultable et contributions
+
+Le code source du projet peut etre publie sur GitHub pour la transparence, l'audit, l'apprentissage et les contributions au projet officiel.
+
+Toute contribution proposee au projet officiel peut etre integree au Logiciel sous la licence du projet. En soumettant une contribution, vous accordez a Eric Boyer une licence gratuite, mondiale, non exclusive, irrevocable et integrable au projet officiel.
+
+5. Ce qui n'est pas autorise
+
+Sauf accord ecrit prealable de l'auteur, vous ne pouvez pas :
+
+- publier ou redistribuer une version modifiee du Logiciel ;
+- revendre le Logiciel ;
+- integrer le Logiciel, son code, son interface, sa documentation ou ses fichiers de raccourcis dans un autre produit ;
+- exploiter commercialement le Logiciel, son code ou ses contenus ;
+- reutiliser tout ou partie du code source dans un autre projet ;
+- supprimer ou modifier les mentions de copyright, de licence ou d'attribution.
+
+Le Logiciel est fourni gratuitement, mais il reste protege par le droit d'auteur. Tous droits reserves.
+
+6. Mises a jour
+
+Le Logiciel peut proposer des mises a jour.
+
+Les mises a jour officielles sont distribuees par l'auteur via les canaux officiels du projet, notamment le depot GitHub officiel et ses releases.
+
+L'auteur n'est pas oblige de fournir des mises a jour permanentes, automatiques ou compatibles avec toutes les versions precedentes.
+
+7. Dependances et composants tiers
+
+Le Logiciel peut utiliser des bibliotheques, frameworks ou composants tiers.
+
+Ces elements restent soumis a leurs propres licences.
+
+8. Marques tierces
+
+Les noms Windows, Microsoft, Office, Word, Excel, PowerPoint et les autres marques citees servent uniquement a decrire la compatibilite du Logiciel ou les logiciels pour lesquels des raccourcis peuvent etre affiches.
+
+Ces marques appartiennent a leurs proprietaires respectifs.
+
+9. Absence d'affiliation
+
+Merken est un projet independant.
+
+Il n'est pas affilie, sponsorise, approuve ni valide par Microsoft ou par les editeurs des logiciels mentionnes.
+
+10. Absence de garantie
+
+Le Logiciel est fourni gratuitement, tel quel.
+
+Aucune garantie n'est donnee concernant son fonctionnement permanent, son absence d'erreur, sa disponibilite, sa compatibilite avec toutes les configurations ou son adaptation a un usage particulier.
+
+11. Limitation de responsabilite
+
+Dans les limites autorisees par la loi, l'auteur ne pourra pas etre tenu responsable des dommages directs ou indirects lies a l'installation, l'utilisation ou l'impossibilite d'utiliser le Logiciel.
+
+Vous utilisez le Logiciel sous votre responsabilite.
+
+12. Droit applicable
+
+Le present contrat est soumis au droit francais, sous reserve des regles imperatives applicables.
+
+
+END USER LICENSE AGREEMENT - MERKEN
+
+Copyright (c) 2026 Eric Boyer. All rights reserved.
+
+1. Acceptance
+
+By installing or using Merken, you accept this End User License Agreement.
+
+If you do not accept these terms, you must not install or use the software.
+
+2. Covered software
+
+This agreement applies to Merken, hereafter "the Software".
+
+The Software includes the executables, installer, interface, text, documentation, keyboard shortcut files, and content provided with official versions.
+
+3. Free use
+
+The Software is distributed free of charge.
+
+You may install and use official versions of the Software free of charge, for personal or professional use.
+
+You may freely recommend the Software.
+
+4. Viewable source code and contributions
+
+The project source code may be published on GitHub for transparency, audit, learning, and contributions to the official project.
+
+Any contribution submitted to the official project may be integrated into the Software under the project license. By submitting a contribution, you grant Eric Boyer a free, worldwide, non-exclusive, irrevocable license to integrate it into the official project.
+
+5. What is not allowed
+
+Without the author's prior written permission, you may not:
+
+- publish or redistribute a modified version of the Software;
+- resell the Software;
+- integrate the Software, its code, interface, documentation, or shortcut files into another product;
+- commercially exploit the Software, its code, or its content;
+- reuse all or part of the source code in another project;
+- remove or alter copyright, license, or attribution notices.
+
+The Software is provided free of charge, but it remains protected by copyright. All rights reserved.
+
+6. Updates
+
+The Software may offer updates.
+
+Official updates are distributed by the author through official project channels, including the official GitHub repository and its releases.
+
+The author is not required to provide permanent, automatic, or backward-compatible updates.
+
+7. Third-party dependencies and components
+
+The Software may use third-party libraries, frameworks, or components.
+
+Those elements remain subject to their own licenses.
+
+8. Third-party trademarks
+
+The names Windows, Microsoft, Office, Word, Excel, PowerPoint, and other trademarks mentioned are used only to describe Software compatibility or the applications for which shortcuts may be displayed.
+
+These trademarks belong to their respective owners.
+
+9. No affiliation
+
+Merken is an independent project.
+
+It is not affiliated with, sponsored by, approved by, or endorsed by Microsoft or by the publishers of the mentioned software.
+
+10. No warranty
+
+The Software is provided free of charge, as is.
+
+No warranty is given that it will work permanently, be error-free, remain available, be compatible with every configuration, or fit a particular purpose.
+
+11. Limitation of liability
+
+To the extent permitted by law, the author may not be held liable for direct or indirect damages related to installing, using, or being unable to use the Software.
+
+You use the Software at your own responsibility.
+
+12. Governing law
+
+This agreement is governed by French law, subject to any mandatory applicable rules.
