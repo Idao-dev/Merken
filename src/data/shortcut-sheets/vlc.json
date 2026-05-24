@@ -1,0 +1,552 @@
+[
+  {
+    "id": "vlc-fr",
+    "appNames": [
+      "vlc.exe"
+    ],
+    "title": "VLC - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "lecture",
+        "title": "Lecture",
+        "shortcuts": [
+          {
+            "label": "Lecture pause",
+            "keys": [
+              "Space"
+            ],
+            "description": "Lance ou met en pause.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "lecture-lecture-pause"
+          },
+          {
+            "label": "Stop",
+            "keys": [
+              "S"
+            ],
+            "description": "Arrete la lecture.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "lecture-stop"
+          },
+          {
+            "label": "Suivant",
+            "keys": [
+              "N"
+            ],
+            "description": "Passe au media suivant.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "lecture-suivant"
+          },
+          {
+            "label": "Precedent",
+            "keys": [
+              "P"
+            ],
+            "description": "Revient au media precedent.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "lecture-precedent"
+          },
+          {
+            "label": "Plein ecran",
+            "keys": [
+              "F"
+            ],
+            "description": "Bascule le plein ecran.",
+            "priority": 5,
+            "usageLevel": "essential",
+            "id": "lecture-plein-ecran"
+          },
+          {
+            "label": "Muet",
+            "keys": [
+              "M"
+            ],
+            "description": "Coupe ou retablit le son.",
+            "priority": 6,
+            "usageLevel": "essential",
+            "id": "lecture-muet"
+          },
+          {
+            "label": "Temps",
+            "keys": [
+              "T"
+            ],
+            "description": "Affiche le temps.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "lecture-temps"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation media",
+        "shortcuts": [
+          {
+            "label": "Saut court arriere",
+            "keys": [
+              "Shift",
+              "Left"
+            ],
+            "description": "Recule legerement.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-saut-court-arriere"
+          },
+          {
+            "label": "Saut court avant",
+            "keys": [
+              "Shift",
+              "Right"
+            ],
+            "description": "Avance legerement.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-saut-court-avant"
+          },
+          {
+            "label": "Saut moyen arriere",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Recule davantage.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-moyen-arriere"
+          },
+          {
+            "label": "Saut moyen avant",
+            "keys": [
+              "Alt",
+              "Right"
+            ],
+            "description": "Avance davantage.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-moyen-avant"
+          },
+          {
+            "label": "Saut long arriere",
+            "keys": [
+              "Ctrl",
+              "Left"
+            ],
+            "description": "Recule fortement.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-long-arriere"
+          },
+          {
+            "label": "Saut long avant",
+            "keys": [
+              "Ctrl",
+              "Right"
+            ],
+            "description": "Avance fortement.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-long-avant"
+          },
+          {
+            "label": "Image suivante",
+            "keys": [
+              "E"
+            ],
+            "description": "Avance image par image.",
+            "priority": 7,
+            "usageLevel": "expert",
+            "id": "navigation-image-suivante"
+          }
+        ]
+      },
+      {
+        "id": "audio",
+        "title": "Audio et video",
+        "shortcuts": [
+          {
+            "label": "Volume plus",
+            "keys": [
+              "Ctrl",
+              "Up"
+            ],
+            "description": "Augmente le volume.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "audio-volume-plus"
+          },
+          {
+            "label": "Volume moins",
+            "keys": [
+              "Ctrl",
+              "Down"
+            ],
+            "description": "Diminue le volume.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "audio-volume-moins"
+          },
+          {
+            "label": "Sous-titres",
+            "keys": [
+              "V"
+            ],
+            "description": "Change les sous-titres.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "audio-sous-titres"
+          },
+          {
+            "label": "Piste audio",
+            "keys": [
+              "B"
+            ],
+            "description": "Change la piste audio.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "audio-piste-audio"
+          },
+          {
+            "label": "Plus rapide",
+            "keys": [
+              "+"
+            ],
+            "description": "Augmente la vitesse.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "audio-plus-rapide"
+          },
+          {
+            "label": "Plus lent",
+            "keys": [
+              "-"
+            ],
+            "description": "Diminue la vitesse.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "audio-plus-lent"
+          },
+          {
+            "label": "Vitesse normale",
+            "keys": [
+              "="
+            ],
+            "description": "Restaure la vitesse.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "audio-vitesse-normale"
+          }
+        ]
+      },
+      {
+        "id": "fichiers",
+        "title": "Fichiers",
+        "shortcuts": [
+          {
+            "label": "Ouvrir fichier",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Ouvre un media.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "fichiers-ouvrir-fichier"
+          },
+          {
+            "label": "Quitter",
+            "keys": [
+              "Ctrl",
+              "Q"
+            ],
+            "description": "Ferme VLC.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "fichiers-quitter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "vlc-en",
+    "appNames": [
+      "vlc.exe"
+    ],
+    "title": "VLC - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "lecture",
+        "title": "Playback",
+        "shortcuts": [
+          {
+            "label": "Play pause",
+            "keys": [
+              "Space"
+            ],
+            "description": "Play or pause.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "lecture-lecture-pause"
+          },
+          {
+            "label": "Stop",
+            "keys": [
+              "S"
+            ],
+            "description": "Stop playback.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "lecture-stop"
+          },
+          {
+            "label": "Next media",
+            "keys": [
+              "N"
+            ],
+            "description": "Move to next media.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "lecture-suivant"
+          },
+          {
+            "label": "Previous media",
+            "keys": [
+              "P"
+            ],
+            "description": "Move to previous media.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "lecture-precedent"
+          },
+          {
+            "label": "Full screen",
+            "keys": [
+              "F"
+            ],
+            "description": "Toggle full screen.",
+            "priority": 5,
+            "usageLevel": "essential",
+            "id": "lecture-plein-ecran"
+          },
+          {
+            "label": "Mute",
+            "keys": [
+              "M"
+            ],
+            "description": "Mute or restore sound.",
+            "priority": 6,
+            "usageLevel": "essential",
+            "id": "lecture-muet"
+          },
+          {
+            "label": "Time display",
+            "keys": [
+              "T"
+            ],
+            "description": "Show time.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "lecture-temps"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Media navigation",
+        "shortcuts": [
+          {
+            "label": "Short jump backward",
+            "keys": [
+              "Shift",
+              "Left"
+            ],
+            "description": "Seek back slightly.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-saut-court-arriere"
+          },
+          {
+            "label": "Short jump forward",
+            "keys": [
+              "Shift",
+              "Right"
+            ],
+            "description": "Seek forward slightly.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-saut-court-avant"
+          },
+          {
+            "label": "Medium jump backward",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Seek back further.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-moyen-arriere"
+          },
+          {
+            "label": "Medium jump forward",
+            "keys": [
+              "Alt",
+              "Right"
+            ],
+            "description": "Seek forward further.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-moyen-avant"
+          },
+          {
+            "label": "Long jump backward",
+            "keys": [
+              "Ctrl",
+              "Left"
+            ],
+            "description": "Seek back strongly.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-long-arriere"
+          },
+          {
+            "label": "Long jump forward",
+            "keys": [
+              "Ctrl",
+              "Right"
+            ],
+            "description": "Seek forward strongly.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-long-avant"
+          },
+          {
+            "label": "Next frame",
+            "keys": [
+              "E"
+            ],
+            "description": "Advance frame by frame.",
+            "priority": 7,
+            "usageLevel": "expert",
+            "id": "navigation-image-suivante"
+          }
+        ]
+      },
+      {
+        "id": "audio",
+        "title": "Audio and video",
+        "shortcuts": [
+          {
+            "label": "Volume up",
+            "keys": [
+              "Ctrl",
+              "Up"
+            ],
+            "description": "Increase volume.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "audio-volume-plus"
+          },
+          {
+            "label": "Volume down",
+            "keys": [
+              "Ctrl",
+              "Down"
+            ],
+            "description": "Decrease volume.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "audio-volume-moins"
+          },
+          {
+            "label": "Subtitles",
+            "keys": [
+              "V"
+            ],
+            "description": "Change subtitles.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "audio-sous-titres"
+          },
+          {
+            "label": "Audio track",
+            "keys": [
+              "B"
+            ],
+            "description": "Change audio track.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "audio-piste-audio"
+          },
+          {
+            "label": "Faster",
+            "keys": [
+              "+"
+            ],
+            "description": "Increase speed.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "audio-plus-rapide"
+          },
+          {
+            "label": "Slower",
+            "keys": [
+              "-"
+            ],
+            "description": "Decrease speed.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "audio-plus-lent"
+          },
+          {
+            "label": "Normal speed",
+            "keys": [
+              "="
+            ],
+            "description": "Restore normal speed.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "audio-vitesse-normale"
+          }
+        ]
+      },
+      {
+        "id": "fichiers",
+        "title": "Files",
+        "shortcuts": [
+          {
+            "label": "Open file",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Open media.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "fichiers-ouvrir-fichier"
+          },
+          {
+            "label": "Quit",
+            "keys": [
+              "Ctrl",
+              "Q"
+            ],
+            "description": "Close VLC.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "fichiers-quitter"
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -46,5 +46,26 @@ describe("settings persistence", () => {
     expect(settings.shortcutPlacementPreset).toBe("top-right");
     expect(settings.shortcutCustomPosition).toBeNull();
     expect(settings.trayVisibilityPromptDismissed).toBe(false);
+    expect(settings.shortcutSheetPreferences).toEqual({});
+  });
+
+  it("migrates old expert mode settings to advanced sheet levels", () => {
+    memoryStorage.setItem(
+      "merken.settings.v1",
+      JSON.stringify({
+        language: "fr",
+        theme: "dark",
+        textSize: "md",
+        blur: "medium",
+        sheetMode: "auto",
+        manualSheetId: "windows-core",
+        expertMode: true,
+        startWithWindows: true
+      })
+    );
+    const settings = loadSettings(memoryStorage);
+
+    expect(settings.shortcutSheetPreferences["windows-core"]).toEqual({ mode: "level", level: "advanced" });
+    expect(settings.shortcutSheetPreferences.excel).toEqual({ mode: "level", level: "advanced" });
   });
 });

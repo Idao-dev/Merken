@@ -1,0 +1,784 @@
+[
+  {
+    "id": "word-fr",
+    "appNames": [
+      "winword.exe"
+    ],
+    "title": "Word - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "general",
+        "title": "General",
+        "shortcuts": [
+          {
+            "label": "Nouveau document",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Cree un document.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "general-nouveau-document"
+          },
+          {
+            "label": "Ouvrir",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Ouvre un document.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "general-ouvrir"
+          },
+          {
+            "label": "Enregistrer",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Enregistre le document.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "general-enregistrer"
+          },
+          {
+            "label": "Imprimer",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Ouvre l impression.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "general-imprimer"
+          },
+          {
+            "label": "Fermer",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme le document.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "general-fermer"
+          },
+          {
+            "label": "Recherche commande",
+            "keys": [
+              "Alt",
+              "Q"
+            ],
+            "description": "Recherche une commande.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "general-recherche-commande"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Edition",
+        "shortcuts": [
+          {
+            "label": "Copier",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copie la selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Coller",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Colle le presse-papiers.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Couper",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Coupe la selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "edition-couper"
+          },
+          {
+            "label": "Annuler",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Annule l action recente.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Retablir",
+            "keys": [
+              "Ctrl",
+              "Y"
+            ],
+            "description": "Retablit l action.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "edition-retablir"
+          },
+          {
+            "label": "Rechercher",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Recherche dans le document.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Remplacer",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Ouvre le remplacement.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "edition-remplacer"
+          },
+          {
+            "label": "Atteindre",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Va a une cible.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "edition-atteindre"
+          }
+        ]
+      },
+      {
+        "id": "format",
+        "title": "Mise en forme",
+        "shortcuts": [
+          {
+            "label": "Gras",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Active le gras.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "format-gras"
+          },
+          {
+            "label": "Italique",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Active l italique.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "format-italique"
+          },
+          {
+            "label": "Souligne",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Active le souligne.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "format-souligne"
+          },
+          {
+            "label": "Gauche",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Aligne a gauche.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "format-gauche"
+          },
+          {
+            "label": "Centrer",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Centre le paragraphe.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "format-centrer"
+          },
+          {
+            "label": "Droite",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Aligne a droite.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "format-droite"
+          },
+          {
+            "label": "Justifier",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Justifie le paragraphe.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "format-justifier"
+          },
+          {
+            "label": "Copier format",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "C"
+            ],
+            "description": "Copie la mise en forme.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "format-copier-format"
+          },
+          {
+            "label": "Coller format",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Applique la mise en forme.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "format-coller-format"
+          },
+          {
+            "label": "Effacer format",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Retire le format direct.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "format-effacer-format"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation et selection",
+        "shortcuts": [
+          {
+            "label": "Debut document",
+            "keys": [
+              "Ctrl",
+              "Home"
+            ],
+            "description": "Va au debut.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-debut-document"
+          },
+          {
+            "label": "Fin document",
+            "keys": [
+              "Ctrl",
+              "End"
+            ],
+            "description": "Va a la fin.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-fin-document"
+          },
+          {
+            "label": "Mot precedent",
+            "keys": [
+              "Ctrl",
+              "Left"
+            ],
+            "description": "Va au mot precedent.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "navigation-mot-precedent"
+          },
+          {
+            "label": "Mot suivant",
+            "keys": [
+              "Ctrl",
+              "Right"
+            ],
+            "description": "Va au mot suivant.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-mot-suivant"
+          },
+          {
+            "label": "Selection mot precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Left"
+            ],
+            "description": "Etend la selection.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "navigation-selection-mot-precedent"
+          },
+          {
+            "label": "Selection mot suivant",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Right"
+            ],
+            "description": "Etend la selection.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "navigation-selection-mot-suivant"
+          },
+          {
+            "label": "Saut de page",
+            "keys": [
+              "Ctrl",
+              "Enter"
+            ],
+            "description": "Insere un saut de page.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-de-page"
+          },
+          {
+            "label": "Lien",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insere ou modifie un lien.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "navigation-lien"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "word-en",
+    "appNames": [
+      "winword.exe"
+    ],
+    "title": "Word - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "general",
+        "title": "General",
+        "shortcuts": [
+          {
+            "label": "New document",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Create a document.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "general-nouveau-document"
+          },
+          {
+            "label": "Open",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Open a document.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "general-ouvrir"
+          },
+          {
+            "label": "Save",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Save the document.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "general-enregistrer"
+          },
+          {
+            "label": "Print",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Open print options.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "general-imprimer"
+          },
+          {
+            "label": "Close document",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the document.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "general-fermer"
+          },
+          {
+            "label": "Command search",
+            "keys": [
+              "Alt",
+              "Q"
+            ],
+            "description": "Search for a command.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "general-recherche-commande"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Editing",
+        "shortcuts": [
+          {
+            "label": "Copy",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copy the selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Paste",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Paste clipboard content.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Cut",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Cut the selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "edition-couper"
+          },
+          {
+            "label": "Undo",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Undo the latest action.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Redo",
+            "keys": [
+              "Ctrl",
+              "Y"
+            ],
+            "description": "Redo the action.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "edition-retablir"
+          },
+          {
+            "label": "Find",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Search the document.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Replace",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Open replace.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "edition-remplacer"
+          },
+          {
+            "label": "Go to",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Go to a target.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "edition-atteindre"
+          }
+        ]
+      },
+      {
+        "id": "format",
+        "title": "Formatting",
+        "shortcuts": [
+          {
+            "label": "Bold",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Toggle bold.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "format-gras"
+          },
+          {
+            "label": "Italic",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Toggle italic.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "format-italique"
+          },
+          {
+            "label": "Underline",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Toggle underline.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "format-souligne"
+          },
+          {
+            "label": "Align left",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Align left.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "format-gauche"
+          },
+          {
+            "label": "Center",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Center paragraph.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "format-centrer"
+          },
+          {
+            "label": "Align right",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Align right.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "format-droite"
+          },
+          {
+            "label": "Justify",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Justify paragraph.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "format-justifier"
+          },
+          {
+            "label": "Copy formatting",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "C"
+            ],
+            "description": "Copy formatting.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "format-copier-format"
+          },
+          {
+            "label": "Paste formatting",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Apply formatting.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "format-coller-format"
+          },
+          {
+            "label": "Clear formatting",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Remove direct formatting.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "format-effacer-format"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation and selection",
+        "shortcuts": [
+          {
+            "label": "Document start",
+            "keys": [
+              "Ctrl",
+              "Home"
+            ],
+            "description": "Go to the start.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-debut-document"
+          },
+          {
+            "label": "Document end",
+            "keys": [
+              "Ctrl",
+              "End"
+            ],
+            "description": "Go to the end.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-fin-document"
+          },
+          {
+            "label": "Previous word",
+            "keys": [
+              "Ctrl",
+              "Left"
+            ],
+            "description": "Move to previous word.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "navigation-mot-precedent"
+          },
+          {
+            "label": "Next word",
+            "keys": [
+              "Ctrl",
+              "Right"
+            ],
+            "description": "Move to next word.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-mot-suivant"
+          },
+          {
+            "label": "Select previous word",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Left"
+            ],
+            "description": "Extend selection.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "navigation-selection-mot-precedent"
+          },
+          {
+            "label": "Select next word",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Right"
+            ],
+            "description": "Extend selection.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "navigation-selection-mot-suivant"
+          },
+          {
+            "label": "Page break",
+            "keys": [
+              "Ctrl",
+              "Enter"
+            ],
+            "description": "Insert a page break.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "navigation-saut-de-page"
+          },
+          {
+            "label": "Hyperlink",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insert or edit a link.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "navigation-lien"
+          }
+        ]
+      }
+    ]
+  }
+]

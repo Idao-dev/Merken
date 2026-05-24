@@ -1,0 +1,494 @@
+[
+  {
+    "id": "thunderbird-fr",
+    "appNames": [
+      "thunderbird.exe"
+    ],
+    "title": "Thunderbird - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "messages",
+        "title": "Messages",
+        "shortcuts": [
+          {
+            "label": "Nouveau message",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Cree un message.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "messages-nouveau-message"
+          },
+          {
+            "label": "Repondre",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Repond au message.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "messages-repondre"
+          },
+          {
+            "label": "Repondre a tous",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "R"
+            ],
+            "description": "Repond a tous.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "messages-repondre-a-tous"
+          },
+          {
+            "label": "Transferer",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Transfere le message.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "messages-transferer"
+          },
+          {
+            "label": "Archiver",
+            "keys": [
+              "A"
+            ],
+            "description": "Archive le message.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "messages-archiver"
+          },
+          {
+            "label": "Supprimer",
+            "keys": [
+              "Delete"
+            ],
+            "description": "Supprime le message.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "messages-supprimer"
+          },
+          {
+            "label": "Lu non lu",
+            "keys": [
+              "M"
+            ],
+            "description": "Change l etat lu.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "messages-lu-non-lu"
+          },
+          {
+            "label": "Indesirable",
+            "keys": [
+              "J"
+            ],
+            "description": "Change le statut indesirable.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "messages-indesirable"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation et recherche",
+        "shortcuts": [
+          {
+            "label": "Recevoir messages",
+            "keys": [
+              "F5"
+            ],
+            "description": "Releve les messages.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-recevoir-messages"
+          },
+          {
+            "label": "Recherche globale",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Recherche partout.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-recherche-globale"
+          },
+          {
+            "label": "Filtre rapide",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "K"
+            ],
+            "description": "Active le filtre rapide.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-filtre-rapide"
+          },
+          {
+            "label": "Message suivant",
+            "keys": [
+              "F"
+            ],
+            "description": "Passe au message suivant.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-message-suivant"
+          },
+          {
+            "label": "Message precedent",
+            "keys": [
+              "B"
+            ],
+            "description": "Revient au message precedent.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-message-precedent"
+          },
+          {
+            "label": "Carnet d adresses",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "B"
+            ],
+            "description": "Ouvre le carnet d adresses.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "navigation-carnet-d-adresses"
+          }
+        ]
+      },
+      {
+        "id": "redaction",
+        "title": "Redaction",
+        "shortcuts": [
+          {
+            "label": "Envoyer",
+            "keys": [
+              "Ctrl",
+              "Enter"
+            ],
+            "description": "Envoie le message.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "redaction-envoyer"
+          },
+          {
+            "label": "Brouillon",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Enregistre en brouillon.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "redaction-brouillon"
+          },
+          {
+            "label": "Piece jointe",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "A"
+            ],
+            "description": "Ajoute une piece jointe.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "redaction-piece-jointe"
+          },
+          {
+            "label": "Gras",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Active le gras.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "redaction-gras"
+          },
+          {
+            "label": "Italique",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Active l italique.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "redaction-italique"
+          },
+          {
+            "label": "Lien",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insere ou modifie un lien.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "redaction-lien"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "thunderbird-en",
+    "appNames": [
+      "thunderbird.exe"
+    ],
+    "title": "Thunderbird - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "messages",
+        "title": "Messages",
+        "shortcuts": [
+          {
+            "label": "New message",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Create a message.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "messages-nouveau-message"
+          },
+          {
+            "label": "Reply",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Reply to the message.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "messages-repondre"
+          },
+          {
+            "label": "Reply all",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "R"
+            ],
+            "description": "Reply to all.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "messages-repondre-a-tous"
+          },
+          {
+            "label": "Forward",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Forward the message.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "messages-transferer"
+          },
+          {
+            "label": "Archive",
+            "keys": [
+              "A"
+            ],
+            "description": "Archive the message.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "messages-archiver"
+          },
+          {
+            "label": "Delete",
+            "keys": [
+              "Delete"
+            ],
+            "description": "Delete the message.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "messages-supprimer"
+          },
+          {
+            "label": "Read unread",
+            "keys": [
+              "M"
+            ],
+            "description": "Toggle read state.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "messages-lu-non-lu"
+          },
+          {
+            "label": "Junk",
+            "keys": [
+              "J"
+            ],
+            "description": "Toggle junk status.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "messages-indesirable"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation and search",
+        "shortcuts": [
+          {
+            "label": "Get messages",
+            "keys": [
+              "F5"
+            ],
+            "description": "Check messages.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-recevoir-messages"
+          },
+          {
+            "label": "Global search",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Search globally.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-recherche-globale"
+          },
+          {
+            "label": "Quick filter",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "K"
+            ],
+            "description": "Focus quick filter.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-filtre-rapide"
+          },
+          {
+            "label": "Next message",
+            "keys": [
+              "F"
+            ],
+            "description": "Move to next message.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-message-suivant"
+          },
+          {
+            "label": "Previous message",
+            "keys": [
+              "B"
+            ],
+            "description": "Move to previous message.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-message-precedent"
+          },
+          {
+            "label": "Address book",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "B"
+            ],
+            "description": "Open the address book.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "navigation-carnet-d-adresses"
+          }
+        ]
+      },
+      {
+        "id": "redaction",
+        "title": "Compose",
+        "shortcuts": [
+          {
+            "label": "Send",
+            "keys": [
+              "Ctrl",
+              "Enter"
+            ],
+            "description": "Send the message.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "redaction-envoyer"
+          },
+          {
+            "label": "Save draft",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Save as draft.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "redaction-brouillon"
+          },
+          {
+            "label": "Attach file",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "A"
+            ],
+            "description": "Add an attachment.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "redaction-piece-jointe"
+          },
+          {
+            "label": "Bold",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Toggle bold.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "redaction-gras"
+          },
+          {
+            "label": "Italic",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Toggle italic.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "redaction-italique"
+          },
+          {
+            "label": "Link",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insert or edit a link.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "redaction-lien"
+          }
+        ]
+      }
+    ]
+  }
+]

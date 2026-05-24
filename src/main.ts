@@ -7,7 +7,22 @@ import { relaunch } from "@tauri-apps/plugin-process";
 import { check, type Update } from "@tauri-apps/plugin-updater";
 import { labelsFor, supportedLanguages, type AutostartStatus, type SettingsTab, type UpdateStatus } from "./app/i18n";
 import { defaultSettings, loadSettings, saveSettings, settingsStorageKey } from "./app/settings";
-import { manualSheetOptions, selectSheet, sheetFamily, visibleShortcuts } from "./app/sheets";
+import {
+  availableShortcutLevels,
+  customPreferenceFromLevel,
+  ensureCustomPreference,
+  findSheetForFamily,
+  isShortcutIncluded,
+  manualSheetOptions,
+  selectSheet,
+  sheetFamily,
+  sheetShortcutPreference,
+  shortcutThemeState,
+  shortcutDisplayLevels,
+  updateCustomCategoryPreference,
+  updateCustomShortcutPreference,
+  visibleShortcuts
+} from "./app/sheets";
 import { distributionFromEnv, repositoryUrl, updateStateClass } from "./app/updates";
 import "./styles.css";
 import type {
@@ -15,6 +30,10 @@ import type {
   BlurLevel,
   LanguageCode,
   SheetMode,
+  ShortcutDisplayChoice,
+  ShortcutDisplayLevel,
+  ShortcutSheetPreference,
+  ShortcutSheet,
   ShortcutPlacementPreset,
   TextSize,
   ThemeMode,
@@ -27,6 +46,13 @@ if (!root) {
   throw new Error("Missing #app root");
 }
 
+type ShortcutsOpenMode = "shortcuts" | "placement" | "preview";
+
+interface ShortcutsOpenRequest {
+  mode: ShortcutsOpenMode;
+  activeApp: ActiveApp;
+}
+
 const app: HTMLElement = root;
 const currentWindow = getCurrentWindow();
 const isSettingsWindow = currentWindow.label === "settings";
@@ -36,6 +62,8 @@ let settings = loadSettings();
 let activeApp: ActiveApp | null = null;
 let panelMode: "shortcuts" | "placement" = "shortcuts";
 let settingsTab: SettingsTab = "general";
+let selectedSettingsSheetFamily = sheetFamily(settings.manualSheetId);
+let selectedCustomizationSheetFamily = selectedSettingsSheetFamily;
 let autostartStatus: AutostartStatus = "syncing";
 let updateStatus: UpdateStatus = "idle";
 let pendingUpdate: Update | null = null;
@@ -55,20 +83,144 @@ const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
 const themeModes: ThemeMode[] = ["dark", "colorblind"];
 const sheetModes: SheetMode[] = ["auto", "os", "manual"];
 const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-right", "bottom-left", "bottom-right", "center"];
-const settingsTabs: SettingsTab[] = ["general", "appearance", "sheets", "expert", "about"];
+const settingsTabs: SettingsTab[] = ["general", "appearance", "sheets", "customization", "about"];
+const shortcutDisplayChoices: ShortcutDisplayChoice[] = [...shortcutDisplayLevels, "custom"];
+const customizationTargetStorageKey = "merken.customizationTarget.v1";
 const distribution = distributionFromEnv(import.meta.env.VITE_MERKEN_DISTRIBUTION);
+
+function debugActiveAppLog(message: string, details?: unknown): void {
+  if (import.meta.env.DEV) {
+    console.debug(`[merken:active-app] ${message}`, details ?? "");
+  }
+}
+
+function debugSheetSelection(context: string, selectedSheet: ShortcutSheet): void {
+  if (!isShortcutsWindow) {
+    return;
+  }
+
+  debugActiveAppLog(context, {
+    activeApp,
+    language: settings.language,
+    panelMode,
+    selectedSheetId: selectedSheet.id,
+    sheetMode: settings.sheetMode
+  });
+}
 
 async function refreshActiveApp(): Promise<void> {
   try {
     activeApp = await invoke<ActiveApp>("get_active_app");
-  } catch {
+    debugActiveAppLog("refreshActiveApp success", activeApp);
+  } catch (error) {
     activeApp = { processName: null, title: null, sheetId: null };
+    debugActiveAppLog("refreshActiveApp failed", error);
   }
+}
+
+function useActiveApp(nextActiveApp: ActiveApp, context: string): void {
+  activeApp = nextActiveApp;
+  debugActiveAppLog(context, activeApp);
 }
 
 function updateSettings(next: Partial<UserSettings>): void {
   settings = { ...settings, ...next };
   saveSettings(settings);
+  render();
+}
+
+function saveShortcutSheetPreference(family: string, preference: ShortcutSheetPreference): void {
+  settings = {
+    ...settings,
+    shortcutSheetPreferences: {
+      ...settings.shortcutSheetPreferences,
+      [family]: preference
+    }
+  };
+  saveSettings(settings);
+}
+
+function updateShortcutSheetLevel(family: string, level: ShortcutDisplayLevel): void {
+  selectedSettingsSheetFamily = family;
+  saveShortcutSheetPreference(family, {
+    mode: "level",
+    level
+  });
+  render();
+}
+
+function ensureCustomPreferenceForFamily(family: string): ShortcutSheetPreference | null {
+  const sheet = findSheetForFamily(family, settings.language);
+
+  if (!sheet) {
+    return null;
+  }
+
+  const preference = sheetShortcutPreference(settings, sheet);
+  const customPreference = preference.mode === "custom" ? preference : customPreferenceFromLevel(sheet, preference.level);
+
+  saveShortcutSheetPreference(family, customPreference);
+  return customPreference;
+}
+
+async function openCustomizationForFamily(family: string): Promise<void> {
+  if (!ensureCustomPreferenceForFamily(family)) {
+    return;
+  }
+
+  selectedSettingsSheetFamily = family;
+  selectedCustomizationSheetFamily = family;
+
+  if (isShortcutsWindow) {
+    localStorage.setItem(customizationTargetStorageKey, family);
+    await showSettingsWindow();
+    await showShortcutPreviewForFamily(family);
+    return;
+  }
+
+  settingsTab = "customization";
+  render();
+}
+
+function applyCustomizationTarget(family: string | null): void {
+  if (!isSettingsWindow || !family || !findSheetForFamily(family, settings.language)) {
+    return;
+  }
+
+  settings = loadSettings();
+  selectedSettingsSheetFamily = family;
+  selectedCustomizationSheetFamily = family;
+  settingsTab = "customization";
+  ensureCustomPreferenceForFamily(family);
+  localStorage.removeItem(customizationTargetStorageKey);
+}
+
+function updateCustomCategory(family: string, categoryId: string, checked: boolean): void {
+  const sheet = findSheetForFamily(family, settings.language);
+  const category = sheet?.categories.find((candidate) => candidate.id === categoryId);
+
+  if (!sheet || !category) {
+    return;
+  }
+
+  const preference = ensureCustomPreference(sheet, sheetShortcutPreference(settings, sheet));
+  saveShortcutSheetPreference(family, updateCustomCategoryPreference(preference, category, checked));
+  selectedCustomizationSheetFamily = family;
+  render();
+}
+
+function updateCustomShortcut(family: string, categoryId: string, shortcutId: string, checked: boolean): void {
+  const sheet = findSheetForFamily(family, settings.language);
+  const category = sheet?.categories.find((candidate) => candidate.id === categoryId);
+  const shortcut = category?.shortcuts.find((candidate) => candidate.id === shortcutId);
+
+  if (!sheet || !category || !shortcut) {
+    return;
+  }
+
+  const preference = ensureCustomPreference(sheet, sheetShortcutPreference(settings, sheet));
+  saveShortcutSheetPreference(family, updateCustomShortcutPreference(preference, category, shortcut, checked));
+  selectedCustomizationSheetFamily = family;
   render();
 }
 
@@ -201,6 +353,54 @@ async function showSettingsWindow(): Promise<void> {
   }
 }
 
+async function showShortcutPreviewForFamily(family: string): Promise<void> {
+  const sheet = findSheetForFamily(family, settings.language);
+
+  if (!sheet) {
+    return;
+  }
+
+  try {
+    await invoke("show_shortcuts_preview", { sheetId: sheet.id });
+  } catch {
+    // The browser preview has no native shortcuts window.
+  }
+}
+
+async function hideShortcutPreview(): Promise<void> {
+  try {
+    await invoke("hide_shortcuts_preview");
+  } catch {
+    // The browser preview has no native shortcuts window.
+  }
+}
+
+async function syncSettingsShortcutPreview(): Promise<void> {
+  if (!isSettingsWindow) {
+    return;
+  }
+
+  try {
+    if (!(await currentWindow.isVisible())) {
+      return;
+    }
+  } catch {
+    // The browser preview has no native window visibility state.
+  }
+
+  if (settingsTab === "sheets") {
+    await showShortcutPreviewForFamily(selectedSettingsSheetFamily);
+    return;
+  }
+
+  if (settingsTab === "customization") {
+    await showShortcutPreviewForFamily(selectedCustomizationSheetFamily);
+    return;
+  }
+
+  await hideShortcutPreview();
+}
+
 async function checkForUpdates(silent = false): Promise<void> {
   if (!isSettingsWindow) {
     return;
@@ -322,23 +522,8 @@ function renderKey(key: string): string {
   return `<kbd>${key}</kbd>`;
 }
 
-function textSizeClass(textSize: TextSize): string {
-  return `text-${textSize}`;
-}
-
-function blurClass(blur: BlurLevel): string {
-  return `blur-${blur}`;
-}
-
-function themeClass(theme: ThemeMode): string {
-  return theme === "dark" ? "" : `theme-${theme}`;
-}
-
-function render(): void {
-  const labels = labelsFor(settings.language);
-  const sheet = visibleShortcuts(selectSheet(settings, activeApp), settings.expertMode);
-  const isPlacement = panelMode === "placement";
-  const categories = sheet.categories
+function renderShortcutCategories(sheet: ShortcutSheet): string {
+  return sheet.categories
     .map(
       (category) => `
         <section class="shortcut-section">
@@ -359,6 +544,61 @@ function render(): void {
       `
     )
     .join("");
+}
+
+function renderShortcutChoiceSwitch(
+  family: string,
+  preference: ShortcutSheetPreference,
+  availableLevels: Record<ShortcutDisplayLevel, boolean>,
+  className = ""
+): string {
+  const labels = labelsFor(settings.language);
+  const selectedChoice: ShortcutDisplayChoice = preference.mode === "custom" ? "custom" : preference.level;
+
+  return `
+    <div class="level-switch ${className}" role="group" aria-label="${labels.settings.sheetLevel}">
+      ${shortcutDisplayChoices
+        .map((choice) => {
+          const available = choice === "custom" || availableLevels[choice];
+
+          return `
+            <button
+              type="button"
+              class="${selectedChoice === choice ? "active" : ""}"
+              data-shortcut-family="${family}"
+              data-shortcut-choice="${choice}"
+              aria-pressed="${selectedChoice === choice}"
+              ${available ? "" : "disabled"}
+            >
+              ${labels.shortcutDisplayChoice[choice]}
+            </button>
+          `;
+        })
+        .join("")}
+    </div>
+  `;
+}
+
+function textSizeClass(textSize: TextSize): string {
+  return `text-${textSize}`;
+}
+
+function blurClass(blur: BlurLevel): string {
+  return `blur-${blur}`;
+}
+
+function themeClass(theme: ThemeMode): string {
+  return theme === "dark" ? "" : `theme-${theme}`;
+}
+
+function render(): void {
+  const labels = labelsFor(settings.language);
+  const selectedSheet = selectSheet(settings, activeApp);
+  debugSheetSelection("render selected sheet", selectedSheet);
+  const selectedSheetPreference = sheetShortcutPreference(settings, selectedSheet);
+  const sheet = visibleShortcuts(selectedSheet, selectedSheetPreference);
+  const isPlacement = panelMode === "placement";
+  const categories = renderShortcutCategories(sheet);
 
   app.className = `${themeClass(settings.theme)} ${textSizeClass(settings.textSize)} ${blurClass(settings.blur)}`;
   app.innerHTML = `
@@ -419,6 +659,7 @@ function render(): void {
   `;
 
   bindEvents();
+  void syncSettingsShortcutPreview();
 }
 
 function renderSettings(): string {
@@ -467,7 +708,7 @@ function settingsTabIcon(tab: SettingsTab): string {
     general: "G",
     appearance: "A",
     sheets: "F",
-    expert: "E",
+    customization: "P",
     about: "i"
   };
 
@@ -510,31 +751,14 @@ function renderSettingsTab(): string {
         <h2>${labels.sections.availableSheets}</h2>
         <p class="settings-note">${labels.settings.sheetLibraryIntro}</p>
         <div class="sheet-library">
-          ${manualSheetOptions(settings.language)
-            .map(
-              (option) => `
-                <label class="sheet-family-row">
-                  <input type="checkbox" checked disabled />
-                  <span>${option.label}</span>
-                  <small>${labels.settings.sheetLibraryPending}</small>
-                </label>
-              `
-            )
-            .join("")}
+          ${renderSheetLibraryRows()}
         </div>
       </section>
     `;
   }
 
-  if (settingsTab === "expert") {
-    return `
-      <section class="settings-group">
-        <h2>${labels.sections.expertDisplay}</h2>
-        <p class="settings-note">${labels.settings.expertIntro}</p>
-        ${renderToggleRow(labels.settings.expertMode, "expertMode", settings.expertMode)}
-        <div class="pending-panel">${labels.settings.expertPending}</div>
-      </section>
-    `;
+  if (settingsTab === "customization") {
+    return renderCustomizationTab();
   }
 
   if (settingsTab === "about") {
@@ -563,13 +787,112 @@ function renderSettingsTab(): string {
           <span>${labels.settings.trayVisibility}</span>
           <small>${labels.settings.trayVisibilityHelp}</small>
         </button>
-      </section>
+    </section>
     <section class="settings-group">
       <h2>${labels.sections.behavior}</h2>
-      ${renderSelectRow(labels.settings.sheet, "sheetMode", sheetModes, settings.sheetMode, (mode) => labels.sheetMode[mode])}
+      <p class="settings-note">${labels.settings.resetHelp}</p>
       <button type="button" class="secondary-button" id="reset-settings">${labels.settings.reset}</button>
     </section>
   `;
+}
+
+function renderSheetLibraryRows(): string {
+  return manualSheetOptions(settings.language)
+    .map((option) => {
+      const sheet = findSheetForFamily(option.key, settings.language);
+
+      if (!sheet) {
+        return "";
+      }
+
+      const preference = sheetShortcutPreference(settings, sheet);
+
+      return `
+        <div class="sheet-family-row ${selectedSettingsSheetFamily === option.key ? "active" : ""}">
+          <button type="button" class="sheet-family-name" data-sheet-preview-family="${option.key}">${option.label}</button>
+          ${renderShortcutChoiceSwitch(option.key, preference, availableShortcutLevels(sheet), "sheet-level-switch")}
+        </div>
+      `;
+    })
+    .join("");
+}
+
+function renderCustomizationTab(): string {
+  const labels = labelsFor(settings.language);
+  const sheet = findSheetForFamily(selectedCustomizationSheetFamily, settings.language) ?? getCurrentSettingsFallbackSheet();
+  const family = sheetFamily(sheet.id);
+  const preference = ensureCustomPreference(sheet, sheetShortcutPreference(settings, sheet));
+
+  selectedCustomizationSheetFamily = family;
+
+  return `
+    <section class="settings-group">
+      <h2>${labels.sections.customization}</h2>
+      <p class="settings-note">${labels.settings.customizationIntro}</p>
+      ${renderSelectRow(
+        labels.settings.sheet,
+        "customizationSheetFamily",
+        manualSheetOptions(settings.language).map((option) => option.key),
+        family,
+        (key) => manualSheetOptions(settings.language).find((option) => option.key === key)?.label ?? key
+      )}
+    </section>
+    <section class="customization-editor" aria-label="${labels.sections.customization}">
+      ${renderCustomizationEditor(sheet, preference)}
+    </section>
+  `;
+}
+
+function renderCustomizationEditor(sheet: ShortcutSheet, preference: ShortcutSheetPreference): string {
+  const labels = labelsFor(settings.language);
+  const family = sheetFamily(sheet.id);
+
+  return sheet.categories
+    .map((category) => {
+      const state = shortcutThemeState(category, preference);
+
+      return `
+        <section class="custom-theme">
+          <label class="custom-theme-row">
+            <input
+              type="checkbox"
+              data-custom-family="${family}"
+              data-custom-category="${category.id}"
+              data-theme-state="${state}"
+              ${state === "checked" ? "checked" : ""}
+            />
+            <span>
+              <strong>${category.title}</strong>
+              <small>${labels.settings.allShortcutsInTheme}</small>
+            </span>
+          </label>
+          <div class="custom-shortcut-list">
+            ${category.shortcuts
+              .map(
+                (shortcut) => `
+                  <label class="custom-shortcut-row">
+                    <input
+                      type="checkbox"
+                      data-custom-family="${family}"
+                      data-custom-category="${category.id}"
+                      data-custom-shortcut="${shortcut.id}"
+                      ${isShortcutIncluded(category, shortcut, preference) ? "checked" : ""}
+                    />
+                    <span class="keys">${shortcut.keys.map(renderKey).join("")}</span>
+                    <strong>${shortcut.label}</strong>
+                  </label>
+                `
+              )
+              .join("")}
+          </div>
+        </section>
+      `;
+    })
+    .join("");
+}
+
+function getCurrentSettingsFallbackSheet(): ShortcutSheet {
+  return findSheetForFamily(selectedSettingsSheetFamily, settings.language) ?? selectSheet(settings, activeApp);
 }
 
 function renderSelectRow<T extends string>(
@@ -643,6 +966,20 @@ async function hideCurrentWindow(): Promise<void> {
   }
 }
 
+async function closeSettingsWindow(): Promise<void> {
+  await hideShortcutPreview();
+  await hideCurrentWindow();
+}
+
+async function showPreparedShortcutsWindow(): Promise<void> {
+  try {
+    await currentWindow.show();
+    await currentWindow.setFocus();
+  } catch (error) {
+    debugActiveAppLog("showPreparedShortcutsWindow failed", error);
+  }
+}
+
 async function requestPlacementMode(): Promise<void> {
   if (isSettingsWindow) {
     try {
@@ -656,7 +993,7 @@ async function requestPlacementMode(): Promise<void> {
   await enterPlacementMode();
 }
 
-async function enterPlacementMode(): Promise<void> {
+async function enterPlacementMode(requestActiveApp?: ActiveApp): Promise<void> {
   settings = loadSettings();
   placementSnapshot = {
     shortcutPlacementMode: settings.shortcutPlacementMode,
@@ -665,7 +1002,11 @@ async function enterPlacementMode(): Promise<void> {
   };
   panelMode = "placement";
   await setPanelKeepVisible(true);
-  await refreshActiveApp();
+  if (requestActiveApp) {
+    useActiveApp(requestActiveApp, "placement activeApp from open request");
+  } else {
+    await refreshActiveApp();
+  }
   await applyShortcutPlacement();
   render();
 }
@@ -717,7 +1058,7 @@ function bindEvents(): void {
         if (event.target instanceof Element && event.target.closest("#close-settings")) {
           event.preventDefault();
           event.stopPropagation();
-          void hideCurrentWindow();
+          void closeSettingsWindow();
         }
       },
       { capture: true }
@@ -741,19 +1082,54 @@ function bindEvents(): void {
   document.querySelector("#close-settings")?.addEventListener("pointerdown", (event) => {
     event.preventDefault();
     event.stopPropagation();
-    void hideCurrentWindow();
+    void closeSettingsWindow();
   });
 
   document.querySelector("#close-settings")?.addEventListener("click", (event) => {
     event.preventDefault();
     event.stopPropagation();
-    void hideCurrentWindow();
+    void closeSettingsWindow();
   });
 
   document.querySelectorAll<HTMLButtonElement>("[data-settings-tab]").forEach((button) => {
     button.addEventListener("click", () => {
       settingsTab = button.dataset.settingsTab as SettingsTab;
       render();
+    });
+  });
+
+  document.querySelectorAll<HTMLInputElement>("[data-theme-state='indeterminate']").forEach((input) => {
+    input.indeterminate = true;
+  });
+
+  document.querySelectorAll<HTMLButtonElement>("[data-sheet-preview-family]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const family = button.dataset.sheetPreviewFamily;
+
+      if (!family) {
+        return;
+      }
+
+      selectedSettingsSheetFamily = family;
+      render();
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>("[data-shortcut-family][data-shortcut-choice]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const family = button.dataset.shortcutFamily;
+      const choice = button.dataset.shortcutChoice as ShortcutDisplayChoice | undefined;
+
+      if (!family || !choice || button.disabled) {
+        return;
+      }
+
+      if (choice === "custom") {
+        void openCustomizationForFamily(family);
+        return;
+      }
+
+      updateShortcutSheetLevel(family, choice);
     });
   });
 
@@ -805,6 +1181,26 @@ function bindEvents(): void {
     const target = event.target as HTMLInputElement | HTMLSelectElement;
     const value = target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value;
 
+    if (target.name === "customizationSheetFamily") {
+      void openCustomizationForFamily(String(value));
+      return;
+    }
+
+    if (target instanceof HTMLInputElement && target.dataset.customCategory && !target.dataset.customShortcut) {
+      updateCustomCategory(target.dataset.customFamily ?? selectedCustomizationSheetFamily, target.dataset.customCategory, target.checked);
+      return;
+    }
+
+    if (target instanceof HTMLInputElement && target.dataset.customCategory && target.dataset.customShortcut) {
+      updateCustomShortcut(
+        target.dataset.customFamily ?? selectedCustomizationSheetFamily,
+        target.dataset.customCategory,
+        target.dataset.customShortcut,
+        target.checked
+      );
+      return;
+    }
+
     if (target.name === "startWithWindows") {
       void setStartWithWindows(Boolean(value));
       return;
@@ -829,6 +1225,11 @@ function bindEvents(): void {
 
 document.addEventListener("keydown", async (event) => {
   if (event.key === "Escape") {
+    if (isSettingsWindow) {
+      await closeSettingsWindow();
+      return;
+    }
+
     if (panelMode === "placement") {
       await cancelPlacement();
       return;
@@ -838,23 +1239,34 @@ document.addEventListener("keydown", async (event) => {
   }
 });
 
-await listen<string>("merken:shortcuts-mode", async (event) => {
+await listen<ShortcutsOpenRequest>("merken:shortcuts-open-request", async (event) => {
   if (!isShortcutsWindow) {
     return;
   }
 
-  if (event.payload === "placement") {
-    await enterPlacementMode();
+  debugActiveAppLog("shortcuts open request", event.payload);
+
+  if (event.payload.mode === "placement") {
+    await enterPlacementMode(event.payload.activeApp);
+    await showPreparedShortcutsWindow();
     return;
   }
 
   settings = loadSettings();
   panelMode = "shortcuts";
   placementSnapshot = null;
+  if (event.payload.mode === "preview") {
+    await setPanelKeepVisible(true);
+    useActiveApp(event.payload.activeApp, "shortcuts preview activeApp from open request");
+    render();
+    return;
+  }
+
   await setPanelKeepVisible(false);
-  await refreshActiveApp();
+  useActiveApp(event.payload.activeApp, "shortcuts activeApp from open request");
   await applyShortcutPlacement();
   render();
+  await showPreparedShortcutsWindow();
 });
 
 window.addEventListener("storage", (event) => {
@@ -862,8 +1274,14 @@ window.addEventListener("storage", (event) => {
     settings = loadSettings();
     render();
   }
+
+  if (event.key === customizationTargetStorageKey && event.newValue) {
+    applyCustomizationTarget(event.newValue);
+    render();
+  }
 });
 
+applyCustomizationTarget(localStorage.getItem(customizationTargetStorageKey));
 await Promise.all([refreshActiveApp(), refreshAppInfo()]);
 void setTrayLanguage(settings.language);
 render();

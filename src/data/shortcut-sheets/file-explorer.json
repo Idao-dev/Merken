@@ -1,0 +1,476 @@
+[
+  {
+    "id": "file-explorer-fr",
+    "appNames": [
+      "explorer.exe"
+    ],
+    "title": "Explorateur de fichiers - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Ouvrir l explorateur",
+            "keys": [
+              "Win",
+              "E"
+            ],
+            "description": "Ouvre une fenetre de fichiers.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-ouvrir-l-explorateur"
+          },
+          {
+            "label": "Nouvelle fenetre",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Ouvre une nouvelle fenetre.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-nouvelle-fenetre"
+          },
+          {
+            "label": "Nouvel onglet",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Ouvre un onglet si disponible.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "navigation-nouvel-onglet"
+          },
+          {
+            "label": "Fermer onglet",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme l onglet ou la fenetre.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-fermer-onglet"
+          },
+          {
+            "label": "Dossier parent",
+            "keys": [
+              "Alt",
+              "Up"
+            ],
+            "description": "Remonte d un dossier.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-dossier-parent"
+          },
+          {
+            "label": "Retour",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Revient a l emplacement precedent.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "navigation-retour"
+          },
+          {
+            "label": "Avancer",
+            "keys": [
+              "Alt",
+              "Right"
+            ],
+            "description": "Passe a l emplacement suivant.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "navigation-avancer"
+          },
+          {
+            "label": "Barre d adresse",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Active la barre d adresse.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "navigation-barre-d-adresse"
+          },
+          {
+            "label": "Actualiser",
+            "keys": [
+              "F5"
+            ],
+            "description": "Recharge le dossier.",
+            "priority": 9,
+            "usageLevel": "common",
+            "id": "navigation-actualiser"
+          }
+        ]
+      },
+      {
+        "id": "fichiers",
+        "title": "Fichiers et dossiers",
+        "shortcuts": [
+          {
+            "label": "Nouveau dossier",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "N"
+            ],
+            "description": "Cree un dossier.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "fichiers-nouveau-dossier"
+          },
+          {
+            "label": "Renommer",
+            "keys": [
+              "F2"
+            ],
+            "description": "Renomme l element selectionne.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "fichiers-renommer"
+          },
+          {
+            "label": "Supprimer",
+            "keys": [
+              "Delete"
+            ],
+            "description": "Supprime vers la corbeille.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "fichiers-supprimer"
+          },
+          {
+            "label": "Supprimer definitivement",
+            "keys": [
+              "Shift",
+              "Delete"
+            ],
+            "description": "Supprime sans corbeille.",
+            "priority": 4,
+            "usageLevel": "expert",
+            "id": "fichiers-supprimer-definitivement"
+          },
+          {
+            "label": "Proprietes",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Ouvre les proprietes.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "fichiers-proprietes"
+          },
+          {
+            "label": "Menu contextuel",
+            "keys": [
+              "Shift",
+              "F10"
+            ],
+            "description": "Ouvre le menu contextuel.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "fichiers-menu-contextuel"
+          }
+        ]
+      },
+      {
+        "id": "selection",
+        "title": "Selection et recherche",
+        "shortcuts": [
+          {
+            "label": "Tout selectionner",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Selectionne tous les elements.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "selection-tout-selectionner"
+          },
+          {
+            "label": "Recherche",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Active la recherche du dossier.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "selection-recherche"
+          },
+          {
+            "label": "Volet de visualisation",
+            "keys": [
+              "Alt",
+              "P"
+            ],
+            "description": "Affiche ou masque l apercu.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "selection-volet-de-visualisation"
+          },
+          {
+            "label": "Volet de details",
+            "keys": [
+              "Alt",
+              "Shift",
+              "P"
+            ],
+            "description": "Affiche ou masque les details.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "selection-volet-de-details"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "file-explorer-en",
+    "appNames": [
+      "explorer.exe"
+    ],
+    "title": "File Explorer - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Open File Explorer",
+            "keys": [
+              "Win",
+              "E"
+            ],
+            "description": "Open a file window.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-ouvrir-l-explorateur"
+          },
+          {
+            "label": "New window",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Open a new window.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-nouvelle-fenetre"
+          },
+          {
+            "label": "New tab",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Open a tab when supported.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "navigation-nouvel-onglet"
+          },
+          {
+            "label": "Close tab",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the tab or window.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-fermer-onglet"
+          },
+          {
+            "label": "Parent folder",
+            "keys": [
+              "Alt",
+              "Up"
+            ],
+            "description": "Go up one folder.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-dossier-parent"
+          },
+          {
+            "label": "Back",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Return to the previous location.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "navigation-retour"
+          },
+          {
+            "label": "Forward",
+            "keys": [
+              "Alt",
+              "Right"
+            ],
+            "description": "Move to the next location.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "navigation-avancer"
+          },
+          {
+            "label": "Address bar",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Focus the address bar.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "navigation-barre-d-adresse"
+          },
+          {
+            "label": "Refresh",
+            "keys": [
+              "F5"
+            ],
+            "description": "Reload the folder.",
+            "priority": 9,
+            "usageLevel": "common",
+            "id": "navigation-actualiser"
+          }
+        ]
+      },
+      {
+        "id": "fichiers",
+        "title": "Files and folders",
+        "shortcuts": [
+          {
+            "label": "New folder",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "N"
+            ],
+            "description": "Create a folder.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "fichiers-nouveau-dossier"
+          },
+          {
+            "label": "Rename",
+            "keys": [
+              "F2"
+            ],
+            "description": "Rename the selected item.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "fichiers-renommer"
+          },
+          {
+            "label": "Delete",
+            "keys": [
+              "Delete"
+            ],
+            "description": "Delete to the recycle bin.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "fichiers-supprimer"
+          },
+          {
+            "label": "Delete permanently",
+            "keys": [
+              "Shift",
+              "Delete"
+            ],
+            "description": "Delete without the recycle bin.",
+            "priority": 4,
+            "usageLevel": "expert",
+            "id": "fichiers-supprimer-definitivement"
+          },
+          {
+            "label": "Properties",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Open properties.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "fichiers-proprietes"
+          },
+          {
+            "label": "Context menu",
+            "keys": [
+              "Shift",
+              "F10"
+            ],
+            "description": "Open the context menu.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "fichiers-menu-contextuel"
+          }
+        ]
+      },
+      {
+        "id": "selection",
+        "title": "Selection and search",
+        "shortcuts": [
+          {
+            "label": "Select all",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Select all items.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "selection-tout-selectionner"
+          },
+          {
+            "label": "Search",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Focus folder search.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "selection-recherche"
+          },
+          {
+            "label": "Preview pane",
+            "keys": [
+              "Alt",
+              "P"
+            ],
+            "description": "Show or hide preview.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "selection-volet-de-visualisation"
+          },
+          {
+            "label": "Details pane",
+            "keys": [
+              "Alt",
+              "Shift",
+              "P"
+            ],
+            "description": "Show or hide details.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "selection-volet-de-details"
+          }
+        ]
+      }
+    ]
+  }
+]

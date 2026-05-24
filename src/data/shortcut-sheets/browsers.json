@@ -1,0 +1,690 @@
+[
+  {
+    "id": "browsers-fr",
+    "appNames": [
+      "msedge.exe",
+      "chrome.exe",
+      "firefox.exe",
+      "brave.exe"
+    ],
+    "title": "Navigateurs - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "onglets",
+        "title": "Onglets et fenetres",
+        "shortcuts": [
+          {
+            "label": "Nouvel onglet",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Ouvre un nouvel onglet.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "onglets-nouvel-onglet"
+          },
+          {
+            "label": "Fermer onglet",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme l onglet actif.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "onglets-fermer-onglet"
+          },
+          {
+            "label": "Rouvrir onglet",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "T"
+            ],
+            "description": "Restaure un onglet ferme.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "onglets-rouvrir-onglet"
+          },
+          {
+            "label": "Nouvelle fenetre",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Ouvre une fenetre.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "onglets-nouvelle-fenetre"
+          },
+          {
+            "label": "Prive Chromium",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "N"
+            ],
+            "description": "Ouvre une fenetre privee Chromium.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "onglets-prive-chromium"
+          },
+          {
+            "label": "Prive Firefox",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "P"
+            ],
+            "description": "Ouvre une fenetre privee Firefox.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "onglets-prive-firefox"
+          },
+          {
+            "label": "Onglet suivant",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Passe a l onglet suivant.",
+            "priority": 7,
+            "usageLevel": "essential",
+            "id": "onglets-onglet-suivant"
+          },
+          {
+            "label": "Onglet precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Revient a l onglet precedent.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "onglets-onglet-precedent"
+          },
+          {
+            "label": "Onglet numero",
+            "keys": [
+              "Ctrl",
+              "1-8"
+            ],
+            "description": "Passe a l onglet numerote.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "onglets-onglet-numero"
+          },
+          {
+            "label": "Dernier onglet",
+            "keys": [
+              "Ctrl",
+              "9"
+            ],
+            "description": "Passe au dernier onglet.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "onglets-dernier-onglet"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Barre d adresse",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Active adresse ou recherche.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-barre-d-adresse"
+          },
+          {
+            "label": "Actualiser",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Recharge la page.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "navigation-actualiser"
+          },
+          {
+            "label": "Actualiser sans cache",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "R"
+            ],
+            "description": "Recharge sans cache.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-actualiser-sans-cache"
+          },
+          {
+            "label": "Retour",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Revient a la page precedente.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-retour"
+          },
+          {
+            "label": "Avancer",
+            "keys": [
+              "Alt",
+              "Right"
+            ],
+            "description": "Passe a la page suivante.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-avancer"
+          },
+          {
+            "label": "Rechercher page",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Recherche dans la page.",
+            "priority": 6,
+            "usageLevel": "essential",
+            "id": "navigation-rechercher-page"
+          },
+          {
+            "label": "Historique",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Ouvre l historique.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "navigation-historique"
+          },
+          {
+            "label": "Telechargements",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Ouvre les telechargements.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "navigation-telechargements"
+          }
+        ]
+      },
+      {
+        "id": "outils",
+        "title": "Page et outils",
+        "shortcuts": [
+          {
+            "label": "Favori",
+            "keys": [
+              "Ctrl",
+              "D"
+            ],
+            "description": "Ajoute la page aux favoris.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "outils-favori"
+          },
+          {
+            "label": "Imprimer",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Ouvre l impression.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "outils-imprimer"
+          },
+          {
+            "label": "Enregistrer page",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Enregistre la page.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "outils-enregistrer-page"
+          },
+          {
+            "label": "Ouvrir fichier",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Ouvre un fichier local.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "outils-ouvrir-fichier"
+          },
+          {
+            "label": "Zoom avant",
+            "keys": [
+              "Ctrl",
+              "+"
+            ],
+            "description": "Agrandit la page.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "outils-zoom-avant"
+          },
+          {
+            "label": "Zoom arriere",
+            "keys": [
+              "Ctrl",
+              "-"
+            ],
+            "description": "Reduit la page.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "outils-zoom-arriere"
+          },
+          {
+            "label": "Zoom par defaut",
+            "keys": [
+              "Ctrl",
+              "0"
+            ],
+            "description": "Restaure le zoom.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "outils-zoom-par-defaut"
+          },
+          {
+            "label": "Plein ecran",
+            "keys": [
+              "F11"
+            ],
+            "description": "Bascule le plein ecran.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "outils-plein-ecran"
+          },
+          {
+            "label": "Outils developpeur",
+            "keys": [
+              "F12"
+            ],
+            "description": "Ouvre les outils developpeur.",
+            "priority": 9,
+            "usageLevel": "expert",
+            "id": "outils-outils-developpeur"
+          },
+          {
+            "label": "Effacer donnees",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Delete"
+            ],
+            "description": "Ouvre l effacement recent.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "outils-effacer-donnees"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "browsers-en",
+    "appNames": [
+      "msedge.exe",
+      "chrome.exe",
+      "firefox.exe",
+      "brave.exe"
+    ],
+    "title": "Browsers - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "onglets",
+        "title": "Tabs and windows",
+        "shortcuts": [
+          {
+            "label": "New tab",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Open a new tab.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "onglets-nouvel-onglet"
+          },
+          {
+            "label": "Close tab",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the active tab.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "onglets-fermer-onglet"
+          },
+          {
+            "label": "Reopen tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "T"
+            ],
+            "description": "Restore a closed tab.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "onglets-rouvrir-onglet"
+          },
+          {
+            "label": "New window",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Open a window.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "onglets-nouvelle-fenetre"
+          },
+          {
+            "label": "Private Chromium",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "N"
+            ],
+            "description": "Open a Chromium private window.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "onglets-prive-chromium"
+          },
+          {
+            "label": "Private Firefox",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "P"
+            ],
+            "description": "Open a Firefox private window.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "onglets-prive-firefox"
+          },
+          {
+            "label": "Next tab",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Move to the next tab.",
+            "priority": 7,
+            "usageLevel": "essential",
+            "id": "onglets-onglet-suivant"
+          },
+          {
+            "label": "Previous tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Move to the previous tab.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "onglets-onglet-precedent"
+          },
+          {
+            "label": "Numbered tab",
+            "keys": [
+              "Ctrl",
+              "1-8"
+            ],
+            "description": "Move to the numbered tab.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "onglets-onglet-numero"
+          },
+          {
+            "label": "Last tab",
+            "keys": [
+              "Ctrl",
+              "9"
+            ],
+            "description": "Move to the last tab.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "onglets-dernier-onglet"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Address bar",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Focus address or search.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-barre-d-adresse"
+          },
+          {
+            "label": "Reload",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Reload the page.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "navigation-actualiser"
+          },
+          {
+            "label": "Hard reload",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "R"
+            ],
+            "description": "Reload without cache.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-actualiser-sans-cache"
+          },
+          {
+            "label": "Back",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Go back.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-retour"
+          },
+          {
+            "label": "Forward",
+            "keys": [
+              "Alt",
+              "Right"
+            ],
+            "description": "Go forward.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-avancer"
+          },
+          {
+            "label": "Find in page",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Search in the page.",
+            "priority": 6,
+            "usageLevel": "essential",
+            "id": "navigation-rechercher-page"
+          },
+          {
+            "label": "History",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Open history.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "navigation-historique"
+          },
+          {
+            "label": "Downloads",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Open downloads.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "navigation-telechargements"
+          }
+        ]
+      },
+      {
+        "id": "outils",
+        "title": "Page and tools",
+        "shortcuts": [
+          {
+            "label": "Bookmark",
+            "keys": [
+              "Ctrl",
+              "D"
+            ],
+            "description": "Bookmark the page.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "outils-favori"
+          },
+          {
+            "label": "Print",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Open print options.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "outils-imprimer"
+          },
+          {
+            "label": "Save page",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Save the page.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "outils-enregistrer-page"
+          },
+          {
+            "label": "Open file",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Open a local file.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "outils-ouvrir-fichier"
+          },
+          {
+            "label": "Zoom in",
+            "keys": [
+              "Ctrl",
+              "+"
+            ],
+            "description": "Zoom in.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "outils-zoom-avant"
+          },
+          {
+            "label": "Zoom out",
+            "keys": [
+              "Ctrl",
+              "-"
+            ],
+            "description": "Zoom out.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "outils-zoom-arriere"
+          },
+          {
+            "label": "Default zoom",
+            "keys": [
+              "Ctrl",
+              "0"
+            ],
+            "description": "Reset zoom.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "outils-zoom-par-defaut"
+          },
+          {
+            "label": "Full screen",
+            "keys": [
+              "F11"
+            ],
+            "description": "Toggle full screen.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "outils-plein-ecran"
+          },
+          {
+            "label": "Developer tools",
+            "keys": [
+              "F12"
+            ],
+            "description": "Open developer tools.",
+            "priority": 9,
+            "usageLevel": "expert",
+            "id": "outils-outils-developpeur"
+          },
+          {
+            "label": "Clear data",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Delete"
+            ],
+            "description": "Open recent data cleanup.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "outils-effacer-donnees"
+          }
+        ]
+      }
+    ]
+  }
+]

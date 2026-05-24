@@ -1,0 +1,314 @@
+[
+  {
+    "id": "media-player-fr",
+    "appNames": [
+      "microsoft.media.player.exe",
+      "wmplayer.exe",
+      "zunemusic.exe",
+      "zunevideo.exe"
+    ],
+    "title": "Lecteur multimedia - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "lecture",
+        "title": "Lecture",
+        "shortcuts": [
+          {
+            "label": "Lecture pause",
+            "keys": [
+              "Space"
+            ],
+            "description": "Lance ou met en pause.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "lecture-lecture-pause"
+          },
+          {
+            "label": "Lecture pause alternative",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Bascule la lecture si compatible.",
+            "priority": 2,
+            "usageLevel": "advanced",
+            "id": "lecture-lecture-pause-alternative"
+          },
+          {
+            "label": "Stop",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Arrete la lecture si compatible.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "lecture-stop"
+          },
+          {
+            "label": "Plein ecran",
+            "keys": [
+              "F11"
+            ],
+            "description": "Bascule le plein ecran.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "lecture-plein-ecran"
+          },
+          {
+            "label": "Quitter plein ecran",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Revient a la fenetre.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "lecture-quitter-plein-ecran"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation media",
+        "shortcuts": [
+          {
+            "label": "Avancer",
+            "keys": [
+              "Right"
+            ],
+            "description": "Avance dans le media.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-avancer"
+          },
+          {
+            "label": "Reculer",
+            "keys": [
+              "Left"
+            ],
+            "description": "Recule dans le media.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-reculer"
+          },
+          {
+            "label": "Media suivant",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Passe au media suivant si compatible.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-media-suivant"
+          },
+          {
+            "label": "Media precedent",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Revient au media precedent si compatible.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "navigation-media-precedent"
+          }
+        ]
+      },
+      {
+        "id": "audio",
+        "title": "Audio",
+        "shortcuts": [
+          {
+            "label": "Volume plus",
+            "keys": [
+              "Up"
+            ],
+            "description": "Augmente le volume.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "audio-volume-plus"
+          },
+          {
+            "label": "Volume moins",
+            "keys": [
+              "Down"
+            ],
+            "description": "Diminue le volume.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "audio-volume-moins"
+          },
+          {
+            "label": "Muet",
+            "keys": [
+              "F7"
+            ],
+            "description": "Coupe le son si compatible.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "audio-muet"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "media-player-en",
+    "appNames": [
+      "microsoft.media.player.exe",
+      "wmplayer.exe",
+      "zunemusic.exe",
+      "zunevideo.exe"
+    ],
+    "title": "Media Player - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "lecture",
+        "title": "Playback",
+        "shortcuts": [
+          {
+            "label": "Play pause",
+            "keys": [
+              "Space"
+            ],
+            "description": "Play or pause.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "lecture-lecture-pause"
+          },
+          {
+            "label": "Alternative play pause",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Toggle playback when compatible.",
+            "priority": 2,
+            "usageLevel": "advanced",
+            "id": "lecture-lecture-pause-alternative"
+          },
+          {
+            "label": "Stop",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Stop playback when compatible.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "lecture-stop"
+          },
+          {
+            "label": "Full screen",
+            "keys": [
+              "F11"
+            ],
+            "description": "Toggle full screen.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "lecture-plein-ecran"
+          },
+          {
+            "label": "Exit full screen",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Return to window mode.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "lecture-quitter-plein-ecran"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Media navigation",
+        "shortcuts": [
+          {
+            "label": "Seek forward",
+            "keys": [
+              "Right"
+            ],
+            "description": "Seek forward.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "navigation-avancer"
+          },
+          {
+            "label": "Seek backward",
+            "keys": [
+              "Left"
+            ],
+            "description": "Seek backward.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-reculer"
+          },
+          {
+            "label": "Next media",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Move to next media when compatible.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-media-suivant"
+          },
+          {
+            "label": "Previous media",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Move to previous media when compatible.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "navigation-media-precedent"
+          }
+        ]
+      },
+      {
+        "id": "audio",
+        "title": "Audio",
+        "shortcuts": [
+          {
+            "label": "Volume up",
+            "keys": [
+              "Up"
+            ],
+            "description": "Increase volume.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "audio-volume-plus"
+          },
+          {
+            "label": "Volume down",
+            "keys": [
+              "Down"
+            ],
+            "description": "Decrease volume.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "audio-volume-moins"
+          },
+          {
+            "label": "Mute",
+            "keys": [
+              "F7"
+            ],
+            "description": "Mute when compatible.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "audio-muet"
+          }
+        ]
+      }
+    ]
+  }
+]

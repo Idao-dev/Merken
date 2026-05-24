@@ -92,6 +92,7 @@ a,
 .toggle-row,
 .settings-row,
 .sheet-family-row,
+.level-switch,
 .placement-bar,
 .modal,
 kbd {
@@ -157,6 +158,51 @@ kbd {
 
 .text-xl {
   font-size: 15px;
+}
+
+.level-switch {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  min-width: 300px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 8px;
+  background: rgb(255 255 255 / 5%);
+}
+
+.level-switch button {
+  min-width: 0;
+  min-height: 30px;
+  padding: 4px 8px;
+  border: 0;
+  border-right: 1px solid color-mix(in srgb, var(--border) 74%, transparent);
+  background: transparent;
+  color: rgb(231 238 248 / 76%);
+  cursor: pointer;
+  font-size: 0.82em;
+  font-weight: 800;
+}
+
+.level-switch button:last-child {
+  border-right: 0;
+}
+
+.level-switch button:hover,
+.level-switch button:focus {
+  color: var(--text-primary);
+  background: rgb(255 255 255 / 8%);
+  outline: none;
+}
+
+.level-switch button.active {
+  background: color-mix(in srgb, var(--accent) 82%, var(--bg-card));
+  color: #fff;
+}
+
+.level-switch button:disabled {
+  color: rgb(198 211 229 / 34%);
+  cursor: not-allowed;
+  background: rgb(0 0 0 / 10%);
 }
 
 .content {
@@ -231,7 +277,7 @@ kbd {
 }
 
 .panel-settings {
-  width: min(100vw - 18px, 880px);
+  width: min(100vw - 18px, 1040px);
   cursor: move;
 }
 
@@ -286,7 +332,6 @@ kbd {
 
 .settings-sidebar-footer small,
 .settings-note,
-.sheet-family-row small,
 .toggle-row small {
   color: rgb(198 211 229 / 68%);
   font-size: 0.82em;
@@ -556,18 +601,126 @@ kbd {
 
 .sheet-family-row {
   display: grid;
-  grid-template-columns: 22px minmax(130px, 1fr) minmax(140px, 1fr);
+  grid-template-columns: minmax(130px, 1fr) minmax(300px, auto);
   align-items: center;
-  gap: 8px;
+  gap: 12px;
   min-height: 39px;
   padding: 8px 14px;
   border-top: 1px solid rgb(255 255 255 / 8%);
 }
 
-.sheet-family-row input {
+.sheet-family-row.active {
+  background: rgb(255 255 255 / 5%);
+}
+
+.sheet-family-name {
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  overflow: hidden;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-weight: 700;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sheet-family-name:hover,
+.sheet-family-name:focus {
+  color: var(--accent);
+  outline: none;
+}
+
+.sheet-level-switch {
+  width: min(100%, 330px);
+  justify-self: end;
+}
+
+.customization-editor {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+  max-height: 472px;
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--bg-card) 82%, transparent);
+}
+
+.customization-editor {
+  padding: 0;
+}
+
+.custom-theme {
+  display: grid;
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+}
+
+.custom-theme:last-child {
+  border-bottom: 0;
+}
+
+.custom-theme-row,
+.custom-shortcut-row {
+  display: grid;
+  align-items: center;
+  min-width: 0;
+}
+
+.custom-theme-row {
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  min-height: 44px;
+  padding: 9px 14px;
+  background: rgb(255 255 255 / 4%);
+  cursor: pointer;
+}
+
+.custom-theme-row input,
+.custom-shortcut-row input {
   width: 15px;
   height: 15px;
   accent-color: var(--accent);
+}
+
+.custom-theme-row span {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.custom-theme-row strong {
+  min-width: 0;
+  color: var(--text-primary);
+  font-size: 0.92em;
+}
+
+.custom-theme-row small {
+  color: rgb(198 211 229 / 68%);
+  font-size: 0.78em;
+}
+
+.custom-shortcut-list {
+  display: grid;
+}
+
+.custom-shortcut-row {
+  grid-template-columns: 22px minmax(96px, auto) minmax(0, 1fr);
+  gap: 8px;
+  min-height: 33px;
+  padding: 5px 14px;
+  border-top: 1px solid rgb(255 255 255 / 6%);
+  cursor: pointer;
+}
+
+.custom-shortcut-row strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 0.9em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .pending-panel {
@@ -797,6 +950,12 @@ kbd {
   .settings-row,
   .sheet-family-row {
     grid-template-columns: 1fr;
+  }
+
+  .level-switch,
+  .sheet-level-switch {
+    width: 100%;
+    min-width: 0;
   }
 
   .toggle-row {

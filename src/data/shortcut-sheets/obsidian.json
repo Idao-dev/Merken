@@ -1,0 +1,488 @@
+[
+  {
+    "id": "obsidian-fr",
+    "appNames": [
+      "obsidian.exe"
+    ],
+    "title": "Obsidian - Essentiels",
+    "platform": "cross-platform",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Palette commandes",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Ouvre la palette.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-palette-commandes"
+          },
+          {
+            "label": "Ouverture rapide",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Recherche une note.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "navigation-ouverture-rapide"
+          },
+          {
+            "label": "Nouvelle note",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Cree une note.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "navigation-nouvelle-note"
+          },
+          {
+            "label": "Fermer onglet",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme l onglet.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-fermer-onglet"
+          },
+          {
+            "label": "Onglet suivant",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Passe a l onglet suivant.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-onglet-suivant"
+          },
+          {
+            "label": "Onglet precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Revient a l onglet precedent.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "navigation-onglet-precedent"
+          },
+          {
+            "label": "Parametres",
+            "keys": [
+              "Ctrl",
+              ","
+            ],
+            "description": "Ouvre les parametres.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "navigation-parametres"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Edition Markdown",
+        "shortcuts": [
+          {
+            "label": "Copier",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copie selection ou paragraphe.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Coller",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Colle le texte.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Coller brut",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Colle sans mise en forme.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "edition-coller-brut"
+          },
+          {
+            "label": "Annuler",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Annule l action.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Retablir",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Z"
+            ],
+            "description": "Retablit l action.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "edition-retablir"
+          },
+          {
+            "label": "Supprimer ligne",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "K"
+            ],
+            "description": "Supprime la ligne courante.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "edition-supprimer-ligne"
+          }
+        ]
+      },
+      {
+        "id": "format",
+        "title": "Mise en forme",
+        "shortcuts": [
+          {
+            "label": "Gras",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Met en gras.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "format-gras"
+          },
+          {
+            "label": "Italique",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Met en italique.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "format-italique"
+          },
+          {
+            "label": "Lien",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insere ou modifie un lien.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "format-lien"
+          },
+          {
+            "label": "Recherche note",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Recherche dans la note.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "format-recherche-note"
+          },
+          {
+            "label": "Recherche coffre",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F"
+            ],
+            "description": "Recherche dans le coffre.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "format-recherche-coffre"
+          },
+          {
+            "label": "Lecture edition",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Bascule lecture et edition.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "format-lecture-edition"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "obsidian-en",
+    "appNames": [
+      "obsidian.exe"
+    ],
+    "title": "Obsidian - Essentials",
+    "platform": "cross-platform",
+    "language": "en",
+    "categories": [
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Command palette",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Open the palette.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-palette-commandes"
+          },
+          {
+            "label": "Quick switcher",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Search for a note.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "navigation-ouverture-rapide"
+          },
+          {
+            "label": "New note",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Create a note.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "navigation-nouvelle-note"
+          },
+          {
+            "label": "Close tab",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the tab.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "navigation-fermer-onglet"
+          },
+          {
+            "label": "Next tab",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Move to next tab.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-onglet-suivant"
+          },
+          {
+            "label": "Previous tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Move to previous tab.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "navigation-onglet-precedent"
+          },
+          {
+            "label": "Settings",
+            "keys": [
+              "Ctrl",
+              ","
+            ],
+            "description": "Open settings.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "navigation-parametres"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Markdown editing",
+        "shortcuts": [
+          {
+            "label": "Copy",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copy selection or paragraph.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Paste",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Paste text.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Paste plain",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Paste without formatting.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "edition-coller-brut"
+          },
+          {
+            "label": "Undo",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Undo the action.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Redo",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Z"
+            ],
+            "description": "Redo the action.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "edition-retablir"
+          },
+          {
+            "label": "Delete line",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "K"
+            ],
+            "description": "Delete the current line.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "edition-supprimer-ligne"
+          }
+        ]
+      },
+      {
+        "id": "format",
+        "title": "Formatting",
+        "shortcuts": [
+          {
+            "label": "Bold",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Make text bold.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "format-gras"
+          },
+          {
+            "label": "Italic",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Make text italic.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "format-italique"
+          },
+          {
+            "label": "Link",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insert or edit a link.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "format-lien"
+          },
+          {
+            "label": "Find note",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Search the note.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "format-recherche-note"
+          },
+          {
+            "label": "Search vault",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F"
+            ],
+            "description": "Search the vault.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "format-recherche-coffre"
+          },
+          {
+            "label": "Reading editing",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Toggle reading and editing.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "format-lecture-edition"
+          }
+        ]
+      }
+    ]
+  }
+]

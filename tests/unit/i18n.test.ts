@@ -23,6 +23,9 @@ describe("interface labels", () => {
     expect(labels.settings.updateUnconfigured).toContain("GitHub Releases");
     expect(labels.settings.updateCheck).toContain("Check for updates");
     expect(labels.settings.repository).toBe("GitHub repository");
+    expect(labels.shortcutDisplayChoice.advanced).toBe("Advanced");
+    expect(labels.shortcutDisplayChoice.custom).toBe("Customize");
+    expect(labels.tabs.customization).toBe("Customization");
     expect(labels.theme.dark).toBe("Dark");
     expect(labels.theme.colorblind).toBe("Colorblind mode");
     expect(Object.values(labels.theme)).not.toContain("Light");
@@ -66,7 +69,9 @@ describe("interface labels", () => {
 
     expect(fr.settings.updateChecking).toBe("Verification en cours");
     expect(fr.settings.updatePortableAvailable).toContain("Telecharger");
+    expect(fr.settings.resetHelp).toContain("ensemble des options");
     expect(en.settings.updateUpToDate).toBe("Merken is up to date");
     expect(en.settings.updateAvailable).toContain("Install");
+    expect(en.settings.resetHelp).toContain("all application options");
   });
 });

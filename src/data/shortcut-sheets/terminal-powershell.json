@@ -1,0 +1,436 @@
+[
+  {
+    "id": "terminal-powershell-fr",
+    "appNames": [
+      "windowsterminal.exe",
+      "wt.exe",
+      "powershell.exe",
+      "pwsh.exe"
+    ],
+    "title": "Terminal et PowerShell - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "onglets",
+        "title": "Onglets",
+        "shortcuts": [
+          {
+            "label": "Nouvel onglet",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "T"
+            ],
+            "description": "Ouvre un onglet.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "onglets-nouvel-onglet"
+          },
+          {
+            "label": "Fermer onglet",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "W"
+            ],
+            "description": "Ferme l onglet actif.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "onglets-fermer-onglet"
+          },
+          {
+            "label": "Onglet suivant",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Passe a l onglet suivant.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "onglets-onglet-suivant"
+          },
+          {
+            "label": "Onglet precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Revient a l onglet precedent.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "onglets-onglet-precedent"
+          },
+          {
+            "label": "Palette de commandes",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "P"
+            ],
+            "description": "Ouvre la palette.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "onglets-palette-de-commandes"
+          },
+          {
+            "label": "Parametres",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              ","
+            ],
+            "description": "Ouvre les parametres.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "onglets-parametres"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Edition",
+        "shortcuts": [
+          {
+            "label": "Copier",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "C"
+            ],
+            "description": "Copie la selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Coller",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Colle dans le terminal.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Rechercher",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F"
+            ],
+            "description": "Recherche dans le tampon.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Interrompre commande",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Interrompt une commande.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "edition-interrompre-commande"
+          },
+          {
+            "label": "Effacer affichage",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Nettoie l affichage du shell.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "edition-effacer-affichage"
+          }
+        ]
+      },
+      {
+        "id": "affichage",
+        "title": "Panneaux et affichage",
+        "shortcuts": [
+          {
+            "label": "Dupliquer panneau",
+            "keys": [
+              "Alt",
+              "Shift",
+              "D"
+            ],
+            "description": "Cree un panneau du profil courant.",
+            "priority": 1,
+            "usageLevel": "advanced",
+            "id": "affichage-dupliquer-panneau"
+          },
+          {
+            "label": "Zoom avant",
+            "keys": [
+              "Ctrl",
+              "+"
+            ],
+            "description": "Agrandit le texte.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "affichage-zoom-avant"
+          },
+          {
+            "label": "Zoom arriere",
+            "keys": [
+              "Ctrl",
+              "-"
+            ],
+            "description": "Reduit le texte.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "affichage-zoom-arriere"
+          },
+          {
+            "label": "Zoom par defaut",
+            "keys": [
+              "Ctrl",
+              "0"
+            ],
+            "description": "Restaure la taille initiale.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "affichage-zoom-par-defaut"
+          },
+          {
+            "label": "Plein ecran",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Bascule le plein ecran.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "affichage-plein-ecran"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "terminal-powershell-en",
+    "appNames": [
+      "windowsterminal.exe",
+      "wt.exe",
+      "powershell.exe",
+      "pwsh.exe"
+    ],
+    "title": "Terminal and PowerShell - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "onglets",
+        "title": "Tabs",
+        "shortcuts": [
+          {
+            "label": "New tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "T"
+            ],
+            "description": "Open a tab.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "onglets-nouvel-onglet"
+          },
+          {
+            "label": "Close tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "W"
+            ],
+            "description": "Close the active tab.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "onglets-fermer-onglet"
+          },
+          {
+            "label": "Next tab",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Move to the next tab.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "onglets-onglet-suivant"
+          },
+          {
+            "label": "Previous tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Move to the previous tab.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "onglets-onglet-precedent"
+          },
+          {
+            "label": "Command palette",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "P"
+            ],
+            "description": "Open the command palette.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "onglets-palette-de-commandes"
+          },
+          {
+            "label": "Settings",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              ","
+            ],
+            "description": "Open settings.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "onglets-parametres"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Editing",
+        "shortcuts": [
+          {
+            "label": "Copy",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "C"
+            ],
+            "description": "Copy selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Paste",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Paste into the terminal.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Find",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F"
+            ],
+            "description": "Search the buffer.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Interrupt command",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Interrupt a command.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "edition-interrompre-commande"
+          },
+          {
+            "label": "Clear display",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Clear shell display.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "edition-effacer-affichage"
+          }
+        ]
+      },
+      {
+        "id": "affichage",
+        "title": "Panes and display",
+        "shortcuts": [
+          {
+            "label": "Duplicate pane",
+            "keys": [
+              "Alt",
+              "Shift",
+              "D"
+            ],
+            "description": "Create a pane from the current profile.",
+            "priority": 1,
+            "usageLevel": "advanced",
+            "id": "affichage-dupliquer-panneau"
+          },
+          {
+            "label": "Zoom in",
+            "keys": [
+              "Ctrl",
+              "+"
+            ],
+            "description": "Increase text size.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "affichage-zoom-avant"
+          },
+          {
+            "label": "Zoom out",
+            "keys": [
+              "Ctrl",
+              "-"
+            ],
+            "description": "Decrease text size.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "affichage-zoom-arriere"
+          },
+          {
+            "label": "Default zoom",
+            "keys": [
+              "Ctrl",
+              "0"
+            ],
+            "description": "Restore default size.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "affichage-zoom-par-defaut"
+          },
+          {
+            "label": "Full screen",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Toggle full screen.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "affichage-plein-ecran"
+          }
+        ]
+      }
+    ]
+  }
+]

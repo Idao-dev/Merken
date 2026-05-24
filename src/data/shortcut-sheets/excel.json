@@ -1,0 +1,688 @@
+[
+  {
+    "id": "excel-fr",
+    "appNames": [
+      "excel.exe"
+    ],
+    "title": "Excel - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "general",
+        "title": "General",
+        "shortcuts": [
+          {
+            "label": "Nouveau classeur",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Cree un classeur.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "general-nouveau-classeur"
+          },
+          {
+            "label": "Ouvrir",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Ouvre un classeur.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "general-ouvrir"
+          },
+          {
+            "label": "Enregistrer",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Enregistre le classeur.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "general-enregistrer"
+          },
+          {
+            "label": "Fermer",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme le classeur.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "general-fermer"
+          },
+          {
+            "label": "Imprimer",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Ouvre l impression.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "general-imprimer"
+          },
+          {
+            "label": "Recherche commande",
+            "keys": [
+              "Alt",
+              "Q"
+            ],
+            "description": "Recherche une commande.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "general-recherche-commande"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Edition",
+        "shortcuts": [
+          {
+            "label": "Copier",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copie la selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Coller",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Colle la selection.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Couper",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Coupe la selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "edition-couper"
+          },
+          {
+            "label": "Annuler",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Annule l action recente.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Retablir",
+            "keys": [
+              "Ctrl",
+              "Y"
+            ],
+            "description": "Retablit l action.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "edition-retablir"
+          },
+          {
+            "label": "Rechercher",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Recherche dans le classeur.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Remplacer",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Ouvre le remplacement.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "edition-remplacer"
+          }
+        ]
+      },
+      {
+        "id": "cellules",
+        "title": "Cellules et navigation",
+        "shortcuts": [
+          {
+            "label": "Modifier cellule",
+            "keys": [
+              "F2"
+            ],
+            "description": "Modifie la cellule active.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "cellules-modifier-cellule"
+          },
+          {
+            "label": "Atteindre",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Ouvre Atteindre.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "cellules-atteindre"
+          },
+          {
+            "label": "Debut feuille",
+            "keys": [
+              "Ctrl",
+              "Home"
+            ],
+            "description": "Va au debut de la feuille.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "cellules-debut-feuille"
+          },
+          {
+            "label": "Derniere cellule",
+            "keys": [
+              "Ctrl",
+              "End"
+            ],
+            "description": "Va a la derniere cellule utilisee.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "cellules-derniere-cellule"
+          },
+          {
+            "label": "Bord region",
+            "keys": [
+              "Ctrl",
+              "Arrow"
+            ],
+            "description": "Saute au bord des donnees.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "cellules-bord-region"
+          },
+          {
+            "label": "Etendre selection",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Arrow"
+            ],
+            "description": "Etend la selection.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "cellules-etendre-selection"
+          },
+          {
+            "label": "Inserer",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "+"
+            ],
+            "description": "Insere cellules, lignes ou colonnes.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "cellules-inserer"
+          },
+          {
+            "label": "Supprimer",
+            "keys": [
+              "Ctrl",
+              "-"
+            ],
+            "description": "Supprime cellules, lignes ou colonnes.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "cellules-supprimer"
+          }
+        ]
+      },
+      {
+        "id": "formules",
+        "title": "Formules et donnees",
+        "shortcuts": [
+          {
+            "label": "Somme automatique",
+            "keys": [
+              "Alt",
+              "="
+            ],
+            "description": "Insere une somme.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "formules-somme-automatique"
+          },
+          {
+            "label": "Inserer fonction",
+            "keys": [
+              "Shift",
+              "F3"
+            ],
+            "description": "Ouvre l assistant fonction.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "formules-inserer-fonction"
+          },
+          {
+            "label": "Reference absolue",
+            "keys": [
+              "F4"
+            ],
+            "description": "Bascule les references.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "formules-reference-absolue"
+          },
+          {
+            "label": "Afficher formules",
+            "keys": [
+              "Ctrl",
+              "`"
+            ],
+            "description": "Affiche ou masque les formules.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "formules-afficher-formules"
+          },
+          {
+            "label": "Recalculer",
+            "keys": [
+              "F9"
+            ],
+            "description": "Recalcule le classeur.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "formules-recalculer"
+          },
+          {
+            "label": "Filtre",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "L"
+            ],
+            "description": "Active ou retire les filtres.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "formules-filtre"
+          },
+          {
+            "label": "Creer tableau",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Cree un tableau.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "formules-creer-tableau"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "excel-en",
+    "appNames": [
+      "excel.exe"
+    ],
+    "title": "Excel - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "general",
+        "title": "General",
+        "shortcuts": [
+          {
+            "label": "New workbook",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Create a workbook.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "general-nouveau-classeur"
+          },
+          {
+            "label": "Open",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Open a workbook.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "general-ouvrir"
+          },
+          {
+            "label": "Save",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Save the workbook.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "general-enregistrer"
+          },
+          {
+            "label": "Close workbook",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the workbook.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "general-fermer"
+          },
+          {
+            "label": "Print",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Open print options.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "general-imprimer"
+          },
+          {
+            "label": "Command search",
+            "keys": [
+              "Alt",
+              "Q"
+            ],
+            "description": "Search for a command.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "general-recherche-commande"
+          }
+        ]
+      },
+      {
+        "id": "edition",
+        "title": "Editing",
+        "shortcuts": [
+          {
+            "label": "Copy",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copy the selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Paste",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Paste the selection.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Cut",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Cut the selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "edition-couper"
+          },
+          {
+            "label": "Undo",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Undo the latest action.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Redo",
+            "keys": [
+              "Ctrl",
+              "Y"
+            ],
+            "description": "Redo the action.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "edition-retablir"
+          },
+          {
+            "label": "Find",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Search the workbook.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Replace",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Open replace.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "edition-remplacer"
+          }
+        ]
+      },
+      {
+        "id": "cellules",
+        "title": "Cells and navigation",
+        "shortcuts": [
+          {
+            "label": "Edit cell",
+            "keys": [
+              "F2"
+            ],
+            "description": "Edit the active cell.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "cellules-modifier-cellule"
+          },
+          {
+            "label": "Go to",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Open Go To.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "cellules-atteindre"
+          },
+          {
+            "label": "Sheet start",
+            "keys": [
+              "Ctrl",
+              "Home"
+            ],
+            "description": "Go to the sheet start.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "cellules-debut-feuille"
+          },
+          {
+            "label": "Last cell",
+            "keys": [
+              "Ctrl",
+              "End"
+            ],
+            "description": "Go to the last used cell.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "cellules-derniere-cellule"
+          },
+          {
+            "label": "Region edge",
+            "keys": [
+              "Ctrl",
+              "Arrow"
+            ],
+            "description": "Jump to the data edge.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "cellules-bord-region"
+          },
+          {
+            "label": "Extend selection",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Arrow"
+            ],
+            "description": "Extend selection.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "cellules-etendre-selection"
+          },
+          {
+            "label": "Insert",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "+"
+            ],
+            "description": "Insert cells, rows, or columns.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "cellules-inserer"
+          },
+          {
+            "label": "Delete",
+            "keys": [
+              "Ctrl",
+              "-"
+            ],
+            "description": "Delete cells, rows, or columns.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "cellules-supprimer"
+          }
+        ]
+      },
+      {
+        "id": "formules",
+        "title": "Formulas and data",
+        "shortcuts": [
+          {
+            "label": "AutoSum",
+            "keys": [
+              "Alt",
+              "="
+            ],
+            "description": "Insert a sum.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "formules-somme-automatique"
+          },
+          {
+            "label": "Insert function",
+            "keys": [
+              "Shift",
+              "F3"
+            ],
+            "description": "Open the function wizard.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "formules-inserer-fonction"
+          },
+          {
+            "label": "Absolute reference",
+            "keys": [
+              "F4"
+            ],
+            "description": "Toggle references.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "formules-reference-absolue"
+          },
+          {
+            "label": "Show formulas",
+            "keys": [
+              "Ctrl",
+              "`"
+            ],
+            "description": "Show or hide formulas.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "formules-afficher-formules"
+          },
+          {
+            "label": "Calculate",
+            "keys": [
+              "F9"
+            ],
+            "description": "Recalculate the workbook.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "formules-recalculer"
+          },
+          {
+            "label": "Filter",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "L"
+            ],
+            "description": "Toggle filters.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "formules-filtre"
+          },
+          {
+            "label": "Create table",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Create a table.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "formules-creer-tableau"
+          }
+        ]
+      }
+    ]
+  }
+]

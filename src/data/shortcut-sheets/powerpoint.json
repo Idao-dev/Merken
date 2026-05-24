@@ -1,0 +1,700 @@
+[
+  {
+    "id": "powerpoint-fr",
+    "appNames": [
+      "powerpnt.exe"
+    ],
+    "title": "PowerPoint - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "general",
+        "title": "General",
+        "shortcuts": [
+          {
+            "label": "Nouvelle presentation",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Cree une presentation.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "general-nouvelle-presentation"
+          },
+          {
+            "label": "Ouvrir",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Ouvre une presentation.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "general-ouvrir"
+          },
+          {
+            "label": "Enregistrer",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Enregistre la presentation.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "general-enregistrer"
+          },
+          {
+            "label": "Imprimer",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Ouvre l impression.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "general-imprimer"
+          },
+          {
+            "label": "Recherche commande",
+            "keys": [
+              "Alt",
+              "Q"
+            ],
+            "description": "Recherche une commande.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "general-recherche-commande"
+          }
+        ]
+      },
+      {
+        "id": "diapos",
+        "title": "Diapositives",
+        "shortcuts": [
+          {
+            "label": "Nouvelle diapositive",
+            "keys": [
+              "Ctrl",
+              "M"
+            ],
+            "description": "Ajoute une diapositive.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "diapos-nouvelle-diapositive"
+          },
+          {
+            "label": "Dupliquer",
+            "keys": [
+              "Ctrl",
+              "D"
+            ],
+            "description": "Duplique la selection.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "diapos-dupliquer"
+          },
+          {
+            "label": "Copier",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copie la selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "diapos-copier"
+          },
+          {
+            "label": "Coller",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Colle la selection.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "diapos-coller"
+          },
+          {
+            "label": "Couper",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Coupe la selection.",
+            "priority": 5,
+            "usageLevel": "essential",
+            "id": "diapos-couper"
+          },
+          {
+            "label": "Annuler",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Annule l action.",
+            "priority": 6,
+            "usageLevel": "essential",
+            "id": "diapos-annuler"
+          },
+          {
+            "label": "Grouper",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Groupe les objets.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "diapos-grouper"
+          },
+          {
+            "label": "Dissocier",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "G"
+            ],
+            "description": "Dissocie les objets.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "diapos-dissocier"
+          }
+        ]
+      },
+      {
+        "id": "texte",
+        "title": "Texte et objets",
+        "shortcuts": [
+          {
+            "label": "Gras",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Active le gras.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "texte-gras"
+          },
+          {
+            "label": "Italique",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Active l italique.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "texte-italique"
+          },
+          {
+            "label": "Souligne",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Active le souligne.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "texte-souligne"
+          },
+          {
+            "label": "Lien",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insere ou modifie un lien.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "texte-lien"
+          },
+          {
+            "label": "Rechercher",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Recherche dans la presentation.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "texte-rechercher"
+          },
+          {
+            "label": "Remplacer",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Ouvre le remplacement.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "texte-remplacer"
+          },
+          {
+            "label": "Tout selectionner",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Selectionne selon le contexte.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "texte-tout-selectionner"
+          }
+        ]
+      },
+      {
+        "id": "presentation",
+        "title": "Presentation",
+        "shortcuts": [
+          {
+            "label": "Depuis le debut",
+            "keys": [
+              "F5"
+            ],
+            "description": "Lance depuis le debut.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "presentation-depuis-le-debut"
+          },
+          {
+            "label": "Depuis la diapo",
+            "keys": [
+              "Shift",
+              "F5"
+            ],
+            "description": "Lance depuis la diapo active.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "presentation-depuis-la-diapo"
+          },
+          {
+            "label": "Mode presentateur",
+            "keys": [
+              "Alt",
+              "F5"
+            ],
+            "description": "Lance le mode presentateur.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "presentation-mode-presentateur"
+          },
+          {
+            "label": "Suivant",
+            "keys": [
+              "N"
+            ],
+            "description": "Passe au suivant.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "presentation-suivant"
+          },
+          {
+            "label": "Precedent",
+            "keys": [
+              "P"
+            ],
+            "description": "Revient au precedent.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "presentation-precedent"
+          },
+          {
+            "label": "Ecran noir",
+            "keys": [
+              "B"
+            ],
+            "description": "Affiche un ecran noir.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "presentation-ecran-noir"
+          },
+          {
+            "label": "Ecran blanc",
+            "keys": [
+              "W"
+            ],
+            "description": "Affiche un ecran blanc.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "presentation-ecran-blanc"
+          },
+          {
+            "label": "Quitter",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Termine le diaporama.",
+            "priority": 8,
+            "usageLevel": "essential",
+            "id": "presentation-quitter"
+          },
+          {
+            "label": "Pointeur laser",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Active le pointeur laser.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "presentation-pointeur-laser"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "powerpoint-en",
+    "appNames": [
+      "powerpnt.exe"
+    ],
+    "title": "PowerPoint - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "general",
+        "title": "General",
+        "shortcuts": [
+          {
+            "label": "New presentation",
+            "keys": [
+              "Ctrl",
+              "N"
+            ],
+            "description": "Create a presentation.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "general-nouvelle-presentation"
+          },
+          {
+            "label": "Open",
+            "keys": [
+              "Ctrl",
+              "O"
+            ],
+            "description": "Open a presentation.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "general-ouvrir"
+          },
+          {
+            "label": "Save",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Save the presentation.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "general-enregistrer"
+          },
+          {
+            "label": "Print",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Open print options.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "general-imprimer"
+          },
+          {
+            "label": "Command search",
+            "keys": [
+              "Alt",
+              "Q"
+            ],
+            "description": "Search for a command.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "general-recherche-commande"
+          }
+        ]
+      },
+      {
+        "id": "diapos",
+        "title": "Slides",
+        "shortcuts": [
+          {
+            "label": "New slide",
+            "keys": [
+              "Ctrl",
+              "M"
+            ],
+            "description": "Add a slide.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "diapos-nouvelle-diapositive"
+          },
+          {
+            "label": "Duplicate",
+            "keys": [
+              "Ctrl",
+              "D"
+            ],
+            "description": "Duplicate selection.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "diapos-dupliquer"
+          },
+          {
+            "label": "Copy",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copy selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "diapos-copier"
+          },
+          {
+            "label": "Paste",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Paste selection.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "diapos-coller"
+          },
+          {
+            "label": "Cut",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Cut selection.",
+            "priority": 5,
+            "usageLevel": "essential",
+            "id": "diapos-couper"
+          },
+          {
+            "label": "Undo",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Undo action.",
+            "priority": 6,
+            "usageLevel": "essential",
+            "id": "diapos-annuler"
+          },
+          {
+            "label": "Group",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Group objects.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "diapos-grouper"
+          },
+          {
+            "label": "Ungroup",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "G"
+            ],
+            "description": "Ungroup objects.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "diapos-dissocier"
+          }
+        ]
+      },
+      {
+        "id": "texte",
+        "title": "Text and objects",
+        "shortcuts": [
+          {
+            "label": "Bold",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Toggle bold.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "texte-gras"
+          },
+          {
+            "label": "Italic",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Toggle italic.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "texte-italique"
+          },
+          {
+            "label": "Underline",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Toggle underline.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "texte-souligne"
+          },
+          {
+            "label": "Link",
+            "keys": [
+              "Ctrl",
+              "K"
+            ],
+            "description": "Insert or edit a link.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "texte-lien"
+          },
+          {
+            "label": "Find",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Search the presentation.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "texte-rechercher"
+          },
+          {
+            "label": "Replace",
+            "keys": [
+              "Ctrl",
+              "H"
+            ],
+            "description": "Open replace.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "texte-remplacer"
+          },
+          {
+            "label": "Select all",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Select based on context.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "texte-tout-selectionner"
+          }
+        ]
+      },
+      {
+        "id": "presentation",
+        "title": "Slideshow",
+        "shortcuts": [
+          {
+            "label": "From beginning",
+            "keys": [
+              "F5"
+            ],
+            "description": "Start from the beginning.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "presentation-depuis-le-debut"
+          },
+          {
+            "label": "From current slide",
+            "keys": [
+              "Shift",
+              "F5"
+            ],
+            "description": "Start from current slide.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "presentation-depuis-la-diapo"
+          },
+          {
+            "label": "Presenter view",
+            "keys": [
+              "Alt",
+              "F5"
+            ],
+            "description": "Start presenter view.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "presentation-mode-presentateur"
+          },
+          {
+            "label": "Next",
+            "keys": [
+              "N"
+            ],
+            "description": "Move next.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "presentation-suivant"
+          },
+          {
+            "label": "Previous",
+            "keys": [
+              "P"
+            ],
+            "description": "Move previous.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "presentation-precedent"
+          },
+          {
+            "label": "Black screen",
+            "keys": [
+              "B"
+            ],
+            "description": "Show a black screen.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "presentation-ecran-noir"
+          },
+          {
+            "label": "White screen",
+            "keys": [
+              "W"
+            ],
+            "description": "Show a white screen.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "presentation-ecran-blanc"
+          },
+          {
+            "label": "End slideshow",
+            "keys": [
+              "Esc"
+            ],
+            "description": "End the slideshow.",
+            "priority": 8,
+            "usageLevel": "essential",
+            "id": "presentation-quitter"
+          },
+          {
+            "label": "Laser pointer",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Start the laser pointer.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "presentation-pointeur-laser"
+          }
+        ]
+      }
+    ]
+  }
+]

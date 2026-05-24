@@ -226,7 +226,7 @@ Fonctions :
 * détection du logiciel au premier plan ;
 * panneau flottant adapté au logiciel de premier plan ;
 * fiche sur les logiciel de la suit office ;
-* mode expert dans les options qui permet de choisir d'enlever le raccourci standardiser pour des plus spécifique ou moins utiliser par logiciel ;
+* niveau d'affichage par fiche : standard, avance ou expert, avec remplacement du contenu affiche et personnalisation par theme ou raccourci ;
 * rejoue de l'espagnole, portugais, italien, allemand ;
 * adaptation des touches selon la langue de l'os et du clavier avec détection automatique et manuel via option
 

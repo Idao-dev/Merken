@@ -1,0 +1,712 @@
+[
+  {
+    "id": "windows-core-fr",
+    "appNames": [
+      "applicationframehost.exe",
+      "searchhost.exe"
+    ],
+    "title": "Windows - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "edition",
+        "title": "Edition",
+        "shortcuts": [
+          {
+            "label": "Copier",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copie la selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Coller",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Colle le presse-papiers.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Couper",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Coupe la selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "edition-couper"
+          },
+          {
+            "label": "Annuler",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Annule l action recente.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Tout selectionner",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Selectionne le contenu disponible.",
+            "priority": 5,
+            "usageLevel": "essential",
+            "id": "edition-tout-selectionner"
+          },
+          {
+            "label": "Rechercher",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Ouvre la recherche locale.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Coller sans mise en forme",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Colle du texte brut si l app le permet.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "edition-coller-sans-mise-en-forme"
+          },
+          {
+            "label": "Historique presse-papiers",
+            "keys": [
+              "Win",
+              "V"
+            ],
+            "description": "Ouvre les elements recents du presse-papiers.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "edition-historique-presse-papiers"
+          }
+        ]
+      },
+      {
+        "id": "systeme",
+        "title": "Systeme",
+        "shortcuts": [
+          {
+            "label": "Menu Demarrer",
+            "keys": [
+              "Win"
+            ],
+            "description": "Ouvre ou ferme Demarrer.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "systeme-menu-demarrer"
+          },
+          {
+            "label": "Rechercher Windows",
+            "keys": [
+              "Win",
+              "S"
+            ],
+            "description": "Ouvre la recherche Windows.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "systeme-rechercher-windows"
+          },
+          {
+            "label": "Executer",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Ouvre la boite Executer.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "systeme-executer"
+          },
+          {
+            "label": "Parametres",
+            "keys": [
+              "Win",
+              "I"
+            ],
+            "description": "Ouvre les parametres.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "systeme-parametres"
+          },
+          {
+            "label": "Verrouiller",
+            "keys": [
+              "Win",
+              "L"
+            ],
+            "description": "Verrouille la session.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "systeme-verrouiller"
+          },
+          {
+            "label": "Menu rapide",
+            "keys": [
+              "Win",
+              "X"
+            ],
+            "description": "Ouvre le menu des outils systeme.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "systeme-menu-rapide"
+          },
+          {
+            "label": "Gestionnaire des taches",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Esc"
+            ],
+            "description": "Ouvre le gestionnaire des taches.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "systeme-gestionnaire-des-taches"
+          },
+          {
+            "label": "Capture de zone",
+            "keys": [
+              "Win",
+              "Shift",
+              "S"
+            ],
+            "description": "Lance la capture de zone.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "systeme-capture-de-zone"
+          },
+          {
+            "label": "Emoji et symboles",
+            "keys": [
+              "Win",
+              "."
+            ],
+            "description": "Ouvre le panneau emoji.",
+            "priority": 9,
+            "usageLevel": "common",
+            "id": "systeme-emoji-et-symboles"
+          }
+        ]
+      },
+      {
+        "id": "fenetres",
+        "title": "Fenetres",
+        "shortcuts": [
+          {
+            "label": "Changer de fenetre",
+            "keys": [
+              "Alt",
+              "Tab"
+            ],
+            "description": "Passe a une autre fenetre.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "fenetres-changer-de-fenetre"
+          },
+          {
+            "label": "Vue des taches",
+            "keys": [
+              "Win",
+              "Tab"
+            ],
+            "description": "Affiche fenetres et bureaux.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "fenetres-vue-des-taches"
+          },
+          {
+            "label": "Afficher le bureau",
+            "keys": [
+              "Win",
+              "D"
+            ],
+            "description": "Affiche ou masque le bureau.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "fenetres-afficher-le-bureau"
+          },
+          {
+            "label": "Fermer fenetre",
+            "keys": [
+              "Alt",
+              "F4"
+            ],
+            "description": "Ferme la fenetre active.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "fenetres-fermer-fenetre"
+          },
+          {
+            "label": "Ancrer a gauche",
+            "keys": [
+              "Win",
+              "Left"
+            ],
+            "description": "Place la fenetre a gauche.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "fenetres-ancrer-a-gauche"
+          },
+          {
+            "label": "Ancrer a droite",
+            "keys": [
+              "Win",
+              "Right"
+            ],
+            "description": "Place la fenetre a droite.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "fenetres-ancrer-a-droite"
+          },
+          {
+            "label": "Agrandir",
+            "keys": [
+              "Win",
+              "Up"
+            ],
+            "description": "Agrandit la fenetre.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "fenetres-agrandir"
+          },
+          {
+            "label": "Reduire ou restaurer",
+            "keys": [
+              "Win",
+              "Down"
+            ],
+            "description": "Reduit ou restaure la fenetre.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "fenetres-reduire-ou-restaurer"
+          },
+          {
+            "label": "Nouveau bureau",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "D"
+            ],
+            "description": "Cree un bureau virtuel.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "fenetres-nouveau-bureau"
+          },
+          {
+            "label": "Bureau suivant",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "Right"
+            ],
+            "description": "Passe au bureau suivant.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "fenetres-bureau-suivant"
+          },
+          {
+            "label": "Bureau precedent",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "Left"
+            ],
+            "description": "Passe au bureau precedent.",
+            "priority": 11,
+            "usageLevel": "advanced",
+            "id": "fenetres-bureau-precedent"
+          },
+          {
+            "label": "Fermer bureau",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "F4"
+            ],
+            "description": "Ferme le bureau virtuel actif.",
+            "priority": 12,
+            "usageLevel": "expert",
+            "id": "fenetres-fermer-bureau"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "windows-core-en",
+    "appNames": [
+      "applicationframehost.exe",
+      "searchhost.exe"
+    ],
+    "title": "Windows - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "edition",
+        "title": "Editing",
+        "shortcuts": [
+          {
+            "label": "Copy",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Copy the selection.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "edition-copier"
+          },
+          {
+            "label": "Paste",
+            "keys": [
+              "Ctrl",
+              "V"
+            ],
+            "description": "Paste clipboard content.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "edition-coller"
+          },
+          {
+            "label": "Cut",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Cut the selection.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "edition-couper"
+          },
+          {
+            "label": "Undo",
+            "keys": [
+              "Ctrl",
+              "Z"
+            ],
+            "description": "Undo the latest action.",
+            "priority": 4,
+            "usageLevel": "essential",
+            "id": "edition-annuler"
+          },
+          {
+            "label": "Select all",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Select available content.",
+            "priority": 5,
+            "usageLevel": "essential",
+            "id": "edition-tout-selectionner"
+          },
+          {
+            "label": "Find",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Open local search.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "edition-rechercher"
+          },
+          {
+            "label": "Paste without formatting",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Paste plain text when supported.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "edition-coller-sans-mise-en-forme"
+          },
+          {
+            "label": "Clipboard history",
+            "keys": [
+              "Win",
+              "V"
+            ],
+            "description": "Open recent clipboard items.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "edition-historique-presse-papiers"
+          }
+        ]
+      },
+      {
+        "id": "systeme",
+        "title": "System",
+        "shortcuts": [
+          {
+            "label": "Start menu",
+            "keys": [
+              "Win"
+            ],
+            "description": "Open or close Start.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "systeme-menu-demarrer"
+          },
+          {
+            "label": "Windows search",
+            "keys": [
+              "Win",
+              "S"
+            ],
+            "description": "Open Windows search.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "systeme-rechercher-windows"
+          },
+          {
+            "label": "Run",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Open the Run dialog.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "systeme-executer"
+          },
+          {
+            "label": "Settings",
+            "keys": [
+              "Win",
+              "I"
+            ],
+            "description": "Open Settings.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "systeme-parametres"
+          },
+          {
+            "label": "Lock",
+            "keys": [
+              "Win",
+              "L"
+            ],
+            "description": "Lock the session.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "systeme-verrouiller"
+          },
+          {
+            "label": "Quick Link menu",
+            "keys": [
+              "Win",
+              "X"
+            ],
+            "description": "Open the system tools menu.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "systeme-menu-rapide"
+          },
+          {
+            "label": "Task Manager",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Esc"
+            ],
+            "description": "Open Task Manager.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "systeme-gestionnaire-des-taches"
+          },
+          {
+            "label": "Area screenshot",
+            "keys": [
+              "Win",
+              "Shift",
+              "S"
+            ],
+            "description": "Start area capture.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "systeme-capture-de-zone"
+          },
+          {
+            "label": "Emoji and symbols",
+            "keys": [
+              "Win",
+              "."
+            ],
+            "description": "Open the emoji panel.",
+            "priority": 9,
+            "usageLevel": "common",
+            "id": "systeme-emoji-et-symboles"
+          }
+        ]
+      },
+      {
+        "id": "fenetres",
+        "title": "Windows",
+        "shortcuts": [
+          {
+            "label": "Switch windows",
+            "keys": [
+              "Alt",
+              "Tab"
+            ],
+            "description": "Switch to another window.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "fenetres-changer-de-fenetre"
+          },
+          {
+            "label": "Task view",
+            "keys": [
+              "Win",
+              "Tab"
+            ],
+            "description": "Show windows and desktops.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "fenetres-vue-des-taches"
+          },
+          {
+            "label": "Show desktop",
+            "keys": [
+              "Win",
+              "D"
+            ],
+            "description": "Show or hide the desktop.",
+            "priority": 3,
+            "usageLevel": "common",
+            "id": "fenetres-afficher-le-bureau"
+          },
+          {
+            "label": "Close window",
+            "keys": [
+              "Alt",
+              "F4"
+            ],
+            "description": "Close the active window.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "fenetres-fermer-fenetre"
+          },
+          {
+            "label": "Snap left",
+            "keys": [
+              "Win",
+              "Left"
+            ],
+            "description": "Snap the window left.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "fenetres-ancrer-a-gauche"
+          },
+          {
+            "label": "Snap right",
+            "keys": [
+              "Win",
+              "Right"
+            ],
+            "description": "Snap the window right.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "fenetres-ancrer-a-droite"
+          },
+          {
+            "label": "Maximize",
+            "keys": [
+              "Win",
+              "Up"
+            ],
+            "description": "Maximize the window.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "fenetres-agrandir"
+          },
+          {
+            "label": "Minimize or restore",
+            "keys": [
+              "Win",
+              "Down"
+            ],
+            "description": "Minimize or restore the window.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "fenetres-reduire-ou-restaurer"
+          },
+          {
+            "label": "New desktop",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "D"
+            ],
+            "description": "Create a virtual desktop.",
+            "priority": 9,
+            "usageLevel": "advanced",
+            "id": "fenetres-nouveau-bureau"
+          },
+          {
+            "label": "Next desktop",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "Right"
+            ],
+            "description": "Switch to the next desktop.",
+            "priority": 10,
+            "usageLevel": "advanced",
+            "id": "fenetres-bureau-suivant"
+          },
+          {
+            "label": "Previous desktop",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "Left"
+            ],
+            "description": "Switch to the previous desktop.",
+            "priority": 11,
+            "usageLevel": "advanced",
+            "id": "fenetres-bureau-precedent"
+          },
+          {
+            "label": "Close desktop",
+            "keys": [
+              "Ctrl",
+              "Win",
+              "F4"
+            ],
+            "description": "Close the active virtual desktop.",
+            "priority": 12,
+            "usageLevel": "expert",
+            "id": "fenetres-fermer-bureau"
+          }
+        ]
+      }
+    ]
+  }
+]

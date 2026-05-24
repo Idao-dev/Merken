@@ -1,8 +1,16 @@
-import type { BlurLevel, LanguageCode, SheetMode, ShortcutPlacementPreset, TextSize, ThemeMode } from "../types";
+import type {
+  BlurLevel,
+  LanguageCode,
+  SheetMode,
+  ShortcutDisplayChoice,
+  ShortcutPlacementPreset,
+  TextSize,
+  ThemeMode
+} from "../types";
 
 export type AutostartStatus = "syncing" | "enabled" | "disabled" | "unavailable";
 export type UpdateStatus = "idle" | "checking" | "upToDate" | "available" | "installing" | "installed" | "error" | "unconfigured";
-export type SettingsTab = "general" | "appearance" | "sheets" | "expert" | "about";
+export type SettingsTab = "general" | "appearance" | "sheets" | "customization" | "about";
 
 interface Labels {
   languageName: string;
@@ -12,7 +20,8 @@ interface Labels {
     behavior: string;
     display: string;
     availableSheets: string;
-    expertDisplay: string;
+    preview: string;
+    customization: string;
     application: string;
     shortcutPlacement: string;
   };
@@ -23,9 +32,12 @@ interface Labels {
     theme: string;
     sheet: string;
     manualSheet: string;
-    expertMode: string;
+    sheetLevel: string;
+    allShortcutsInTheme: string;
+    customizationIntro: string;
     startWithWindows: string;
     reset: string;
+    resetHelp: string;
     about: string;
     update: string;
     updateCheck: string;
@@ -39,9 +51,6 @@ interface Labels {
     updateError: string;
     updateUnconfigured: string;
     sheetLibraryIntro: string;
-    sheetLibraryPending: string;
-    expertIntro: string;
-    expertPending: string;
     repository: string;
     placementPreset: string;
     adjustPlacement: string;
@@ -65,6 +74,7 @@ interface Labels {
   theme: Record<ThemeMode, string>;
   textSize: Record<TextSize, string>;
   sheetMode: Record<SheetMode, string>;
+  shortcutDisplayChoice: Record<ShortcutDisplayChoice, string>;
   shortcutPlacementPreset: Record<ShortcutPlacementPreset, string>;
 }
 
@@ -77,7 +87,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       general: "General",
       appearance: "Apparence",
       sheets: "Fiches",
-      expert: "Expert",
+      customization: "Personnalisation",
       about: "A propos"
     },
     sections: {
@@ -85,7 +95,8 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       behavior: "Comportement",
       display: "Affichage",
       availableSheets: "Bibliotheque",
-      expertDisplay: "Raccourcis experts",
+      preview: "Apercu",
+      customization: "Personnalisation",
       application: "Application",
       shortcutPlacement: "Emplacement des raccourcis"
     },
@@ -96,9 +107,12 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       theme: "Theme",
       sheet: "Fiche",
       manualSheet: "Choix manuel",
-      expertMode: "Mode expert",
+      sheetLevel: "Niveau",
+      allShortcutsInTheme: "Tous les raccourcis du theme",
+      customizationIntro: "Cochez des themes ou des raccourcis pour composer la fiche personnalisee.",
       startWithWindows: "Demarrer avec Windows",
       reset: "Reinitialiser",
+      resetHelp: "Reinitialise l'ensemble des options du logiciel.",
       about: "A propos",
       update: "Mise a jour",
       updateCheck: "Version {version} - Verifier les mises a jour",
@@ -111,10 +125,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       updateInstalled: "Mise a jour installee - Redemarrage",
       updateError: "Verification impossible",
       updateUnconfigured: "Verification disponible quand GitHub Releases sera configure",
-      sheetLibraryIntro: "Les fiches disponibles sont preparees pour une selection fine par logiciel.",
-      sheetLibraryPending: "Configuration individuelle a venir",
-      expertIntro: "Active les raccourcis moins courants dans les fiches affichees.",
-      expertPending: "Le choix expert par logiciel sera ajoute dans une prochaine etape.",
+      sheetLibraryIntro: "Choisissez le niveau affiche pour chaque fiche. Les niveaux vides sont desactives.",
       repository: "Depot GitHub",
       placementPreset: "Position predefinie",
       adjustPlacement: "Ajuster manuellement",
@@ -162,6 +173,12 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       os: "Toujours OS",
       manual: "Manuelle"
     },
+    shortcutDisplayChoice: {
+      standard: "Standard",
+      advanced: "Avance",
+      expert: "Expert",
+      custom: "Personnaliser"
+    },
     shortcutPlacementPreset: {
       "top-left": "Haut gauche",
       "top-right": "Haut droit",
@@ -176,7 +193,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       general: "General",
       appearance: "Appearance",
       sheets: "Sheets",
-      expert: "Expert",
+      customization: "Customization",
       about: "About"
     },
     sections: {
@@ -184,7 +201,8 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       behavior: "Behavior",
       display: "Display",
       availableSheets: "Library",
-      expertDisplay: "Expert shortcuts",
+      preview: "Preview",
+      customization: "Customization",
       application: "Application",
       shortcutPlacement: "Shortcut placement"
     },
@@ -195,9 +213,12 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       theme: "Theme",
       sheet: "Sheet",
       manualSheet: "Manual choice",
-      expertMode: "Expert mode",
+      sheetLevel: "Level",
+      allShortcutsInTheme: "All shortcuts in this theme",
+      customizationIntro: "Select themes or shortcuts to build the customized sheet.",
       startWithWindows: "Start with Windows",
       reset: "Reset",
+      resetHelp: "Resets all application options.",
       about: "About",
       update: "Update",
       updateCheck: "Version {version} - Check for updates",
@@ -210,10 +231,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       updateInstalled: "Update installed - Restarting",
       updateError: "Unable to check for updates",
       updateUnconfigured: "Checking will be available when GitHub Releases is configured",
-      sheetLibraryIntro: "Available sheets are prepared for per-app selection later.",
-      sheetLibraryPending: "Individual configuration coming later",
-      expertIntro: "Shows less common shortcuts in displayed sheets.",
-      expertPending: "Per-app expert choices will be added in a later step.",
+      sheetLibraryIntro: "Choose the displayed level for each sheet. Empty levels are disabled.",
       repository: "GitHub repository",
       placementPreset: "Preset position",
       adjustPlacement: "Adjust manually",
@@ -260,6 +278,12 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       auto: "Automatic",
       os: "Always OS",
       manual: "Manual"
+    },
+    shortcutDisplayChoice: {
+      standard: "Standard",
+      advanced: "Advanced",
+      expert: "Expert",
+      custom: "Customize"
     },
     shortcutPlacementPreset: {
       "top-left": "Top left",

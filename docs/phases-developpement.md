@@ -36,7 +36,7 @@
 
 ## Lot 3 - Personnalisation avancee
 
-- Ajouter le mode expert.
+- Ajouter la personnalisation fine par theme et par raccourci.
 - Completer les langues prevues.
 - Adapter les variantes clavier/OS.
 

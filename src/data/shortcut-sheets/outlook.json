@@ -1,0 +1,574 @@
+[
+  {
+    "id": "outlook-fr",
+    "appNames": [
+      "outlook.exe",
+      "olk.exe"
+    ],
+    "title": "Outlook - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "mail",
+        "title": "Messagerie",
+        "shortcuts": [
+          {
+            "label": "Nouveau message",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "M"
+            ],
+            "description": "Cree un message.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "mail-nouveau-message"
+          },
+          {
+            "label": "Envoyer",
+            "keys": [
+              "Alt",
+              "S"
+            ],
+            "description": "Envoie le message.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "mail-envoyer"
+          },
+          {
+            "label": "Repondre",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Repond au message.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "mail-repondre"
+          },
+          {
+            "label": "Repondre a tous",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "R"
+            ],
+            "description": "Repond a tous.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "mail-repondre-a-tous"
+          },
+          {
+            "label": "Transferer",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Transfere le message.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "mail-transferer"
+          },
+          {
+            "label": "Supprimer",
+            "keys": [
+              "Ctrl",
+              "D"
+            ],
+            "description": "Supprime l element.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "mail-supprimer"
+          },
+          {
+            "label": "Marquer lu",
+            "keys": [
+              "Ctrl",
+              "Q"
+            ],
+            "description": "Marque comme lu.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "mail-marquer-lu"
+          },
+          {
+            "label": "Marquer non lu",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Marque comme non lu.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "mail-marquer-non-lu"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Courrier",
+            "keys": [
+              "Ctrl",
+              "1"
+            ],
+            "description": "Passe au courrier.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-courrier"
+          },
+          {
+            "label": "Calendrier",
+            "keys": [
+              "Ctrl",
+              "2"
+            ],
+            "description": "Passe au calendrier.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-calendrier"
+          },
+          {
+            "label": "Contacts",
+            "keys": [
+              "Ctrl",
+              "3"
+            ],
+            "description": "Passe aux contacts.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-contacts"
+          },
+          {
+            "label": "Taches",
+            "keys": [
+              "Ctrl",
+              "4"
+            ],
+            "description": "Passe aux taches.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "navigation-taches"
+          },
+          {
+            "label": "Recherche",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Active la recherche.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-recherche"
+          },
+          {
+            "label": "Envoyer recevoir",
+            "keys": [
+              "F9"
+            ],
+            "description": "Lance l envoi-reception.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "navigation-envoyer-recevoir"
+          },
+          {
+            "label": "Element suivant",
+            "keys": [
+              "Ctrl",
+              "."
+            ],
+            "description": "Passe a l element suivant.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "navigation-element-suivant"
+          },
+          {
+            "label": "Element precedent",
+            "keys": [
+              "Ctrl",
+              ","
+            ],
+            "description": "Revient a l element precedent.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "navigation-element-precedent"
+          }
+        ]
+      },
+      {
+        "id": "calendrier",
+        "title": "Calendrier",
+        "shortcuts": [
+          {
+            "label": "Nouveau rendez-vous",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "A"
+            ],
+            "description": "Cree un rendez-vous.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "calendrier-nouveau-rendez-vous"
+          },
+          {
+            "label": "Nouvelle reunion",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Q"
+            ],
+            "description": "Cree une reunion.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "calendrier-nouvelle-reunion"
+          },
+          {
+            "label": "Aller date",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Va a une date.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "calendrier-aller-date"
+          },
+          {
+            "label": "Vue jour",
+            "keys": [
+              "Alt",
+              "1"
+            ],
+            "description": "Affiche un jour.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "calendrier-vue-jour"
+          },
+          {
+            "label": "Semaine travail",
+            "keys": [
+              "Alt",
+              "2"
+            ],
+            "description": "Affiche la semaine travail.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "calendrier-semaine-travail"
+          },
+          {
+            "label": "Vue semaine",
+            "keys": [
+              "Alt",
+              "3"
+            ],
+            "description": "Affiche la semaine.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "calendrier-vue-semaine"
+          },
+          {
+            "label": "Vue mois",
+            "keys": [
+              "Alt",
+              "4"
+            ],
+            "description": "Affiche le mois.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "calendrier-vue-mois"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "outlook-en",
+    "appNames": [
+      "outlook.exe",
+      "olk.exe"
+    ],
+    "title": "Outlook - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "mail",
+        "title": "Mail",
+        "shortcuts": [
+          {
+            "label": "New message",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "M"
+            ],
+            "description": "Create a message.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "mail-nouveau-message"
+          },
+          {
+            "label": "Send",
+            "keys": [
+              "Alt",
+              "S"
+            ],
+            "description": "Send the message.",
+            "priority": 2,
+            "usageLevel": "essential",
+            "id": "mail-envoyer"
+          },
+          {
+            "label": "Reply",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Reply to the message.",
+            "priority": 3,
+            "usageLevel": "essential",
+            "id": "mail-repondre"
+          },
+          {
+            "label": "Reply all",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "R"
+            ],
+            "description": "Reply to all.",
+            "priority": 4,
+            "usageLevel": "common",
+            "id": "mail-repondre-a-tous"
+          },
+          {
+            "label": "Forward",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Forward the message.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "mail-transferer"
+          },
+          {
+            "label": "Delete",
+            "keys": [
+              "Ctrl",
+              "D"
+            ],
+            "description": "Delete the item.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "mail-supprimer"
+          },
+          {
+            "label": "Mark read",
+            "keys": [
+              "Ctrl",
+              "Q"
+            ],
+            "description": "Mark as read.",
+            "priority": 7,
+            "usageLevel": "common",
+            "id": "mail-marquer-lu"
+          },
+          {
+            "label": "Mark unread",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Mark as unread.",
+            "priority": 8,
+            "usageLevel": "common",
+            "id": "mail-marquer-non-lu"
+          }
+        ]
+      },
+      {
+        "id": "navigation",
+        "title": "Navigation",
+        "shortcuts": [
+          {
+            "label": "Mail",
+            "keys": [
+              "Ctrl",
+              "1"
+            ],
+            "description": "Switch to Mail.",
+            "priority": 1,
+            "usageLevel": "essential",
+            "id": "navigation-courrier"
+          },
+          {
+            "label": "Calendar",
+            "keys": [
+              "Ctrl",
+              "2"
+            ],
+            "description": "Switch to Calendar.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "navigation-calendrier"
+          },
+          {
+            "label": "People",
+            "keys": [
+              "Ctrl",
+              "3"
+            ],
+            "description": "Switch to People.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "navigation-contacts"
+          },
+          {
+            "label": "Tasks",
+            "keys": [
+              "Ctrl",
+              "4"
+            ],
+            "description": "Switch to Tasks.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "navigation-taches"
+          },
+          {
+            "label": "Search",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Focus search.",
+            "priority": 5,
+            "usageLevel": "common",
+            "id": "navigation-recherche"
+          },
+          {
+            "label": "Send receive",
+            "keys": [
+              "F9"
+            ],
+            "description": "Start send and receive.",
+            "priority": 6,
+            "usageLevel": "common",
+            "id": "navigation-envoyer-recevoir"
+          },
+          {
+            "label": "Next item",
+            "keys": [
+              "Ctrl",
+              "."
+            ],
+            "description": "Move to next item.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "navigation-element-suivant"
+          },
+          {
+            "label": "Previous item",
+            "keys": [
+              "Ctrl",
+              ","
+            ],
+            "description": "Move to previous item.",
+            "priority": 8,
+            "usageLevel": "advanced",
+            "id": "navigation-element-precedent"
+          }
+        ]
+      },
+      {
+        "id": "calendrier",
+        "title": "Calendar",
+        "shortcuts": [
+          {
+            "label": "New appointment",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "A"
+            ],
+            "description": "Create an appointment.",
+            "priority": 1,
+            "usageLevel": "common",
+            "id": "calendrier-nouveau-rendez-vous"
+          },
+          {
+            "label": "New meeting",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Q"
+            ],
+            "description": "Create a meeting.",
+            "priority": 2,
+            "usageLevel": "common",
+            "id": "calendrier-nouvelle-reunion"
+          },
+          {
+            "label": "Go to date",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Go to a date.",
+            "priority": 3,
+            "usageLevel": "advanced",
+            "id": "calendrier-aller-date"
+          },
+          {
+            "label": "Day view",
+            "keys": [
+              "Alt",
+              "1"
+            ],
+            "description": "Show one day.",
+            "priority": 4,
+            "usageLevel": "advanced",
+            "id": "calendrier-vue-jour"
+          },
+          {
+            "label": "Work week",
+            "keys": [
+              "Alt",
+              "2"
+            ],
+            "description": "Show work week.",
+            "priority": 5,
+            "usageLevel": "advanced",
+            "id": "calendrier-semaine-travail"
+          },
+          {
+            "label": "Week view",
+            "keys": [
+              "Alt",
+              "3"
+            ],
+            "description": "Show week.",
+            "priority": 6,
+            "usageLevel": "advanced",
+            "id": "calendrier-vue-semaine"
+          },
+          {
+            "label": "Month view",
+            "keys": [
+              "Alt",
+              "4"
+            ],
+            "description": "Show month.",
+            "priority": 7,
+            "usageLevel": "advanced",
+            "id": "calendrier-vue-mois"
+          }
+        ]
+      }
+    ]
+  }
+]
