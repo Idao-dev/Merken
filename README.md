@@ -10,6 +10,16 @@ Le projet est une application Tauri 2 : interface TypeScript/Vite, backend Rust,
 
 Merken affiche notamment des raccourcis clavier pour Windows et certaines applications compatibles, dont Microsoft Office, Word, Excel et PowerPoint. Le projet est independant et n'est pas affilie, sponsorise, approuve ni valide par Microsoft.
 
+### Fonctionnalites
+
+- Fiches locales pour Windows, Explorateur de fichiers, Parametres, Photos, lecteur multimedia, Terminal/PowerShell, navigateurs, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian et VLC.
+- Detection contextuelle locale : Merken choisit la fiche adaptee a partir du nom du processus actif et du titre de fenetre, sans compte, sans telemetrie et sans journalisation d'usage.
+- Niveaux par fiche : standard, avance ou expert. Chaque niveau remplace le contenu affiche pour garder le panneau court et lisible.
+- Personnalisation par theme ou par raccourci, avec apercu immediat dans le panneau de raccourcis.
+- Placement du panneau par preset ou ajustement manuel.
+- Options organisees par onglets : langue, apparence, fiches, personnalisation, demarrage Windows, informations et mises a jour.
+- Verification manuelle des mises a jour depuis GitHub Releases. L'installateur peut installer la mise a jour signee ; la version portable renvoie vers la derniere release.
+
 ### Lancer en local
 
 Prerequis : Node.js, npm, Rust et les outils Tauri pour Windows.
@@ -50,6 +60,16 @@ Merken is a Windows application that shows a floating keyboard-shortcut panel fr
 The project is a Tauri 2 application: TypeScript/Vite frontend, Rust backend, local shortcut data.
 
 Merken displays keyboard shortcuts for Windows and compatible applications, including Microsoft Office, Word, Excel and PowerPoint. The project is independent and is not affiliated with, sponsored by, approved by, or validated by Microsoft.
+
+### Features
+
+- Local shortcut sheets for Windows, File Explorer, Settings, Photos, media player, Terminal/PowerShell, browsers, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian, and VLC.
+- Local contextual detection: Merken chooses the relevant sheet from the active process name and window title, without accounts, telemetry, or usage logging.
+- Per-sheet levels: standard, advanced, or expert. Each level replaces the visible content so the panel stays short and readable.
+- Theme-level and shortcut-level customization, with an immediate preview in the shortcut panel.
+- Panel placement through presets or manual adjustment.
+- Tabbed options for language, appearance, sheets, customization, Windows startup, app information, and updates.
+- Manual update checks through GitHub Releases. The installer can install signed updates; the portable build links to the latest release.
 
 ### Run Locally
 

@@ -90,8 +90,26 @@ const distribution = distributionFromEnv(import.meta.env.VITE_MERKEN_DISTRIBUTIO
 
 function debugActiveAppLog(message: string, details?: unknown): void {
   if (import.meta.env.DEV) {
-    console.debug(`[merken:active-app] ${message}`, details ?? "");
+    console.debug("[merken:active-app]", message, details ?? "");
   }
+}
+
+function escapeHtml(value: string | number | boolean): string {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      "\"": "&quot;",
+      "'": "&#39;"
+    };
+
+    return entities[character];
+  });
+}
+
+function escapeAttribute(value: string | number | boolean): string {
+  return escapeHtml(value);
 }
 
 function debugSheetSelection(context: string, selectedSheet: ShortcutSheet): void {
@@ -519,7 +537,7 @@ function updateStatusText(): string {
 }
 
 function renderKey(key: string): string {
-  return `<kbd>${key}</kbd>`;
+  return `<kbd>${escapeHtml(key)}</kbd>`;
 }
 
 function renderShortcutCategories(sheet: ShortcutSheet): string {
@@ -527,14 +545,14 @@ function renderShortcutCategories(sheet: ShortcutSheet): string {
     .map(
       (category) => `
         <section class="shortcut-section">
-          <h2>${category.title}</h2>
+          <h2>${escapeHtml(category.title)}</h2>
           <div class="shortcut-list">
             ${category.shortcuts
               .map(
                 (shortcut) => `
                   <article class="shortcut-row">
                     <div class="keys">${shortcut.keys.map(renderKey).join("")}</div>
-                    <strong>${shortcut.label}</strong>
+                    <strong>${escapeHtml(shortcut.label)}</strong>
                   </article>
                 `
               )
@@ -556,7 +574,7 @@ function renderShortcutChoiceSwitch(
   const selectedChoice: ShortcutDisplayChoice = preference.mode === "custom" ? "custom" : preference.level;
 
   return `
-    <div class="level-switch ${className}" role="group" aria-label="${labels.settings.sheetLevel}">
+    <div class="level-switch ${escapeAttribute(className)}" role="group" aria-label="${escapeAttribute(labels.settings.sheetLevel)}">
       ${shortcutDisplayChoices
         .map((choice) => {
           const available = choice === "custom" || availableLevels[choice];
@@ -565,12 +583,12 @@ function renderShortcutChoiceSwitch(
             <button
               type="button"
               class="${selectedChoice === choice ? "active" : ""}"
-              data-shortcut-family="${family}"
-              data-shortcut-choice="${choice}"
+              data-shortcut-family="${escapeAttribute(family)}"
+              data-shortcut-choice="${escapeAttribute(choice)}"
               aria-pressed="${selectedChoice === choice}"
               ${available ? "" : "disabled"}
             >
-              ${labels.shortcutDisplayChoice[choice]}
+              ${escapeHtml(labels.shortcutDisplayChoice[choice])}
             </button>
           `;
         })
@@ -612,9 +630,9 @@ function render(): void {
               isPlacement
                 ? `
                   <div class="placement-bar">
-                    <span>${labels.settings.placementHelp}</span>
-                    <button type="button" id="confirm-placement">${labels.settings.confirmPlacement}</button>
-                    <button type="button" id="cancel-placement">${labels.settings.cancelPlacement}</button>
+                    <span>${escapeHtml(labels.settings.placementHelp)}</span>
+                    <button type="button" id="confirm-placement">${escapeHtml(labels.settings.confirmPlacement)}</button>
+                    <button type="button" id="cancel-placement">${escapeHtml(labels.settings.cancelPlacement)}</button>
                   </div>
                 `
                 : ""
@@ -627,30 +645,30 @@ function render(): void {
         ? `
           <div class="modal-backdrop" role="presentation">
             <section class="modal" role="dialog" aria-modal="true" aria-labelledby="about-title">
-              <h2 id="about-title">${labels.modal.aboutTitle}</h2>
+              <h2 id="about-title">${escapeHtml(labels.modal.aboutTitle)}</h2>
               <dl>
                 <div>
-                  <dt>${labels.modal.name}</dt>
-                  <dd>${appInfo.name}</dd>
+                  <dt>${escapeHtml(labels.modal.name)}</dt>
+                  <dd>${escapeHtml(appInfo.name)}</dd>
                 </div>
                 <div>
-                  <dt>${labels.modal.version}</dt>
-                  <dd>${appInfo.version}</dd>
+                  <dt>${escapeHtml(labels.modal.version)}</dt>
+                  <dd>${escapeHtml(appInfo.version)}</dd>
                 </div>
                 <div>
-                  <dt>${labels.modal.publisher}</dt>
+                  <dt>${escapeHtml(labels.modal.publisher)}</dt>
                   <dd>Idao</dd>
                 </div>
                 <div>
                   <dt>GitHub</dt>
-                  <dd>${repositoryUrl}</dd>
+                  <dd>${escapeHtml(repositoryUrl)}</dd>
                 </div>
                 <div>
-                  <dt>${labels.modal.license}</dt>
-                  <dd>${labels.modal.licenseValue}</dd>
+                  <dt>${escapeHtml(labels.modal.license)}</dt>
+                  <dd>${escapeHtml(labels.modal.licenseValue)}</dd>
                 </div>
               </dl>
-              <button type="button" id="close-about">${labels.modal.close}</button>
+              <button type="button" id="close-about">${escapeHtml(labels.modal.close)}</button>
             </section>
           </div>
         `
@@ -667,18 +685,18 @@ function renderSettings(): string {
 
   return `
     <form class="settings-shell" id="settings-form">
-      <aside class="settings-sidebar" aria-label="${labels.settings.about}">
+      <aside class="settings-sidebar" aria-label="${escapeAttribute(labels.settings.about)}">
         <div class="brand">
-          <img class="brand-mark" src="${appIconUrl}" alt="" aria-hidden="true" />
+          <img class="brand-mark" src="${escapeAttribute(appIconUrl)}" alt="" aria-hidden="true" />
           <strong>Merken</strong>
         </div>
         <nav class="settings-tabs" aria-label="Options">
           ${settingsTabs
             .map(
               (tab) => `
-                <button type="button" class="settings-tab ${settingsTab === tab ? "active" : ""}" data-settings-tab="${tab}">
+                <button type="button" class="settings-tab ${settingsTab === tab ? "active" : ""}" data-settings-tab="${escapeAttribute(tab)}">
                   <span aria-hidden="true">${settingsTabIcon(tab)}</span>
-                  ${labels.tabs[tab]}
+                  ${escapeHtml(labels.tabs[tab])}
                 </button>
               `
             )
@@ -686,15 +704,15 @@ function renderSettings(): string {
         </nav>
         <button type="button" class="settings-sidebar-footer" id="check-update-sidebar">
           <span class="settings-sidebar-update-title">
-            <span>${labels.settings.update}</span>
-            <small class="settings-sidebar-version">Version ${appInfo.version}</small>
+            <span>${escapeHtml(labels.settings.update)}</span>
+            <small class="settings-sidebar-version">Version ${escapeHtml(appInfo.version)}</small>
           </span>
-          <small class="${updateStatusClassName()}">${updateStatusText()}</small>
+          <small class="${escapeAttribute(updateStatusClassName())}">${escapeHtml(updateStatusText())}</small>
         </button>
       </aside>
       <main class="settings-page">
         <header class="settings-header">
-          <h1>${labels.tabs[settingsTab]}</h1>
+          <h1>${escapeHtml(labels.tabs[settingsTab])}</h1>
           <button type="button" class="settings-close" id="close-settings" aria-label="Fermer">x</button>
         </header>
         ${renderSettingsTab()}
@@ -721,13 +739,13 @@ function renderSettingsTab(): string {
   if (settingsTab === "appearance") {
     return `
       <section class="settings-group">
-        <h2>${labels.sections.display}</h2>
+        <h2>${escapeHtml(labels.sections.display)}</h2>
         ${renderSelectRow(labels.settings.theme, "theme", themeModes, settings.theme, (theme) => labels.theme[theme])}
         ${renderSelectRow(labels.settings.textSize, "textSize", textSizes, settings.textSize, (size) => labels.textSize[size])}
         ${renderSelectRow(labels.settings.transparency, "blur", blurLevels, settings.blur, (blur) => labels.transparency[blur])}
       </section>
       <section class="settings-group">
-        <h2>${labels.sections.shortcutPlacement}</h2>
+        <h2>${escapeHtml(labels.sections.shortcutPlacement)}</h2>
         ${renderSelectRow(
           labels.settings.placementPreset,
           "shortcutPlacementPreset",
@@ -735,7 +753,7 @@ function renderSettingsTab(): string {
           settings.shortcutPlacementPreset,
           (preset) => labels.shortcutPlacementPreset[preset]
         )}
-        <button type="button" class="secondary-button" id="adjust-placement">${labels.settings.adjustPlacement}</button>
+        <button type="button" class="secondary-button" id="adjust-placement">${escapeHtml(labels.settings.adjustPlacement)}</button>
       </section>
     `;
   }
@@ -743,13 +761,13 @@ function renderSettingsTab(): string {
   if (settingsTab === "sheets") {
     return `
       <section class="settings-group">
-        <h2>${labels.sections.behavior}</h2>
+        <h2>${escapeHtml(labels.sections.behavior)}</h2>
         ${renderSelectRow(labels.settings.sheet, "sheetMode", sheetModes, settings.sheetMode, (mode) => labels.sheetMode[mode])}
         ${renderSelectRow(labels.settings.manualSheet, "manualSheetId", manualSheetOptions(settings.language).map((option) => option.key), sheetFamily(settings.manualSheetId), (key) => manualSheetOptions(settings.language).find((option) => option.key === key)?.label ?? key)}
       </section>
       <section class="settings-group">
-        <h2>${labels.sections.availableSheets}</h2>
-        <p class="settings-note">${labels.settings.sheetLibraryIntro}</p>
+        <h2>${escapeHtml(labels.sections.availableSheets)}</h2>
+        <p class="settings-note">${escapeHtml(labels.settings.sheetLibraryIntro)}</p>
         <div class="sheet-library">
           ${renderSheetLibraryRows()}
         </div>
@@ -764,15 +782,15 @@ function renderSettingsTab(): string {
   if (settingsTab === "about") {
     return `
       <section class="settings-group">
-        <h2>${labels.sections.application}</h2>
+        <h2>${escapeHtml(labels.sections.application)}</h2>
         ${renderInfoRow(labels.modal.name, appInfo.name)}
         ${renderInfoRow(labels.modal.version, appInfo.version)}
         ${renderInfoRow(labels.modal.publisher, "Idao")}
         ${renderInfoRow(labels.modal.license, labels.modal.licenseValue)}
         ${renderLinkRow(labels.settings.repository, repositoryUrl, "open-repository")}
         <button type="button" class="link-button settings-update" id="check-update">
-          <span>${labels.settings.update}</span>
-          <small class="${updateStatusClassName()}">${updateStatusText()}</small>
+          <span>${escapeHtml(labels.settings.update)}</span>
+          <small class="${escapeAttribute(updateStatusClassName())}">${escapeHtml(updateStatusText())}</small>
         </button>
       </section>
     `;
@@ -780,18 +798,18 @@ function renderSettingsTab(): string {
 
   return `
       <section class="settings-group">
-        <h2>${labels.sections.basics}</h2>
+        <h2>${escapeHtml(labels.sections.basics)}</h2>
         ${renderSelectRow(labels.settings.language, "language", supportedLanguages, settings.language, (language) => labelsFor(language).languageName)}
         ${renderToggleRow(labels.settings.startWithWindows, "startWithWindows", settings.startWithWindows, labels.autostart[autostartStatus])}
         <button type="button" class="link-button settings-update" id="open-taskbar-settings">
-          <span>${labels.settings.trayVisibility}</span>
-          <small>${labels.settings.trayVisibilityHelp}</small>
+          <span>${escapeHtml(labels.settings.trayVisibility)}</span>
+          <small>${escapeHtml(labels.settings.trayVisibilityHelp)}</small>
         </button>
     </section>
     <section class="settings-group">
-      <h2>${labels.sections.behavior}</h2>
-      <p class="settings-note">${labels.settings.resetHelp}</p>
-      <button type="button" class="secondary-button" id="reset-settings">${labels.settings.reset}</button>
+      <h2>${escapeHtml(labels.sections.behavior)}</h2>
+      <p class="settings-note">${escapeHtml(labels.settings.resetHelp)}</p>
+      <button type="button" class="secondary-button" id="reset-settings">${escapeHtml(labels.settings.reset)}</button>
     </section>
   `;
 }
@@ -809,7 +827,7 @@ function renderSheetLibraryRows(): string {
 
       return `
         <div class="sheet-family-row ${selectedSettingsSheetFamily === option.key ? "active" : ""}">
-          <button type="button" class="sheet-family-name" data-sheet-preview-family="${option.key}">${option.label}</button>
+          <button type="button" class="sheet-family-name" data-sheet-preview-family="${escapeAttribute(option.key)}">${escapeHtml(option.label)}</button>
           ${renderShortcutChoiceSwitch(option.key, preference, availableShortcutLevels(sheet), "sheet-level-switch")}
         </div>
       `;
@@ -827,8 +845,8 @@ function renderCustomizationTab(): string {
 
   return `
     <section class="settings-group">
-      <h2>${labels.sections.customization}</h2>
-      <p class="settings-note">${labels.settings.customizationIntro}</p>
+      <h2>${escapeHtml(labels.sections.customization)}</h2>
+      <p class="settings-note">${escapeHtml(labels.settings.customizationIntro)}</p>
       ${renderSelectRow(
         labels.settings.sheet,
         "customizationSheetFamily",
@@ -837,7 +855,7 @@ function renderCustomizationTab(): string {
         (key) => manualSheetOptions(settings.language).find((option) => option.key === key)?.label ?? key
       )}
     </section>
-    <section class="customization-editor" aria-label="${labels.sections.customization}">
+    <section class="customization-editor" aria-label="${escapeAttribute(labels.sections.customization)}">
       ${renderCustomizationEditor(sheet, preference)}
     </section>
   `;
@@ -856,14 +874,14 @@ function renderCustomizationEditor(sheet: ShortcutSheet, preference: ShortcutShe
           <label class="custom-theme-row">
             <input
               type="checkbox"
-              data-custom-family="${family}"
-              data-custom-category="${category.id}"
-              data-theme-state="${state}"
+              data-custom-family="${escapeAttribute(family)}"
+              data-custom-category="${escapeAttribute(category.id)}"
+              data-theme-state="${escapeAttribute(state)}"
               ${state === "checked" ? "checked" : ""}
             />
             <span>
-              <strong>${category.title}</strong>
-              <small>${labels.settings.allShortcutsInTheme}</small>
+              <strong>${escapeHtml(category.title)}</strong>
+              <small>${escapeHtml(labels.settings.allShortcutsInTheme)}</small>
             </span>
           </label>
           <div class="custom-shortcut-list">
@@ -873,13 +891,13 @@ function renderCustomizationEditor(sheet: ShortcutSheet, preference: ShortcutShe
                   <label class="custom-shortcut-row">
                     <input
                       type="checkbox"
-                      data-custom-family="${family}"
-                      data-custom-category="${category.id}"
-                      data-custom-shortcut="${shortcut.id}"
+                      data-custom-family="${escapeAttribute(family)}"
+                      data-custom-category="${escapeAttribute(category.id)}"
+                      data-custom-shortcut="${escapeAttribute(shortcut.id)}"
                       ${isShortcutIncluded(category, shortcut, preference) ? "checked" : ""}
                     />
                     <span class="keys">${shortcut.keys.map(renderKey).join("")}</span>
-                    <strong>${shortcut.label}</strong>
+                    <strong>${escapeHtml(shortcut.label)}</strong>
                   </label>
                 `
               )
@@ -904,9 +922,9 @@ function renderSelectRow<T extends string>(
 ): string {
   return `
     <label class="settings-row">
-      <span>${label}</span>
-      <select name="${name}">
-        ${values.map((value) => `<option value="${value}" ${selected === value ? "selected" : ""}>${labelForValue(value)}</option>`).join("")}
+      <span>${escapeHtml(label)}</span>
+      <select name="${escapeAttribute(name)}">
+        ${values.map((value) => `<option value="${escapeAttribute(value)}" ${selected === value ? "selected" : ""}>${escapeHtml(labelForValue(value))}</option>`).join("")}
       </select>
     </label>
   `;
@@ -915,8 +933,8 @@ function renderSelectRow<T extends string>(
 function renderToggleRow(label: string, name: string, checked: boolean, status?: string): string {
   return `
     <label class="settings-row toggle-row">
-      <span>${label}${status ? `<small>${status}</small>` : ""}</span>
-      <input type="checkbox" name="${name}" ${checked ? "checked" : ""} />
+      <span>${escapeHtml(label)}${status ? `<small>${escapeHtml(status)}</small>` : ""}</span>
+      <input type="checkbox" name="${escapeAttribute(name)}" ${checked ? "checked" : ""} />
       <i aria-hidden="true"></i>
     </label>
   `;
@@ -925,17 +943,17 @@ function renderToggleRow(label: string, name: string, checked: boolean, status?:
 function renderInfoRow(label: string, value: string): string {
   return `
     <div class="settings-row info-row">
-      <span>${label}</span>
-      <strong>${value}</strong>
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
     </div>
   `;
 }
 
 function renderLinkRow(label: string, value: string, id: string): string {
   return `
-    <button type="button" class="link-button settings-row info-row" id="${id}">
-      <span>${label}</span>
-      <strong>${value}</strong>
+    <button type="button" class="link-button settings-row info-row" id="${escapeAttribute(id)}">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
     </button>
   `;
 }

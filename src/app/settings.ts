@@ -1,6 +1,23 @@
-import type { ShortcutDisplayLevel, ShortcutSheetPreference, UserSettings } from "../types";
+import type {
+  BlurLevel,
+  LanguageCode,
+  SheetMode,
+  ShortcutDisplayLevel,
+  ShortcutPlacementPreset,
+  ShortcutSheetPreference,
+  TextSize,
+  ThemeMode,
+  UserSettings
+} from "../types";
 
 const shortcutDisplayLevels: ShortcutDisplayLevel[] = ["standard", "advanced", "expert"];
+const languageCodes: LanguageCode[] = ["fr", "en"];
+const themeModes: ThemeMode[] = ["dark", "colorblind"];
+const textSizes: TextSize[] = ["xs", "sm", "md", "lg", "xl"];
+const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
+const sheetModes: SheetMode[] = ["auto", "os", "manual"];
+const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-right", "bottom-left", "bottom-right", "center"];
+const identifierPattern = /^[a-z0-9-]+$/;
 
 const legacyExpertSheetFamilies = [
   "windows-core",
@@ -60,11 +77,7 @@ export function loadSettings(storage: SettingsStorage = localStorage): UserSetti
       shortcutSheetPreferences: normalizeShortcutSheetPreferences(stored)
     };
 
-    if (!["dark", "colorblind"].includes(parsed.theme)) {
-      parsed.theme = "dark";
-    }
-
-    return parsed;
+    return normalizeSettings(parsed);
   } catch {
     return defaultSettings;
   }
@@ -78,6 +91,7 @@ function normalizeShortcutSheetPreferences(stored: StoredSettings): Record<strin
   if (isRecord(stored.shortcutSheetPreferences) && Object.keys(stored.shortcutSheetPreferences).length > 0) {
     return Object.fromEntries(
       Object.entries(stored.shortcutSheetPreferences)
+        .filter(([family]) => isSafeIdentifier(family))
         .map(([family, preference]) => [family, normalizeShortcutSheetPreference(preference)])
         .filter((entry): entry is [string, ShortcutSheetPreference] => Boolean(entry[1]))
     );
@@ -115,14 +129,63 @@ function normalizeShortcutSheetPreference(preference: unknown): ShortcutSheetPre
   return {
     mode,
     level,
-    categoryIds: stringArray(preference.categoryIds),
-    includeShortcutIds: stringArray(preference.includeShortcutIds),
-    excludeShortcutIds: stringArray(preference.excludeShortcutIds)
+    categoryIds: identifierArray(preference.categoryIds),
+    includeShortcutIds: identifierArray(preference.includeShortcutIds),
+    excludeShortcutIds: identifierArray(preference.excludeShortcutIds)
   };
 }
 
-function stringArray(value: unknown): string[] {
-  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+function normalizeSettings(settings: UserSettings): UserSettings {
+  return {
+    language: oneOf(settings.language, languageCodes, defaultSettings.language),
+    theme: oneOf(settings.theme, themeModes, defaultSettings.theme),
+    textSize: oneOf(settings.textSize, textSizes, defaultSettings.textSize),
+    blur: oneOf(settings.blur, blurLevels, defaultSettings.blur),
+    sheetMode: oneOf(settings.sheetMode, sheetModes, defaultSettings.sheetMode),
+    manualSheetId: typeof settings.manualSheetId === "string" && isSafeIdentifier(settings.manualSheetId)
+      ? settings.manualSheetId
+      : defaultSettings.manualSheetId,
+    shortcutSheetPreferences: settings.shortcutSheetPreferences,
+    startWithWindows: typeof settings.startWithWindows === "boolean" ? settings.startWithWindows : defaultSettings.startWithWindows,
+    shortcutPlacementMode: settings.shortcutPlacementMode === "custom" ? "custom" : "preset",
+    shortcutPlacementPreset: oneOf(
+      settings.shortcutPlacementPreset,
+      shortcutPlacementPresets,
+      defaultSettings.shortcutPlacementPreset
+    ),
+    shortcutCustomPosition: normalizeShortcutCustomPosition(settings.shortcutCustomPosition),
+    trayVisibilityPromptDismissed:
+      typeof settings.trayVisibilityPromptDismissed === "boolean"
+        ? settings.trayVisibilityPromptDismissed
+        : defaultSettings.trayVisibilityPromptDismissed
+  };
+}
+
+function normalizeShortcutCustomPosition(value: unknown): UserSettings["shortcutCustomPosition"] {
+  if (!isRecord(value) || typeof value.x !== "number" || typeof value.y !== "number") {
+    return null;
+  }
+
+  if (!Number.isFinite(value.x) || !Number.isFinite(value.y)) {
+    return null;
+  }
+
+  return {
+    x: Math.round(value.x),
+    y: Math.round(value.y)
+  };
+}
+
+function oneOf<T extends string>(value: unknown, allowed: readonly T[], fallback: T): T {
+  return typeof value === "string" && allowed.includes(value as T) ? (value as T) : fallback;
+}
+
+function identifierArray(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string" && isSafeIdentifier(item)) : [];
+}
+
+function isSafeIdentifier(value: string): boolean {
+  return identifierPattern.test(value);
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

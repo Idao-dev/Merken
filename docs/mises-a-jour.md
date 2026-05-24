@@ -1,34 +1,30 @@
 # Mises a jour de Merken
 
-## Objectif
+## Etat actuel
 
-Ajouter entre le MVP Windows et la contextualisation un lot dedie aux mises a jour applicatives.
+Depuis la branche de publication `0.5.0`, Merken utilise GitHub Releases et le plugin Tauri Updater pour les mises a jour de l'installateur Windows.
 
-L'utilisateur doit pouvoir ouvrir les options, verifier si une nouvelle version existe, puis installer cette version en un clic si elle est disponible.
+Le depot publie les versions avec :
 
-## Solution gratuite recommandee
+- un tag Git de forme `vX.Y.Z` ;
+- un workflow GitHub Actions declenche par ce tag ;
+- un installateur NSIS Windows ;
+- un manifeste `latest.json` ;
+- une signature Tauri pour les artefacts de mise a jour ;
+- une version portable publiee dans la meme release.
 
-Le projet peut s'appuyer sur GitHub :
+La release GitHub est creee en brouillon par la CI. Elle doit etre relue humainement avant publication.
 
-- depot GitHub pour le code source ;
-- tags Git pour identifier les versions, par exemple `v0.1.0` ;
-- GitHub Actions pour construire l'application automatiquement ;
-- GitHub Releases pour publier l'installateur Windows et le manifeste de mise a jour ;
-- plugin Tauri Updater pour verifier et installer les nouvelles versions depuis Merken.
-
-Cette approche est gratuite pour un usage raisonnable, sans serveur personnel a maintenir. Les limites de GitHub Actions et Releases devront etre revues avant une diffusion large.
-
-## Fonctionnement utilisateur cible
+## Fonctionnement utilisateur
 
 Dans les options :
 
-- une ligne indique la version actuelle ;
-- une ligne "Mise a jour" est visible et cliquable ;
-- tant que GitHub Releases et le plugin updater ne sont pas configures, le clic indique que la verification sera disponible apres configuration ;
-- apres integration updater, un bouton "Verifier les mises a jour" lance la verification ;
-- si aucune version recente n'existe, l'etat indique "Merken est a jour" ;
-- si une version existe, l'etat indique la nouvelle version et affiche un bouton d'installation ;
-- apres installation, Merken demande un redemarrage si necessaire.
+- la version actuelle est affichee ;
+- l'utilisateur peut lancer une verification manuelle ;
+- si Merken est a jour, l'etat l'indique clairement ;
+- si une version plus recente existe, l'installateur peut telecharger et installer la mise a jour signee ;
+- si la version courante est portable, Merken renvoie vers la derniere release GitHub a telecharger ;
+- en cas d'echec reseau ou de configuration, l'interface affiche un etat d'erreur simple.
 
 ## Contraintes produit
 
@@ -36,14 +32,25 @@ Dans les options :
 - Pas de telemetrie.
 - Verification uniquement manuelle tant qu'aucune option automatique explicite n'existe.
 - Pas de verification reseau cachee.
-- Message clair si l'utilisateur est hors-ligne.
-- Signature des mises a jour avant diffusion publique.
+- Endpoint limite a GitHub Releases.
+- Signature des mises a jour obligatoire avant publication.
 
-## Travail technique prevu
+## Validation avant publication
 
-- Ajouter `tauri-plugin-updater`.
-- Ajouter la configuration Tauri du endpoint de mise a jour.
-- Creer un workflow GitHub Actions de build Windows.
-- Publier les artefacts dans GitHub Releases.
-- Ajouter l'interface de verification dans les options Merken.
-- Tester les cas : a jour, mise a jour disponible, hors-ligne, echec de signature, installation annulee.
+Avant de pousser un tag de release :
+
+```powershell
+npm run test
+npm run typecheck
+npm run build
+cargo check --manifest-path src-tauri/Cargo.toml
+npm run tauri:build
+```
+
+Apres creation de la draft GitHub, verifier :
+
+- presence de `latest.json` ;
+- presence de l'installateur `Merken_X.Y.Z_x64-setup.exe` ;
+- presence de la signature `.sig` ;
+- presence de `merken.exe` pour la version portable ;
+- coherence du texte de release avec `CHANGELOG.md`.

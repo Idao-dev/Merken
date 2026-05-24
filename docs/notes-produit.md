@@ -17,8 +17,9 @@
 - La fenetre Options doit pouvoir etre deplacee depuis ses zones vides, sans bloquer les controles interactifs.
 - Le panneau de raccourcis peut etre place avec des presets ou un ajustement manuel : afficher, deplacer, valider ou annuler, puis masquer.
 - La position personnalisee est stockee localement en coordonnees ecran et pourra demander des ajustements futurs pour le multi-ecran avance.
-- La verification de mise a jour peut etre visible avant l'integration GitHub Releases, a condition d'indiquer clairement qu'elle n'est pas encore connectee.
-- La verification de mise a jour est uniquement manuelle tant qu'aucune option automatique explicite n'existe.
+- La verification de mise a jour s'appuie sur GitHub Releases et reste uniquement manuelle tant qu'aucune option automatique explicite n'existe.
+- L'installateur peut installer une mise a jour signee ; la version portable renvoie vers la derniere release a telecharger.
+- La version `0.5.0` regroupe le passage a des fiches contextuelles multi-applications, la personnalisation des fiches, le placement du panneau, les options par onglets et les durcissements de securite.
 
 ## Decisions a valider humainement
 

@@ -14,6 +14,15 @@ coverage/
 .vite/
 .vitest/
 
+# Security scan reports and local caches
+.semgrep/
+semgrep.sarif
+gitleaks-report.*
+osv-results.*
+osv-scanner-results.*
+cargo-deny-report.*
+cargo-audit-report.*
+
 # Logs and temporary files
 *.log
 npm-debug.log*

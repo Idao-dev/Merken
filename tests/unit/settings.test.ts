@@ -28,6 +28,65 @@ describe("settings persistence", () => {
     expect(loadSettings(memoryStorage).theme).toBe("dark");
   });
 
+  it("ignores invalid enum and identifier values from storage", () => {
+    memoryStorage.setItem(
+      "merken.settings.v1",
+      JSON.stringify({
+        ...defaultSettings,
+        language: "javascript:alert(1)",
+        textSize: "xl onmouseover=alert(1)",
+        blur: "<strong>",
+        sheetMode: "manual",
+        manualSheetId: "windows-core\" autofocus",
+        shortcutPlacementPreset: "bottom-right<script>",
+        shortcutCustomPosition: { x: Number.NaN, y: 12 }
+      })
+    );
+
+    const settings = loadSettings(memoryStorage);
+
+    expect(settings.language).toBe("fr");
+    expect(settings.textSize).toBe("md");
+    expect(settings.blur).toBe("medium");
+    expect(settings.sheetMode).toBe("manual");
+    expect(settings.manualSheetId).toBe("windows-core");
+    expect(settings.shortcutPlacementPreset).toBe("top-right");
+    expect(settings.shortcutCustomPosition).toBeNull();
+  });
+
+  it("filters unsafe custom shortcut preference identifiers", () => {
+    memoryStorage.setItem(
+      "merken.settings.v1",
+      JSON.stringify({
+        ...defaultSettings,
+        shortcutSheetPreferences: {
+          "windows-core": {
+            mode: "custom",
+            level: "advanced",
+            categoryIds: ["fenetres", "x\" autofocus"],
+            includeShortcutIds: ["fenetres-bureau-suivant", "<script>"],
+            excludeShortcutIds: ["fenetres-fermer-bureau", "javascript:alert(1)"]
+          },
+          "bad\"family": {
+            mode: "level",
+            level: "expert"
+          }
+        }
+      })
+    );
+
+    const settings = loadSettings(memoryStorage);
+
+    expect(settings.shortcutSheetPreferences["bad\"family"]).toBeUndefined();
+    expect(settings.shortcutSheetPreferences["windows-core"]).toEqual({
+      mode: "custom",
+      level: "advanced",
+      categoryIds: ["fenetres"],
+      includeShortcutIds: ["fenetres-bureau-suivant"],
+      excludeShortcutIds: ["fenetres-fermer-bureau"]
+    });
+  });
+
   it("adds shortcut placement defaults to old settings", () => {
     const oldSettings = {
       language: "fr",

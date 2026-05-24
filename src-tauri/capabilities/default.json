@@ -1,8 +1,8 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Default permissions for the Merken panel",
-  "windows": ["shortcuts", "settings"],
+  "description": "Permissions for the Merken settings window",
+  "windows": ["settings"],
   "permissions": [
     "core:default",
     "core:window:allow-start-dragging",
