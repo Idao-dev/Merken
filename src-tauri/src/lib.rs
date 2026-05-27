@@ -20,6 +20,7 @@ struct ActiveApp {
 struct ShortcutsOpenRequest {
     mode: String,
     active_app: ActiveApp,
+    preserve_position: bool,
 }
 
 struct PanelState {
@@ -88,7 +89,11 @@ fn show_shortcuts_placement(app: tauri::AppHandle) {
 }
 
 #[tauri::command]
-fn show_shortcuts_preview(app: tauri::AppHandle, sheet_id: String) {
+fn show_shortcuts_preview(
+    app: tauri::AppHandle,
+    sheet_id: String,
+    preserve_position: Option<bool>,
+) {
     set_panel_flags(&app, Some(true), Some(true));
 
     let active_app = ActiveApp {
@@ -97,7 +102,12 @@ fn show_shortcuts_preview(app: tauri::AppHandle, sheet_id: String) {
         sheet_id: Some(sheet_id),
     };
 
-    show_shortcuts_with_active_app(&app, ShortcutsMode::Preview, active_app);
+    show_shortcuts_with_active_app(
+        &app,
+        ShortcutsMode::Preview,
+        active_app,
+        preserve_position.unwrap_or(false),
+    );
 }
 
 #[tauri::command]
@@ -113,6 +123,18 @@ fn hide_shortcuts(app: tauri::AppHandle) {
 #[tauri::command]
 fn hide_shortcuts_preview(app: tauri::AppHandle) {
     hide_shortcuts_preview_window(&app);
+}
+
+#[tauri::command]
+fn position_shortcuts_preview_window(app: tauri::AppHandle) -> tauri::Result<()> {
+    if let (Some(settings), Some(shortcuts)) = (
+        app.get_webview_window("settings"),
+        app.get_webview_window("shortcuts"),
+    ) {
+        position_shortcuts_preview(&settings, &shortcuts)?;
+    }
+
+    Ok(())
 }
 
 pub fn run() {
@@ -187,7 +209,8 @@ pub fn run() {
             show_shortcuts_preview,
             show_settings_window,
             hide_shortcuts,
-            hide_shortcuts_preview
+            hide_shortcuts_preview,
+            position_shortcuts_preview_window
         ])
         .run(tauri::generate_context!())
         .expect("error while running Merken");
@@ -279,13 +302,14 @@ fn show_shortcuts<R: Runtime>(app: &tauri::AppHandle<R>, mode: ShortcutsMode) {
         active_window::debug_log_active_app("show_shortcuts payload", &active_app);
     }
 
-    show_shortcuts_with_active_app(app, mode, active_app);
+    show_shortcuts_with_active_app(app, mode, active_app, false);
 }
 
 fn show_shortcuts_with_active_app<R: Runtime>(
     app: &tauri::AppHandle<R>,
     mode: ShortcutsMode,
     active_app: ActiveApp,
+    preserve_position: bool,
 ) {
     if mode != ShortcutsMode::Preview {
         set_panel_flags(
@@ -300,31 +324,23 @@ fn show_shortcuts_with_active_app<R: Runtime>(
     }
 
     if let Some(window) = app.get_webview_window("shortcuts") {
-        if mode == ShortcutsMode::Preview {
-            if let Some(settings) = app.get_webview_window("settings") {
-                let _ = position_shortcuts_preview(&settings, &window);
-            }
-        }
-
         let _ = window.emit(
             "merken:shortcuts-open-request",
-            build_shortcuts_open_request(mode, active_app),
+            build_shortcuts_open_request(mode, active_app, preserve_position),
         );
         let _ = window.show();
-
-        if mode != ShortcutsMode::Preview {
-            let _ = window.set_focus();
-        }
     }
 }
 
 fn build_shortcuts_open_request(
     mode: ShortcutsMode,
     active_app: ActiveApp,
+    preserve_position: bool,
 ) -> ShortcutsOpenRequest {
     ShortcutsOpenRequest {
         mode: mode.as_str().to_owned(),
         active_app,
+        preserve_position,
     }
 }
 
@@ -435,12 +451,16 @@ mod tests {
 
     #[test]
     fn builds_shortcuts_open_request_payload() {
-        let request =
-            build_shortcuts_open_request(ShortcutsMode::Shortcuts, active_app("vlc.exe", "vlc-fr"));
+        let request = build_shortcuts_open_request(
+            ShortcutsMode::Shortcuts,
+            active_app("vlc.exe", "vlc-fr"),
+            false,
+        );
 
         assert_eq!(request.mode, "shortcuts");
         assert_eq!(request.active_app.process_name.as_deref(), Some("vlc.exe"));
         assert_eq!(request.active_app.sheet_id.as_deref(), Some("vlc-fr"));
+        assert!(!request.preserve_position);
     }
 
     #[test]
@@ -448,6 +468,7 @@ mod tests {
         let request = build_shortcuts_open_request(
             ShortcutsMode::Placement,
             active_app("EXCEL.EXE", "excel-fr"),
+            false,
         );
 
         assert_eq!(request.mode, "placement");
@@ -456,15 +477,20 @@ mod tests {
             Some("EXCEL.EXE")
         );
         assert_eq!(request.active_app.sheet_id.as_deref(), Some("excel-fr"));
+        assert!(!request.preserve_position);
     }
 
     #[test]
     fn builds_preview_open_request_payload() {
-        let request =
-            build_shortcuts_open_request(ShortcutsMode::Preview, active_app("vlc.exe", "vlc-fr"));
+        let request = build_shortcuts_open_request(
+            ShortcutsMode::Preview,
+            active_app("vlc.exe", "vlc-fr"),
+            true,
+        );
 
         assert_eq!(request.mode, "preview");
         assert_eq!(request.active_app.sheet_id.as_deref(), Some("vlc-fr"));
+        assert!(request.preserve_position);
     }
 }
 

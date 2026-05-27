@@ -1,11 +1,12 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { getName, getVersion } from "@tauri-apps/api/app";
-import { currentMonitor, getCurrentWindow, PhysicalPosition, primaryMonitor } from "@tauri-apps/api/window";
+import { currentMonitor, getCurrentWindow, PhysicalPosition, PhysicalSize, primaryMonitor } from "@tauri-apps/api/window";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check, type Update } from "@tauri-apps/plugin-updater";
 import { labelsFor, supportedLanguages, type AutostartStatus, type SettingsTab, type UpdateStatus } from "./app/i18n";
+import { keycapPresentation } from "./app/keycaps";
 import { defaultSettings, loadSettings, saveSettings, settingsStorageKey } from "./app/settings";
 import {
   availableShortcutLevels,
@@ -51,6 +52,7 @@ type ShortcutsOpenMode = "shortcuts" | "placement" | "preview";
 interface ShortcutsOpenRequest {
   mode: ShortcutsOpenMode;
   activeApp: ActiveApp;
+  preservePosition: boolean;
 }
 
 const app: HTMLElement = root;
@@ -69,8 +71,16 @@ let updateStatus: UpdateStatus = "idle";
 let pendingUpdate: Update | null = null;
 let updateVersion: string | null = null;
 let aboutModalOpen = false;
+let resetConfirmationOpen = false;
 let placementSnapshot: Pick<UserSettings, "shortcutPlacementMode" | "shortcutPlacementPreset" | "shortcutCustomPosition"> | null = null;
 let closeCaptureBound = false;
+let shortcutMoveListenerBound = false;
+let currentShortcutsOpenMode: ShortcutsOpenMode = "shortcuts";
+let activeShortcutDragMode: ShortcutsOpenMode | null = null;
+let shortcutDragMoved = false;
+let shortcutDragSaveTimer: number | null = null;
+let shortcutDragClearTimer: number | null = null;
+let shortcutPreviewMovedManually = false;
 let appInfo = {
   name: "Merken",
   version: "0.1.0"
@@ -86,6 +96,8 @@ const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-ri
 const settingsTabs: SettingsTab[] = ["general", "appearance", "sheets", "customization", "about"];
 const shortcutDisplayChoices: ShortcutDisplayChoice[] = [...shortcutDisplayLevels, "custom"];
 const customizationTargetStorageKey = "merken.customizationTarget.v1";
+const shortcutPreviewMovedStorageKey = "merken.shortcutPreviewMoved.v1";
+const shortcutsWindowMaxSize = { width: 540, height: 680 };
 const distribution = distributionFromEnv(import.meta.env.VITE_MERKEN_DISTRIBUTION);
 
 function debugActiveAppLog(message: string, details?: unknown): void {
@@ -258,6 +270,54 @@ async function setPanelKeepVisible(keepVisible: boolean): Promise<void> {
   }
 }
 
+function cssPixels(value: string): number {
+  return Number.parseFloat(value) || 0;
+}
+
+function measurePanelWindowSize(): { width: number; height: number } | null {
+  const panel = document.querySelector<HTMLElement>(".panel");
+
+  if (!panel) {
+    return null;
+  }
+
+  const rect = panel.getBoundingClientRect();
+  const style = getComputedStyle(panel);
+  const width = Math.ceil(rect.width + cssPixels(style.marginLeft) + cssPixels(style.marginRight));
+  const height = Math.ceil(rect.height + cssPixels(style.marginTop) + cssPixels(style.marginBottom));
+
+  return {
+    width: Math.min(shortcutsWindowMaxSize.width, Math.max(1, width)),
+    height: Math.min(shortcutsWindowMaxSize.height, Math.max(1, height))
+  };
+}
+
+async function resizeShortcutsWindowToPanel(): Promise<void> {
+  if (!isShortcutsWindow) {
+    return;
+  }
+
+  const size = measurePanelWindowSize();
+
+  if (!size) {
+    return;
+  }
+
+  try {
+    await currentWindow.setSize(new PhysicalSize(size.width, size.height));
+  } catch (error) {
+    debugActiveAppLog("resize shortcuts window failed", error);
+  }
+}
+
+async function positionShortcutsPreviewWindow(): Promise<void> {
+  try {
+    await invoke("position_shortcuts_preview_window");
+  } catch {
+    // The browser preview has no native shortcuts window.
+  }
+}
+
 async function applyShortcutPlacement(): Promise<void> {
   try {
     if (settings.shortcutPlacementMode === "custom" && settings.shortcutCustomPosition) {
@@ -379,13 +439,19 @@ async function showShortcutPreviewForFamily(family: string): Promise<void> {
   }
 
   try {
-    await invoke("show_shortcuts_preview", { sheetId: sheet.id });
+    const preservePosition = isSettingsWindow && shortcutPreviewMovedManually;
+
+    await invoke("show_shortcuts_preview", { sheetId: sheet.id, preservePosition });
   } catch {
     // The browser preview has no native shortcuts window.
   }
 }
 
-async function hideShortcutPreview(): Promise<void> {
+async function hideShortcutPreview(resetMovedState = false): Promise<void> {
+  if (resetMovedState) {
+    shortcutPreviewMovedManually = false;
+  }
+
   try {
     await invoke("hide_shortcuts_preview");
   } catch {
@@ -537,7 +603,11 @@ function updateStatusText(): string {
 }
 
 function renderKey(key: string): string {
-  return `<kbd>${escapeHtml(key)}</kbd>`;
+  const keycap = keycapPresentation(key);
+  const classNames = [keycap.isSymbol ? "key-symbol" : "", keycap.className].filter(Boolean).join(" ");
+  const classAttribute = classNames ? ` class="${escapeAttribute(classNames)}"` : "";
+
+  return `<kbd${classAttribute} aria-label="${escapeAttribute(keycap.accessibleLabel)}" title="${escapeAttribute(keycap.accessibleLabel)}"><span class="keycap-label">${escapeHtml(keycap.label)}</span></kbd>`;
 }
 
 function renderShortcutCategories(sheet: ShortcutSheet): string {
@@ -674,6 +744,22 @@ function render(): void {
         `
         : ""
     }
+    ${
+      resetConfirmationOpen
+        ? `
+          <div class="modal-backdrop" role="presentation">
+            <section class="modal modal-confirm" role="dialog" aria-modal="true" aria-labelledby="reset-title" aria-describedby="reset-message">
+              <h2 id="reset-title">${escapeHtml(labels.modal.resetTitle)}</h2>
+              <p id="reset-message">${escapeHtml(labels.modal.resetMessage)}</p>
+              <div class="modal-actions">
+                <button type="button" id="cancel-reset">${escapeHtml(labels.modal.resetCancel)}</button>
+                <button type="button" class="danger-button" id="confirm-reset">${escapeHtml(labels.modal.resetConfirm)}</button>
+              </div>
+            </section>
+          </div>
+        `
+        : ""
+    }
   `;
 
   bindEvents();
@@ -753,7 +839,6 @@ function renderSettingsTab(): string {
           settings.shortcutPlacementPreset,
           (preset) => labels.shortcutPlacementPreset[preset]
         )}
-        <button type="button" class="secondary-button" id="adjust-placement">${escapeHtml(labels.settings.adjustPlacement)}</button>
       </section>
     `;
   }
@@ -958,6 +1043,15 @@ function renderLinkRow(label: string, value: string, id: string): string {
   `;
 }
 
+function resetSettingsToDefaults(): void {
+  settings = defaultSettings;
+  updateStatus = "idle";
+  resetConfirmationOpen = false;
+  saveSettings(settings);
+  void setTrayLanguage(settings.language);
+  render();
+}
+
 function isInteractiveElement(target: EventTarget | null): boolean {
   return target instanceof Element && Boolean(target.closest("button, select, input, a, label, textarea, [data-settings-tab]"));
 }
@@ -976,6 +1070,100 @@ async function startWindowDrag(): Promise<void> {
   }
 }
 
+function clearShortcutDragTimers(): void {
+  if (shortcutDragSaveTimer !== null) {
+    window.clearTimeout(shortcutDragSaveTimer);
+    shortcutDragSaveTimer = null;
+  }
+
+  if (shortcutDragClearTimer !== null) {
+    window.clearTimeout(shortcutDragClearTimer);
+    shortcutDragClearTimer = null;
+  }
+}
+
+async function startShortcutPanelDrag(): Promise<void> {
+  activeShortcutDragMode = currentShortcutsOpenMode;
+  shortcutDragMoved = false;
+  clearShortcutDragTimers();
+  if (activeShortcutDragMode === "shortcuts") {
+    await setPanelKeepVisible(true);
+  }
+
+  shortcutDragClearTimer = window.setTimeout(() => {
+    if (!shortcutDragMoved) {
+      if (activeShortcutDragMode === "shortcuts") {
+        void setPanelKeepVisible(false);
+      }
+
+      activeShortcutDragMode = null;
+    }
+
+    shortcutDragClearTimer = null;
+  }, 3000);
+  await startWindowDrag();
+}
+
+function bindShortcutMoveListener(): void {
+  if (!isShortcutsWindow || shortcutMoveListenerBound) {
+    return;
+  }
+
+  shortcutMoveListenerBound = true;
+  void currentWindow.onMoved(() => {
+    scheduleShortcutDragCompletion();
+  }).catch((error) => {
+    console.warn("Unable to observe shortcut window movement.", error);
+  });
+}
+
+function scheduleShortcutDragCompletion(): void {
+  if (!activeShortcutDragMode || activeShortcutDragMode === "placement") {
+    return;
+  }
+
+  const completedMode = activeShortcutDragMode;
+  shortcutDragMoved = true;
+
+  if (shortcutDragClearTimer !== null) {
+    window.clearTimeout(shortcutDragClearTimer);
+    shortcutDragClearTimer = null;
+  }
+
+  if (shortcutDragSaveTimer !== null) {
+    window.clearTimeout(shortcutDragSaveTimer);
+  }
+
+  shortcutDragSaveTimer = window.setTimeout(() => {
+    shortcutDragSaveTimer = null;
+    activeShortcutDragMode = null;
+
+    if (completedMode === "preview") {
+      shortcutPreviewMovedManually = true;
+      localStorage.setItem(shortcutPreviewMovedStorageKey, String(Date.now()));
+      return;
+    }
+
+    void saveCurrentShortcutPanelPosition().finally(() => {
+      void setPanelKeepVisible(false);
+    });
+  }, 240);
+}
+
+async function saveCurrentShortcutPanelPosition(): Promise<void> {
+  try {
+    const position = await currentWindow.outerPosition();
+    settings = {
+      ...settings,
+      shortcutPlacementMode: "custom",
+      shortcutCustomPosition: { x: position.x, y: position.y }
+    };
+    saveSettings(settings);
+  } catch (error) {
+    debugActiveAppLog("save shortcut panel position failed", error);
+  }
+}
+
 async function hideCurrentWindow(): Promise<void> {
   try {
     await invoke("hide_current_window");
@@ -985,14 +1173,16 @@ async function hideCurrentWindow(): Promise<void> {
 }
 
 async function closeSettingsWindow(): Promise<void> {
-  await hideShortcutPreview();
+  await hideShortcutPreview(true);
   await hideCurrentWindow();
 }
 
-async function showPreparedShortcutsWindow(): Promise<void> {
+async function showPreparedShortcutsWindow(focus = true): Promise<void> {
   try {
     await currentWindow.show();
-    await currentWindow.setFocus();
+    if (focus) {
+      await currentWindow.setFocus();
+    }
   } catch (error) {
     debugActiveAppLog("showPreparedShortcutsWindow failed", error);
   }
@@ -1025,8 +1215,9 @@ async function enterPlacementMode(requestActiveApp?: ActiveApp): Promise<void> {
   } else {
     await refreshActiveApp();
   }
-  await applyShortcutPlacement();
   render();
+  await resizeShortcutsWindowToPanel();
+  await applyShortcutPlacement();
 }
 
 async function confirmPlacement(): Promise<void> {
@@ -1068,6 +1259,8 @@ async function hideShortcutsWindow(): Promise<void> {
 }
 
 function bindEvents(): void {
+  bindShortcutMoveListener();
+
   if (!closeCaptureBound) {
     closeCaptureBound = true;
     document.addEventListener(
@@ -1090,10 +1283,10 @@ function bindEvents(): void {
     }
   });
 
-  document.querySelector(".panel-placement")?.addEventListener("pointerdown", (event) => {
+  document.querySelector(".panel-shortcuts")?.addEventListener("pointerdown", (event) => {
     if (event instanceof PointerEvent && event.button === 0 && !isInteractiveElement(event.target)) {
       event.preventDefault();
-      void startWindowDrag();
+      void startShortcutPanelDrag();
     }
   });
 
@@ -1152,11 +1345,17 @@ function bindEvents(): void {
   });
 
   document.querySelector("#reset-settings")?.addEventListener("click", () => {
-    settings = defaultSettings;
-    updateStatus = "idle";
-    saveSettings(settings);
-    void setTrayLanguage(settings.language);
+    resetConfirmationOpen = true;
     render();
+  });
+
+  document.querySelector("#cancel-reset")?.addEventListener("click", () => {
+    resetConfirmationOpen = false;
+    render();
+  });
+
+  document.querySelector("#confirm-reset")?.addEventListener("click", () => {
+    resetSettingsToDefaults();
   });
 
   document.querySelector("#open-about")?.addEventListener("click", () => {
@@ -1181,10 +1380,6 @@ function bindEvents(): void {
 
   document.querySelector("#open-repository")?.addEventListener("click", () => {
     void openRepository();
-  });
-
-  document.querySelector("#adjust-placement")?.addEventListener("click", () => {
-    void requestPlacementMode();
   });
 
   document.querySelector("#confirm-placement")?.addEventListener("click", () => {
@@ -1243,6 +1438,18 @@ function bindEvents(): void {
 
 document.addEventListener("keydown", async (event) => {
   if (event.key === "Escape") {
+    if (resetConfirmationOpen) {
+      resetConfirmationOpen = false;
+      render();
+      return;
+    }
+
+    if (aboutModalOpen) {
+      aboutModalOpen = false;
+      render();
+      return;
+    }
+
     if (isSettingsWindow) {
       await closeSettingsWindow();
       return;
@@ -1265,6 +1472,7 @@ await listen<ShortcutsOpenRequest>("merken:shortcuts-open-request", async (event
   debugActiveAppLog("shortcuts open request", event.payload);
 
   if (event.payload.mode === "placement") {
+    currentShortcutsOpenMode = "placement";
     await enterPlacementMode(event.payload.activeApp);
     await showPreparedShortcutsWindow();
     return;
@@ -1273,17 +1481,24 @@ await listen<ShortcutsOpenRequest>("merken:shortcuts-open-request", async (event
   settings = loadSettings();
   panelMode = "shortcuts";
   placementSnapshot = null;
+  currentShortcutsOpenMode = event.payload.mode;
   if (event.payload.mode === "preview") {
     await setPanelKeepVisible(true);
     useActiveApp(event.payload.activeApp, "shortcuts preview activeApp from open request");
     render();
+    await resizeShortcutsWindowToPanel();
+    if (!event.payload.preservePosition) {
+      await positionShortcutsPreviewWindow();
+    }
+    await showPreparedShortcutsWindow(false);
     return;
   }
 
   await setPanelKeepVisible(false);
   useActiveApp(event.payload.activeApp, "shortcuts activeApp from open request");
-  await applyShortcutPlacement();
   render();
+  await resizeShortcutsWindowToPanel();
+  await applyShortcutPlacement();
   await showPreparedShortcutsWindow();
 });
 
@@ -1291,11 +1506,16 @@ window.addEventListener("storage", (event) => {
   if (event.key === settingsStorageKey) {
     settings = loadSettings();
     render();
+    void resizeShortcutsWindowToPanel();
   }
 
   if (event.key === customizationTargetStorageKey && event.newValue) {
     applyCustomizationTarget(event.newValue);
     render();
+  }
+
+  if (event.key === shortcutPreviewMovedStorageKey && event.newValue) {
+    shortcutPreviewMovedManually = true;
   }
 });
 

@@ -34,22 +34,12 @@
             "id": "navigation-retour"
           },
           {
-            "label": "Rechercher",
-            "keys": [
-              "Text"
-            ],
-            "description": "Taper dans une zone de recherche.",
-            "priority": 3,
-            "usageLevel": "essential",
-            "id": "navigation-rechercher"
-          },
-          {
             "label": "Element suivant",
             "keys": [
               "Tab"
             ],
             "description": "Passe au controle suivant.",
-            "priority": 4,
+            "priority": 3,
             "usageLevel": "common",
             "id": "navigation-element-suivant"
           },
@@ -60,7 +50,7 @@
               "Tab"
             ],
             "description": "Revient au controle precedent.",
-            "priority": 5,
+            "priority": 4,
             "usageLevel": "common",
             "id": "navigation-element-precedent"
           },
@@ -70,7 +60,7 @@
               "Enter"
             ],
             "description": "Active le controle selectionne.",
-            "priority": 6,
+            "priority": 5,
             "usageLevel": "common",
             "id": "navigation-valider"
           },
@@ -80,7 +70,7 @@
               "Space"
             ],
             "description": "Change une case ou un bouton.",
-            "priority": 7,
+            "priority": 6,
             "usageLevel": "common",
             "id": "navigation-basculer-option"
           }
@@ -123,22 +113,12 @@
             "id": "navigation-retour"
           },
           {
-            "label": "Search setting",
-            "keys": [
-              "Text"
-            ],
-            "description": "Type in a search box.",
-            "priority": 3,
-            "usageLevel": "essential",
-            "id": "navigation-rechercher"
-          },
-          {
             "label": "Next item",
             "keys": [
               "Tab"
             ],
             "description": "Move to the next control.",
-            "priority": 4,
+            "priority": 3,
             "usageLevel": "common",
             "id": "navigation-element-suivant"
           },
@@ -149,7 +129,7 @@
               "Tab"
             ],
             "description": "Move to the previous control.",
-            "priority": 5,
+            "priority": 4,
             "usageLevel": "common",
             "id": "navigation-element-precedent"
           },
@@ -159,7 +139,7 @@
               "Enter"
             ],
             "description": "Activate the selected control.",
-            "priority": 6,
+            "priority": 5,
             "usageLevel": "common",
             "id": "navigation-valider"
           },
@@ -169,7 +149,7 @@
               "Space"
             ],
             "description": "Toggle a checkbox or button.",
-            "priority": 7,
+            "priority": 6,
             "usageLevel": "common",
             "id": "navigation-basculer-option"
           }

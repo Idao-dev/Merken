@@ -70,8 +70,10 @@ describe("interface labels", () => {
     expect(fr.settings.updateChecking).toBe("Verification en cours");
     expect(fr.settings.updatePortableAvailable).toContain("Telecharger");
     expect(fr.settings.resetHelp).toContain("ensemble des options");
+    expect(fr.modal.resetConfirm).toContain("reinitialiser");
     expect(en.settings.updateUpToDate).toBe("Merken is up to date");
     expect(en.settings.updateAvailable).toContain("Install");
     expect(en.settings.resetHelp).toContain("all application options");
+    expect(en.modal.resetTitle).toBe("Confirm reset");
   });
 });

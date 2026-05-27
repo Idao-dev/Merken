@@ -20,7 +20,6 @@ Documentation sheet for Windows Settings.
 | --- | --- | --- | --- | --- |
 | `navigation-ouvrir-les-parametres` | Ouvrir les parametres | `Win` + `I` | Ouvre Parametres. | Essentiel |
 | `navigation-retour` | Retour | `Backspace` | Revient a la page precedente. | Courant |
-| `navigation-rechercher` | Rechercher | `Text` | Taper dans une zone de recherche. | Essentiel |
 | `navigation-element-suivant` | Element suivant | `Tab` | Passe au controle suivant. | Courant |
 | `navigation-element-precedent` | Element precedent | `Shift` + `Tab` | Revient au controle precedent. | Courant |
 | `navigation-valider` | Valider | `Enter` | Active le controle selectionne. | Courant |
@@ -38,7 +37,6 @@ Documentation sheet for Windows Settings.
 | --- | --- | --- | --- | --- |
 | `navigation-ouvrir-les-parametres` | Open Settings | `Win` + `I` | Open Settings. | Essential |
 | `navigation-retour` | Back | `Backspace` | Go back to the previous page. | Common |
-| `navigation-rechercher` | Search setting | `Text` | Type in a search box. | Essential |
 | `navigation-element-suivant` | Next item | `Tab` | Move to the next control. | Common |
 | `navigation-element-precedent` | Previous item | `Shift` + `Tab` | Move to the previous control. | Common |
 | `navigation-valider` | Confirm | `Enter` | Activate the selected control. | Common |

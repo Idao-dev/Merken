@@ -94,6 +94,16 @@ describe("shortcut sheet selection", () => {
     }
   });
 
+  it("does not use text entry as a keyboard key", () => {
+    for (const sheet of sheets) {
+      for (const category of sheet.categories) {
+        for (const shortcut of category.shortcuts) {
+          expect(shortcut.keys, `${sheet.id}:${category.id}:${shortcut.label}`).not.toContain("Text");
+        }
+      }
+    }
+  });
+
   it("requires stable shortcut ids", () => {
     for (const sheet of sheets) {
       const ids = new Set<string>();

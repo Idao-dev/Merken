@@ -53,7 +53,6 @@ interface Labels {
     sheetLibraryIntro: string;
     repository: string;
     placementPreset: string;
-    adjustPlacement: string;
     placementHelp: string;
     confirmPlacement: string;
     cancelPlacement: string;
@@ -62,6 +61,10 @@ interface Labels {
   };
   modal: {
     aboutTitle: string;
+    resetTitle: string;
+    resetMessage: string;
+    resetConfirm: string;
+    resetCancel: string;
     close: string;
     name: string;
     version: string;
@@ -128,7 +131,6 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       sheetLibraryIntro: "Choisissez le niveau affiche pour chaque fiche. Les niveaux vides sont desactives.",
       repository: "Depot GitHub",
       placementPreset: "Position predefinie",
-      adjustPlacement: "Ajuster manuellement",
       placementHelp: "Deplacez le panneau puis validez son emplacement.",
       confirmPlacement: "Valider l'emplacement",
       cancelPlacement: "Annuler",
@@ -137,6 +139,10 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
     },
     modal: {
       aboutTitle: "A propos de Merken",
+      resetTitle: "Confirmer la reinitialisation",
+      resetMessage: "Toutes les options seront remises aux valeurs par defaut.",
+      resetConfirm: "Oui, reinitialiser",
+      resetCancel: "Non",
       close: "Fermer",
       name: "Nom",
       version: "Version",
@@ -234,7 +240,6 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       sheetLibraryIntro: "Choose the displayed level for each sheet. Empty levels are disabled.",
       repository: "GitHub repository",
       placementPreset: "Preset position",
-      adjustPlacement: "Adjust manually",
       placementHelp: "Move the panel, then confirm its placement.",
       confirmPlacement: "Confirm placement",
       cancelPlacement: "Cancel",
@@ -243,6 +248,10 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
     },
     modal: {
       aboutTitle: "About Merken",
+      resetTitle: "Confirm reset",
+      resetMessage: "All application options will be restored to their defaults.",
+      resetConfirm: "Yes, reset",
+      resetCancel: "No",
       close: "Close",
       name: "Name",
       version: "Version",

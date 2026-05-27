@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.5.1 - 2026-05-27
+
+### Change
+
+- Ajout d'une confirmation avant la reinitialisation des options.
+- Deplacement direct du panneau de raccourcis, avec sauvegarde de la position pour l'affichage normal.
+- Amelioration des contrastes des textes secondaires de l'interface.
+- Renforcement de la lisibilite des titres de cadres et des textes d'aide dans les options.
+- Redimensionnement du panneau de raccourcis pour eviter que les zones transparentes bloquent les clics.
+- Suppression des separateurs inutiles sous les raccourcis.
+- Affichage de symboles clavier cibles pour les touches fonctionnelles, tout en conservant `Esc` en texte.
+
 ## 0.5.0 - 2026-05-25
 
 ### Ajoute
