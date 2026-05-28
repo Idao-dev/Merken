@@ -1,6 +1,7 @@
 import type {
   ActiveApp,
   LanguageCode,
+  SheetBadgeKey,
   ShortcutCategory,
   ShortcutDisplayLevel,
   ShortcutEntry,
@@ -17,7 +18,6 @@ export type ShortcutThemeState = "checked" | "indeterminate" | "unchecked";
 const sheetFamilyOrder = [
   "windows-core",
   "file-explorer",
-  "settings",
   "photos",
   "media-player",
   "terminal-powershell",
@@ -44,10 +44,23 @@ export interface ManualSheetOption {
   label: string;
 }
 
+const windowsNativeSheetFamilies = new Set([
+  "windows-core",
+  "file-explorer",
+  "photos",
+  "media-player",
+  "terminal-powershell"
+]);
+
+const systemShortcutWarningExemptFamilies = new Set(["windows-core", "file-explorer"]);
+
+const sheetFamilyBadges = new Map<string, SheetBadgeKey[]>([
+  ["browsers", ["browser-edge", "browser-chrome", "browser-firefox", "browser-brave"]]
+]);
+
 const manualSheetLabels = new Map<string, string>([
   ["windows-core", "Windows - Essentiels"],
   ["file-explorer", "Explorateur de fichiers"],
-  ["settings", "Parametres Windows"],
   ["photos", "Photos"],
   ["media-player", "Lecteur multimedia"],
   ["terminal-powershell", "Terminal et PowerShell"],
@@ -64,7 +77,6 @@ const manualSheetLabels = new Map<string, string>([
 const manualSheetLabelsEn = new Map<string, string>([
   ["windows-core", "Windows - Essentials"],
   ["file-explorer", "File Explorer"],
-  ["settings", "Windows Settings"],
   ["photos", "Photos"],
   ["media-player", "Media Player"],
   ["terminal-powershell", "Terminal and PowerShell"],
@@ -89,6 +101,40 @@ export function sheetFamily(sheetId: string): string {
   return sheetId.replace(/-(fr|en|es|de|pt|it)$/, "");
 }
 
+export function isWindowsNativeSheetFamily(family: string): boolean {
+  return windowsNativeSheetFamilies.has(family);
+}
+
+export function sheetLabelWithWindowsNativeSuffix(family: string, label: string): string {
+  if (!isWindowsNativeSheetFamily(family) || /\bWindows\b/i.test(label)) {
+    return label;
+  }
+
+  return `${label} - Win`;
+}
+
+export function sheetBadgeKeys(family: string): SheetBadgeKey[] {
+  return [
+    ...(isWindowsNativeSheetFamily(family) ? ["windows-native" as SheetBadgeKey] : []),
+    ...(sheetFamilyBadges.get(family) ?? [])
+  ];
+}
+
+export function shouldShowShortcutBaselineWarning(family: string): boolean {
+  return !systemShortcutWarningExemptFamilies.has(family);
+}
+
+export function sharedCommandKeys(category: ShortcutCategory): string[] | null {
+  if (category.shortcuts.length === 0 || category.shortcuts.some((shortcut) => !shortcut.command)) {
+    return null;
+  }
+
+  const [firstShortcut] = category.shortcuts;
+  const signature = shortcutKeysSignature(firstShortcut.keys);
+
+  return category.shortcuts.every((shortcut) => shortcutKeysSignature(shortcut.keys) === signature) ? [...firstShortcut.keys] : null;
+}
+
 export function findSheetForFamily(family: string, language: LanguageCode): ShortcutSheet | null {
   return (
     sheets.find((sheet) => sheetFamily(sheet.id) === family && sheet.language === language) ??
@@ -97,7 +143,7 @@ export function findSheetForFamily(family: string, language: LanguageCode): Shor
   );
 }
 
-export function manualSheetOptions(language: LanguageCode = "fr"): ManualSheetOption[] {
+export function manualSheetOptions(language: LanguageCode = "fr", includeWindowsNativeSuffix = false): ManualSheetOption[] {
   const seen = new Set<string>();
   const labels = language === "en" ? manualSheetLabelsEn : manualSheetLabels;
 
@@ -111,7 +157,14 @@ export function manualSheetOptions(language: LanguageCode = "fr"): ManualSheetOp
       seen.add(key);
       return true;
     })
-    .map((key) => ({ key, label: labels.get(key) ?? key }));
+    .map((key) => {
+      const label = labels.get(key) ?? key;
+
+      return {
+        key,
+        label: includeWindowsNativeSuffix ? sheetLabelWithWindowsNativeSuffix(key, label) : label
+      };
+    });
 }
 
 export function getFallbackSheet(language: LanguageCode): ShortcutSheet {
@@ -352,6 +405,10 @@ export function visibleShortcuts(sheet: ShortcutSheet, preference: ShortcutSheet
 
 function displayLevelForUsage(usageLevel: UsageLevel): ShortcutDisplayLevel {
   return usageLevel === "essential" || usageLevel === "common" ? "standard" : usageLevel;
+}
+
+function shortcutKeysSignature(keys: string[]): string {
+  return keys.join("\u0000");
 }
 
 function compactCustomPreference(

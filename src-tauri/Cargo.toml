@@ -1,6 +1,6 @@
 [package]
 name = "merken"
-version = "0.5.1"
+version = "0.5.2"
 description = "Assistant flottant de raccourcis clavier"
 authors = ["Merken"]
 edition = "2021"

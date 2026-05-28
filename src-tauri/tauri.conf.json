@@ -1,7 +1,7 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "Merken",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "identifier": "fr.merken.desktop",
   "build": {
     "beforeDevCommand": "npm run dev",
@@ -25,10 +25,23 @@
         "shadow": false
       },
       {
+        "label": "shortcuts-preview",
+        "title": "Merken",
+        "width": 540,
+        "height": 680,
+        "visible": false,
+        "decorations": false,
+        "transparent": true,
+        "resizable": false,
+        "skipTaskbar": true,
+        "alwaysOnTop": true,
+        "shadow": false
+      },
+      {
         "label": "settings",
         "title": "Merken Options",
-        "width": 860,
-        "height": 640,
+        "width": 980,
+        "height": 680,
         "visible": false,
         "decorations": false,
         "transparent": true,

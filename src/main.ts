@@ -16,8 +16,11 @@ import {
   isShortcutIncluded,
   manualSheetOptions,
   selectSheet,
+  sheetBadgeKeys,
   sheetFamily,
   sheetShortcutPreference,
+  shouldShowShortcutBaselineWarning,
+  sharedCommandKeys,
   shortcutThemeState,
   shortcutDisplayLevels,
   updateCustomCategoryPreference,
@@ -36,6 +39,8 @@ import type {
   ShortcutSheetPreference,
   ShortcutSheet,
   ShortcutPlacementPreset,
+  ShortcutWarningLevel,
+  ShortcutWarningMode,
   TextSize,
   ThemeMode,
   UserSettings
@@ -59,6 +64,8 @@ const app: HTMLElement = root;
 const currentWindow = getCurrentWindow();
 const isSettingsWindow = currentWindow.label === "settings";
 const isShortcutsWindow = currentWindow.label === "shortcuts";
+const isShortcutsPreviewWindow = currentWindow.label === "shortcuts-preview";
+const isShortcutPanelWindow = isShortcutsWindow || isShortcutsPreviewWindow;
 
 let settings = loadSettings();
 let activeApp: ActiveApp | null = null;
@@ -75,11 +82,13 @@ let resetConfirmationOpen = false;
 let placementSnapshot: Pick<UserSettings, "shortcutPlacementMode" | "shortcutPlacementPreset" | "shortcutCustomPosition"> | null = null;
 let closeCaptureBound = false;
 let shortcutMoveListenerBound = false;
+let shortcutFocusAutoHideBound = false;
 let currentShortcutsOpenMode: ShortcutsOpenMode = "shortcuts";
 let activeShortcutDragMode: ShortcutsOpenMode | null = null;
 let shortcutDragMoved = false;
 let shortcutDragSaveTimer: number | null = null;
 let shortcutDragClearTimer: number | null = null;
+let shortcutAutoHideTimer: number | null = null;
 let shortcutPreviewMovedManually = false;
 let appInfo = {
   name: "Merken",
@@ -93,6 +102,7 @@ const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
 const themeModes: ThemeMode[] = ["dark", "colorblind"];
 const sheetModes: SheetMode[] = ["auto", "os", "manual"];
 const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-right", "bottom-left", "bottom-right", "center"];
+const shortcutWarningModes: ShortcutWarningMode[] = ["all", "danger-only", "off"];
 const settingsTabs: SettingsTab[] = ["general", "appearance", "sheets", "customization", "about"];
 const shortcutDisplayChoices: ShortcutDisplayChoice[] = [...shortcutDisplayLevels, "custom"];
 const customizationTargetStorageKey = "merken.customizationTarget.v1";
@@ -125,7 +135,7 @@ function escapeAttribute(value: string | number | boolean): string {
 }
 
 function debugSheetSelection(context: string, selectedSheet: ShortcutSheet): void {
-  if (!isShortcutsWindow) {
+  if (!isShortcutPanelWindow) {
     return;
   }
 
@@ -293,7 +303,7 @@ function measurePanelWindowSize(): { width: number; height: number } | null {
 }
 
 async function resizeShortcutsWindowToPanel(): Promise<void> {
-  if (!isShortcutsWindow) {
+  if (!isShortcutPanelWindow) {
     return;
   }
 
@@ -421,6 +431,44 @@ async function openRepository(): Promise<void> {
   } catch (error) {
     console.warn("Unable to open repository.", error);
   }
+}
+
+async function copyCommandToClipboard(command: string, button: HTMLButtonElement): Promise<void> {
+  try {
+    if (navigator.clipboard?.writeText) {
+      await navigator.clipboard.writeText(command);
+    } else {
+      copyTextWithFallback(command);
+    }
+
+    showCopiedState(button);
+  } catch (error) {
+    console.warn("Unable to copy command.", error);
+  }
+}
+
+function copyTextWithFallback(value: string): void {
+  const textarea = document.createElement("textarea");
+  textarea.value = value;
+  textarea.setAttribute("readonly", "");
+  textarea.style.position = "fixed";
+  textarea.style.left = "-9999px";
+  document.body.append(textarea);
+  textarea.select();
+  document.execCommand("copy");
+  textarea.remove();
+}
+
+function showCopiedState(button: HTMLButtonElement): void {
+  const labels = labelsFor(settings.language);
+  const previousText = button.textContent ?? "";
+
+  button.textContent = labels.settings.shortcutCopied;
+  window.setTimeout(() => {
+    if (button.isConnected) {
+      button.textContent = previousText || labels.settings.shortcutCopy;
+    }
+  }, 900);
 }
 
 async function showSettingsWindow(): Promise<void> {
@@ -610,27 +658,135 @@ function renderKey(key: string): string {
   return `<kbd${classAttribute} aria-label="${escapeAttribute(keycap.accessibleLabel)}" title="${escapeAttribute(keycap.accessibleLabel)}"><span class="keycap-label">${escapeHtml(keycap.label)}</span></kbd>`;
 }
 
+function renderSheetBadges(family: string): string {
+  const labels = labelsFor(settings.language);
+
+  return sheetBadgeKeys(family)
+    .map((badgeKey) => {
+      const badge = labels.sheetBadge[badgeKey];
+      const className = badgeKey === "windows-native" ? "sheet-badge sheet-badge-native" : "sheet-badge sheet-badge-browser";
+
+      return `<span class="${escapeAttribute(className)}" title="${escapeAttribute(badge.help)}" aria-label="${escapeAttribute(badge.help)}">${escapeHtml(badge.label)}</span>`;
+    })
+    .join("");
+}
+
+function renderShortcutCommand(command: string | undefined): string {
+  if (!command) {
+    return "";
+  }
+
+  return `<small class="shortcut-command"><code>${escapeHtml(command)}</code></small>`;
+}
+
+function renderShortcutCommandLine(command: string | undefined): string {
+  if (!command) {
+    return "";
+  }
+
+  const labels = labelsFor(settings.language);
+
+  return `
+    <span class="shortcut-command-line">
+      <code>${escapeHtml(command)}</code>
+      <button
+        type="button"
+        class="shortcut-copy-button"
+        data-copy-command="${escapeAttribute(command)}"
+        aria-label="${escapeAttribute(labels.settings.shortcutCopyHelp)}"
+        title="${escapeAttribute(labels.settings.shortcutCopyHelp)}"
+      >${escapeHtml(labels.settings.shortcutCopy)}</button>
+    </span>
+  `;
+}
+
+function shouldShowWarningLevel(level: ShortcutWarningLevel): boolean {
+  if (settings.shortcutWarningMode === "off") {
+    return false;
+  }
+
+  return settings.shortcutWarningMode === "all" || level === "danger";
+}
+
+function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): string {
+  const labels = labelsFor(settings.language);
+  const notes = new Map<string, { level: ShortcutWarningLevel; text: string }>();
+
+  if (shouldShowShortcutBaselineWarning(family) && shouldShowWarningLevel("info")) {
+    notes.set(`info:${labels.settings.shortcutBaselineWarning}`, {
+      level: "info",
+      text: labels.settings.shortcutBaselineWarning
+    });
+  }
+
+  for (const category of sheet.categories) {
+    for (const shortcut of category.shortcuts) {
+      if (!shortcut.warning || !shortcut.warningLevel || !shouldShowWarningLevel(shortcut.warningLevel)) {
+        continue;
+      }
+
+      notes.set(`${shortcut.warningLevel}:${shortcut.warning}`, {
+        level: shortcut.warningLevel,
+        text: shortcut.warning
+      });
+    }
+  }
+
+  if (notes.size === 0) {
+    return "";
+  }
+
+  return `
+    <div class="shortcut-prevention-notes">
+      ${[...notes.values()]
+        .map(
+          (note) => `<p class="shortcut-prevention-note shortcut-prevention-note-${escapeAttribute(note.level)}">${escapeHtml(note.text)}</p>`
+        )
+        .join("")}
+    </div>
+  `;
+}
+
 function renderShortcutCategories(sheet: ShortcutSheet): string {
   return sheet.categories
-    .map(
-      (category) => `
-        <section class="shortcut-section">
-          <h2>${escapeHtml(category.title)}</h2>
-          <div class="shortcut-list">
+    .map((category) => {
+      const commandKeys = sharedCommandKeys(category);
+      const commandKeyHeader = commandKeys ? `<div class="section-keys">${commandKeys.map(renderKey).join("")}</div>` : "";
+      const listClassName = commandKeys ? "shortcut-list shortcut-command-list" : "shortcut-list";
+
+      return `
+        <section class="shortcut-section ${commandKeys ? "shortcut-command-section" : ""}">
+          <header class="shortcut-section-header">
+            <h2>${escapeHtml(category.title)}</h2>
+            ${commandKeyHeader}
+          </header>
+          <div class="${escapeAttribute(listClassName)}">
             ${category.shortcuts
-              .map(
-                (shortcut) => `
-                  <article class="shortcut-row">
-                    <div class="keys">${shortcut.keys.map(renderKey).join("")}</div>
-                    <strong>${escapeHtml(shortcut.label)}</strong>
-                  </article>
-                `
+              .map((shortcut) =>
+                commandKeys
+                  ? `
+                    <article class="shortcut-row shortcut-command-row">
+                      <span class="shortcut-text">
+                        <strong>${escapeHtml(shortcut.label)}</strong>
+                        ${renderShortcutCommandLine(shortcut.command)}
+                      </span>
+                    </article>
+                  `
+                  : `
+                    <article class="shortcut-row">
+                      <div class="keys">${shortcut.keys.map(renderKey).join("")}</div>
+                      <span class="shortcut-text">
+                        <strong>${escapeHtml(shortcut.label)}</strong>
+                        ${renderShortcutCommand(shortcut.command)}
+                      </span>
+                    </article>
+                  `
               )
               .join("")}
           </div>
         </section>
-      `
-    )
+      `;
+    })
     .join("");
 }
 
@@ -684,9 +840,11 @@ function render(): void {
   const selectedSheet = selectSheet(settings, activeApp);
   debugSheetSelection("render selected sheet", selectedSheet);
   const selectedSheetPreference = sheetShortcutPreference(settings, selectedSheet);
+  const selectedSheetFamily = sheetFamily(selectedSheet.id);
   const sheet = visibleShortcuts(selectedSheet, selectedSheetPreference);
   const isPlacement = panelMode === "placement";
   const categories = renderShortcutCategories(sheet);
+  const shortcutPreventionNotes = !isPlacement ? renderShortcutPreventionNotes(selectedSheetFamily, sheet) : "";
 
   app.className = `${themeClass(settings.theme)} ${textSizeClass(settings.textSize)} ${blurClass(settings.blur)}`;
   app.innerHTML = `
@@ -696,6 +854,7 @@ function render(): void {
           ? renderSettings()
           : `
             <div class="content">${categories}</div>
+            ${shortcutPreventionNotes}
             ${
               isPlacement
                 ? `
@@ -781,7 +940,6 @@ function renderSettings(): string {
             .map(
               (tab) => `
                 <button type="button" class="settings-tab ${settingsTab === tab ? "active" : ""}" data-settings-tab="${escapeAttribute(tab)}">
-                  <span aria-hidden="true">${settingsTabIcon(tab)}</span>
                   ${escapeHtml(labels.tabs[tab])}
                 </button>
               `
@@ -805,18 +963,6 @@ function renderSettings(): string {
       </main>
     </form>
   `;
-}
-
-function settingsTabIcon(tab: SettingsTab): string {
-  const icons: Record<SettingsTab, string> = {
-    general: "G",
-    appearance: "A",
-    sheets: "F",
-    customization: "P",
-    about: "i"
-  };
-
-  return icons[tab];
 }
 
 function renderSettingsTab(): string {
@@ -848,7 +994,7 @@ function renderSettingsTab(): string {
       <section class="settings-group">
         <h2>${escapeHtml(labels.sections.behavior)}</h2>
         ${renderSelectRow(labels.settings.sheet, "sheetMode", sheetModes, settings.sheetMode, (mode) => labels.sheetMode[mode])}
-        ${renderSelectRow(labels.settings.manualSheet, "manualSheetId", manualSheetOptions(settings.language).map((option) => option.key), sheetFamily(settings.manualSheetId), (key) => manualSheetOptions(settings.language).find((option) => option.key === key)?.label ?? key)}
+        ${renderSelectRow(labels.settings.manualSheet, "manualSheetId", manualSheetOptions(settings.language, true).map((option) => option.key), sheetFamily(settings.manualSheetId), (key) => manualSheetOptions(settings.language, true).find((option) => option.key === key)?.label ?? key)}
       </section>
       <section class="settings-group">
         <h2>${escapeHtml(labels.sections.availableSheets)}</h2>
@@ -893,6 +1039,13 @@ function renderSettingsTab(): string {
     </section>
     <section class="settings-group">
       <h2>${escapeHtml(labels.sections.behavior)}</h2>
+      ${renderSelectRow(
+        labels.settings.shortcutWarningMode,
+        "shortcutWarningMode",
+        shortcutWarningModes,
+        settings.shortcutWarningMode,
+        (mode) => labels.shortcutWarningMode[mode]
+      )}
       <p class="settings-note">${escapeHtml(labels.settings.resetHelp)}</p>
       <button type="button" class="secondary-button" id="reset-settings">${escapeHtml(labels.settings.reset)}</button>
     </section>
@@ -912,7 +1065,7 @@ function renderSheetLibraryRows(): string {
 
       return `
         <div class="sheet-family-row ${selectedSettingsSheetFamily === option.key ? "active" : ""}">
-          <button type="button" class="sheet-family-name" data-sheet-preview-family="${escapeAttribute(option.key)}">${escapeHtml(option.label)}</button>
+          <button type="button" class="sheet-family-name" data-sheet-preview-family="${escapeAttribute(option.key)}"><span>${escapeHtml(option.label)}</span>${renderSheetBadges(option.key)}</button>
           ${renderShortcutChoiceSwitch(option.key, preference, availableShortcutLevels(sheet), "sheet-level-switch")}
         </div>
       `;
@@ -935,9 +1088,9 @@ function renderCustomizationTab(): string {
       ${renderSelectRow(
         labels.settings.sheet,
         "customizationSheetFamily",
-        manualSheetOptions(settings.language).map((option) => option.key),
+        manualSheetOptions(settings.language, true).map((option) => option.key),
         family,
-        (key) => manualSheetOptions(settings.language).find((option) => option.key === key)?.label ?? key
+        (key) => manualSheetOptions(settings.language, true).find((option) => option.key === key)?.label ?? key
       )}
     </section>
     <section class="customization-editor" aria-label="${escapeAttribute(labels.sections.customization)}">
@@ -982,7 +1135,10 @@ function renderCustomizationEditor(sheet: ShortcutSheet, preference: ShortcutShe
                       ${isShortcutIncluded(category, shortcut, preference) ? "checked" : ""}
                     />
                     <span class="keys">${shortcut.keys.map(renderKey).join("")}</span>
-                    <strong>${escapeHtml(shortcut.label)}</strong>
+                    <span class="custom-shortcut-label">
+                      <strong>${escapeHtml(shortcut.label)}</strong>
+                      ${renderShortcutCommand(shortcut.command)}
+                    </span>
                   </label>
                 `
               )
@@ -1105,7 +1261,7 @@ async function startShortcutPanelDrag(): Promise<void> {
 }
 
 function bindShortcutMoveListener(): void {
-  if (!isShortcutsWindow || shortcutMoveListenerBound) {
+  if (!isShortcutPanelWindow || shortcutMoveListenerBound) {
     return;
   }
 
@@ -1115,6 +1271,57 @@ function bindShortcutMoveListener(): void {
   }).catch((error) => {
     console.warn("Unable to observe shortcut window movement.", error);
   });
+}
+
+function clearShortcutAutoHideTimer(): void {
+  if (shortcutAutoHideTimer !== null) {
+    window.clearTimeout(shortcutAutoHideTimer);
+    shortcutAutoHideTimer = null;
+  }
+}
+
+function scheduleShortcutFocusAutoHide(): void {
+  if (!isShortcutsWindow || currentShortcutsOpenMode !== "shortcuts" || activeShortcutDragMode) {
+    return;
+  }
+
+  clearShortcutAutoHideTimer();
+  shortcutAutoHideTimer = window.setTimeout(async () => {
+    shortcutAutoHideTimer = null;
+    if (!isShortcutsWindow || currentShortcutsOpenMode !== "shortcuts" || activeShortcutDragMode) {
+      return;
+    }
+
+    try {
+      if (await currentWindow.isFocused()) {
+        return;
+      }
+    } catch {
+      // The native focus check is only available in the Tauri window.
+    }
+
+    await setPanelKeepVisible(false);
+    await hideShortcutsWindow();
+  }, 160);
+}
+
+function bindShortcutFocusAutoHide(): void {
+  if (!isShortcutsWindow || shortcutFocusAutoHideBound) {
+    return;
+  }
+
+  shortcutFocusAutoHideBound = true;
+  void currentWindow.onFocusChanged(({ payload: focused }) => {
+    if (focused) {
+      clearShortcutAutoHideTimer();
+      return;
+    }
+
+    scheduleShortcutFocusAutoHide();
+  }).catch((error) => {
+    debugActiveAppLog("bind shortcut focus auto-hide failed", error);
+  });
+  window.addEventListener("blur", scheduleShortcutFocusAutoHide);
 }
 
 function scheduleShortcutDragCompletion(): void {
@@ -1260,6 +1467,7 @@ async function hideShortcutsWindow(): Promise<void> {
 
 function bindEvents(): void {
   bindShortcutMoveListener();
+  bindShortcutFocusAutoHide();
 
   if (!closeCaptureBound) {
     closeCaptureBound = true;
@@ -1382,6 +1590,18 @@ function bindEvents(): void {
     void openRepository();
   });
 
+  document.querySelectorAll<HTMLButtonElement>("[data-copy-command]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const command = button.dataset.copyCommand;
+
+      if (command) {
+        void copyCommandToClipboard(command, button);
+      }
+    });
+  });
+
   document.querySelector("#confirm-placement")?.addEventListener("click", () => {
     void confirmPlacement();
   });
@@ -1464,16 +1684,20 @@ document.addEventListener("keydown", async (event) => {
   }
 });
 
-await listen<ShortcutsOpenRequest>("merken:shortcuts-open-request", async (event) => {
-  if (!isShortcutsWindow) {
+async function handleShortcutsOpenRequest(request: ShortcutsOpenRequest): Promise<void> {
+  if (!isShortcutPanelWindow) {
     return;
   }
 
-  debugActiveAppLog("shortcuts open request", event.payload);
+  debugActiveAppLog("shortcuts open request", request);
 
-  if (event.payload.mode === "placement") {
+  if (request.mode === "placement") {
+    if (!isShortcutsWindow) {
+      return;
+    }
+
     currentShortcutsOpenMode = "placement";
-    await enterPlacementMode(event.payload.activeApp);
+    await enterPlacementMode(request.activeApp);
     await showPreparedShortcutsWindow();
     return;
   }
@@ -1481,25 +1705,52 @@ await listen<ShortcutsOpenRequest>("merken:shortcuts-open-request", async (event
   settings = loadSettings();
   panelMode = "shortcuts";
   placementSnapshot = null;
-  currentShortcutsOpenMode = event.payload.mode;
-  if (event.payload.mode === "preview") {
-    await setPanelKeepVisible(true);
-    useActiveApp(event.payload.activeApp, "shortcuts preview activeApp from open request");
+  if (request.mode === "preview") {
+    if (!isShortcutsPreviewWindow) {
+      return;
+    }
+
+    currentShortcutsOpenMode = "preview";
+    useActiveApp(request.activeApp, "shortcuts preview activeApp from open request");
     render();
     await resizeShortcutsWindowToPanel();
-    if (!event.payload.preservePosition) {
+    if (!request.preservePosition) {
       await positionShortcutsPreviewWindow();
     }
     await showPreparedShortcutsWindow(false);
     return;
   }
 
+  if (!isShortcutsWindow) {
+    return;
+  }
+
+  currentShortcutsOpenMode = "shortcuts";
   await setPanelKeepVisible(false);
-  useActiveApp(event.payload.activeApp, "shortcuts activeApp from open request");
+  useActiveApp(request.activeApp, "shortcuts activeApp from open request");
   render();
   await resizeShortcutsWindowToPanel();
   await applyShortcutPlacement();
   await showPreparedShortcutsWindow();
+}
+
+async function syncPendingShortcutsOpenRequest(): Promise<void> {
+  if (!isShortcutPanelWindow) {
+    return;
+  }
+
+  try {
+    const request = await invoke<ShortcutsOpenRequest | null>("get_shortcuts_open_request");
+    if (request) {
+      await handleShortcutsOpenRequest(request);
+    }
+  } catch (error) {
+    debugActiveAppLog("get_shortcuts_open_request failed", error);
+  }
+}
+
+await listen<ShortcutsOpenRequest>("merken:shortcuts-open-request", async (event) => {
+  await handleShortcutsOpenRequest(event.payload);
 });
 
 window.addEventListener("storage", (event) => {
@@ -1523,4 +1774,5 @@ applyCustomizationTarget(localStorage.getItem(customizationTargetStorageKey));
 await Promise.all([refreshActiveApp(), refreshAppInfo()]);
 void setTrayLanguage(settings.language);
 render();
+void syncPendingShortcutsOpenRequest();
 void syncAutostart();

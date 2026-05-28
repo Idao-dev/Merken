@@ -3,7 +3,8 @@
     "id": "windows-core-fr",
     "appNames": [
       "applicationframehost.exe",
-      "searchhost.exe"
+      "searchhost.exe",
+      "systemsettings.exe"
     ],
     "title": "Windows - Essentiels",
     "platform": "windows",
@@ -207,6 +208,121 @@
             "priority": 9,
             "usageLevel": "common",
             "id": "systeme-emoji-et-symboles"
+          },
+          {
+            "label": "A propos du systeme",
+            "keys": [
+              "Win",
+              "Pause"
+            ],
+            "description": "Ouvre la page Systeme > Informations.",
+            "priority": 10,
+            "usageLevel": "expert",
+            "id": "systeme-a-propos"
+          }
+        ]
+      },
+      {
+        "id": "outils-systeme",
+        "title": "Outils systeme",
+        "shortcuts": [
+          {
+            "label": "Gestionnaire de peripheriques",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "devmgmt.msc",
+            "description": "Ouvre le gestionnaire de peripheriques depuis Executer.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 1,
+            "usageLevel": "expert",
+            "id": "outils-systeme-gestionnaire-peripheriques"
+          },
+          {
+            "label": "Options d'alimentation",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "powercfg.cpl",
+            "description": "Ouvre les options d'alimentation depuis Executer.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 2,
+            "usageLevel": "expert",
+            "id": "outils-systeme-options-alimentation"
+          },
+          {
+            "label": "Alimentation avancee",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "control.exe powercfg.cpl,,3",
+            "description": "Ouvre les parametres avances du mode de gestion d'alimentation.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 3,
+            "usageLevel": "expert",
+            "id": "outils-systeme-alimentation-avancee"
+          },
+          {
+            "label": "Parametres systeme avances",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "SystemPropertiesAdvanced.exe",
+            "description": "Ouvre les proprietes systeme avancees.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 4,
+            "usageLevel": "expert",
+            "id": "outils-systeme-parametres-systeme-avances"
+          },
+          {
+            "label": "Connexions reseau",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "control.exe netconnections",
+            "description": "Ouvre les connexions reseau.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 5,
+            "usageLevel": "expert",
+            "id": "outils-systeme-connexions-reseau"
+          },
+          {
+            "label": "Programmes et fonctionnalites",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "appwiz.cpl",
+            "description": "Ouvre la liste des programmes installes.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 6,
+            "usageLevel": "expert",
+            "id": "outils-systeme-programmes-fonctionnalites"
+          },
+          {
+            "label": "Fonctionnalites Windows",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "OptionalFeatures.exe",
+            "description": "Ouvre l'activation des fonctionnalites Windows.",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger",
+            "priority": 7,
+            "usageLevel": "expert",
+            "id": "outils-systeme-fonctionnalites-windows"
           }
         ]
       },
@@ -358,7 +474,8 @@
     "id": "windows-core-en",
     "appNames": [
       "applicationframehost.exe",
-      "searchhost.exe"
+      "searchhost.exe",
+      "systemsettings.exe"
     ],
     "title": "Windows - Essentials",
     "platform": "windows",
@@ -562,6 +679,121 @@
             "priority": 9,
             "usageLevel": "common",
             "id": "systeme-emoji-et-symboles"
+          },
+          {
+            "label": "System About",
+            "keys": [
+              "Win",
+              "Pause"
+            ],
+            "description": "Open the System > About page.",
+            "priority": 10,
+            "usageLevel": "expert",
+            "id": "systeme-a-propos"
+          }
+        ]
+      },
+      {
+        "id": "outils-systeme",
+        "title": "System tools",
+        "shortcuts": [
+          {
+            "label": "Device Manager",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "devmgmt.msc",
+            "description": "Open Device Manager from Run.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 1,
+            "usageLevel": "expert",
+            "id": "outils-systeme-gestionnaire-peripheriques"
+          },
+          {
+            "label": "Power Options",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "powercfg.cpl",
+            "description": "Open Power Options from Run.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 2,
+            "usageLevel": "expert",
+            "id": "outils-systeme-options-alimentation"
+          },
+          {
+            "label": "Advanced power settings",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "control.exe powercfg.cpl,,3",
+            "description": "Open advanced power plan settings.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 3,
+            "usageLevel": "expert",
+            "id": "outils-systeme-alimentation-avancee"
+          },
+          {
+            "label": "Advanced system settings",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "SystemPropertiesAdvanced.exe",
+            "description": "Open advanced system properties.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 4,
+            "usageLevel": "expert",
+            "id": "outils-systeme-parametres-systeme-avances"
+          },
+          {
+            "label": "Network Connections",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "control.exe netconnections",
+            "description": "Open Network Connections.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 5,
+            "usageLevel": "expert",
+            "id": "outils-systeme-connexions-reseau"
+          },
+          {
+            "label": "Programs and Features",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "appwiz.cpl",
+            "description": "Open the installed programs list.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 6,
+            "usageLevel": "expert",
+            "id": "outils-systeme-programmes-fonctionnalites"
+          },
+          {
+            "label": "Windows Features",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "command": "OptionalFeatures.exe",
+            "description": "Open Windows features.",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger",
+            "priority": 7,
+            "usageLevel": "expert",
+            "id": "outils-systeme-fonctionnalites-windows"
           }
         ]
       },

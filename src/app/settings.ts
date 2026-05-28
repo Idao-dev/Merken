@@ -4,6 +4,7 @@ import type {
   SheetMode,
   ShortcutDisplayLevel,
   ShortcutPlacementPreset,
+  ShortcutWarningMode,
   ShortcutSheetPreference,
   TextSize,
   ThemeMode,
@@ -17,12 +18,13 @@ const textSizes: TextSize[] = ["xs", "sm", "md", "lg", "xl"];
 const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
 const sheetModes: SheetMode[] = ["auto", "os", "manual"];
 const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-right", "bottom-left", "bottom-right", "center"];
+const shortcutWarningModes: ShortcutWarningMode[] = ["all", "danger-only", "off"];
 const identifierPattern = /^[a-z0-9-]+$/;
+const deprecatedSheetFamilies = new Set(["settings"]);
 
 const legacyExpertSheetFamilies = [
   "windows-core",
   "file-explorer",
-  "settings",
   "photos",
   "media-player",
   "terminal-powershell",
@@ -48,6 +50,7 @@ export const defaultSettings: UserSettings = {
   shortcutPlacementMode: "preset",
   shortcutPlacementPreset: "top-right",
   shortcutCustomPosition: null,
+  shortcutWarningMode: "all",
   trayVisibilityPromptDismissed: false
 };
 
@@ -91,7 +94,7 @@ function normalizeShortcutSheetPreferences(stored: StoredSettings): Record<strin
   if (isRecord(stored.shortcutSheetPreferences) && Object.keys(stored.shortcutSheetPreferences).length > 0) {
     return Object.fromEntries(
       Object.entries(stored.shortcutSheetPreferences)
-        .filter(([family]) => isSafeIdentifier(family))
+        .filter(([family]) => isSafeIdentifier(family) && !deprecatedSheetFamilies.has(family))
         .map(([family, preference]) => [family, normalizeShortcutSheetPreference(preference)])
         .filter((entry): entry is [string, ShortcutSheetPreference] => Boolean(entry[1]))
     );
@@ -142,7 +145,7 @@ function normalizeSettings(settings: UserSettings): UserSettings {
     textSize: oneOf(settings.textSize, textSizes, defaultSettings.textSize),
     blur: oneOf(settings.blur, blurLevels, defaultSettings.blur),
     sheetMode: oneOf(settings.sheetMode, sheetModes, defaultSettings.sheetMode),
-    manualSheetId: typeof settings.manualSheetId === "string" && isSafeIdentifier(settings.manualSheetId)
+    manualSheetId: typeof settings.manualSheetId === "string" && isSafeIdentifier(settings.manualSheetId) && !deprecatedSheetFamilies.has(settings.manualSheetId)
       ? settings.manualSheetId
       : defaultSettings.manualSheetId,
     shortcutSheetPreferences: settings.shortcutSheetPreferences,
@@ -154,6 +157,7 @@ function normalizeSettings(settings: UserSettings): UserSettings {
       defaultSettings.shortcutPlacementPreset
     ),
     shortcutCustomPosition: normalizeShortcutCustomPosition(settings.shortcutCustomPosition),
+    shortcutWarningMode: oneOf(settings.shortcutWarningMode, shortcutWarningModes, defaultSettings.shortcutWarningMode),
     trayVisibilityPromptDismissed:
       typeof settings.trayVisibilityPromptDismissed === "boolean"
         ? settings.trayVisibilityPromptDismissed

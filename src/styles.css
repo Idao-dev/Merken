@@ -211,7 +211,7 @@ kbd {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px 18px;
-  padding: 14px;
+  padding: 14px 14px 8px;
   overflow: hidden;
 }
 
@@ -219,13 +219,34 @@ kbd {
   min-width: 0;
 }
 
-.shortcut-section h2 {
+.shortcut-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
   margin: 0 0 6px;
+}
+
+.shortcut-section h2 {
+  margin: 0;
   color: var(--text-muted);
   font-size: 0.72em;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: uppercase;
+}
+
+.section-keys {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+  gap: 4px;
+}
+
+.section-keys kbd {
+  min-width: 22px;
+  padding: 2px 5px 3px;
+  font-size: 0.78em;
 }
 
 .shortcut-list {
@@ -242,6 +263,12 @@ kbd {
   padding: 3px 0;
 }
 
+.shortcut-text {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
 .shortcut-row strong {
   min-width: 0;
   overflow: hidden;
@@ -251,6 +278,78 @@ kbd {
   line-height: 1.2;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.shortcut-command {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.74em;
+  font-weight: 700;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shortcut-command code {
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.95em;
+}
+
+.shortcut-command-list {
+  gap: 7px;
+}
+
+.shortcut-command-row {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  min-height: 40px;
+  padding: 1px 0 4px;
+}
+
+.shortcut-command-row strong {
+  overflow: visible;
+  line-height: 1.15;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.shortcut-command-line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.shortcut-command-line code {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  color: var(--text-muted);
+  font-family: "Cascadia Mono", Consolas, monospace;
+  font-size: 0.74em;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.shortcut-copy-button {
+  min-height: 22px;
+  padding: 2px 6px;
+  border: 1px solid color-mix(in srgb, var(--border) 84%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 0.7em;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.shortcut-copy-button:hover,
+.shortcut-copy-button:focus {
+  border-color: var(--accent);
+  color: var(--text-primary);
+  outline: none;
 }
 
 .keys {
@@ -329,10 +428,16 @@ kbd {
 .panel-shortcuts .content,
 .panel-shortcuts .shortcut-section,
 .panel-shortcuts .shortcut-row,
+.panel-shortcuts .shortcut-section-header,
 .panel-shortcuts .shortcut-section h2,
 .panel-shortcuts .shortcut-row strong,
+.panel-shortcuts .shortcut-text,
+.panel-shortcuts .shortcut-command,
+.panel-shortcuts .shortcut-command-line,
 .panel-shortcuts .keys,
-.panel-shortcuts kbd {
+.panel-shortcuts kbd,
+.shortcut-prevention-notes,
+.shortcut-prevention-note {
   cursor: move;
 }
 
@@ -344,7 +449,7 @@ kbd {
 .settings-shell {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
-  min-height: 600px;
+  min-height: 640px;
 }
 
 .settings-sidebar {
@@ -403,11 +508,10 @@ kbd {
 
 .settings-tab {
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
-  gap: 8px;
   min-height: 36px;
-  padding: 6px 10px;
+  padding: 7px 10px;
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
@@ -415,17 +519,6 @@ kbd {
   cursor: pointer;
   font-weight: 700;
   text-align: left;
-}
-
-.settings-tab span {
-  display: grid;
-  place-items: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 6px;
-  background: rgb(255 255 255 / 8%);
-  color: var(--text-primary);
-  font-size: 0.76em;
 }
 
 .settings-tab:hover,
@@ -436,11 +529,6 @@ kbd {
 
 .settings-tab.active {
   background: color-mix(in srgb, var(--accent) 82%, var(--bg-card));
-  color: #fff;
-}
-
-.settings-tab.active span {
-  background: rgb(255 255 255 / 20%);
   color: #fff;
 }
 
@@ -490,7 +578,7 @@ kbd {
 
 .settings-page {
   min-width: 0;
-  max-height: 600px;
+  max-height: 640px;
   padding: 18px 16px;
   overflow: auto;
 }
@@ -579,7 +667,10 @@ kbd {
   min-height: 32px;
   border: 1px solid var(--border);
   border-radius: 8px;
-  background: color-mix(in srgb, var(--bg-panel) 90%, transparent);
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 7%),
+    0 8px 18px rgb(0 0 0 / 14%);
   color: var(--text-primary);
 }
 
@@ -677,14 +768,21 @@ kbd {
 }
 
 .sheet-family-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
   min-width: 0;
   border: 0;
   background: transparent;
-  overflow: hidden;
   color: var(--text-primary);
   cursor: pointer;
   font-weight: 700;
   text-align: left;
+}
+
+.sheet-family-name > span {
+  min-width: 0;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -693,6 +791,28 @@ kbd {
 .sheet-family-name:focus {
   color: var(--accent);
   outline: none;
+}
+
+.sheet-badge {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  min-height: 18px;
+  padding: 1px 6px 2px;
+  border: 1px solid color-mix(in srgb, var(--accent) 44%, transparent);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--text-primary);
+  font-size: 0.72em;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.sheet-badge-browser {
+  border-color: color-mix(in srgb, var(--warning) 42%, transparent);
+  background: color-mix(in srgb, var(--warning) 12%, transparent);
 }
 
 .sheet-level-switch {
@@ -777,6 +897,12 @@ kbd {
   cursor: pointer;
 }
 
+.custom-shortcut-label {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
 .custom-shortcut-row strong {
   min-width: 0;
   overflow: hidden;
@@ -805,14 +931,15 @@ kbd {
   justify-self: start;
   min-width: 180px;
   margin: 14px;
-  padding: 4px 12px;
+  padding: 6px 14px;
   cursor: pointer;
+  font-weight: 800;
 }
 
 .link-button {
   display: grid;
   gap: 2px;
-  padding: 8px 10px;
+  padding: 10px 12px;
   cursor: pointer;
   text-align: left;
 }
@@ -830,6 +957,28 @@ kbd {
 
 .settings-update {
   margin: 14px;
+}
+
+.shortcut-prevention-notes {
+  display: grid;
+  gap: 6px;
+  margin: 0 14px 12px;
+}
+
+.shortcut-prevention-note {
+  margin: 0;
+  padding: 8px 10px;
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: 8px;
+  background: rgb(0 0 0 / 12%);
+  color: var(--text-secondary);
+  font-size: 0.78em;
+  line-height: 1.35;
+}
+
+.shortcut-prevention-note-danger {
+  border-color: color-mix(in srgb, var(--warning) 40%, transparent);
+  background: color-mix(in srgb, var(--warning) 11%, transparent);
 }
 
 .panel-placement {

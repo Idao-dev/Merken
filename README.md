@@ -12,7 +12,7 @@ Merken affiche notamment des raccourcis clavier pour Windows et certaines applic
 
 ### Fonctionnalites
 
-- Fiches locales pour Windows, Explorateur de fichiers, Parametres, Photos, lecteur multimedia, Terminal/PowerShell, navigateurs, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian et VLC.
+- Fiches locales pour Windows, Explorateur de fichiers, Photos, lecteur multimedia, Terminal/PowerShell, navigateurs, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian et VLC.
 - Detection contextuelle locale : Merken choisit la fiche adaptee a partir du nom du processus actif et du titre de fenetre, sans compte, sans telemetrie et sans journalisation d'usage.
 - Niveaux par fiche : standard, avance ou expert. Chaque niveau remplace le contenu affiche pour garder le panneau court et lisible.
 - Personnalisation par theme ou par raccourci, avec apercu immediat dans le panneau de raccourcis.
@@ -63,7 +63,7 @@ Merken displays keyboard shortcuts for Windows and compatible applications, incl
 
 ### Features
 
-- Local shortcut sheets for Windows, File Explorer, Settings, Photos, media player, Terminal/PowerShell, browsers, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian, and VLC.
+- Local shortcut sheets for Windows, File Explorer, Photos, media player, Terminal/PowerShell, browsers, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian, and VLC.
 - Local contextual detection: Merken chooses the relevant sheet from the active process name and window title, without accounts, telemetry, or usage logging.
 - Per-sheet levels: standard, advanced, or expert. Each level replaces the visible content so the panel stays short and readable.
 - Theme-level and shortcut-level customization, with an immediate preview in the shortcut panel.

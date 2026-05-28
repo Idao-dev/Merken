@@ -25,7 +25,8 @@ struct ShortcutsOpenRequest {
 
 struct PanelState {
     keep_visible: Mutex<bool>,
-    preview_visible: Mutex<bool>,
+    shortcuts_request: Mutex<Option<ShortcutsOpenRequest>>,
+    preview_request: Mutex<Option<ShortcutsOpenRequest>>,
 }
 
 struct ActiveAppState {
@@ -52,10 +53,40 @@ fn set_tray_language(app: tauri::AppHandle, language: String) -> tauri::Result<(
 }
 
 #[tauri::command]
-fn set_panel_keep_visible(state: State<'_, PanelState>, keep_visible: bool) {
+fn set_panel_keep_visible(app: tauri::AppHandle, state: State<'_, PanelState>, keep_visible: bool) {
     if let Ok(mut value) = state.keep_visible.lock() {
         *value = keep_visible;
-    }
+    };
+    log_window_lifecycle(&app, format!("set keep_visible={keep_visible}"));
+}
+
+#[tauri::command]
+fn get_shortcuts_open_request(
+    window: WebviewWindow,
+    state: State<'_, PanelState>,
+) -> Option<ShortcutsOpenRequest> {
+    let request = match window.label() {
+        "shortcuts" => state
+            .shortcuts_request
+            .lock()
+            .ok()
+            .and_then(|value| value.clone()),
+        "shortcuts-preview" => state
+            .preview_request
+            .lock()
+            .ok()
+            .and_then(|value| value.clone()),
+        _ => None,
+    };
+    log_window_lifecycle(
+        &window.app_handle(),
+        format!(
+            "get pending request label={} has_request={}",
+            window.label(),
+            request.is_some()
+        ),
+    );
+    request
 }
 
 #[tauri::command]
@@ -94,8 +125,6 @@ fn show_shortcuts_preview(
     sheet_id: String,
     preserve_position: Option<bool>,
 ) {
-    set_panel_flags(&app, Some(true), Some(true));
-
     let active_app = ActiveApp {
         process_name: None,
         title: None,
@@ -127,21 +156,15 @@ fn hide_shortcuts_preview(app: tauri::AppHandle) {
 
 #[tauri::command]
 fn position_shortcuts_preview_window(app: tauri::AppHandle) -> tauri::Result<()> {
-    if let (Some(settings), Some(shortcuts)) = (
-        app.get_webview_window("settings"),
-        app.get_webview_window("shortcuts"),
-    ) {
-        position_shortcuts_preview(&settings, &shortcuts)?;
-    }
-
-    Ok(())
+    position_shortcuts_preview_if_ready(&app)
 }
 
 pub fn run() {
     tauri::Builder::default()
         .manage(PanelState {
             keep_visible: Mutex::new(false),
-            preview_visible: Mutex::new(false),
+            shortcuts_request: Mutex::new(None),
+            preview_request: Mutex::new(None),
         })
         .manage(ActiveAppState {
             last_active_app: Arc::new(Mutex::new(None)),
@@ -163,19 +186,44 @@ pub fn run() {
         })
         .on_window_event(|window, event| {
             if matches!(event, WindowEvent::Focused(false)) {
+                log_window_lifecycle(
+                    &window.app_handle(),
+                    format!("focus lost label={}", window.label()),
+                );
                 if window.label() == "settings" {
-                    let window = window.clone();
+                    let settings = window.clone();
                     let app = window.app_handle().clone();
                     thread::spawn(move || {
                         thread::sleep(Duration::from_millis(140));
-                        if is_shortcuts_preview_visible(&app) {
+                        if should_keep_preview_pair_visible(&app) {
+                            log_window_lifecycle(&app, "keep preview pair after settings blur");
                             return;
                         }
 
-                        if !window.is_focused().unwrap_or(false) {
-                            let _ = window.hide();
+                        if !settings.is_focused().unwrap_or(false) {
+                            log_window_lifecycle(
+                                &app,
+                                "hide settings + preview after settings blur",
+                            );
+                            let _ = settings.hide();
                             hide_shortcuts_preview_window(&app);
                         }
+                    });
+                    return;
+                }
+
+                if window.label() == "shortcuts-preview" {
+                    let app = window.app_handle().clone();
+                    thread::spawn(move || {
+                        thread::sleep(Duration::from_millis(140));
+                        if should_keep_preview_pair_visible(&app) {
+                            log_window_lifecycle(&app, "keep preview pair after preview blur");
+                            return;
+                        }
+
+                        log_window_lifecycle(&app, "hide settings + preview after preview blur");
+                        hide_settings_window(&app);
+                        hide_shortcuts_preview_window(&app);
                     });
                     return;
                 }
@@ -184,20 +232,30 @@ pub fn run() {
                     return;
                 }
 
-                let keep_visible = window
-                    .state::<PanelState>()
-                    .keep_visible
-                    .lock()
-                    .map(|value| *value)
-                    .unwrap_or(false);
+                let shortcuts = window.clone();
+                let app = window.app_handle().clone();
+                thread::spawn(move || {
+                    thread::sleep(Duration::from_millis(140));
+                    let is_focused = shortcuts.is_focused().unwrap_or(false);
+                    let keep_visible = is_panel_keep_visible(&app);
 
-                if !keep_visible {
-                    let _ = window.hide();
-                }
+                    log_window_lifecycle(
+                        &app,
+                        format!(
+                            "normal blur check focused={is_focused} keep_visible={keep_visible}"
+                        ),
+                    );
+
+                    if should_hide_unfocused_shortcuts(is_focused, keep_visible) {
+                        log_window_lifecycle(&app, "hide normal shortcuts after blur");
+                        let _ = shortcuts.hide();
+                    }
+                });
             }
         })
         .invoke_handler(tauri::generate_handler![
             get_active_app,
+            get_shortcuts_open_request,
             set_tray_language,
             set_panel_keep_visible,
             start_native_drag,
@@ -311,25 +369,75 @@ fn show_shortcuts_with_active_app<R: Runtime>(
     active_app: ActiveApp,
     preserve_position: bool,
 ) {
-    if mode != ShortcutsMode::Preview {
-        set_panel_flags(
-            app,
-            if mode == ShortcutsMode::Shortcuts {
-                Some(false)
-            } else {
-                None
-            },
-            Some(false),
-        );
-    }
+    set_shortcuts_keep_visible(app, matches!(mode, ShortcutsMode::Placement));
+    hide_inactive_shortcuts_window(app, mode);
 
-    if let Some(window) = app.get_webview_window("shortcuts") {
-        let _ = window.emit(
-            "merken:shortcuts-open-request",
-            build_shortcuts_open_request(mode, active_app, preserve_position),
+    if let Some(window) = app.get_webview_window(shortcuts_window_label(mode)) {
+        let request = build_shortcuts_open_request(mode, active_app, preserve_position);
+        let is_visible = window.is_visible().unwrap_or(false);
+        log_window_lifecycle(
+            app,
+            format!(
+                "open request mode={} target={} visible={} preserve_position={}",
+                mode.as_str(),
+                window.label(),
+                is_visible,
+                preserve_position
+            ),
         );
-        let _ = window.show();
+        if should_stage_shortcuts_before_open(mode, is_visible) {
+            stage_shortcuts_before_open(&window);
+        } else if should_position_preview_before_show(mode, is_visible) {
+            let _ = position_shortcuts_preview_if_ready(app);
+        }
+
+        set_shortcuts_open_request(app, mode, Some(request.clone()));
+        match window.show() {
+            Ok(()) => log_window_lifecycle(app, format!("show target={}", window.label())),
+            Err(error) => log_window_lifecycle(
+                app,
+                format!("show failed target={} error={error}", window.label()),
+            ),
+        }
+        if should_focus_after_show(mode) {
+            match window.set_focus() {
+                Ok(()) => log_window_lifecycle(app, format!("focus target={}", window.label())),
+                Err(error) => log_window_lifecycle(
+                    app,
+                    format!("focus failed target={} error={error}", window.label()),
+                ),
+            }
+        }
+        match window.emit("merken:shortcuts-open-request", request) {
+            Ok(()) => log_window_lifecycle(app, format!("emit open target={}", window.label())),
+            Err(error) => log_window_lifecycle(
+                app,
+                format!("emit open failed target={} error={error}", window.label()),
+            ),
+        }
     }
+}
+
+fn shortcuts_window_label(mode: ShortcutsMode) -> &'static str {
+    match mode {
+        ShortcutsMode::Preview => "shortcuts-preview",
+        ShortcutsMode::Shortcuts | ShortcutsMode::Placement => "shortcuts",
+    }
+}
+
+fn inactive_shortcuts_window_label(mode: ShortcutsMode) -> &'static str {
+    match mode {
+        ShortcutsMode::Preview => "shortcuts",
+        ShortcutsMode::Shortcuts | ShortcutsMode::Placement => "shortcuts-preview",
+    }
+}
+
+fn hide_inactive_shortcuts_window<R: Runtime>(app: &tauri::AppHandle<R>, mode: ShortcutsMode) {
+    let inactive_label = inactive_shortcuts_window_label(mode);
+    if let Some(window) = app.get_webview_window(inactive_label) {
+        let _ = window.hide();
+    }
+    clear_shortcuts_open_request(app, inactive_label);
 }
 
 fn build_shortcuts_open_request(
@@ -351,50 +459,133 @@ fn show_settings<R: Runtime>(app: &tauri::AppHandle<R>) {
     }
 }
 
-fn hide_shortcuts_window<R: Runtime>(app: &tauri::AppHandle<R>) {
-    set_panel_flags(app, Some(false), Some(false));
-
-    if let Some(window) = app.get_webview_window("shortcuts") {
+fn hide_settings_window<R: Runtime>(app: &tauri::AppHandle<R>) {
+    if let Some(window) = app.get_webview_window("settings") {
         let _ = window.hide();
     }
 }
 
-fn hide_shortcuts_preview_window<R: Runtime>(app: &tauri::AppHandle<R>) {
-    let was_preview = is_shortcuts_preview_visible(app);
+fn hide_shortcuts_window<R: Runtime>(app: &tauri::AppHandle<R>) {
+    set_shortcuts_keep_visible(app, false);
 
-    if was_preview {
-        hide_shortcuts_window(app);
+    if let Some(window) = app.get_webview_window("shortcuts") {
+        log_window_lifecycle(app, "hide normal shortcuts");
+        let _ = window.hide();
     }
+    clear_shortcuts_open_request(app, "shortcuts");
 }
 
-fn is_shortcuts_preview_visible<R: Runtime>(app: &tauri::AppHandle<R>) -> bool {
+fn hide_shortcuts_preview_window<R: Runtime>(app: &tauri::AppHandle<R>) {
+    if let Some(window) = app.get_webview_window("shortcuts-preview") {
+        log_window_lifecycle(app, "hide preview shortcuts");
+        let _ = window.hide();
+    }
+    clear_shortcuts_open_request(app, "shortcuts-preview");
+}
+
+fn should_keep_preview_pair_visible<R: Runtime>(app: &tauri::AppHandle<R>) -> bool {
+    should_keep_preview_pair_visible_from_focus(
+        is_window_focused(app, "settings"),
+        is_window_focused(app, "shortcuts-preview"),
+    )
+}
+
+fn is_panel_keep_visible<R: Runtime>(app: &tauri::AppHandle<R>) -> bool {
     let state = app.state::<PanelState>();
     state
-        .preview_visible
+        .keep_visible
         .lock()
         .map(|value| *value)
         .unwrap_or(false)
 }
 
-fn set_panel_flags<R: Runtime>(
-    app: &tauri::AppHandle<R>,
-    keep_visible: Option<bool>,
-    preview_visible: Option<bool>,
-) {
+fn is_window_focused<R: Runtime>(app: &tauri::AppHandle<R>, label: &str) -> bool {
+    app.get_webview_window(label)
+        .and_then(|window| window.is_focused().ok())
+        .unwrap_or(false)
+}
+
+fn should_keep_preview_pair_visible_from_focus(
+    settings_focused: bool,
+    preview_focused: bool,
+) -> bool {
+    settings_focused || preview_focused
+}
+
+fn should_stage_shortcuts_before_open(mode: ShortcutsMode, is_visible: bool) -> bool {
+    !is_visible && !matches!(mode, ShortcutsMode::Preview)
+}
+
+fn should_position_preview_before_show(mode: ShortcutsMode, is_visible: bool) -> bool {
+    !is_visible && matches!(mode, ShortcutsMode::Preview)
+}
+
+fn should_focus_after_show(mode: ShortcutsMode) -> bool {
+    !matches!(mode, ShortcutsMode::Preview)
+}
+
+fn stage_shortcuts_before_open<R: Runtime>(window: &WebviewWindow<R>) {
+    let _ = window.set_position(PhysicalPosition::new(-32000, -32000));
+}
+
+fn should_hide_unfocused_shortcuts(is_focused: bool, keep_visible: bool) -> bool {
+    !is_focused && !keep_visible
+}
+
+fn set_shortcuts_keep_visible<R: Runtime>(app: &tauri::AppHandle<R>, keep_visible: bool) {
     let state = app.state::<PanelState>();
 
-    if let Some(keep_visible) = keep_visible {
-        if let Ok(mut value) = state.keep_visible.lock() {
-            *value = keep_visible;
-        }
+    if let Ok(mut value) = state.keep_visible.lock() {
+        *value = keep_visible;
+    };
+}
+
+fn set_shortcuts_open_request<R: Runtime>(
+    app: &tauri::AppHandle<R>,
+    mode: ShortcutsMode,
+    request: Option<ShortcutsOpenRequest>,
+) {
+    clear_shortcuts_open_request(app, shortcuts_window_label(mode));
+    let state = app.state::<PanelState>();
+    let slot = match mode {
+        ShortcutsMode::Preview => &state.preview_request,
+        ShortcutsMode::Shortcuts | ShortcutsMode::Placement => &state.shortcuts_request,
+    };
+
+    if let Ok(mut value) = slot.lock() {
+        *value = request;
+    };
+}
+
+fn clear_shortcuts_open_request<R: Runtime>(app: &tauri::AppHandle<R>, label: &str) {
+    let state = app.state::<PanelState>();
+    let slot = match label {
+        "shortcuts" => Some(&state.shortcuts_request),
+        "shortcuts-preview" => Some(&state.preview_request),
+        _ => None,
+    };
+
+    let Some(slot) = slot else {
+        return;
+    };
+
+    if let Ok(mut value) = slot.lock() {
+        *value = None;
+    };
+}
+
+fn position_shortcuts_preview_if_ready<R: Runtime>(app: &tauri::AppHandle<R>) -> tauri::Result<()> {
+    if let (Some(settings), Some(shortcuts)) = (
+        app.get_webview_window("settings"),
+        app.get_webview_window("shortcuts-preview"),
+    ) {
+        position_shortcuts_preview(&settings, &shortcuts)?;
     }
 
-    if let Some(preview_visible) = preview_visible {
-        if let Ok(mut value) = state.preview_visible.lock() {
-            *value = preview_visible;
-        }
-    }
+    Ok(())
 }
+
+fn log_window_lifecycle<R: Runtime>(_app: &tauri::AppHandle<R>, _message: impl AsRef<str>) {}
 
 fn position_shortcuts_preview<R: Runtime>(
     settings: &WebviewWindow<R>,
@@ -491,6 +682,95 @@ mod tests {
         assert_eq!(request.mode, "preview");
         assert_eq!(request.active_app.sheet_id.as_deref(), Some("vlc-fr"));
         assert!(request.preserve_position);
+    }
+
+    #[test]
+    fn hides_unfocused_shortcuts_when_not_kept_visible() {
+        assert!(should_hide_unfocused_shortcuts(false, false));
+        assert!(!should_hide_unfocused_shortcuts(true, false));
+        assert!(!should_hide_unfocused_shortcuts(false, true));
+    }
+
+    #[test]
+    fn routes_shortcuts_modes_to_dedicated_windows() {
+        assert_eq!(
+            shortcuts_window_label(ShortcutsMode::Shortcuts),
+            "shortcuts"
+        );
+        assert_eq!(
+            shortcuts_window_label(ShortcutsMode::Placement),
+            "shortcuts"
+        );
+        assert_eq!(
+            shortcuts_window_label(ShortcutsMode::Preview),
+            "shortcuts-preview"
+        );
+    }
+
+    #[test]
+    fn routes_inactive_shortcuts_windows_to_hide() {
+        assert_eq!(
+            inactive_shortcuts_window_label(ShortcutsMode::Shortcuts),
+            "shortcuts-preview"
+        );
+        assert_eq!(
+            inactive_shortcuts_window_label(ShortcutsMode::Placement),
+            "shortcuts-preview"
+        );
+        assert_eq!(
+            inactive_shortcuts_window_label(ShortcutsMode::Preview),
+            "shortcuts"
+        );
+    }
+
+    #[test]
+    fn keeps_preview_pair_only_when_settings_or_preview_has_focus() {
+        assert!(should_keep_preview_pair_visible_from_focus(true, false));
+        assert!(should_keep_preview_pair_visible_from_focus(false, true));
+        assert!(!should_keep_preview_pair_visible_from_focus(false, false));
+    }
+
+    #[test]
+    fn stages_hidden_normal_windows_before_opening() {
+        assert!(should_stage_shortcuts_before_open(
+            ShortcutsMode::Shortcuts,
+            false
+        ));
+        assert!(should_stage_shortcuts_before_open(
+            ShortcutsMode::Placement,
+            false
+        ));
+        assert!(!should_stage_shortcuts_before_open(
+            ShortcutsMode::Shortcuts,
+            true
+        ));
+    }
+
+    #[test]
+    fn positions_hidden_preview_before_showing() {
+        assert!(!should_stage_shortcuts_before_open(
+            ShortcutsMode::Preview,
+            false
+        ));
+        assert!(should_position_preview_before_show(
+            ShortcutsMode::Preview,
+            false
+        ));
+        assert!(!should_position_preview_before_show(
+            ShortcutsMode::Preview,
+            true
+        ));
+        assert!(!should_position_preview_before_show(
+            ShortcutsMode::Shortcuts,
+            false
+        ));
+    }
+
+    #[test]
+    fn focuses_only_interactive_shortcuts_windows_after_showing() {
+        assert!(should_focus_after_show(ShortcutsMode::Shortcuts));
+        assert!(should_focus_after_show(ShortcutsMode::Placement));
+        assert!(!should_focus_after_show(ShortcutsMode::Preview));
     }
 }
 
@@ -700,7 +980,7 @@ mod active_window {
         match process_name.to_ascii_lowercase().as_str() {
             "applicationframehost.exe" | "searchhost.exe" => Some("windows-core-fr"),
             "explorer.exe" => Some("file-explorer-fr"),
-            "systemsettings.exe" => Some("settings-fr"),
+            "systemsettings.exe" => Some("windows-core-fr"),
             "microsoft.photos.exe" | "photos.exe" => Some("photos-fr"),
             "microsoft.media.player.exe" | "wmplayer.exe" | "zunemusic.exe" | "zunevideo.exe" => {
                 Some("media-player-fr")
@@ -742,7 +1022,7 @@ mod active_window {
                 ("applicationframehost.exe", Some("windows-core-fr")),
                 ("searchhost.exe", Some("windows-core-fr")),
                 ("explorer.exe", Some("file-explorer-fr")),
-                ("systemsettings.exe", Some("settings-fr")),
+                ("systemsettings.exe", Some("windows-core-fr")),
                 ("microsoft.photos.exe", Some("photos-fr")),
                 ("photos.exe", Some("photos-fr")),
                 ("microsoft.media.player.exe", Some("media-player-fr")),

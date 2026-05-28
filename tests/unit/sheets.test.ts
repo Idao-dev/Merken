@@ -6,15 +6,21 @@ import {
   findSheetForProcess,
   getFallbackSheet,
   isShortcutIncluded,
+  isWindowsNativeSheetFamily,
   manualSheetOptions,
   resolveShortcutDisplayLevel,
   selectSheet,
+  sheetBadgeKeys,
+  sheetLabelWithWindowsNativeSuffix,
   sheets,
+  shouldShowShortcutBaselineWarning,
+  sharedCommandKeys,
   shortcutThemeState,
   updateCustomCategoryPreference,
   updateCustomShortcutPreference,
   visibleShortcuts
 } from "../../src/app/sheets";
+import type { ShortcutSheet } from "../../src/types";
 
 describe("shortcut sheet selection", () => {
   const expectedSheetIds = [
@@ -22,8 +28,6 @@ describe("shortcut sheet selection", () => {
     "windows-core-en",
     "file-explorer-fr",
     "file-explorer-en",
-    "settings-fr",
-    "settings-en",
     "photos-fr",
     "photos-en",
     "media-player-fr",
@@ -58,6 +62,7 @@ describe("shortcut sheet selection", () => {
     expect(defaultSettings.shortcutPlacementMode).toBe("preset");
     expect(defaultSettings.shortcutPlacementPreset).toBe("top-right");
     expect(defaultSettings.shortcutCustomPosition).toBeNull();
+    expect(defaultSettings.shortcutWarningMode).toBe("all");
   });
 
   it("uses the Windows fallback for unknown apps", () => {
@@ -102,6 +107,35 @@ describe("shortcut sheet selection", () => {
         }
       }
     }
+  });
+
+  it("keeps command and warning metadata explicit", () => {
+    const warningLevels = new Set(["info", "danger"]);
+
+    for (const sheet of sheets) {
+      for (const category of sheet.categories) {
+        for (const shortcut of category.shortcuts) {
+          if (shortcut.command) {
+            expect(shortcut.command.trim(), `${sheet.id}:${shortcut.id}`).toBe(shortcut.command);
+            expect(shortcut.keys, `${sheet.id}:${shortcut.id}`).not.toContain(shortcut.command);
+          }
+
+          if (shortcut.warningLevel || shortcut.warning) {
+            expect(shortcut.warning, `${sheet.id}:${shortcut.id}`).toBeTruthy();
+            expect(warningLevels.has(shortcut.warningLevel ?? ""), `${sheet.id}:${shortcut.id}`).toBe(true);
+          }
+        }
+      }
+    }
+  });
+
+  it("detects command categories with shared keys", () => {
+    const windows = getFallbackSheet("fr");
+    const toolsCategory = windows.categories.find((category) => category.id === "outils-systeme");
+    const systemCategory = windows.categories.find((category) => category.id === "systeme");
+
+    expect(sharedCommandKeys(toolsCategory!)).toEqual(["Win", "R"]);
+    expect(sharedCommandKeys(systemCategory!)).toBeNull();
   });
 
   it("requires stable shortcut ids", () => {
@@ -161,7 +195,7 @@ describe("shortcut sheet selection", () => {
       "file-explorer-en"
     );
     expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "systemsettings.exe", title: null, sheetId: null }).id).toBe(
-      "settings-en"
+      "windows-core-en"
     );
     expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "microsoft.photos.exe", title: null, sheetId: null }).id).toBe(
       "photos-en"
@@ -233,7 +267,6 @@ describe("shortcut sheet selection", () => {
     expect(options).toContainEqual({ key: "powerpoint", label: "PowerPoint" });
     expect(options).toContainEqual({ key: "outlook", label: "Outlook" });
     expect(options).toContainEqual({ key: "file-explorer", label: "Explorateur de fichiers" });
-    expect(options).toContainEqual({ key: "settings", label: "Parametres Windows" });
     expect(options).toContainEqual({ key: "photos", label: "Photos" });
     expect(options).toContainEqual({ key: "media-player", label: "Lecteur multimedia" });
     expect(options).toContainEqual({ key: "terminal-powershell", label: "Terminal et PowerShell" });
@@ -248,10 +281,37 @@ describe("shortcut sheet selection", () => {
 
     expect(options).toContainEqual({ key: "windows-core", label: "Windows - Essentials" });
     expect(options).toContainEqual({ key: "file-explorer", label: "File Explorer" });
-    expect(options).toContainEqual({ key: "settings", label: "Windows Settings" });
     expect(options).toContainEqual({ key: "media-player", label: "Media Player" });
     expect(options).toContainEqual({ key: "terminal-powershell", label: "Terminal and PowerShell" });
     expect(options).toContainEqual({ key: "browsers", label: "Browsers" });
+  });
+
+  it("adds a compact Win suffix only to native Windows selector labels", () => {
+    const options = manualSheetOptions("fr", true);
+
+    expect(options).toContainEqual({ key: "windows-core", label: "Windows - Essentiels" });
+    expect(options).toContainEqual({ key: "file-explorer", label: "Explorateur de fichiers - Win" });
+    expect(options).toContainEqual({ key: "photos", label: "Photos - Win" });
+    expect(options).toContainEqual({ key: "media-player", label: "Lecteur multimedia - Win" });
+    expect(options).toContainEqual({ key: "terminal-powershell", label: "Terminal et PowerShell - Win" });
+    expect(options).toContainEqual({ key: "excel", label: "Excel" });
+  });
+
+  it("identifies native Windows sheets and software shortcut warnings", () => {
+    expect(isWindowsNativeSheetFamily("photos")).toBe(true);
+    expect(sheetLabelWithWindowsNativeSuffix("photos", "Photos")).toBe("Photos - Win");
+    expect(isWindowsNativeSheetFamily("excel")).toBe(false);
+
+    expect(shouldShowShortcutBaselineWarning("windows-core")).toBe(false);
+    expect(shouldShowShortcutBaselineWarning("file-explorer")).toBe(false);
+    expect(shouldShowShortcutBaselineWarning("photos")).toBe(true);
+    expect(shouldShowShortcutBaselineWarning("excel")).toBe(true);
+  });
+
+  it("identifies sheet badges", () => {
+    expect(sheetBadgeKeys("windows-core")).toEqual(["windows-native"]);
+    expect(sheetBadgeKeys("browsers")).toEqual(["browser-edge", "browser-chrome", "browser-firefox", "browser-brave"]);
+    expect(sheetBadgeKeys("excel")).toEqual([]);
   });
 
   it("uses the current language when a manual family has variants", () => {
@@ -273,19 +333,43 @@ describe("shortcut sheet selection", () => {
     const expert = visibleShortcuts(sheet, { mode: "level", level: "expert" });
 
     expect(JSON.stringify(standard)).not.toContain("Bureau suivant");
+    expect(JSON.stringify(standard)).not.toContain("Gestionnaire de peripheriques");
     expect(JSON.stringify(advanced)).toContain("Bureau suivant");
+    expect(JSON.stringify(advanced)).not.toContain("Gestionnaire de peripheriques");
     expect(JSON.stringify(advanced)).not.toContain("Copier");
     expect(JSON.stringify(expert)).toContain("Fermer bureau");
+    expect(JSON.stringify(expert)).toContain("Gestionnaire de peripheriques");
     expect(JSON.stringify(expert)).not.toContain("Bureau suivant");
   });
 
   it("marks empty levels unavailable and resolves them to a non-empty level", () => {
-    const sheet = sheets.find((candidate) => candidate.id === "settings-fr");
+    const sheet: ShortcutSheet = {
+      id: "synthetic-fr",
+      appNames: [],
+      title: "Synthetic",
+      platform: "windows",
+      language: "fr",
+      categories: [
+        {
+          id: "navigation",
+          title: "Navigation",
+          shortcuts: [
+            {
+              label: "Synthetic",
+              keys: ["Ctrl", "S"],
+              description: "Synthetic shortcut.",
+              priority: 1,
+              usageLevel: "common",
+              id: "navigation-synthetic"
+            }
+          ]
+        }
+      ]
+    };
 
-    expect(sheet).toBeDefined();
-    expect(availableShortcutLevels(sheet!).advanced).toBe(false);
-    expect(availableShortcutLevels(sheet!).expert).toBe(false);
-    expect(resolveShortcutDisplayLevel(sheet!, "expert")).toBe("standard");
+    expect(availableShortcutLevels(sheet).advanced).toBe(false);
+    expect(availableShortcutLevels(sheet).expert).toBe(false);
+    expect(resolveShortcutDisplayLevel(sheet, "expert")).toBe("standard");
   });
 
   it("prepares custom filtering with categories, included shortcuts, and excluded shortcuts", () => {
@@ -375,5 +459,22 @@ describe("shortcut sheet selection", () => {
     expect(isShortcutIncluded(windowCategory!, closeDesktop!, custom)).toBe(true);
     expect(JSON.stringify(visible)).toContain("Fermer bureau");
     expect(JSON.stringify(visible)).not.toContain("Changer de fenetre");
+  });
+
+  it("allows expert Windows tools through customization", () => {
+    const sheet = getFallbackSheet("fr");
+    const toolsCategory = sheet.categories.find((category) => category.id === "outils-systeme");
+    const deviceManager = toolsCategory?.shortcuts.find((shortcut) => shortcut.id === "outils-systeme-gestionnaire-peripheriques");
+
+    expect(toolsCategory).toBeDefined();
+    expect(deviceManager).toBeDefined();
+
+    const custom = updateCustomShortcutPreference({ mode: "custom", level: "standard" }, toolsCategory!, deviceManager!, true);
+    const visible = visibleShortcuts(sheet, custom);
+    const serialized = JSON.stringify(visible);
+
+    expect(serialized).toContain("Gestionnaire de peripheriques");
+    expect(serialized).toContain("devmgmt.msc");
+    expect(serialized).not.toContain("Menu Demarrer");
   });
 });

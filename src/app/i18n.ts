@@ -2,8 +2,10 @@ import type {
   BlurLevel,
   LanguageCode,
   SheetMode,
+  SheetBadgeKey,
   ShortcutDisplayChoice,
   ShortcutPlacementPreset,
+  ShortcutWarningMode,
   TextSize,
   ThemeMode
 } from "../types";
@@ -56,6 +58,13 @@ interface Labels {
     placementHelp: string;
     confirmPlacement: string;
     cancelPlacement: string;
+    shortcutWarningMode: string;
+    shortcutCopy: string;
+    shortcutCopied: string;
+    shortcutCopyHelp: string;
+    windowsNativeBadge: string;
+    windowsNativeBadgeHelp: string;
+    shortcutBaselineWarning: string;
     trayVisibility: string;
     trayVisibilityHelp: string;
   };
@@ -78,7 +87,9 @@ interface Labels {
   textSize: Record<TextSize, string>;
   sheetMode: Record<SheetMode, string>;
   shortcutDisplayChoice: Record<ShortcutDisplayChoice, string>;
+  shortcutWarningMode: Record<ShortcutWarningMode, string>;
   shortcutPlacementPreset: Record<ShortcutPlacementPreset, string>;
+  sheetBadge: Record<SheetBadgeKey, { label: string; help: string }>;
 }
 
 export const supportedLanguages: LanguageCode[] = ["fr", "en"];
@@ -119,7 +130,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       about: "A propos",
       update: "Mise a jour",
       updateCheck: "Version {version} - Verifier les mises a jour",
-      updateIdle: "Verifier si Merken est a jour",
+      updateIdle: "Verifier si le logiciel est a jour",
       updateChecking: "Verification en cours",
       updateUpToDate: "Merken est a jour",
       updateAvailable: "Version {version} disponible - Installer",
@@ -134,8 +145,15 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       placementHelp: "Deplacez le panneau puis validez son emplacement.",
       confirmPlacement: "Valider l'emplacement",
       cancelPlacement: "Annuler",
-      trayVisibility: "Afficher l'icone Merken dans la barre des taches",
-      trayVisibilityHelp: "Ouvre les parametres Windows. Activez ensuite Merken dans les icones visibles de la barre des taches."
+      shortcutWarningMode: "Messages de prevention",
+      shortcutCopy: "Copier",
+      shortcutCopied: "Copie",
+      shortcutCopyHelp: "Copier la commande",
+      windowsNativeBadge: "Win",
+      windowsNativeBadgeHelp: "Natif Windows",
+      shortcutBaselineWarning: "* Raccourcis de base : les modifications dans le logiciel ne sont pas detectees.",
+      trayVisibility: "Icone Merken visible",
+      trayVisibilityHelp: "Ouvre le reglage Windows des icones de barre des taches."
     },
     modal: {
       aboutTitle: "A propos de Merken",
@@ -185,12 +203,24 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       expert: "Expert",
       custom: "Personnaliser"
     },
+    shortcutWarningMode: {
+      all: "Tous les messages",
+      "danger-only": "Risques importants",
+      off: "Aucun message"
+    },
     shortcutPlacementPreset: {
       "top-left": "Haut gauche",
       "top-right": "Haut droit",
       "bottom-left": "Bas gauche",
       "bottom-right": "Bas droit",
       center: "Centre"
+    },
+    sheetBadge: {
+      "windows-native": { label: "Win", help: "Natif Windows" },
+      "browser-edge": { label: "Edge", help: "Compatible Microsoft Edge" },
+      "browser-chrome": { label: "Chrome", help: "Compatible Google Chrome" },
+      "browser-firefox": { label: "Firefox", help: "Compatible Mozilla Firefox" },
+      "browser-brave": { label: "Brave", help: "Compatible Brave" }
     }
   },
   en: {
@@ -228,7 +258,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       about: "About",
       update: "Update",
       updateCheck: "Version {version} - Check for updates",
-      updateIdle: "Check whether Merken is up to date",
+      updateIdle: "Check whether the software is up to date",
       updateChecking: "Checking for updates",
       updateUpToDate: "Merken is up to date",
       updateAvailable: "Version {version} available - Install",
@@ -243,8 +273,15 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       placementHelp: "Move the panel, then confirm its placement.",
       confirmPlacement: "Confirm placement",
       cancelPlacement: "Cancel",
-      trayVisibility: "Show the Merken icon on the taskbar",
-      trayVisibilityHelp: "Opens Windows settings. Then enable Merken in the visible taskbar icons."
+      shortcutWarningMode: "Prevention messages",
+      shortcutCopy: "Copy",
+      shortcutCopied: "Copied",
+      shortcutCopyHelp: "Copy command",
+      windowsNativeBadge: "Win",
+      windowsNativeBadgeHelp: "Native Windows",
+      shortcutBaselineWarning: "* Default shortcuts: changes inside the software are not detected.",
+      trayVisibility: "Visible Merken icon",
+      trayVisibilityHelp: "Opens the Windows taskbar icon settings."
     },
     modal: {
       aboutTitle: "About Merken",
@@ -294,12 +331,24 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       expert: "Expert",
       custom: "Customize"
     },
+    shortcutWarningMode: {
+      all: "All messages",
+      "danger-only": "Important risks",
+      off: "No messages"
+    },
     shortcutPlacementPreset: {
       "top-left": "Top left",
       "top-right": "Top right",
       "bottom-left": "Bottom left",
       "bottom-right": "Bottom right",
       center: "Center"
+    },
+    sheetBadge: {
+      "windows-native": { label: "Win", help: "Native Windows" },
+      "browser-edge": { label: "Edge", help: "Compatible with Microsoft Edge" },
+      "browser-chrome": { label: "Chrome", help: "Compatible with Google Chrome" },
+      "browser-firefox": { label: "Firefox", help: "Compatible with Mozilla Firefox" },
+      "browser-brave": { label: "Brave", help: "Compatible with Brave" }
     }
   }
 };

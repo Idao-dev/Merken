@@ -7,12 +7,17 @@ Documentation sheet for general Windows shortcuts.
 ## Sources
 
 - https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-apps-139014e7-177b-d1f3-eb2e-7298b2599a34
+- https://support.microsoft.com/en-us/windows/keyboard-shortcuts-in-windows-dcc61a57-8ff0-cffe-9796-cb9706c75eec
+- https://support.microsoft.com/topic/how-to-run-control-panel-tools-by-typing-a-command-bce95b4d-e8c2-1cd0-ee0d-027679d520a6
+- https://learn.microsoft.com/en-us/windows/win32/shell/executing-control-panel-items
+- https://learn.microsoft.com/en-us/windows/win32/shell/controlpanel-canonical-names
+- https://www.dell.com/support/kbdoc/en-us/000123570/how-to-access-device-manager
 
 ## Francais
 
 - ID: `windows-core-fr`
 - Titre: Windows - Essentiels
-- Applications: `applicationframehost.exe`, `searchhost.exe`
+- Applications: `applicationframehost.exe`, `searchhost.exe`, `systemsettings.exe`
 
 ### Edition
 
@@ -40,6 +45,19 @@ Documentation sheet for general Windows shortcuts.
 | `systeme-gestionnaire-des-taches` | Gestionnaire des taches | `Ctrl` + `Shift` + `Esc` | Ouvre le gestionnaire des taches. | Avance |
 | `systeme-capture-de-zone` | Capture de zone | `Win` + `Shift` + `S` | Lance la capture de zone. | Courant |
 | `systeme-emoji-et-symboles` | Emoji et symboles | `Win` + `.` | Ouvre le panneau emoji. | Courant |
+| `systeme-a-propos` | A propos du systeme | `Win` + `Pause` | Ouvre la page Systeme > Informations. | Expert |
+
+### Outils systeme
+
+| ID | Action | Touches | Commande | Description | Niveau |
+| --- | --- | --- | --- | --- | --- |
+| `outils-systeme-gestionnaire-peripheriques` | Gestionnaire de peripheriques | `Win` + `R` | `devmgmt.msc` | Ouvre le gestionnaire de peripheriques depuis Executer. | Expert |
+| `outils-systeme-options-alimentation` | Options d'alimentation | `Win` + `R` | `powercfg.cpl` | Ouvre les options d'alimentation depuis Executer. | Expert |
+| `outils-systeme-alimentation-avancee` | Alimentation avancee | `Win` + `R` | `control.exe powercfg.cpl,,3` | Ouvre les parametres avances du mode de gestion d'alimentation. | Expert |
+| `outils-systeme-parametres-systeme-avances` | Parametres systeme avances | `Win` + `R` | `SystemPropertiesAdvanced.exe` | Ouvre les proprietes systeme avancees. | Expert |
+| `outils-systeme-connexions-reseau` | Connexions reseau | `Win` + `R` | `control.exe netconnections` | Ouvre les connexions reseau. | Expert |
+| `outils-systeme-programmes-fonctionnalites` | Programmes et fonctionnalites | `Win` + `R` | `appwiz.cpl` | Ouvre la liste des programmes installes. | Expert |
+| `outils-systeme-fonctionnalites-windows` | Fonctionnalites Windows | `Win` + `R` | `OptionalFeatures.exe` | Ouvre l'activation des fonctionnalites Windows. | Expert |
 
 ### Fenetres
 
@@ -62,7 +80,7 @@ Documentation sheet for general Windows shortcuts.
 
 - ID: `windows-core-en`
 - Titre: Windows - Essentials
-- Applications: `applicationframehost.exe`, `searchhost.exe`
+- Applications: `applicationframehost.exe`, `searchhost.exe`, `systemsettings.exe`
 
 ### Editing
 
@@ -90,6 +108,19 @@ Documentation sheet for general Windows shortcuts.
 | `systeme-gestionnaire-des-taches` | Task Manager | `Ctrl` + `Shift` + `Esc` | Open Task Manager. | Advanced |
 | `systeme-capture-de-zone` | Area screenshot | `Win` + `Shift` + `S` | Start area capture. | Common |
 | `systeme-emoji-et-symboles` | Emoji and symbols | `Win` + `.` | Open the emoji panel. | Common |
+| `systeme-a-propos` | System About | `Win` + `Pause` | Open the System > About page. | Expert |
+
+### System tools
+
+| ID | Action | Keys | Command | Description | Level |
+| --- | --- | --- | --- | --- | --- |
+| `outils-systeme-gestionnaire-peripheriques` | Device Manager | `Win` + `R` | `devmgmt.msc` | Open Device Manager from Run. | Expert |
+| `outils-systeme-options-alimentation` | Power Options | `Win` + `R` | `powercfg.cpl` | Open Power Options from Run. | Expert |
+| `outils-systeme-alimentation-avancee` | Advanced power settings | `Win` + `R` | `control.exe powercfg.cpl,,3` | Open advanced power plan settings. | Expert |
+| `outils-systeme-parametres-systeme-avances` | Advanced system settings | `Win` + `R` | `SystemPropertiesAdvanced.exe` | Open advanced system properties. | Expert |
+| `outils-systeme-connexions-reseau` | Network Connections | `Win` + `R` | `control.exe netconnections` | Open Network Connections. | Expert |
+| `outils-systeme-programmes-fonctionnalites` | Programs and Features | `Win` + `R` | `appwiz.cpl` | Open the installed programs list. | Expert |
+| `outils-systeme-fonctionnalites-windows` | Windows Features | `Win` + `R` | `OptionalFeatures.exe` | Open Windows features. | Expert |
 
 ### Windows
 

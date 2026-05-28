@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.2 - 2026-05-28
+
+### Change
+
+- Clarification des fiches natives Windows avec un libelle `Win` dans les selecteurs et un badge compact dans la bibliotheque.
+- Ajout de badges texte pour les navigateurs compatibles Edge, Chrome, Firefox et Brave.
+- Ajout d'un avertissement court sur les fiches logicielles indiquant que les raccourcis modifies dans le logiciel ne sont pas detectes.
+- Ajout d'un mode de messages de prevention configurable dans les options.
+- Suppression de la fiche Parametres Windows et rattachement de `systemsettings.exe` a la fiche Windows.
+- Ajout d'outils systeme Windows en niveau expert avec commande `Win` + `R`.
+- Simplification des onglets d'options et renforcement de la lisibilite des boutons d'action.
+- Agrandissement de la fenetre Options pour ameliorer la lecture des titres longs.
+- Amelioration de la gestion des fenetres de raccourcis et de leur apercu dans les options.
+- Remplacement du texte de verification de mise a jour par un libelle generique pour le logiciel.
+
 ## 0.5.1 - 2026-05-27
 
 ### Change

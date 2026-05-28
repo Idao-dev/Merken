@@ -20,6 +20,12 @@ export type ShortcutDisplayMode = "level" | "custom";
 
 export type ShortcutDisplayChoice = ShortcutDisplayLevel | "custom";
 
+export type ShortcutWarningLevel = "info" | "danger";
+
+export type ShortcutWarningMode = "all" | "danger-only" | "off";
+
+export type SheetBadgeKey = "windows-native" | "browser-edge" | "browser-chrome" | "browser-firefox" | "browser-brave";
+
 export interface ShortcutCustomPosition {
   x: number;
   y: number;
@@ -29,7 +35,10 @@ export interface ShortcutEntry {
   id: string;
   label: string;
   keys: string[];
+  command?: string;
   description: string;
+  warning?: string;
+  warningLevel?: ShortcutWarningLevel;
   priority: number;
   usageLevel: UsageLevel;
 }
@@ -69,6 +78,7 @@ export interface UserSettings {
   shortcutPlacementMode: ShortcutPlacementMode;
   shortcutPlacementPreset: ShortcutPlacementPreset;
   shortcutCustomPosition: ShortcutCustomPosition | null;
+  shortcutWarningMode: ShortcutWarningMode;
   trayVisibilityPromptDismissed: boolean;
 }
 
