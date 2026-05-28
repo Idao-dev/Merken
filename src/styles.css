@@ -210,9 +210,16 @@ kbd {
 .content {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px 18px;
+  column-gap: 18px;
   padding: 14px 14px 8px;
   overflow: hidden;
+}
+
+.shortcut-column {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
 }
 
 .shortcut-section {
@@ -936,6 +943,17 @@ kbd {
   font-weight: 800;
 }
 
+.reset-button {
+  border-color: color-mix(in srgb, var(--error) 52%, var(--border));
+  background: color-mix(in srgb, var(--error) 16%, var(--bg-card));
+}
+
+.reset-button:hover,
+.reset-button:focus {
+  border-color: var(--error);
+  background: color-mix(in srgb, var(--error) 22%, var(--bg-card));
+}
+
 .link-button {
   display: grid;
   gap: 2px;
@@ -1159,6 +1177,7 @@ kbd {
 @media (max-width: 420px) {
   .content {
     grid-template-columns: 1fr;
+    row-gap: 12px;
   }
 
   .shortcut-row {

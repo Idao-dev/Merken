@@ -7,6 +7,7 @@ import {
   getFallbackSheet,
   isShortcutIncluded,
   isWindowsNativeSheetFamily,
+  layoutShortcutCategories,
   manualSheetOptions,
   resolveShortcutDisplayLevel,
   selectSheet,
@@ -20,7 +21,23 @@ import {
   updateCustomShortcutPreference,
   visibleShortcuts
 } from "../../src/app/sheets";
-import type { ShortcutSheet } from "../../src/types";
+import type { ShortcutCategory, ShortcutSheet } from "../../src/types";
+
+function syntheticCategory(id: string, count: number, command = false): ShortcutCategory {
+  return {
+    id,
+    title: id,
+    shortcuts: Array.from({ length: count }, (_, index) => ({
+      id: `${id}-${index + 1}`,
+      label: `${id} ${index + 1}`,
+      keys: command ? ["Win", "R"] : ["Ctrl", String(index + 1)],
+      command: command ? "SystemPropertiesAdvanced.exe" : undefined,
+      description: "Synthetic shortcut.",
+      priority: index + 1,
+      usageLevel: "common"
+    }))
+  };
+}
 
 describe("shortcut sheet selection", () => {
   const expectedSheetIds = [
@@ -476,5 +493,65 @@ describe("shortcut sheet selection", () => {
     expect(serialized).toContain("Gestionnaire de peripheriques");
     expect(serialized).toContain("devmgmt.msc");
     expect(serialized).not.toContain("Menu Demarrer");
+  });
+
+  it("balances Windows expert categories across shortcut columns", () => {
+    const sheet = getFallbackSheet("fr");
+    const expert = visibleShortcuts(sheet, { mode: "level", level: "expert" });
+    const columns = layoutShortcutCategories(expert.categories);
+
+    expect(columns.map((column) => column.map((category) => category.id))).toEqual([
+      ["systeme", "fenetres"],
+      ["outils-systeme"]
+    ]);
+  });
+
+  it("keeps balanced categories stable without reordering shortcuts", () => {
+    const columns = layoutShortcutCategories([
+      syntheticCategory("alpha", 1),
+      syntheticCategory("bravo", 1),
+      syntheticCategory("charlie", 1),
+      syntheticCategory("delta", 1)
+    ]);
+
+    expect(columns.map((column) => column.map((category) => category.id))).toEqual([
+      ["alpha", "charlie"],
+      ["bravo", "delta"]
+    ]);
+  });
+
+  it("gives command categories more layout weight than simple rows", () => {
+    const columns = layoutShortcutCategories([
+      syntheticCategory("commands", 1, true),
+      syntheticCategory("simple-a", 1),
+      syntheticCategory("simple-b", 1)
+    ]);
+
+    expect(columns.map((column) => column.map((category) => category.id))).toEqual([
+      ["commands"],
+      ["simple-a", "simple-b"]
+    ]);
+  });
+
+  it("rebalances custom layouts after empty categories are removed", () => {
+    const sheet = getFallbackSheet("fr");
+    const toolsCategory = sheet.categories.find((category) => category.id === "outils-systeme");
+    const windowCategory = sheet.categories.find((category) => category.id === "fenetres");
+    const deviceManager = toolsCategory?.shortcuts.find((shortcut) => shortcut.id === "outils-systeme-gestionnaire-peripheriques");
+    const closeDesktop = windowCategory?.shortcuts.find((shortcut) => shortcut.id === "fenetres-fermer-bureau");
+
+    expect(deviceManager).toBeDefined();
+    expect(closeDesktop).toBeDefined();
+
+    const visible = visibleShortcuts(sheet, {
+      mode: "custom",
+      level: "standard",
+      includeShortcutIds: [deviceManager!.id, closeDesktop!.id]
+    });
+    const columns = layoutShortcutCategories(visible.categories);
+
+    expect(visible.categories.map((category) => category.id)).toEqual(["outils-systeme", "fenetres"]);
+    expect(columns.flat().map((category) => category.id)).toEqual(["outils-systeme", "fenetres"]);
+    expect(columns.some((column) => column.some((category) => category.shortcuts.length === 0))).toBe(false);
   });
 });

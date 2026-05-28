@@ -20,6 +20,8 @@ interface Labels {
   sections: {
     basics: string;
     behavior: string;
+    functioning: string;
+    reset: string;
     display: string;
     availableSheets: string;
     preview: string;
@@ -107,6 +109,8 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
     sections: {
       basics: "Essentiel",
       behavior: "Comportement",
+      functioning: "Fonctionnement",
+      reset: "Reinitialisation",
       display: "Affichage",
       availableSheets: "Bibliotheque",
       preview: "Apercu",
@@ -235,6 +239,8 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
     sections: {
       basics: "Basics",
       behavior: "Behavior",
+      functioning: "Operation",
+      reset: "Reset",
       display: "Display",
       availableSheets: "Library",
       preview: "Preview",

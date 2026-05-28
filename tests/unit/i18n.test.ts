@@ -19,6 +19,8 @@ describe("interface labels", () => {
     expect(labels.settings.language).toBe("Language");
     expect(labels.settings.about).toBe("About");
     expect(labels.tabs.appearance).toBe("Appearance");
+    expect(labels.sections.functioning).toBe("Operation");
+    expect(labels.sections.reset).toBe("Reset");
     expect(labels.sections.availableSheets).toBe("Library");
     expect(labels.settings.updateUnconfigured).toContain("GitHub Releases");
     expect(labels.settings.updateCheck).toContain("Check for updates");
@@ -93,6 +95,8 @@ describe("interface labels", () => {
     expect(fr.settings.updateIdle).toBe("Verifier si le logiciel est a jour");
     expect(fr.settings.updateChecking).toBe("Verification en cours");
     expect(fr.settings.updatePortableAvailable).toContain("Telecharger");
+    expect(fr.sections.functioning).toBe("Fonctionnement");
+    expect(fr.sections.reset).toBe("Reinitialisation");
     expect(fr.settings.resetHelp).toContain("ensemble des options");
     expect(fr.modal.resetConfirm).toContain("reinitialiser");
     expect(en.settings.updateIdle).toBe("Check whether the software is up to date");

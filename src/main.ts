@@ -14,6 +14,7 @@ import {
   ensureCustomPreference,
   findSheetForFamily,
   isShortcutIncluded,
+  layoutShortcutCategories,
   manualSheetOptions,
   selectSheet,
   sheetBadgeKeys,
@@ -94,6 +95,11 @@ let appInfo = {
   name: "Merken",
   version: "0.1.0"
 };
+
+interface SettingsScrollSnapshot {
+  settingsPage: number;
+  customizationEditor: number;
+}
 
 const appIconUrl = new URL("../src-tauri/icons/32x32.png", import.meta.url).href;
 
@@ -246,7 +252,7 @@ function updateCustomCategory(family: string, categoryId: string, checked: boole
   const preference = ensureCustomPreference(sheet, sheetShortcutPreference(settings, sheet));
   saveShortcutSheetPreference(family, updateCustomCategoryPreference(preference, category, checked));
   selectedCustomizationSheetFamily = family;
-  render();
+  renderPreservingSettingsScroll();
 }
 
 function updateCustomShortcut(family: string, categoryId: string, shortcutId: string, checked: boolean): void {
@@ -261,7 +267,7 @@ function updateCustomShortcut(family: string, categoryId: string, shortcutId: st
   const preference = ensureCustomPreference(sheet, sheetShortcutPreference(settings, sheet));
   saveShortcutSheetPreference(family, updateCustomShortcutPreference(preference, category, shortcut, checked));
   selectedCustomizationSheetFamily = family;
-  render();
+  renderPreservingSettingsScroll();
 }
 
 async function setTrayLanguage(language: LanguageCode): Promise<void> {
@@ -747,46 +753,54 @@ function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): st
   `;
 }
 
-function renderShortcutCategories(sheet: ShortcutSheet): string {
-  return sheet.categories
-    .map((category) => {
-      const commandKeys = sharedCommandKeys(category);
-      const commandKeyHeader = commandKeys ? `<div class="section-keys">${commandKeys.map(renderKey).join("")}</div>` : "";
-      const listClassName = commandKeys ? "shortcut-list shortcut-command-list" : "shortcut-list";
+function renderShortcutCategory(category: ShortcutSheet["categories"][number]): string {
+  const commandKeys = sharedCommandKeys(category);
+  const commandKeyHeader = commandKeys ? `<div class="section-keys">${commandKeys.map(renderKey).join("")}</div>` : "";
+  const listClassName = commandKeys ? "shortcut-list shortcut-command-list" : "shortcut-list";
 
-      return `
-        <section class="shortcut-section ${commandKeys ? "shortcut-command-section" : ""}">
-          <header class="shortcut-section-header">
-            <h2>${escapeHtml(category.title)}</h2>
-            ${commandKeyHeader}
-          </header>
-          <div class="${escapeAttribute(listClassName)}">
-            ${category.shortcuts
-              .map((shortcut) =>
-                commandKeys
-                  ? `
-                    <article class="shortcut-row shortcut-command-row">
-                      <span class="shortcut-text">
-                        <strong>${escapeHtml(shortcut.label)}</strong>
-                        ${renderShortcutCommandLine(shortcut.command)}
-                      </span>
-                    </article>
-                  `
-                  : `
-                    <article class="shortcut-row">
-                      <div class="keys">${shortcut.keys.map(renderKey).join("")}</div>
-                      <span class="shortcut-text">
-                        <strong>${escapeHtml(shortcut.label)}</strong>
-                        ${renderShortcutCommand(shortcut.command)}
-                      </span>
-                    </article>
-                  `
-              )
-              .join("")}
-          </div>
-        </section>
-      `;
-    })
+  return `
+    <section class="shortcut-section ${commandKeys ? "shortcut-command-section" : ""}">
+      <header class="shortcut-section-header">
+        <h2>${escapeHtml(category.title)}</h2>
+        ${commandKeyHeader}
+      </header>
+      <div class="${escapeAttribute(listClassName)}">
+        ${category.shortcuts
+          .map((shortcut) =>
+            commandKeys
+              ? `
+                <article class="shortcut-row shortcut-command-row">
+                  <span class="shortcut-text">
+                    <strong>${escapeHtml(shortcut.label)}</strong>
+                    ${renderShortcutCommandLine(shortcut.command)}
+                  </span>
+                </article>
+              `
+              : `
+                <article class="shortcut-row">
+                  <div class="keys">${shortcut.keys.map(renderKey).join("")}</div>
+                  <span class="shortcut-text">
+                    <strong>${escapeHtml(shortcut.label)}</strong>
+                    ${renderShortcutCommand(shortcut.command)}
+                  </span>
+                </article>
+              `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
+function renderShortcutCategories(sheet: ShortcutSheet): string {
+  return layoutShortcutCategories(sheet.categories)
+    .map(
+      (column, index) => `
+        <div class="shortcut-column" data-shortcut-column="${index + 1}">
+          ${column.map(renderShortcutCategory).join("")}
+        </div>
+      `
+    )
     .join("");
 }
 
@@ -833,6 +847,33 @@ function blurClass(blur: BlurLevel): string {
 
 function themeClass(theme: ThemeMode): string {
   return theme === "dark" ? "" : `theme-${theme}`;
+}
+
+function captureSettingsScroll(): SettingsScrollSnapshot {
+  return {
+    settingsPage: document.querySelector<HTMLElement>(".settings-page")?.scrollTop ?? 0,
+    customizationEditor: document.querySelector<HTMLElement>(".customization-editor")?.scrollTop ?? 0
+  };
+}
+
+function restoreSettingsScroll(snapshot: SettingsScrollSnapshot): void {
+  const settingsPage = document.querySelector<HTMLElement>(".settings-page");
+  const customizationEditor = document.querySelector<HTMLElement>(".customization-editor");
+
+  if (settingsPage) {
+    settingsPage.scrollTop = snapshot.settingsPage;
+  }
+
+  if (customizationEditor) {
+    customizationEditor.scrollTop = snapshot.customizationEditor;
+  }
+}
+
+function renderPreservingSettingsScroll(): void {
+  const scrollSnapshot = captureSettingsScroll();
+
+  render();
+  restoreSettingsScroll(scrollSnapshot);
 }
 
 function render(): void {
@@ -1029,25 +1070,25 @@ function renderSettingsTab(): string {
 
   return `
       <section class="settings-group">
-        <h2>${escapeHtml(labels.sections.basics)}</h2>
+        <h2>${escapeHtml(labels.sections.functioning)}</h2>
         ${renderSelectRow(labels.settings.language, "language", supportedLanguages, settings.language, (language) => labelsFor(language).languageName)}
         ${renderToggleRow(labels.settings.startWithWindows, "startWithWindows", settings.startWithWindows, labels.autostart[autostartStatus])}
         <button type="button" class="link-button settings-update" id="open-taskbar-settings">
           <span>${escapeHtml(labels.settings.trayVisibility)}</span>
           <small>${escapeHtml(labels.settings.trayVisibilityHelp)}</small>
         </button>
-    </section>
-    <section class="settings-group">
-      <h2>${escapeHtml(labels.sections.behavior)}</h2>
-      ${renderSelectRow(
-        labels.settings.shortcutWarningMode,
-        "shortcutWarningMode",
-        shortcutWarningModes,
-        settings.shortcutWarningMode,
-        (mode) => labels.shortcutWarningMode[mode]
-      )}
+        ${renderSelectRow(
+          labels.settings.shortcutWarningMode,
+          "shortcutWarningMode",
+          shortcutWarningModes,
+          settings.shortcutWarningMode,
+          (mode) => labels.shortcutWarningMode[mode]
+        )}
+      </section>
+      <section class="settings-group">
+      <h2>${escapeHtml(labels.sections.reset)}</h2>
       <p class="settings-note">${escapeHtml(labels.settings.resetHelp)}</p>
-      <button type="button" class="secondary-button" id="reset-settings">${escapeHtml(labels.settings.reset)}</button>
+      <button type="button" class="secondary-button reset-button" id="reset-settings">${escapeHtml(labels.settings.reset)}</button>
     </section>
   `;
 }

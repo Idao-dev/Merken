@@ -13,6 +13,7 @@
 - Simplification des onglets d'options et renforcement de la lisibilite des boutons d'action.
 - Agrandissement de la fenetre Options pour ameliorer la lecture des titres longs.
 - Amelioration de la gestion des fenetres de raccourcis et de leur apercu dans les options.
+- Equilibrage automatique des categories dans le panneau de raccourcis pour limiter les colonnes desequilibrees.
 - Remplacement du texte de verification de mise a jour par un libelle generique pour le logiciel.
 
 ## 0.5.1 - 2026-05-27

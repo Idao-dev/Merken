@@ -403,6 +403,48 @@ export function visibleShortcuts(sheet: ShortcutSheet, preference: ShortcutSheet
   };
 }
 
+export type ShortcutCategoryColumns = [ShortcutCategory[], ShortcutCategory[]];
+
+export function layoutShortcutCategories(categories: ShortcutCategory[]): ShortcutCategoryColumns {
+  const columns: ShortcutCategoryColumns = [[], []];
+  const columnWeights = [0, 0];
+
+  for (const category of categories) {
+    const targetColumn = columnWeights[0] <= columnWeights[1] ? 0 : 1;
+
+    columns[targetColumn].push(category);
+    columnWeights[targetColumn] += shortcutCategoryLayoutWeight(category);
+  }
+
+  return columns;
+}
+
+function shortcutCategoryLayoutWeight(category: ShortcutCategory): number {
+  return category.shortcuts.reduce((weight, shortcut) => weight + shortcutLayoutWeight(shortcut), 0) + 0.65;
+}
+
+function shortcutLayoutWeight(shortcut: ShortcutEntry): number {
+  let weight = shortcut.command ? 1.75 : 1;
+
+  if (shortcut.command && shortcut.command.length > 18) {
+    weight += 0.25;
+  }
+
+  if (shortcut.label.length > 24) {
+    weight += 0.2;
+  }
+
+  if (shortcut.keys.length >= 3) {
+    weight += 0.1;
+  }
+
+  if (shortcut.warningLevel === "danger") {
+    weight += 0.15;
+  }
+
+  return weight;
+}
+
 function displayLevelForUsage(usageLevel: UsageLevel): ShortcutDisplayLevel {
   return usageLevel === "essential" || usageLevel === "common" ? "standard" : usageLevel;
 }
