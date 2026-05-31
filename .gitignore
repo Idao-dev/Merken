@@ -15,6 +15,7 @@ coverage/
 .vitest/
 
 # Security scan reports and local caches
+.codex-security-scans/
 .semgrep/
 semgrep.sarif
 gitleaks-report.*
