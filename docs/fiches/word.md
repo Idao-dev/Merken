@@ -24,7 +24,8 @@ Documentation sheet for useful Word shortcuts on Windows.
 - Statut audit 2026-06-01: les sections Francais et English utilisent les pages Microsoft localisees quand les touches divergent.
 - Divergence verifiee: la table Word desktop FR indique `Ctrl` + `G` pour Gras, alors que la page EN indique `Ctrl` + `B`; le JSON FR garde donc `Ctrl` + `G`.
 - Conflit officiel note: Microsoft documente aussi `Ctrl` + `G` pour Atteindre et a publie une note de resolution du changement de raccourci Gras en version 2412; cette fiche doit etre reverifiee dans Word FR installe si le comportement local differe.
-- Les touches de ponctuation (`[`, `]`) et les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
+- Les crochets `[` / `]` restent documentes pour changer la police de 1 point, mais Merken retient `Ctrl` + `Shift` + `>` / `<`, officiel et plus simple sur AZERTY/QWERTY pour changer la taille par paliers.
+- Les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
 
 ## Inventaire complet
 
@@ -46,7 +47,7 @@ Documentation sheet for useful Word shortcuts on Windows.
 | Alignement droite / justifie | `Ctrl` + `R` / `J` | Microsoft Word shortcuts | Avance | Mise en forme moins systematique. |
 | Copier / coller format | `Ctrl` + `Shift` + `C` / `V` | Microsoft Word shortcuts | Avance | Mise en forme avancee. |
 | Effacer format direct | `Ctrl` + `Space` | Microsoft Word shortcuts | Avance | Nettoyage de style. |
-| Augmenter / reduire police | `Ctrl` + `]` / `[` | Microsoft Word shortcuts | Avance | Mise en forme rapide. |
+| Augmenter / reduire police | `Ctrl` + `Shift` + `>` / `<` | Microsoft Word shortcuts | Avance | Variante officielle plus simple que les crochets pour changer la taille par paliers. |
 | Titre 1 / 2 / 3 | `Ctrl` + `Alt` + `1/2/3` | Microsoft Word shortcuts | Avance | Structure de document. |
 | Interligne 1 / 2 / 1,5 | `Ctrl` + `1/2/5` | Microsoft Word shortcuts | Avance | Mise en page rapide. |
 | Debut / fin document | `Ctrl` + `Home` / `End` | Microsoft Word shortcuts | Avance | Navigation longue. |
@@ -104,8 +105,8 @@ Documentation sheet for useful Word shortcuts on Windows.
 | `format-copier-format` | Copier format | `Ctrl` + `Shift` + `C` | Copie la mise en forme. | Avance |
 | `format-coller-format` | Coller format | `Ctrl` + `Shift` + `V` | Applique la mise en forme. | Avance |
 | `format-effacer-format` | Effacer format | `Ctrl` + `Space` | Retire le format direct. | Avance |
-| `format-police-plus` | Police plus | `Ctrl` + `]` | Augmente la taille de police. | Avance |
-| `format-police-moins` | Police moins | `Ctrl` + `[` | Reduit la taille de police. | Avance |
+| `format-police-plus` | Police plus | `Ctrl` + `Shift` + `>` | Augmente la taille de police. | Avance |
+| `format-police-moins` | Police moins | `Ctrl` + `Shift` + `<` | Reduit la taille de police. | Avance |
 | `format-titre-1` | Titre 1 | `Ctrl` + `Alt` + `1` | Applique le style Titre 1. | Avance |
 | `format-titre-2` | Titre 2 | `Ctrl` + `Alt` + `2` | Applique le style Titre 2. | Avance |
 | `format-interligne-simple` | Interligne simple | `Ctrl` + `1` | Applique un interligne simple. | Avance |
@@ -173,8 +174,8 @@ Documentation sheet for useful Word shortcuts on Windows.
 | `format-copier-format` | Copy formatting | `Ctrl` + `Shift` + `C` | Copy formatting. | Advanced |
 | `format-coller-format` | Paste formatting | `Ctrl` + `Shift` + `V` | Apply formatting. | Advanced |
 | `format-effacer-format` | Clear formatting | `Ctrl` + `Space` | Remove direct formatting. | Advanced |
-| `format-police-plus` | Font larger | `Ctrl` + `]` | Increase font size. | Advanced |
-| `format-police-moins` | Font smaller | `Ctrl` + `[` | Decrease font size. | Advanced |
+| `format-police-plus` | Font larger | `Ctrl` + `Shift` + `>` | Increase font size. | Advanced |
+| `format-police-moins` | Font smaller | `Ctrl` + `Shift` + `<` | Decrease font size. | Advanced |
 | `format-titre-1` | Heading 1 | `Ctrl` + `Alt` + `1` | Apply Heading 1. | Advanced |
 | `format-titre-2` | Heading 2 | `Ctrl` + `Alt` + `2` | Apply Heading 2. | Advanced |
 | `format-interligne-simple` | Single spacing | `Ctrl` + `1` | Apply single spacing. | Advanced |

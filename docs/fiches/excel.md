@@ -8,6 +8,8 @@ Documentation sheet for useful Excel shortcuts on Windows.
 
 - https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f
 - https://support.microsoft.com/fr-fr/office/raccourcis-clavier-dans-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f
+- https://support.microsoft.com/fr-fr/office/afficher-et-imprimer-des-formules-65a29965-b1b1-40db-9cb7-4fd051da3a5c
+- https://learn.microsoft.com/fr-be/answers/questions/5733438/le-raccourci-clavier-ctrl-maj-ne-fonctionne-pas-%28i
 - https://support.microsoft.com/en-us/office/about-power-query-in-excel-7104fbee-9e62-4cb9-a02e-5bfb1a6c536a
 - https://support.microsoft.com/en-us/office/manage-queries-power-query-76f93a6d-37d9-46b5-bc40-d5f2162401f5
 - https://support.microsoft.com/en-us/office/get-started-with-power-pivot-in-microsoft-excel-fdfcf944-7876-424a-8437-1a6c1043a80b
@@ -30,7 +32,10 @@ Documentation sheet for useful Excel shortcuts on Windows.
 
 - Statut audit 2026-06-01: les sections Francais et English utilisent les pages Microsoft localisees quand les touches divergent.
 - Divergence verifiee: Excel FR indique `Ctrl` + `G` pour Gras, alors que la page EN indique `Ctrl` + `B`; le JSON FR garde donc `Ctrl` + `G`.
-- Les touches de ponctuation (`;`, `'`, `` ` ``, `+`, `-`, `=`) et les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
+- Les pages Microsoft Excel FR/EN indiquent que les raccourcis font reference a la disposition clavier americaine; les touches de ponctuation doivent donc etre verifiees avant promotion JSON.
+- Decision AZERTY/QWERTY: quand plusieurs formes officielles existent, Merken retient le raccourci le plus simple pour la disposition cible. `formules-heure` utilise `Ctrl` + `:` en AZERTY et `Ctrl` + `Shift` + `;` en QWERTY.
+- `formules-afficher-formules` reste en Expert avec `Ctrl` + `` ` ``: la page Microsoft dediee ne donne pas d autre raccourci clavier direct et renvoie au ruban si la touche accent grave est introuvable.
+- `cellules-inserer` reste `Ctrl` + `Shift` + `+`: la source officielle actuelle ne justifie pas de retirer `Shift`.
 
 ## Inventaire complet
 
@@ -65,12 +70,12 @@ Documentation sheet for useful Excel shortcuts on Windows.
 | Somme automatique | `Alt` + `=` | Microsoft Excel shortcuts | Standard | Formule courante. |
 | Inserer fonction | `Shift` + `F3` | Microsoft Excel shortcuts | Standard | Assistant formule. |
 | Reference absolue | `F4` | Microsoft Excel shortcuts | Standard | Edition de formule. |
-| Afficher formules | `Ctrl` + `` ` `` | Microsoft Excel shortcuts | Avance | Audit. |
+| Afficher formules | `Ctrl` + `` ` `` | Microsoft Excel shortcuts | Expert | Audit utile mais accent grave difficile sur AZERTY, sans autre raccourci clavier direct verifie. |
 | Recalculer | `F9` | Microsoft Excel shortcuts | Avance | Calcul. |
 | Filtrer | `Ctrl` + `Shift` + `L` | Microsoft Excel shortcuts | Avance | Donnees. |
 | Creer tableau | `Ctrl` + `T` | Microsoft Excel shortcuts | Standard | Donnees structurees. |
 | Inserer date | `Ctrl` + `;` | Microsoft Excel shortcuts | Avance | Saisie de donnees. |
-| Inserer heure | `Ctrl` + `Shift` + `;` | Microsoft Excel shortcuts | Avance | Saisie de donnees. |
+| Inserer heure | AZERTY: `Ctrl` + `:`; QWERTY: `Ctrl` + `Shift` + `;` | Microsoft Excel shortcuts / Microsoft Q&A | Avance | Saisie de donnees; variante AZERTY verifiee. |
 | Copier formule du dessus | `Ctrl` + `'` | Microsoft Excel shortcuts | Avance | Formule rapide. |
 | Collage special | `Ctrl` + `Alt` + `V` | Microsoft Excel shortcuts | Avance | Collage technique. |
 | Calculer feuille active | `Shift` + `F9` | Microsoft Excel shortcuts | Expert | Calcul cible pour classeurs lourds. |
@@ -164,12 +169,12 @@ Documentation sheet for useful Excel shortcuts on Windows.
 | `formules-somme-automatique` | Somme automatique | `Alt` + `=` | Insere une somme. | Standard |
 | `formules-inserer-fonction` | Inserer fonction | `Shift` + `F3` | Ouvre l assistant fonction. | Standard |
 | `formules-reference-absolue` | Reference absolue | `F4` | Bascule les references. | Standard |
-| `formules-afficher-formules` | Afficher formules | `Ctrl` + `` ` `` | Affiche ou masque les formules. | Avance |
+| `formules-afficher-formules` | Afficher formules | `Ctrl` + `` ` `` | Affiche ou masque les formules. | Expert |
 | `formules-recalculer` | Recalculer | `F9` | Recalcule le classeur. | Avance |
 | `formules-filtre` | Filtre | `Ctrl` + `Shift` + `L` | Active ou retire les filtres. | Avance |
 | `formules-creer-tableau` | Creer tableau | `Ctrl` + `T` | Cree un tableau. | Standard |
 | `formules-date` | Date | `Ctrl` + `;` | Insere la date courante. | Avance |
-| `formules-heure` | Heure | `Ctrl` + `Shift` + `;` | Insere l heure courante. | Avance |
+| `formules-heure` | Heure | AZERTY: `Ctrl` + `:`; QWERTY: `Ctrl` + `Shift` + `;` | Insere l heure courante. | Avance |
 | `formules-copier-dessus` | Formule du dessus | `Ctrl` + `'` | Copie la formule de la cellule au-dessus. | Avance |
 | `formules-collage-special` | Collage special | `Ctrl` + `Alt` + `V` | Ouvre le collage special. | Avance |
 | `formules-calculer-feuille` | Calculer feuille | `Shift` + `F9` | Recalcule la feuille active. | Expert |
@@ -268,12 +273,12 @@ Documentation sheet for useful Excel shortcuts on Windows.
 | `formules-somme-automatique` | AutoSum | `Alt` + `=` | Insert a sum. | Standard |
 | `formules-inserer-fonction` | Insert function | `Shift` + `F3` | Open the function wizard. | Standard |
 | `formules-reference-absolue` | Absolute reference | `F4` | Toggle references. | Standard |
-| `formules-afficher-formules` | Show formulas | `Ctrl` + `` ` `` | Show or hide formulas. | Advanced |
+| `formules-afficher-formules` | Show formulas | `Ctrl` + `` ` `` | Show or hide formulas. | Expert |
 | `formules-recalculer` | Calculate | `F9` | Recalculate the workbook. | Advanced |
 | `formules-filtre` | Filter | `Ctrl` + `Shift` + `L` | Toggle filters. | Advanced |
 | `formules-creer-tableau` | Create table | `Ctrl` + `T` | Create a table. | Standard |
 | `formules-date` | Date | `Ctrl` + `;` | Insert the current date. | Advanced |
-| `formules-heure` | Time | `Ctrl` + `Shift` + `;` | Insert the current time. | Advanced |
+| `formules-heure` | Time | AZERTY: `Ctrl` + `:`; QWERTY: `Ctrl` + `Shift` + `;` | Insert the current time. | Advanced |
 | `formules-copier-dessus` | Formula above | `Ctrl` + `'` | Copy the formula from the cell above. | Advanced |
 | `formules-collage-special` | Paste special | `Ctrl` + `Alt` + `V` | Open Paste Special. | Advanced |
 | `formules-calculer-feuille` | Calculate sheet | `Shift` + `F9` | Recalculate the active sheet. | Expert |

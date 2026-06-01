@@ -23,7 +23,8 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 
 - Statut audit 2026-06-01: les sections Francais et English utilisent les pages Microsoft localisees quand les touches divergent.
 - Conflit officiel note: la page PowerPoint FR contient des mentions differentes de Gras (`Ctrl` + `B` dans un resume, `Ctrl` + `G` dans la section Windows de mise en forme du texte). La fiche retient `Ctrl` + `G` pour PowerPoint FR, car c'est la table detaillee de creation Windows.
-- Les touches de ponctuation (`[`, `]`) et les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
+- Les raccourcis directs d ordre des objets utilisent `Ctrl` + `Shift` + `[` / `]`, difficiles sur AZERTY; ils restent en Expert. `Ctrl` + `Shift` + `F/B` existe seulement dans le volet Selection et ne remplace pas le raccourci direct.
+- Les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
 
 ## Inventaire complet
 
@@ -40,7 +41,7 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 | Copier / coller / couper | `Ctrl` + `C` / `V` / `X` | Microsoft PowerPoint shortcuts | Standard | Edition courante. |
 | Annuler / retablir | `Ctrl` + `Z` / `Y` | Microsoft PowerPoint shortcuts | Standard | Edition courante. |
 | Grouper / dissocier | `Ctrl` + `G` / `Ctrl` + `Shift` + `G` | Microsoft PowerPoint shortcuts | Avance | Objets multiples. |
-| Avancer / reculer objet | `Ctrl` + `Shift` + `]` / `[` | Microsoft PowerPoint shortcuts | Avance | Ordre des objets. |
+| Avancer / reculer objet | `Ctrl` + `Shift` + `]` / `[` | Microsoft PowerPoint shortcuts | Expert | Ordre des objets; raccourci direct difficile sur AZERTY, sans remplacement direct plus simple. |
 | Gras / italique / souligne | FR: `Ctrl` + `G`; EN: `Ctrl` + `B`; `Ctrl` + `I` / `U` | Microsoft PowerPoint shortcuts | Standard | Mise en forme. |
 | Lien | `Ctrl` + `K` | Microsoft PowerPoint shortcuts | Standard | Lien courant. |
 | Rechercher / remplacer | `Ctrl` + `F` / `H` | Microsoft PowerPoint shortcuts | Standard / Avance | Recherche. |
@@ -87,8 +88,8 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 | `diapos-retablir` | Retablir | `Ctrl` + `Y` | Retablit l action. | Standard |
 | `diapos-grouper` | Grouper | `Ctrl` + `G` | Groupe les objets. | Avance |
 | `diapos-dissocier` | Dissocier | `Ctrl` + `Shift` + `G` | Dissocie les objets. | Avance |
-| `diapos-avancer-plan` | Avancer plan | `Ctrl` + `Shift` + `]` | Avance l objet dans l ordre. | Avance |
-| `diapos-reculer-plan` | Reculer plan | `Ctrl` + `Shift` + `[` | Recule l objet dans l ordre. | Avance |
+| `diapos-avancer-plan` | Avancer plan | `Ctrl` + `Shift` + `]` | Avance l objet dans l ordre. | Expert |
+| `diapos-reculer-plan` | Reculer plan | `Ctrl` + `Shift` + `[` | Recule l objet dans l ordre. | Expert |
 
 ### Texte et objets
 
@@ -153,8 +154,8 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 | `diapos-retablir` | Redo | `Ctrl` + `Y` | Redo action. | Standard |
 | `diapos-grouper` | Group | `Ctrl` + `G` | Group objects. | Advanced |
 | `diapos-dissocier` | Ungroup | `Ctrl` + `Shift` + `G` | Ungroup objects. | Advanced |
-| `diapos-avancer-plan` | Bring forward | `Ctrl` + `Shift` + `]` | Move the object forward. | Advanced |
-| `diapos-reculer-plan` | Send backward | `Ctrl` + `Shift` + `[` | Move the object backward. | Advanced |
+| `diapos-avancer-plan` | Bring forward | `Ctrl` + `Shift` + `]` | Move the object forward. | Expert |
+| `diapos-reculer-plan` | Send backward | `Ctrl` + `Shift` + `[` | Move the object backward. | Expert |
 
 ### Text and objects
 

@@ -350,6 +350,35 @@ describe("shortcut sheet selection", () => {
     expect(findShortcut(findSheetForFamily("word", "en")!, "format-gras")?.keys).toEqual(["Ctrl", "B"]);
   });
 
+  it("keeps difficult Office punctuation shortcuts explicit", () => {
+    const excelFr = findSheetForFamily("excel", "fr")!;
+    const excelEn = findSheetForFamily("excel", "en")!;
+    const wordFr = findSheetForFamily("word", "fr")!;
+    const wordEn = findSheetForFamily("word", "en")!;
+    const powerpointFr = findSheetForFamily("powerpoint", "fr")!;
+    const powerpointEn = findSheetForFamily("powerpoint", "en")!;
+
+    expect(findShortcut(excelFr, "formules-afficher-formules")?.keys).toEqual(["Ctrl", "`"]);
+    expect(findShortcut(excelFr, "formules-afficher-formules")?.level).toBe("expert");
+    expect(findShortcut(excelEn, "formules-afficher-formules")?.level).toBe("expert");
+    expect(shortcutKeysForLayout(findShortcut(excelFr, "formules-heure")!, "azerty")).toEqual(["Ctrl", ":"]);
+    expect(shortcutKeysForLayout(findShortcut(excelFr, "formules-heure")!, "qwerty")).toEqual(["Ctrl", "Shift", ";"]);
+    expect(shortcutKeysForLayout(findShortcut(excelEn, "formules-heure")!, "azerty")).toEqual(["Ctrl", ":"]);
+    expect(shortcutKeysForLayout(findShortcut(excelEn, "formules-heure")!, "qwerty")).toEqual(["Ctrl", "Shift", ";"]);
+
+    expect(findShortcut(wordFr, "format-police-plus")?.keys).toEqual(["Ctrl", "Shift", ">"]);
+    expect(findShortcut(wordFr, "format-police-moins")?.keys).toEqual(["Ctrl", "Shift", "<"]);
+    expect(findShortcut(wordEn, "format-police-plus")?.keys).toEqual(["Ctrl", "Shift", ">"]);
+    expect(findShortcut(wordEn, "format-police-moins")?.keys).toEqual(["Ctrl", "Shift", "<"]);
+
+    expect(findShortcut(powerpointFr, "diapos-avancer-plan")?.keys).toEqual(["Ctrl", "Shift", "]"]);
+    expect(findShortcut(powerpointFr, "diapos-avancer-plan")?.level).toBe("expert");
+    expect(findShortcut(powerpointFr, "diapos-reculer-plan")?.keys).toEqual(["Ctrl", "Shift", "["]);
+    expect(findShortcut(powerpointFr, "diapos-reculer-plan")?.level).toBe("expert");
+    expect(findShortcut(powerpointEn, "diapos-avancer-plan")?.level).toBe("expert");
+    expect(findShortcut(powerpointEn, "diapos-reculer-plan")?.level).toBe("expert");
+  });
+
   it("honors manual sheet mode", () => {
     const sheet = selectSheet({ ...defaultSettings, sheetMode: "manual", manualSheetId: "word" }, null);
 

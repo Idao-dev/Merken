@@ -412,7 +412,7 @@
             "description": "Affiche ou masque les formules.",
             "priority": 4,
             "id": "formules-afficher-formules",
-            "level": "advanced"
+            "level": "expert"
           },
           {
             "label": "Recalculer",
@@ -465,6 +465,17 @@
               "Shift",
               ";"
             ],
+            "keysByLayout": {
+              "azerty": [
+                "Ctrl",
+                ":"
+              ],
+              "qwerty": [
+                "Ctrl",
+                "Shift",
+                ";"
+              ]
+            },
             "description": "Insere l heure courante.",
             "priority": 9,
             "id": "formules-heure",
@@ -1258,7 +1269,7 @@
             "description": "Show or hide formulas.",
             "priority": 4,
             "id": "formules-afficher-formules",
-            "level": "advanced"
+            "level": "expert"
           },
           {
             "label": "Calculate",
@@ -1311,6 +1322,17 @@
               "Shift",
               ";"
             ],
+            "keysByLayout": {
+              "azerty": [
+                "Ctrl",
+                ":"
+              ],
+              "qwerty": [
+                "Ctrl",
+                "Shift",
+                ";"
+              ]
+            },
             "description": "Insert the current time.",
             "priority": 9,
             "id": "formules-heure",

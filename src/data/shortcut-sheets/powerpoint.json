@@ -194,7 +194,7 @@
             "description": "Avance l objet dans l ordre.",
             "priority": 10,
             "id": "diapos-avancer-plan",
-            "level": "advanced"
+            "level": "expert"
           },
           {
             "label": "Reculer plan",
@@ -206,7 +206,7 @@
             "description": "Recule l objet dans l ordre.",
             "priority": 11,
             "id": "diapos-reculer-plan",
-            "level": "advanced"
+            "level": "expert"
           }
         ]
       },
@@ -663,7 +663,7 @@
             "description": "Move the object forward.",
             "priority": 10,
             "id": "diapos-avancer-plan",
-            "level": "advanced"
+            "level": "expert"
           },
           {
             "label": "Send backward",
@@ -675,7 +675,7 @@
             "description": "Move the object backward.",
             "priority": 11,
             "id": "diapos-reculer-plan",
-            "level": "advanced"
+            "level": "expert"
           }
         ]
       },

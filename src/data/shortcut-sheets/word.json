@@ -316,7 +316,8 @@
             "label": "Police plus",
             "keys": [
               "Ctrl",
-              "]"
+              "Shift",
+              ">"
             ],
             "description": "Augmente la taille de police.",
             "priority": 11,
@@ -327,7 +328,8 @@
             "label": "Police moins",
             "keys": [
               "Ctrl",
-              "["
+              "Shift",
+              "<"
             ],
             "description": "Reduit la taille de police.",
             "priority": 12,
@@ -830,7 +832,8 @@
             "label": "Font larger",
             "keys": [
               "Ctrl",
-              "]"
+              "Shift",
+              ">"
             ],
             "description": "Increase font size.",
             "priority": 11,
@@ -841,7 +844,8 @@
             "label": "Font smaller",
             "keys": [
               "Ctrl",
-              "["
+              "Shift",
+              "<"
             ],
             "description": "Decrease font size.",
             "priority": 12,

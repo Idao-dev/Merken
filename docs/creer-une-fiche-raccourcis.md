@@ -77,6 +77,8 @@ Cette section doit indiquer :
 
 Ne jamais deduire une touche francaise depuis une source anglaise traduite. Une traduction de libelle peut garder le meme ID, mais la touche doit venir d'une source localisee ou d'une validation explicite.
 
+Quand plusieurs raccourcis officiels existent pour la meme action, retenir le plus simple a realiser pour la paire langue/disposition visee : par defaut francais/AZERTY pour les fiches FR et anglais/QWERTY pour les fiches EN. Ne jamais retirer `Shift`, `Alt`, `AltGr` ou modifier une touche de ponctuation sans source localisee ou validation explicite. Si le seul raccourci verifie utilise une touche morte, un crochet, un symbole AltGr ou une ponctuation difficile, le classer en `expert` ou le laisser documente sans promotion JSON.
+
 ## Priorite et niveaux
 
 - `priority` controle l'ordre d'affichage dans une categorie. Utiliser `1` pour le raccourci le plus important.
