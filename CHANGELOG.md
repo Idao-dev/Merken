@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.5.3 - 2026-06-01
+
+### Change
+
+- Completion et fiabilisation des fiches de raccourcis pour les logiciels pris en charge.
+- Separation de la langue du logiciel et de la disposition clavier pour afficher des raccourcis adaptes, notamment AZERTY/QWERTY.
+- Correction de raccourcis Office difficiles ou ambigus, dont certaines touches de ponctuation dans Excel, Word et PowerPoint.
+- Ajout de badges et keycaps plus precis pour faciliter la lecture des fiches.
+- Ajout d'une option pour rendre l'icone Merken toujours visible dans la zone de notification Windows.
+- Amelioration de la conservation du defilement dans les options pendant les interactions avec les fiches.
+
+### Notes
+
+- Les raccourcis Office utilisant des touches difficiles ou dependantes de la disposition clavier restent classes avec prudence.
+- L'option d'icone toujours visible depend du comportement Windows et peut necessiter une verification manuelle selon l'installation.
+
 ## 0.5.2 - 2026-05-28
 
 ### Change
