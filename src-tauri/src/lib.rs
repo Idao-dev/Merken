@@ -100,8 +100,8 @@ fn hide_current_window(window: WebviewWindow) -> tauri::Result<()> {
 }
 
 #[tauri::command]
-fn open_taskbar_settings() -> Result<(), String> {
-    system_settings::open_taskbar_settings()
+fn set_tray_icon_visibility(visible: bool) -> Result<(), String> {
+    system_settings::set_tray_icon_visibility(visible)
 }
 
 #[tauri::command]
@@ -260,7 +260,7 @@ pub fn run() {
             set_panel_keep_visible,
             start_native_drag,
             hide_current_window,
-            open_taskbar_settings,
+            set_tray_icon_visibility,
             open_latest_release,
             open_repository,
             show_shortcuts_placement,
@@ -631,6 +631,7 @@ fn position_shortcuts_preview<R: Runtime>(
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::path::Path;
 
     fn active_app(process_name: &str, sheet_id: &str) -> ActiveApp {
         ActiveApp {
@@ -728,6 +729,32 @@ mod tests {
         assert!(should_keep_preview_pair_visible_from_focus(true, false));
         assert!(should_keep_preview_pair_visible_from_focus(false, true));
         assert!(!should_keep_preview_pair_visible_from_focus(false, false));
+    }
+
+    #[test]
+    fn matches_current_tray_icon_registry_entry() {
+        let current = Path::new(r"C:\Users\Test\AppData\Local\Merken\merken.exe");
+
+        assert!(system_settings::tray_entry_matches_current_executable(
+            current,
+            Some(r#""C:\Users\Test\AppData\Local\Merken\merken.exe""#),
+            None
+        ));
+        assert!(system_settings::tray_entry_matches_current_executable(
+            current,
+            Some(r"C:\Other\Path\MERKEN.EXE"),
+            None
+        ));
+        assert!(system_settings::tray_entry_matches_current_executable(
+            current,
+            None,
+            Some("Merken")
+        ));
+        assert!(!system_settings::tray_entry_matches_current_executable(
+            current,
+            Some(r"C:\Other\Path\other.exe"),
+            Some("Other app")
+        ));
     }
 
     #[test]
@@ -1403,8 +1430,22 @@ mod active_window {
 }
 
 mod system_settings {
-    pub fn open_taskbar_settings() -> Result<(), String> {
-        open_url("ms-settings:taskbar")
+    use std::path::Path;
+
+    pub fn set_tray_icon_visibility(visible: bool) -> Result<(), String> {
+        #[cfg(windows)]
+        {
+            let current_executable = std::env::current_exe()
+                .map_err(|error| format!("Unable to resolve current executable: {error}"))?;
+
+            set_current_user_tray_icon_visibility(&current_executable, visible)
+        }
+
+        #[cfg(not(windows))]
+        {
+            let _ = visible;
+            Err("Tray icon visibility can only be changed on Windows.".to_owned())
+        }
     }
 
     pub fn open_url(url: &str) -> Result<(), String> {
@@ -1432,5 +1473,263 @@ mod system_settings {
             let _ = url;
             Err("Opening system URLs is only available on Windows.".to_owned())
         }
+    }
+
+    pub(super) fn tray_entry_matches_current_executable(
+        current_executable: &Path,
+        executable_path: Option<&str>,
+        initial_tooltip: Option<&str>,
+    ) -> bool {
+        let current_path = normalize_registry_path(&current_executable.to_string_lossy());
+        let current_file_name = file_name_for_comparison(&current_executable.to_string_lossy());
+
+        if let Some(executable_path) = executable_path {
+            let entry_path = normalize_registry_path(executable_path);
+
+            if !entry_path.is_empty() && entry_path == current_path {
+                return true;
+            }
+
+            if current_file_name.is_some()
+                && file_name_for_comparison(executable_path) == current_file_name
+            {
+                return true;
+            }
+        }
+
+        initial_tooltip
+            .map(|tooltip| tooltip.to_ascii_lowercase().contains("merken"))
+            .unwrap_or(false)
+    }
+
+    fn normalize_registry_path(path: &str) -> String {
+        let without_quotes = path.trim().trim_matches('"').trim_matches('\0');
+        let without_prefix = without_quotes
+            .strip_prefix("\\\\?\\")
+            .or_else(|| without_quotes.strip_prefix("\\??\\"))
+            .unwrap_or(without_quotes);
+
+        without_prefix.replace('/', "\\").to_ascii_lowercase()
+    }
+
+    fn file_name_for_comparison(path: &str) -> Option<String> {
+        let normalized = normalize_registry_path(path);
+
+        normalized
+            .rsplit(|character| character == '\\' || character == '/')
+            .next()
+            .filter(|file_name| !file_name.is_empty())
+            .map(ToOwned::to_owned)
+    }
+
+    #[cfg(windows)]
+    fn set_current_user_tray_icon_visibility(
+        current_executable: &Path,
+        visible: bool,
+    ) -> Result<(), String> {
+        use windows::core::{PCWSTR, PWSTR};
+        use windows::Win32::Foundation::{
+            ERROR_FILE_NOT_FOUND, ERROR_NO_MORE_ITEMS, ERROR_SUCCESS, WIN32_ERROR,
+        };
+        use windows::Win32::System::Registry::{
+            RegCloseKey, RegEnumKeyExW, RegOpenKeyExW, RegQueryValueExW, RegSetValueExW, HKEY,
+            HKEY_CURRENT_USER, KEY_READ, KEY_SET_VALUE, REG_DWORD, REG_EXPAND_SZ, REG_SAM_FLAGS,
+            REG_SZ, REG_VALUE_TYPE,
+        };
+
+        struct RegistryKey(HKEY);
+
+        impl Drop for RegistryKey {
+            fn drop(&mut self) {
+                unsafe {
+                    let _ = RegCloseKey(self.0);
+                }
+            }
+        }
+
+        fn to_wide(value: &str) -> Vec<u16> {
+            value.encode_utf16().chain(std::iter::once(0)).collect()
+        }
+
+        fn registry_error(operation: &str, status: WIN32_ERROR) -> String {
+            format!("{operation} failed with Windows error {}.", status.0)
+        }
+
+        fn open_key(
+            root: HKEY,
+            subkey: &str,
+            access: REG_SAM_FLAGS,
+        ) -> Result<RegistryKey, String> {
+            let subkey = to_wide(subkey);
+            let mut handle = HKEY::default();
+            let status =
+                unsafe { RegOpenKeyExW(root, PCWSTR(subkey.as_ptr()), 0, access, &mut handle) };
+
+            if status != ERROR_SUCCESS {
+                return Err(registry_error("Opening registry key", status));
+            }
+
+            Ok(RegistryKey(handle))
+        }
+
+        fn open_child_key(
+            parent: &RegistryKey,
+            subkey: &str,
+            access: REG_SAM_FLAGS,
+        ) -> Result<RegistryKey, String> {
+            let subkey = to_wide(subkey);
+            let mut handle = HKEY::default();
+            let status =
+                unsafe { RegOpenKeyExW(parent.0, PCWSTR(subkey.as_ptr()), 0, access, &mut handle) };
+
+            if status != ERROR_SUCCESS {
+                return Err(registry_error("Opening registry subkey", status));
+            }
+
+            Ok(RegistryKey(handle))
+        }
+
+        fn subkey_names(key: &RegistryKey) -> Result<Vec<String>, String> {
+            let mut names = Vec::new();
+            let mut index = 0;
+
+            loop {
+                let mut buffer = vec![0u16; 260];
+                let mut length = buffer.len() as u32;
+                let status = unsafe {
+                    RegEnumKeyExW(
+                        key.0,
+                        index,
+                        PWSTR(buffer.as_mut_ptr()),
+                        &mut length,
+                        None,
+                        PWSTR(std::ptr::null_mut()),
+                        None,
+                        None,
+                    )
+                };
+
+                if status == ERROR_NO_MORE_ITEMS {
+                    break;
+                }
+
+                if status != ERROR_SUCCESS {
+                    return Err(registry_error(
+                        "Enumerating notification icon settings",
+                        status,
+                    ));
+                }
+
+                names.push(String::from_utf16_lossy(&buffer[..length as usize]));
+                index += 1;
+            }
+
+            Ok(names)
+        }
+
+        fn string_value(key: &RegistryKey, name: &str) -> Result<Option<String>, String> {
+            let name = to_wide(name);
+            let mut value_type = REG_VALUE_TYPE::default();
+            let mut byte_length = 0u32;
+            let status = unsafe {
+                RegQueryValueExW(
+                    key.0,
+                    PCWSTR(name.as_ptr()),
+                    None,
+                    Some(&mut value_type),
+                    None,
+                    Some(&mut byte_length),
+                )
+            };
+
+            if status == ERROR_FILE_NOT_FOUND {
+                return Ok(None);
+            }
+
+            if status != ERROR_SUCCESS {
+                return Err(registry_error("Reading notification icon setting", status));
+            }
+
+            if value_type != REG_SZ && value_type != REG_EXPAND_SZ {
+                return Ok(None);
+            }
+
+            if byte_length == 0 {
+                return Ok(Some(String::new()));
+            }
+
+            let mut data = vec![0u8; byte_length as usize];
+            let status = unsafe {
+                RegQueryValueExW(
+                    key.0,
+                    PCWSTR(name.as_ptr()),
+                    None,
+                    Some(&mut value_type),
+                    Some(data.as_mut_ptr()),
+                    Some(&mut byte_length),
+                )
+            };
+
+            if status != ERROR_SUCCESS {
+                return Err(registry_error("Reading notification icon setting", status));
+            }
+
+            let words = unsafe {
+                std::slice::from_raw_parts(data.as_ptr() as *const u16, byte_length as usize / 2)
+            };
+            let end = words
+                .iter()
+                .position(|character| *character == 0)
+                .unwrap_or(words.len());
+
+            Ok(Some(String::from_utf16_lossy(&words[..end])))
+        }
+
+        fn set_dword_value(key: &RegistryKey, name: &str, value: u32) -> Result<(), String> {
+            let name = to_wide(name);
+            let data = value.to_le_bytes();
+            let status =
+                unsafe { RegSetValueExW(key.0, PCWSTR(name.as_ptr()), 0, REG_DWORD, Some(&data)) };
+
+            if status != ERROR_SUCCESS {
+                return Err(registry_error(
+                    "Updating notification icon visibility",
+                    status,
+                ));
+            }
+
+            Ok(())
+        }
+
+        let root = open_key(
+            HKEY_CURRENT_USER,
+            "Control Panel\\NotifyIconSettings",
+            KEY_READ,
+        )?;
+        let mut promoted_count = 0;
+
+        for subkey_name in subkey_names(&root)? {
+            let child = open_child_key(&root, &subkey_name, KEY_READ)?;
+            let executable_path = string_value(&child, "ExecutablePath")?;
+            let initial_tooltip = string_value(&child, "InitialToolTip")?;
+
+            if tray_entry_matches_current_executable(
+                current_executable,
+                executable_path.as_deref(),
+                initial_tooltip.as_deref(),
+            ) {
+                let writable_child = open_child_key(&root, &subkey_name, KEY_SET_VALUE)?;
+                set_dword_value(&writable_child, "IsPromoted", if visible { 1 } else { 0 })?;
+                promoted_count += 1;
+            }
+        }
+
+        if promoted_count == 0 {
+            return Err(
+                "No Merken notification icon entry was found in Windows settings.".to_owned(),
+            );
+        }
+
+        Ok(())
     }
 }
