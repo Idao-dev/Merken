@@ -428,6 +428,78 @@ kbd {
   transform: translate(-50%, -50%);
 }
 
+.key-mouse {
+  position: relative;
+  width: 34px;
+  height: 24px;
+  min-width: 34px;
+  padding: 0;
+}
+
+.key-mouse .keycap-label {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+}
+
+.key-mouse::before {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  width: 17px;
+  height: 18px;
+  border: 2px solid var(--text-primary);
+  border-radius: 9px 9px 7px 7px;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.key-mouse::after {
+  position: absolute;
+  content: "";
+}
+
+.key-mouse-left::after,
+.key-mouse-right::after {
+  top: 6px;
+  width: 6px;
+  height: 7px;
+  background: var(--text-primary);
+}
+
+.key-mouse-left::after {
+  left: 10px;
+  border-radius: 4px 0 2px;
+}
+
+.key-mouse-right::after {
+  right: 10px;
+  border-radius: 0 4px 2px 0;
+}
+
+.key-mouse-wheel::after {
+  top: 6px;
+  left: 50%;
+  width: 3px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--text-primary);
+  transform: translateX(-50%);
+}
+
+.key-mouse-drag::after {
+  right: 8px;
+  bottom: 5px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-primary);
+  border-bottom: 2px solid var(--text-primary);
+  transform: rotate(-45deg);
+}
+
 .panel-shortcuts {
   cursor: move;
 }
@@ -820,6 +892,11 @@ kbd {
 .sheet-badge-browser {
   border-color: color-mix(in srgb, var(--warning) 42%, transparent);
   background: color-mix(in srgb, var(--warning) 12%, transparent);
+}
+
+.sheet-badge-office {
+  border-color: color-mix(in srgb, #2b7a4b 46%, transparent);
+  background: color-mix(in srgb, #2b7a4b 14%, transparent);
 }
 
 .sheet-level-switch {

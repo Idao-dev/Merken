@@ -221,6 +221,9 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
     },
     sheetBadge: {
       "windows-native": { label: "Win", help: "Natif Windows" },
+      "office-365": { label: "365", help: "Version Microsoft 365" },
+      "office-2024": { label: "2024", help: "Version Office 2024" },
+      "office-2021": { label: "2021", help: "Version Office 2021" },
       "browser-edge": { label: "Edge", help: "Compatible Microsoft Edge" },
       "browser-chrome": { label: "Chrome", help: "Compatible Google Chrome" },
       "browser-firefox": { label: "Firefox", help: "Compatible Mozilla Firefox" },
@@ -351,6 +354,9 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
     },
     sheetBadge: {
       "windows-native": { label: "Win", help: "Native Windows" },
+      "office-365": { label: "365", help: "Microsoft 365 version" },
+      "office-2024": { label: "2024", help: "Office 2024 version" },
+      "office-2021": { label: "2021", help: "Office 2021 version" },
       "browser-edge": { label: "Edge", help: "Compatible with Microsoft Edge" },
       "browser-chrome": { label: "Chrome", help: "Compatible with Google Chrome" },
       "browser-firefox": { label: "Firefox", help: "Compatible with Mozilla Firefox" },

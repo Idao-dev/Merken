@@ -20,8 +20,8 @@
             ],
             "description": "Ouvre une fenetre de fichiers.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-ouvrir-l-explorateur"
+            "id": "navigation-ouvrir-l-explorateur",
+            "level": "standard"
           },
           {
             "label": "Nouvelle fenetre",
@@ -31,8 +31,8 @@
             ],
             "description": "Ouvre une nouvelle fenetre.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-nouvelle-fenetre"
+            "id": "navigation-nouvelle-fenetre",
+            "level": "standard"
           },
           {
             "label": "Nouvel onglet",
@@ -42,8 +42,8 @@
             ],
             "description": "Ouvre un onglet si disponible.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "navigation-nouvel-onglet"
+            "id": "navigation-nouvel-onglet",
+            "level": "standard"
           },
           {
             "label": "Fermer onglet",
@@ -53,8 +53,42 @@
             ],
             "description": "Ferme l onglet ou la fenetre.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-fermer-onglet"
+            "id": "navigation-fermer-onglet",
+            "level": "standard"
+          },
+          {
+            "label": "Onglet suivant",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Passe a l onglet suivant.",
+            "priority": 5,
+            "id": "navigation-onglet-suivant",
+            "level": "standard"
+          },
+          {
+            "label": "Onglet precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Revient a l onglet precedent.",
+            "priority": 6,
+            "id": "navigation-onglet-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Onglet numero",
+            "keys": [
+              "Ctrl",
+              "1-9"
+            ],
+            "description": "Active l onglet numerote.",
+            "priority": 7,
+            "id": "navigation-onglet-numero",
+            "level": "advanced"
           },
           {
             "label": "Dossier parent",
@@ -63,9 +97,9 @@
               "Up"
             ],
             "description": "Remonte d un dossier.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-dossier-parent"
+            "priority": 8,
+            "id": "navigation-dossier-parent",
+            "level": "standard"
           },
           {
             "label": "Retour",
@@ -74,9 +108,9 @@
               "Left"
             ],
             "description": "Revient a l emplacement precedent.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "navigation-retour"
+            "priority": 9,
+            "id": "navigation-retour",
+            "level": "standard"
           },
           {
             "label": "Avancer",
@@ -85,9 +119,9 @@
               "Right"
             ],
             "description": "Passe a l emplacement suivant.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "navigation-avancer"
+            "priority": 10,
+            "id": "navigation-avancer",
+            "level": "standard"
           },
           {
             "label": "Barre d adresse",
@@ -96,9 +130,9 @@
               "L"
             ],
             "description": "Active la barre d adresse.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "navigation-barre-d-adresse"
+            "priority": 11,
+            "id": "navigation-barre-d-adresse",
+            "level": "standard"
           },
           {
             "label": "Actualiser",
@@ -106,9 +140,29 @@
               "F5"
             ],
             "description": "Recharge le dossier.",
-            "priority": 9,
-            "usageLevel": "common",
-            "id": "navigation-actualiser"
+            "priority": 12,
+            "id": "navigation-actualiser",
+            "level": "standard"
+          },
+          {
+            "label": "Parcourir volets",
+            "keys": [
+              "F6"
+            ],
+            "description": "Deplace le focus entre les zones.",
+            "priority": 13,
+            "id": "navigation-parcourir-volets",
+            "level": "advanced"
+          },
+          {
+            "label": "Plein ecran",
+            "keys": [
+              "F11"
+            ],
+            "description": "Maximise ou restaure la fenetre.",
+            "priority": 14,
+            "id": "navigation-plein-ecran",
+            "level": "advanced"
           }
         ]
       },
@@ -125,8 +179,8 @@
             ],
             "description": "Cree un dossier.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "fichiers-nouveau-dossier"
+            "id": "fichiers-nouveau-dossier",
+            "level": "standard"
           },
           {
             "label": "Renommer",
@@ -135,8 +189,8 @@
             ],
             "description": "Renomme l element selectionne.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "fichiers-renommer"
+            "id": "fichiers-renommer",
+            "level": "standard"
           },
           {
             "label": "Supprimer",
@@ -145,8 +199,8 @@
             ],
             "description": "Supprime vers la corbeille.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "fichiers-supprimer"
+            "id": "fichiers-supprimer",
+            "level": "standard"
           },
           {
             "label": "Supprimer definitivement",
@@ -156,8 +210,8 @@
             ],
             "description": "Supprime sans corbeille.",
             "priority": 4,
-            "usageLevel": "expert",
-            "id": "fichiers-supprimer-definitivement"
+            "id": "fichiers-supprimer-definitivement",
+            "level": "expert"
           },
           {
             "label": "Proprietes",
@@ -167,8 +221,8 @@
             ],
             "description": "Ouvre les proprietes.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "fichiers-proprietes"
+            "id": "fichiers-proprietes",
+            "level": "advanced"
           },
           {
             "label": "Menu contextuel",
@@ -178,8 +232,64 @@
             ],
             "description": "Ouvre le menu contextuel.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "fichiers-menu-contextuel"
+            "id": "fichiers-menu-contextuel",
+            "level": "advanced"
+          },
+          {
+            "label": "Ajuster colonnes",
+            "keys": [
+              "Ctrl",
+              "+"
+            ],
+            "description": "Ajuste les colonnes au texte.",
+            "priority": 7,
+            "id": "fichiers-ajuster-colonnes",
+            "level": "advanced"
+          },
+          {
+            "label": "Style affichage",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "1-9"
+            ],
+            "description": "Change le mode d affichage.",
+            "priority": 8,
+            "id": "fichiers-style-affichage",
+            "level": "advanced"
+          },
+          {
+            "label": "Copier en glissant",
+            "keys": [
+              "Ctrl",
+              "Drag"
+            ],
+            "description": "Force la copie pendant un glisser-deposer.",
+            "priority": 9,
+            "id": "fichiers-copier-glisser",
+            "level": "expert"
+          },
+          {
+            "label": "Deplacer en glissant",
+            "keys": [
+              "Shift",
+              "Drag"
+            ],
+            "description": "Force le deplacement pendant un glisser-deposer.",
+            "priority": 10,
+            "id": "fichiers-deplacer-glisser",
+            "level": "expert"
+          },
+          {
+            "label": "Taille des icones",
+            "keys": [
+              "Ctrl",
+              "Wheel"
+            ],
+            "description": "Change la taille ou l affichage des icones.",
+            "priority": 11,
+            "id": "fichiers-taille-icones",
+            "level": "expert"
           }
         ]
       },
@@ -195,8 +305,8 @@
             ],
             "description": "Selectionne tous les elements.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "selection-tout-selectionner"
+            "id": "selection-tout-selectionner",
+            "level": "standard"
           },
           {
             "label": "Recherche",
@@ -206,8 +316,31 @@
             ],
             "description": "Active la recherche du dossier.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "selection-recherche"
+            "id": "selection-recherche",
+            "level": "standard"
+          },
+          {
+            "label": "Selection multiple",
+            "keys": [
+              "Shift",
+              "Arrows"
+            ],
+            "description": "Etend la selection au clavier.",
+            "priority": 3,
+            "id": "selection-multiple",
+            "level": "standard"
+          },
+          {
+            "label": "Selection individuelle",
+            "keys": [
+              "Ctrl",
+              "Arrow",
+              "Space"
+            ],
+            "description": "Ajoute des elements non contigus.",
+            "priority": 4,
+            "id": "selection-individuelle",
+            "level": "advanced"
           },
           {
             "label": "Volet de visualisation",
@@ -216,9 +349,9 @@
               "P"
             ],
             "description": "Affiche ou masque l apercu.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "selection-volet-de-visualisation"
+            "priority": 5,
+            "id": "selection-volet-de-visualisation",
+            "level": "advanced"
           },
           {
             "label": "Volet de details",
@@ -228,9 +361,61 @@
               "P"
             ],
             "description": "Affiche ou masque les details.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "selection-volet-de-details"
+            "priority": 6,
+            "id": "selection-volet-de-details",
+            "level": "advanced"
+          },
+          {
+            "label": "Debut de liste",
+            "keys": [
+              "Home"
+            ],
+            "description": "Va en haut de la liste.",
+            "priority": 7,
+            "id": "selection-debut-liste",
+            "level": "advanced"
+          },
+          {
+            "label": "Fin de liste",
+            "keys": [
+              "End"
+            ],
+            "description": "Va en bas de la liste.",
+            "priority": 8,
+            "id": "selection-fin-liste",
+            "level": "advanced"
+          },
+          {
+            "label": "Replier dossier",
+            "keys": [
+              "Left"
+            ],
+            "description": "Replie le dossier ou selectionne le parent.",
+            "priority": 9,
+            "id": "selection-replier-dossier",
+            "level": "advanced"
+          },
+          {
+            "label": "Deplier dossier",
+            "keys": [
+              "Right"
+            ],
+            "description": "Deplie le dossier ou selectionne le premier sous-dossier.",
+            "priority": 10,
+            "id": "selection-deplier-dossier",
+            "level": "advanced"
+          },
+          {
+            "label": "Deplier arborescence",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "E"
+            ],
+            "description": "Deplie l arborescence du volet de navigation.",
+            "priority": 11,
+            "id": "selection-deplier-arborescence",
+            "level": "advanced"
           }
         ]
       }
@@ -257,8 +442,8 @@
             ],
             "description": "Open a file window.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-ouvrir-l-explorateur"
+            "id": "navigation-ouvrir-l-explorateur",
+            "level": "standard"
           },
           {
             "label": "New window",
@@ -268,8 +453,8 @@
             ],
             "description": "Open a new window.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-nouvelle-fenetre"
+            "id": "navigation-nouvelle-fenetre",
+            "level": "standard"
           },
           {
             "label": "New tab",
@@ -279,8 +464,8 @@
             ],
             "description": "Open a tab when supported.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "navigation-nouvel-onglet"
+            "id": "navigation-nouvel-onglet",
+            "level": "standard"
           },
           {
             "label": "Close tab",
@@ -290,8 +475,42 @@
             ],
             "description": "Close the tab or window.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-fermer-onglet"
+            "id": "navigation-fermer-onglet",
+            "level": "standard"
+          },
+          {
+            "label": "Next tab",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Move to the next tab.",
+            "priority": 5,
+            "id": "navigation-onglet-suivant",
+            "level": "standard"
+          },
+          {
+            "label": "Previous tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Move to the previous tab.",
+            "priority": 6,
+            "id": "navigation-onglet-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Numbered tab",
+            "keys": [
+              "Ctrl",
+              "1-9"
+            ],
+            "description": "Move to a numbered tab.",
+            "priority": 7,
+            "id": "navigation-onglet-numero",
+            "level": "advanced"
           },
           {
             "label": "Parent folder",
@@ -300,9 +519,9 @@
               "Up"
             ],
             "description": "Go up one folder.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-dossier-parent"
+            "priority": 8,
+            "id": "navigation-dossier-parent",
+            "level": "standard"
           },
           {
             "label": "Back",
@@ -311,9 +530,9 @@
               "Left"
             ],
             "description": "Return to the previous location.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "navigation-retour"
+            "priority": 9,
+            "id": "navigation-retour",
+            "level": "standard"
           },
           {
             "label": "Forward",
@@ -322,9 +541,9 @@
               "Right"
             ],
             "description": "Move to the next location.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "navigation-avancer"
+            "priority": 10,
+            "id": "navigation-avancer",
+            "level": "standard"
           },
           {
             "label": "Address bar",
@@ -333,9 +552,9 @@
               "L"
             ],
             "description": "Focus the address bar.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "navigation-barre-d-adresse"
+            "priority": 11,
+            "id": "navigation-barre-d-adresse",
+            "level": "standard"
           },
           {
             "label": "Refresh",
@@ -343,9 +562,29 @@
               "F5"
             ],
             "description": "Reload the folder.",
-            "priority": 9,
-            "usageLevel": "common",
-            "id": "navigation-actualiser"
+            "priority": 12,
+            "id": "navigation-actualiser",
+            "level": "standard"
+          },
+          {
+            "label": "Cycle panes",
+            "keys": [
+              "F6"
+            ],
+            "description": "Move focus between window areas.",
+            "priority": 13,
+            "id": "navigation-parcourir-volets",
+            "level": "advanced"
+          },
+          {
+            "label": "Full screen",
+            "keys": [
+              "F11"
+            ],
+            "description": "Maximize or restore the window.",
+            "priority": 14,
+            "id": "navigation-plein-ecran",
+            "level": "advanced"
           }
         ]
       },
@@ -362,8 +601,8 @@
             ],
             "description": "Create a folder.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "fichiers-nouveau-dossier"
+            "id": "fichiers-nouveau-dossier",
+            "level": "standard"
           },
           {
             "label": "Rename",
@@ -372,8 +611,8 @@
             ],
             "description": "Rename the selected item.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "fichiers-renommer"
+            "id": "fichiers-renommer",
+            "level": "standard"
           },
           {
             "label": "Delete",
@@ -382,8 +621,8 @@
             ],
             "description": "Delete to the recycle bin.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "fichiers-supprimer"
+            "id": "fichiers-supprimer",
+            "level": "standard"
           },
           {
             "label": "Delete permanently",
@@ -393,8 +632,8 @@
             ],
             "description": "Delete without the recycle bin.",
             "priority": 4,
-            "usageLevel": "expert",
-            "id": "fichiers-supprimer-definitivement"
+            "id": "fichiers-supprimer-definitivement",
+            "level": "expert"
           },
           {
             "label": "Properties",
@@ -404,8 +643,8 @@
             ],
             "description": "Open properties.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "fichiers-proprietes"
+            "id": "fichiers-proprietes",
+            "level": "advanced"
           },
           {
             "label": "Context menu",
@@ -415,8 +654,64 @@
             ],
             "description": "Open the context menu.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "fichiers-menu-contextuel"
+            "id": "fichiers-menu-contextuel",
+            "level": "advanced"
+          },
+          {
+            "label": "Fit columns",
+            "keys": [
+              "Ctrl",
+              "+"
+            ],
+            "description": "Resize columns to fit text.",
+            "priority": 7,
+            "id": "fichiers-ajuster-colonnes",
+            "level": "advanced"
+          },
+          {
+            "label": "View style",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "1-9"
+            ],
+            "description": "Change the view style.",
+            "priority": 8,
+            "id": "fichiers-style-affichage",
+            "level": "advanced"
+          },
+          {
+            "label": "Copy by dragging",
+            "keys": [
+              "Ctrl",
+              "Drag"
+            ],
+            "description": "Force copy during drag and drop.",
+            "priority": 9,
+            "id": "fichiers-copier-glisser",
+            "level": "expert"
+          },
+          {
+            "label": "Move by dragging",
+            "keys": [
+              "Shift",
+              "Drag"
+            ],
+            "description": "Force move during drag and drop.",
+            "priority": 10,
+            "id": "fichiers-deplacer-glisser",
+            "level": "expert"
+          },
+          {
+            "label": "Icon size",
+            "keys": [
+              "Ctrl",
+              "Wheel"
+            ],
+            "description": "Change icon size or appearance.",
+            "priority": 11,
+            "id": "fichiers-taille-icones",
+            "level": "expert"
           }
         ]
       },
@@ -432,8 +727,8 @@
             ],
             "description": "Select all items.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "selection-tout-selectionner"
+            "id": "selection-tout-selectionner",
+            "level": "standard"
           },
           {
             "label": "Search",
@@ -443,8 +738,31 @@
             ],
             "description": "Focus folder search.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "selection-recherche"
+            "id": "selection-recherche",
+            "level": "standard"
+          },
+          {
+            "label": "Multiple selection",
+            "keys": [
+              "Shift",
+              "Arrows"
+            ],
+            "description": "Extend selection from the keyboard.",
+            "priority": 3,
+            "id": "selection-multiple",
+            "level": "standard"
+          },
+          {
+            "label": "Individual selection",
+            "keys": [
+              "Ctrl",
+              "Arrow",
+              "Space"
+            ],
+            "description": "Add non-contiguous items.",
+            "priority": 4,
+            "id": "selection-individuelle",
+            "level": "advanced"
           },
           {
             "label": "Preview pane",
@@ -453,9 +771,9 @@
               "P"
             ],
             "description": "Show or hide preview.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "selection-volet-de-visualisation"
+            "priority": 5,
+            "id": "selection-volet-de-visualisation",
+            "level": "advanced"
           },
           {
             "label": "Details pane",
@@ -465,9 +783,61 @@
               "P"
             ],
             "description": "Show or hide details.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "selection-volet-de-details"
+            "priority": 6,
+            "id": "selection-volet-de-details",
+            "level": "advanced"
+          },
+          {
+            "label": "Start of list",
+            "keys": [
+              "Home"
+            ],
+            "description": "Go to the top of the list.",
+            "priority": 7,
+            "id": "selection-debut-liste",
+            "level": "advanced"
+          },
+          {
+            "label": "End of list",
+            "keys": [
+              "End"
+            ],
+            "description": "Go to the bottom of the list.",
+            "priority": 8,
+            "id": "selection-fin-liste",
+            "level": "advanced"
+          },
+          {
+            "label": "Collapse folder",
+            "keys": [
+              "Left"
+            ],
+            "description": "Collapse the folder or select its parent.",
+            "priority": 9,
+            "id": "selection-replier-dossier",
+            "level": "advanced"
+          },
+          {
+            "label": "Expand folder",
+            "keys": [
+              "Right"
+            ],
+            "description": "Expand the folder or select its first subfolder.",
+            "priority": 10,
+            "id": "selection-deplier-dossier",
+            "level": "advanced"
+          },
+          {
+            "label": "Expand tree",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "E"
+            ],
+            "description": "Expand the navigation pane tree.",
+            "priority": 11,
+            "id": "selection-deplier-arborescence",
+            "level": "advanced"
           }
         ]
       }

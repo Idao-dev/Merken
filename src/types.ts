@@ -12,8 +12,6 @@ export type ShortcutPlacementMode = "preset" | "custom";
 
 export type ShortcutPlacementPreset = "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center";
 
-export type UsageLevel = "essential" | "common" | "advanced" | "expert";
-
 export type ShortcutDisplayLevel = "standard" | "advanced" | "expert";
 
 export type ShortcutDisplayMode = "level" | "custom";
@@ -24,7 +22,15 @@ export type ShortcutWarningLevel = "info" | "danger";
 
 export type ShortcutWarningMode = "all" | "danger-only" | "off";
 
-export type SheetBadgeKey = "windows-native" | "browser-edge" | "browser-chrome" | "browser-firefox" | "browser-brave";
+export type SheetBadgeKey =
+  | "windows-native"
+  | "office-365"
+  | "office-2024"
+  | "office-2021"
+  | "browser-edge"
+  | "browser-chrome"
+  | "browser-firefox"
+  | "browser-brave";
 
 export interface ShortcutCustomPosition {
   x: number;
@@ -40,7 +46,7 @@ export interface ShortcutEntry {
   warning?: string;
   warningLevel?: ShortcutWarningLevel;
   priority: number;
-  usageLevel: UsageLevel;
+  level: ShortcutDisplayLevel;
 }
 
 export interface ShortcutCategory {

@@ -20,8 +20,8 @@
             ],
             "description": "Ouvre la palette.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-palette-commandes"
+            "id": "navigation-palette-commandes",
+            "level": "standard"
           },
           {
             "label": "Ouverture rapide",
@@ -31,8 +31,8 @@
             ],
             "description": "Recherche une note.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "navigation-ouverture-rapide"
+            "id": "navigation-ouverture-rapide",
+            "level": "standard"
           },
           {
             "label": "Nouvelle note",
@@ -42,8 +42,8 @@
             ],
             "description": "Cree une note.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "navigation-nouvelle-note"
+            "id": "navigation-nouvelle-note",
+            "level": "standard"
           },
           {
             "label": "Fermer onglet",
@@ -53,8 +53,8 @@
             ],
             "description": "Ferme l onglet.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-fermer-onglet"
+            "id": "navigation-fermer-onglet",
+            "level": "standard"
           },
           {
             "label": "Onglet suivant",
@@ -64,8 +64,8 @@
             ],
             "description": "Passe a l onglet suivant.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-onglet-suivant"
+            "id": "navigation-onglet-suivant",
+            "level": "standard"
           },
           {
             "label": "Onglet precedent",
@@ -76,8 +76,8 @@
             ],
             "description": "Revient a l onglet precedent.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "navigation-onglet-precedent"
+            "id": "navigation-onglet-precedent",
+            "level": "standard"
           },
           {
             "label": "Parametres",
@@ -87,8 +87,8 @@
             ],
             "description": "Ouvre les parametres.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "navigation-parametres"
+            "id": "navigation-parametres",
+            "level": "advanced"
           }
         ]
       },
@@ -104,8 +104,19 @@
             ],
             "description": "Copie selection ou paragraphe.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
+          },
+          {
+            "label": "Couper",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Coupe selection ou paragraphe.",
+            "priority": 2,
+            "id": "edition-couper",
+            "level": "standard"
           },
           {
             "label": "Coller",
@@ -114,9 +125,9 @@
               "V"
             ],
             "description": "Colle le texte.",
-            "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "priority": 3,
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Coller brut",
@@ -126,9 +137,9 @@
               "V"
             ],
             "description": "Colle sans mise en forme.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "edition-coller-brut"
+            "priority": 4,
+            "id": "edition-coller-brut",
+            "level": "standard"
           },
           {
             "label": "Annuler",
@@ -137,9 +148,9 @@
               "Z"
             ],
             "description": "Annule l action.",
-            "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "priority": 5,
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Retablir",
@@ -149,9 +160,9 @@
               "Z"
             ],
             "description": "Retablit l action.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "priority": 6,
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Supprimer ligne",
@@ -161,9 +172,88 @@
               "K"
             ],
             "description": "Supprime la ligne courante.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "edition-supprimer-ligne"
+            "priority": 7,
+            "id": "edition-supprimer-ligne",
+            "level": "advanced"
+          },
+          {
+            "label": "Supprimer mot precedent",
+            "keys": [
+              "Ctrl",
+              "Backspace"
+            ],
+            "description": "Supprime le mot avant le curseur.",
+            "priority": 8,
+            "id": "edition-supprimer-mot-precedent",
+            "level": "advanced"
+          },
+          {
+            "label": "Supprimer mot suivant",
+            "keys": [
+              "Ctrl",
+              "Delete"
+            ],
+            "description": "Supprime le mot apres le curseur.",
+            "priority": 9,
+            "id": "edition-supprimer-mot-suivant",
+            "level": "advanced"
+          },
+          {
+            "label": "Debut note",
+            "keys": [
+              "Ctrl",
+              "Home"
+            ],
+            "description": "Va au debut de la note. Variante portable: Ctrl + Fn + Left.",
+            "priority": 10,
+            "id": "edition-debut-note",
+            "level": "advanced"
+          },
+          {
+            "label": "Fin note",
+            "keys": [
+              "Ctrl",
+              "End"
+            ],
+            "description": "Va a la fin de la note. Variante portable: Ctrl + Fn + Right.",
+            "priority": 11,
+            "id": "edition-fin-note",
+            "level": "advanced"
+          },
+          {
+            "label": "Tout selectionner",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Selectionne la note.",
+            "priority": 12,
+            "id": "edition-tout-selectionner",
+            "level": "standard"
+          },
+          {
+            "label": "Selection debut note",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Home"
+            ],
+            "description": "Etend la selection au debut.",
+            "priority": 13,
+            "id": "edition-selection-debut-note",
+            "level": "expert"
+          },
+          {
+            "label": "Selection fin note",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "End"
+            ],
+            "description": "Etend la selection a la fin.",
+            "priority": 14,
+            "id": "edition-selection-fin-note",
+            "level": "expert"
           }
         ]
       },
@@ -179,8 +269,8 @@
             ],
             "description": "Met en gras.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "format-gras"
+            "id": "format-gras",
+            "level": "standard"
           },
           {
             "label": "Italique",
@@ -190,8 +280,8 @@
             ],
             "description": "Met en italique.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "format-italique"
+            "id": "format-italique",
+            "level": "standard"
           },
           {
             "label": "Lien",
@@ -201,8 +291,8 @@
             ],
             "description": "Insere ou modifie un lien.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "format-lien"
+            "id": "format-lien",
+            "level": "standard"
           },
           {
             "label": "Recherche note",
@@ -212,8 +302,8 @@
             ],
             "description": "Recherche dans la note.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "format-recherche-note"
+            "id": "format-recherche-note",
+            "level": "standard"
           },
           {
             "label": "Recherche coffre",
@@ -224,8 +314,8 @@
             ],
             "description": "Recherche dans le coffre.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "format-recherche-coffre"
+            "id": "format-recherche-coffre",
+            "level": "standard"
           },
           {
             "label": "Lecture edition",
@@ -235,8 +325,8 @@
             ],
             "description": "Bascule lecture et edition.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "format-lecture-edition"
+            "id": "format-lecture-edition",
+            "level": "advanced"
           }
         ]
       }
@@ -263,8 +353,8 @@
             ],
             "description": "Open the palette.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-palette-commandes"
+            "id": "navigation-palette-commandes",
+            "level": "standard"
           },
           {
             "label": "Quick switcher",
@@ -274,8 +364,8 @@
             ],
             "description": "Search for a note.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "navigation-ouverture-rapide"
+            "id": "navigation-ouverture-rapide",
+            "level": "standard"
           },
           {
             "label": "New note",
@@ -285,8 +375,8 @@
             ],
             "description": "Create a note.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "navigation-nouvelle-note"
+            "id": "navigation-nouvelle-note",
+            "level": "standard"
           },
           {
             "label": "Close tab",
@@ -296,8 +386,8 @@
             ],
             "description": "Close the tab.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-fermer-onglet"
+            "id": "navigation-fermer-onglet",
+            "level": "standard"
           },
           {
             "label": "Next tab",
@@ -307,8 +397,8 @@
             ],
             "description": "Move to next tab.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-onglet-suivant"
+            "id": "navigation-onglet-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous tab",
@@ -319,8 +409,8 @@
             ],
             "description": "Move to previous tab.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "navigation-onglet-precedent"
+            "id": "navigation-onglet-precedent",
+            "level": "standard"
           },
           {
             "label": "Settings",
@@ -330,8 +420,8 @@
             ],
             "description": "Open settings.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "navigation-parametres"
+            "id": "navigation-parametres",
+            "level": "advanced"
           }
         ]
       },
@@ -347,8 +437,19 @@
             ],
             "description": "Copy selection or paragraph.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
+          },
+          {
+            "label": "Cut",
+            "keys": [
+              "Ctrl",
+              "X"
+            ],
+            "description": "Cut selection or paragraph.",
+            "priority": 2,
+            "id": "edition-couper",
+            "level": "standard"
           },
           {
             "label": "Paste",
@@ -357,9 +458,9 @@
               "V"
             ],
             "description": "Paste text.",
-            "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "priority": 3,
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Paste plain",
@@ -369,9 +470,9 @@
               "V"
             ],
             "description": "Paste without formatting.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "edition-coller-brut"
+            "priority": 4,
+            "id": "edition-coller-brut",
+            "level": "standard"
           },
           {
             "label": "Undo",
@@ -380,9 +481,9 @@
               "Z"
             ],
             "description": "Undo the action.",
-            "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "priority": 5,
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Redo",
@@ -392,9 +493,9 @@
               "Z"
             ],
             "description": "Redo the action.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "priority": 6,
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Delete line",
@@ -404,9 +505,88 @@
               "K"
             ],
             "description": "Delete the current line.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "edition-supprimer-ligne"
+            "priority": 7,
+            "id": "edition-supprimer-ligne",
+            "level": "advanced"
+          },
+          {
+            "label": "Delete previous word",
+            "keys": [
+              "Ctrl",
+              "Backspace"
+            ],
+            "description": "Delete the word before the cursor.",
+            "priority": 8,
+            "id": "edition-supprimer-mot-precedent",
+            "level": "advanced"
+          },
+          {
+            "label": "Delete next word",
+            "keys": [
+              "Ctrl",
+              "Delete"
+            ],
+            "description": "Delete the word after the cursor.",
+            "priority": 9,
+            "id": "edition-supprimer-mot-suivant",
+            "level": "advanced"
+          },
+          {
+            "label": "Note start",
+            "keys": [
+              "Ctrl",
+              "Home"
+            ],
+            "description": "Go to the start of the note. Laptop variant: Ctrl + Fn + Left.",
+            "priority": 10,
+            "id": "edition-debut-note",
+            "level": "advanced"
+          },
+          {
+            "label": "Note end",
+            "keys": [
+              "Ctrl",
+              "End"
+            ],
+            "description": "Go to the end of the note. Laptop variant: Ctrl + Fn + Right.",
+            "priority": 11,
+            "id": "edition-fin-note",
+            "level": "advanced"
+          },
+          {
+            "label": "Select all",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Select the note.",
+            "priority": 12,
+            "id": "edition-tout-selectionner",
+            "level": "standard"
+          },
+          {
+            "label": "Select to note start",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Home"
+            ],
+            "description": "Extend selection to the start.",
+            "priority": 13,
+            "id": "edition-selection-debut-note",
+            "level": "expert"
+          },
+          {
+            "label": "Select to note end",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "End"
+            ],
+            "description": "Extend selection to the end.",
+            "priority": 14,
+            "id": "edition-selection-fin-note",
+            "level": "expert"
           }
         ]
       },
@@ -422,8 +602,8 @@
             ],
             "description": "Make text bold.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "format-gras"
+            "id": "format-gras",
+            "level": "standard"
           },
           {
             "label": "Italic",
@@ -433,8 +613,8 @@
             ],
             "description": "Make text italic.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "format-italique"
+            "id": "format-italique",
+            "level": "standard"
           },
           {
             "label": "Link",
@@ -444,8 +624,8 @@
             ],
             "description": "Insert or edit a link.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "format-lien"
+            "id": "format-lien",
+            "level": "standard"
           },
           {
             "label": "Find note",
@@ -455,8 +635,8 @@
             ],
             "description": "Search the note.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "format-recherche-note"
+            "id": "format-recherche-note",
+            "level": "standard"
           },
           {
             "label": "Search vault",
@@ -467,8 +647,8 @@
             ],
             "description": "Search the vault.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "format-recherche-coffre"
+            "id": "format-recherche-coffre",
+            "level": "standard"
           },
           {
             "label": "Reading editing",
@@ -478,8 +658,8 @@
             ],
             "description": "Toggle reading and editing.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "format-lecture-edition"
+            "id": "format-lecture-edition",
+            "level": "advanced"
           }
         ]
       }

@@ -22,8 +22,8 @@
             ],
             "description": "Lance ou met en pause.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "lecture-lecture-pause"
+            "id": "lecture-lecture-pause",
+            "level": "standard"
           },
           {
             "label": "Lecture pause alternative",
@@ -33,8 +33,8 @@
             ],
             "description": "Bascule la lecture si compatible.",
             "priority": 2,
-            "usageLevel": "advanced",
-            "id": "lecture-lecture-pause-alternative"
+            "id": "lecture-lecture-pause-alternative",
+            "level": "advanced"
           },
           {
             "label": "Stop",
@@ -44,8 +44,8 @@
             ],
             "description": "Arrete la lecture si compatible.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "lecture-stop"
+            "id": "lecture-stop",
+            "level": "advanced"
           },
           {
             "label": "Plein ecran",
@@ -54,8 +54,19 @@
             ],
             "description": "Bascule le plein ecran.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "lecture-plein-ecran"
+            "id": "lecture-plein-ecran",
+            "level": "standard"
+          },
+          {
+            "label": "Plein ecran alternatif",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Bascule le plein ecran si compatible.",
+            "priority": 5,
+            "id": "lecture-plein-ecran-alt",
+            "level": "advanced"
           },
           {
             "label": "Quitter plein ecran",
@@ -63,9 +74,9 @@
               "Esc"
             ],
             "description": "Revient a la fenetre.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "lecture-quitter-plein-ecran"
+            "priority": 6,
+            "id": "lecture-quitter-plein-ecran",
+            "level": "standard"
           }
         ]
       },
@@ -80,8 +91,8 @@
             ],
             "description": "Avance dans le media.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-avancer"
+            "id": "navigation-avancer",
+            "level": "standard"
           },
           {
             "label": "Reculer",
@@ -90,8 +101,30 @@
             ],
             "description": "Recule dans le media.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-reculer"
+            "id": "navigation-reculer",
+            "level": "standard"
+          },
+          {
+            "label": "Retour app",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Revient a l ecran precedent.",
+            "priority": 3,
+            "id": "navigation-retour-app",
+            "level": "advanced"
+          },
+          {
+            "label": "Repetition",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Active ou desactive la repetition.",
+            "priority": 4,
+            "id": "navigation-repetition",
+            "level": "advanced"
           },
           {
             "label": "Media suivant",
@@ -100,9 +133,9 @@
               "F"
             ],
             "description": "Passe au media suivant si compatible.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-media-suivant"
+            "priority": 5,
+            "id": "navigation-media-suivant",
+            "level": "advanced"
           },
           {
             "label": "Media precedent",
@@ -111,9 +144,9 @@
               "B"
             ],
             "description": "Revient au media precedent si compatible.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-media-precedent"
+            "priority": 6,
+            "id": "navigation-media-precedent",
+            "level": "advanced"
           }
         ]
       },
@@ -128,8 +161,8 @@
             ],
             "description": "Augmente le volume.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "audio-volume-plus"
+            "id": "audio-volume-plus",
+            "level": "standard"
           },
           {
             "label": "Volume moins",
@@ -138,8 +171,8 @@
             ],
             "description": "Diminue le volume.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "audio-volume-moins"
+            "id": "audio-volume-moins",
+            "level": "standard"
           },
           {
             "label": "Muet",
@@ -148,8 +181,8 @@
             ],
             "description": "Coupe le son si compatible.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "audio-muet"
+            "id": "audio-muet",
+            "level": "advanced"
           }
         ]
       }
@@ -178,8 +211,8 @@
             ],
             "description": "Play or pause.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "lecture-lecture-pause"
+            "id": "lecture-lecture-pause",
+            "level": "standard"
           },
           {
             "label": "Alternative play pause",
@@ -189,8 +222,8 @@
             ],
             "description": "Toggle playback when compatible.",
             "priority": 2,
-            "usageLevel": "advanced",
-            "id": "lecture-lecture-pause-alternative"
+            "id": "lecture-lecture-pause-alternative",
+            "level": "advanced"
           },
           {
             "label": "Stop",
@@ -200,8 +233,8 @@
             ],
             "description": "Stop playback when compatible.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "lecture-stop"
+            "id": "lecture-stop",
+            "level": "advanced"
           },
           {
             "label": "Full screen",
@@ -210,8 +243,19 @@
             ],
             "description": "Toggle full screen.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "lecture-plein-ecran"
+            "id": "lecture-plein-ecran",
+            "level": "standard"
+          },
+          {
+            "label": "Alternative full screen",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Toggle full screen when compatible.",
+            "priority": 5,
+            "id": "lecture-plein-ecran-alt",
+            "level": "advanced"
           },
           {
             "label": "Exit full screen",
@@ -219,9 +263,9 @@
               "Esc"
             ],
             "description": "Return to window mode.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "lecture-quitter-plein-ecran"
+            "priority": 6,
+            "id": "lecture-quitter-plein-ecran",
+            "level": "standard"
           }
         ]
       },
@@ -236,8 +280,8 @@
             ],
             "description": "Seek forward.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-avancer"
+            "id": "navigation-avancer",
+            "level": "standard"
           },
           {
             "label": "Seek backward",
@@ -246,8 +290,30 @@
             ],
             "description": "Seek backward.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-reculer"
+            "id": "navigation-reculer",
+            "level": "standard"
+          },
+          {
+            "label": "App back",
+            "keys": [
+              "Alt",
+              "Left"
+            ],
+            "description": "Return to the previous screen.",
+            "priority": 3,
+            "id": "navigation-retour-app",
+            "level": "advanced"
+          },
+          {
+            "label": "Repeat",
+            "keys": [
+              "Ctrl",
+              "T"
+            ],
+            "description": "Toggle repeat.",
+            "priority": 4,
+            "id": "navigation-repetition",
+            "level": "advanced"
           },
           {
             "label": "Next media",
@@ -256,9 +322,9 @@
               "F"
             ],
             "description": "Move to next media when compatible.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-media-suivant"
+            "priority": 5,
+            "id": "navigation-media-suivant",
+            "level": "advanced"
           },
           {
             "label": "Previous media",
@@ -267,9 +333,9 @@
               "B"
             ],
             "description": "Move to previous media when compatible.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-media-precedent"
+            "priority": 6,
+            "id": "navigation-media-precedent",
+            "level": "advanced"
           }
         ]
       },
@@ -284,8 +350,8 @@
             ],
             "description": "Increase volume.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "audio-volume-plus"
+            "id": "audio-volume-plus",
+            "level": "standard"
           },
           {
             "label": "Volume down",
@@ -294,8 +360,8 @@
             ],
             "description": "Decrease volume.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "audio-volume-moins"
+            "id": "audio-volume-moins",
+            "level": "standard"
           },
           {
             "label": "Mute",
@@ -304,8 +370,8 @@
             ],
             "description": "Mute when compatible.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "audio-muet"
+            "id": "audio-muet",
+            "level": "advanced"
           }
         ]
       }

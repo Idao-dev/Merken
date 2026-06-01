@@ -12,7 +12,7 @@ Une fiche applicative est un objet `ShortcutSheet` :
 {
   "id": "excel-fr",
   "appNames": ["excel.exe"],
-  "title": "Excel - Essentiels",
+  "title": "Excel",
   "platform": "windows",
   "language": "fr",
   "categories": [
@@ -26,7 +26,7 @@ Une fiche applicative est un objet `ShortcutSheet` :
           "keys": ["Ctrl", "S"],
           "description": "Enregistre le classeur.",
           "priority": 1,
-          "usageLevel": "essential"
+          "level": "standard"
         }
       ]
     }
@@ -48,20 +48,21 @@ Une fiche applicative est un objet `ShortcutSheet` :
 - `title` est le titre lisible de la fiche.
 - `platform` vaut `windows`, `macos`, `linux` ou `cross-platform`.
 - `categories` regroupe les raccourcis par theme court.
-- Chaque raccourci contient `id`, `label`, `keys`, `description`, `priority` et `usageLevel`.
+- Chaque raccourci contient `id`, `label`, `keys`, `description`, `priority` et `level`.
 
 ## Priorite et niveaux
 
 - `priority` controle l'ordre d'affichage dans une categorie. Utiliser `1` pour le raccourci le plus important.
-- `usageLevel` est obligatoire et vaut `essential`, `common`, `advanced` ou `expert`.
-- `essential` correspond aux raccourcis a connaitre en premier.
-- `common` correspond aux raccourcis utiles dans un usage regulier.
+- `level` est obligatoire dans les donnees JSON.
+- Les valeurs autorisees sont `standard`, `advanced` et `expert`.
+- `standard` correspond aux raccourcis les plus utiles au quotidien.
 - `advanced` correspond aux raccourcis puissants mais moins frequents.
 - `expert` correspond aux raccourcis rares, destructifs, techniques ou tres contextuels.
-- L'affichage standard regroupe `essential` et `common`.
+- L'affichage standard montre uniquement les raccourcis `standard`.
 - L'affichage avance montre uniquement les raccourcis `advanced`.
 - L'affichage expert montre uniquement les raccourcis `expert`.
 - Les niveaux ne sont pas cumulatifs : un niveau remplace le precedent au lieu de s'y ajouter.
+- Le niveau personnalise n'est pas une valeur de fiche : il est compose dans l'application par theme ou par raccourci.
 
 ## Personnalisation
 
@@ -87,7 +88,7 @@ Ajouter une section `Sources`, puis utiliser la table recommandee :
 ```markdown
 | ID | Action | Touches | Description | Niveau |
 | --- | --- | --- | --- | --- |
-| `general-enregistrer` | Enregistrer | Ctrl + S | Enregistre le fichier. | Essentiel |
+| `general-enregistrer` | Enregistrer | Ctrl + S | Enregistre le fichier. | Standard |
 ```
 
 ## Validation

@@ -22,8 +22,8 @@
             ],
             "description": "Cree un message.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "mail-nouveau-message"
+            "id": "mail-nouveau-message",
+            "level": "standard"
           },
           {
             "label": "Envoyer",
@@ -33,8 +33,30 @@
             ],
             "description": "Envoie le message.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "mail-envoyer"
+            "id": "mail-envoyer",
+            "level": "standard"
+          },
+          {
+            "label": "Enregistrer brouillon",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Enregistre le brouillon.",
+            "priority": 3,
+            "id": "mail-enregistrer-brouillon",
+            "level": "standard"
+          },
+          {
+            "label": "Imprimer",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Ouvre l impression.",
+            "priority": 4,
+            "id": "mail-imprimer",
+            "level": "advanced"
           },
           {
             "label": "Repondre",
@@ -43,9 +65,9 @@
               "R"
             ],
             "description": "Repond au message.",
-            "priority": 3,
-            "usageLevel": "essential",
-            "id": "mail-repondre"
+            "priority": 5,
+            "id": "mail-repondre",
+            "level": "standard"
           },
           {
             "label": "Repondre a tous",
@@ -55,9 +77,9 @@
               "R"
             ],
             "description": "Repond a tous.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "mail-repondre-a-tous"
+            "priority": 6,
+            "id": "mail-repondre-a-tous",
+            "level": "standard"
           },
           {
             "label": "Transferer",
@@ -66,9 +88,9 @@
               "F"
             ],
             "description": "Transfere le message.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "mail-transferer"
+            "priority": 7,
+            "id": "mail-transferer",
+            "level": "standard"
           },
           {
             "label": "Supprimer",
@@ -77,9 +99,9 @@
               "D"
             ],
             "description": "Supprime l element.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "mail-supprimer"
+            "priority": 8,
+            "id": "mail-supprimer",
+            "level": "standard"
           },
           {
             "label": "Marquer lu",
@@ -88,9 +110,9 @@
               "Q"
             ],
             "description": "Marque comme lu.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "mail-marquer-lu"
+            "priority": 9,
+            "id": "mail-marquer-lu",
+            "level": "standard"
           },
           {
             "label": "Marquer non lu",
@@ -99,9 +121,31 @@
               "U"
             ],
             "description": "Marque comme non lu.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "mail-marquer-non-lu"
+            "priority": 10,
+            "id": "mail-marquer-non-lu",
+            "level": "standard"
+          },
+          {
+            "label": "Categoriser",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "G"
+            ],
+            "description": "Ouvre les categories.",
+            "priority": 11,
+            "id": "mail-categoriser",
+            "level": "advanced"
+          },
+          {
+            "label": "Suivi",
+            "keys": [
+              "Insert"
+            ],
+            "description": "Ajoute ou retire un indicateur.",
+            "priority": 12,
+            "id": "mail-suivi",
+            "level": "advanced"
           }
         ]
       },
@@ -117,8 +161,8 @@
             ],
             "description": "Passe au courrier.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-courrier"
+            "id": "navigation-courrier",
+            "level": "standard"
           },
           {
             "label": "Calendrier",
@@ -128,8 +172,8 @@
             ],
             "description": "Passe au calendrier.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-calendrier"
+            "id": "navigation-calendrier",
+            "level": "standard"
           },
           {
             "label": "Contacts",
@@ -139,8 +183,8 @@
             ],
             "description": "Passe aux contacts.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-contacts"
+            "id": "navigation-contacts",
+            "level": "advanced"
           },
           {
             "label": "Taches",
@@ -150,8 +194,8 @@
             ],
             "description": "Passe aux taches.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-taches"
+            "id": "navigation-taches",
+            "level": "advanced"
           },
           {
             "label": "Recherche",
@@ -161,8 +205,8 @@
             ],
             "description": "Active la recherche.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-recherche"
+            "id": "navigation-recherche",
+            "level": "standard"
           },
           {
             "label": "Envoyer recevoir",
@@ -171,8 +215,8 @@
             ],
             "description": "Lance l envoi-reception.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "navigation-envoyer-recevoir"
+            "id": "navigation-envoyer-recevoir",
+            "level": "standard"
           },
           {
             "label": "Element suivant",
@@ -182,8 +226,8 @@
             ],
             "description": "Passe a l element suivant.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "navigation-element-suivant"
+            "id": "navigation-element-suivant",
+            "level": "advanced"
           },
           {
             "label": "Element precedent",
@@ -193,8 +237,8 @@
             ],
             "description": "Revient a l element precedent.",
             "priority": 8,
-            "usageLevel": "advanced",
-            "id": "navigation-element-precedent"
+            "id": "navigation-element-precedent",
+            "level": "advanced"
           }
         ]
       },
@@ -211,8 +255,8 @@
             ],
             "description": "Cree un rendez-vous.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "calendrier-nouveau-rendez-vous"
+            "id": "calendrier-nouveau-rendez-vous",
+            "level": "standard"
           },
           {
             "label": "Nouvelle reunion",
@@ -223,8 +267,8 @@
             ],
             "description": "Cree une reunion.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "calendrier-nouvelle-reunion"
+            "id": "calendrier-nouvelle-reunion",
+            "level": "standard"
           },
           {
             "label": "Aller date",
@@ -234,8 +278,8 @@
             ],
             "description": "Va a une date.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "calendrier-aller-date"
+            "id": "calendrier-aller-date",
+            "level": "advanced"
           },
           {
             "label": "Vue jour",
@@ -245,8 +289,8 @@
             ],
             "description": "Affiche un jour.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "calendrier-vue-jour"
+            "id": "calendrier-vue-jour",
+            "level": "advanced"
           },
           {
             "label": "Semaine travail",
@@ -256,8 +300,8 @@
             ],
             "description": "Affiche la semaine travail.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "calendrier-semaine-travail"
+            "id": "calendrier-semaine-travail",
+            "level": "advanced"
           },
           {
             "label": "Vue semaine",
@@ -267,8 +311,8 @@
             ],
             "description": "Affiche la semaine.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "calendrier-vue-semaine"
+            "id": "calendrier-vue-semaine",
+            "level": "advanced"
           },
           {
             "label": "Vue mois",
@@ -278,8 +322,8 @@
             ],
             "description": "Affiche le mois.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "calendrier-vue-mois"
+            "id": "calendrier-vue-mois",
+            "level": "advanced"
           }
         ]
       }
@@ -308,8 +352,8 @@
             ],
             "description": "Create a message.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "mail-nouveau-message"
+            "id": "mail-nouveau-message",
+            "level": "standard"
           },
           {
             "label": "Send",
@@ -319,8 +363,30 @@
             ],
             "description": "Send the message.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "mail-envoyer"
+            "id": "mail-envoyer",
+            "level": "standard"
+          },
+          {
+            "label": "Save draft",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Save the draft.",
+            "priority": 3,
+            "id": "mail-enregistrer-brouillon",
+            "level": "standard"
+          },
+          {
+            "label": "Print",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Open print options.",
+            "priority": 4,
+            "id": "mail-imprimer",
+            "level": "advanced"
           },
           {
             "label": "Reply",
@@ -329,9 +395,9 @@
               "R"
             ],
             "description": "Reply to the message.",
-            "priority": 3,
-            "usageLevel": "essential",
-            "id": "mail-repondre"
+            "priority": 5,
+            "id": "mail-repondre",
+            "level": "standard"
           },
           {
             "label": "Reply all",
@@ -341,9 +407,9 @@
               "R"
             ],
             "description": "Reply to all.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "mail-repondre-a-tous"
+            "priority": 6,
+            "id": "mail-repondre-a-tous",
+            "level": "standard"
           },
           {
             "label": "Forward",
@@ -352,9 +418,9 @@
               "F"
             ],
             "description": "Forward the message.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "mail-transferer"
+            "priority": 7,
+            "id": "mail-transferer",
+            "level": "standard"
           },
           {
             "label": "Delete",
@@ -363,9 +429,9 @@
               "D"
             ],
             "description": "Delete the item.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "mail-supprimer"
+            "priority": 8,
+            "id": "mail-supprimer",
+            "level": "standard"
           },
           {
             "label": "Mark read",
@@ -374,9 +440,9 @@
               "Q"
             ],
             "description": "Mark as read.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "mail-marquer-lu"
+            "priority": 9,
+            "id": "mail-marquer-lu",
+            "level": "standard"
           },
           {
             "label": "Mark unread",
@@ -385,9 +451,31 @@
               "U"
             ],
             "description": "Mark as unread.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "mail-marquer-non-lu"
+            "priority": 10,
+            "id": "mail-marquer-non-lu",
+            "level": "standard"
+          },
+          {
+            "label": "Categorize",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "G"
+            ],
+            "description": "Open categories.",
+            "priority": 11,
+            "id": "mail-categoriser",
+            "level": "advanced"
+          },
+          {
+            "label": "Follow up",
+            "keys": [
+              "Insert"
+            ],
+            "description": "Add or remove a follow-up flag.",
+            "priority": 12,
+            "id": "mail-suivi",
+            "level": "advanced"
           }
         ]
       },
@@ -403,8 +491,8 @@
             ],
             "description": "Switch to Mail.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-courrier"
+            "id": "navigation-courrier",
+            "level": "standard"
           },
           {
             "label": "Calendar",
@@ -414,8 +502,8 @@
             ],
             "description": "Switch to Calendar.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-calendrier"
+            "id": "navigation-calendrier",
+            "level": "standard"
           },
           {
             "label": "People",
@@ -425,8 +513,8 @@
             ],
             "description": "Switch to People.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-contacts"
+            "id": "navigation-contacts",
+            "level": "advanced"
           },
           {
             "label": "Tasks",
@@ -436,8 +524,8 @@
             ],
             "description": "Switch to Tasks.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-taches"
+            "id": "navigation-taches",
+            "level": "advanced"
           },
           {
             "label": "Search",
@@ -447,8 +535,8 @@
             ],
             "description": "Focus search.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-recherche"
+            "id": "navigation-recherche",
+            "level": "standard"
           },
           {
             "label": "Send receive",
@@ -457,8 +545,8 @@
             ],
             "description": "Start send and receive.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "navigation-envoyer-recevoir"
+            "id": "navigation-envoyer-recevoir",
+            "level": "standard"
           },
           {
             "label": "Next item",
@@ -468,8 +556,8 @@
             ],
             "description": "Move to next item.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "navigation-element-suivant"
+            "id": "navigation-element-suivant",
+            "level": "advanced"
           },
           {
             "label": "Previous item",
@@ -479,8 +567,8 @@
             ],
             "description": "Move to previous item.",
             "priority": 8,
-            "usageLevel": "advanced",
-            "id": "navigation-element-precedent"
+            "id": "navigation-element-precedent",
+            "level": "advanced"
           }
         ]
       },
@@ -497,8 +585,8 @@
             ],
             "description": "Create an appointment.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "calendrier-nouveau-rendez-vous"
+            "id": "calendrier-nouveau-rendez-vous",
+            "level": "standard"
           },
           {
             "label": "New meeting",
@@ -509,8 +597,8 @@
             ],
             "description": "Create a meeting.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "calendrier-nouvelle-reunion"
+            "id": "calendrier-nouvelle-reunion",
+            "level": "standard"
           },
           {
             "label": "Go to date",
@@ -520,8 +608,8 @@
             ],
             "description": "Go to a date.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "calendrier-aller-date"
+            "id": "calendrier-aller-date",
+            "level": "advanced"
           },
           {
             "label": "Day view",
@@ -531,8 +619,8 @@
             ],
             "description": "Show one day.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "calendrier-vue-jour"
+            "id": "calendrier-vue-jour",
+            "level": "advanced"
           },
           {
             "label": "Work week",
@@ -542,8 +630,8 @@
             ],
             "description": "Show work week.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "calendrier-semaine-travail"
+            "id": "calendrier-semaine-travail",
+            "level": "advanced"
           },
           {
             "label": "Week view",
@@ -553,8 +641,8 @@
             ],
             "description": "Show week.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "calendrier-vue-semaine"
+            "id": "calendrier-vue-semaine",
+            "level": "advanced"
           },
           {
             "label": "Month view",
@@ -564,8 +652,8 @@
             ],
             "description": "Show month.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "calendrier-vue-mois"
+            "id": "calendrier-vue-mois",
+            "level": "advanced"
           }
         ]
       }

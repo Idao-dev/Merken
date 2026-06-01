@@ -24,8 +24,8 @@
             ],
             "description": "Ouvre un onglet.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "onglets-nouvel-onglet"
+            "id": "onglets-nouvel-onglet",
+            "level": "standard"
           },
           {
             "label": "Fermer onglet",
@@ -36,8 +36,8 @@
             ],
             "description": "Ferme l onglet actif.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "onglets-fermer-onglet"
+            "id": "onglets-fermer-onglet",
+            "level": "standard"
           },
           {
             "label": "Onglet suivant",
@@ -47,8 +47,8 @@
             ],
             "description": "Passe a l onglet suivant.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "onglets-onglet-suivant"
+            "id": "onglets-onglet-suivant",
+            "level": "standard"
           },
           {
             "label": "Onglet precedent",
@@ -59,8 +59,20 @@
             ],
             "description": "Revient a l onglet precedent.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "onglets-onglet-precedent"
+            "id": "onglets-onglet-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Liste profils",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Space"
+            ],
+            "description": "Ouvre la liste des profils.",
+            "priority": 5,
+            "id": "onglets-liste-profils",
+            "level": "advanced"
           },
           {
             "label": "Palette de commandes",
@@ -70,21 +82,32 @@
               "P"
             ],
             "description": "Ouvre la palette.",
-            "priority": 5,
-            "usageLevel": "advanced",
-            "id": "onglets-palette-de-commandes"
+            "priority": 6,
+            "id": "onglets-palette-de-commandes",
+            "level": "advanced"
           },
           {
             "label": "Parametres",
             "keys": [
               "Ctrl",
-              "Shift",
               ","
             ],
             "description": "Ouvre les parametres.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "onglets-parametres"
+            "priority": 7,
+            "id": "onglets-parametres",
+            "level": "advanced"
+          },
+          {
+            "label": "Fichier parametres",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              ","
+            ],
+            "description": "Ouvre le fichier de parametres.",
+            "priority": 8,
+            "id": "onglets-fichier-parametres",
+            "level": "expert"
           }
         ]
       },
@@ -101,8 +124,8 @@
             ],
             "description": "Copie la selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Coller",
@@ -113,8 +136,8 @@
             ],
             "description": "Colle dans le terminal.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Rechercher",
@@ -125,8 +148,8 @@
             ],
             "description": "Recherche dans le tampon.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Interrompre commande",
@@ -136,8 +159,8 @@
             ],
             "description": "Interrompt une commande.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "edition-interrompre-commande"
+            "id": "edition-interrompre-commande",
+            "level": "standard"
           },
           {
             "label": "Effacer affichage",
@@ -147,8 +170,8 @@
             ],
             "description": "Nettoie l affichage du shell.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "edition-effacer-affichage"
+            "id": "edition-effacer-affichage",
+            "level": "advanced"
           }
         ]
       },
@@ -165,8 +188,32 @@
             ],
             "description": "Cree un panneau du profil courant.",
             "priority": 1,
-            "usageLevel": "advanced",
-            "id": "affichage-dupliquer-panneau"
+            "id": "affichage-dupliquer-panneau",
+            "level": "advanced"
+          },
+          {
+            "label": "Scinder horizontal",
+            "keys": [
+              "Alt",
+              "Shift",
+              "-"
+            ],
+            "description": "Cree un panneau horizontal.",
+            "priority": 2,
+            "id": "affichage-scinder-horizontal",
+            "level": "expert"
+          },
+          {
+            "label": "Scinder vertical",
+            "keys": [
+              "Alt",
+              "Shift",
+              "+"
+            ],
+            "description": "Cree un panneau vertical.",
+            "priority": 3,
+            "id": "affichage-scinder-vertical",
+            "level": "expert"
           },
           {
             "label": "Zoom avant",
@@ -175,9 +222,9 @@
               "+"
             ],
             "description": "Agrandit le texte.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "affichage-zoom-avant"
+            "priority": 4,
+            "id": "affichage-zoom-avant",
+            "level": "standard"
           },
           {
             "label": "Zoom arriere",
@@ -186,9 +233,9 @@
               "-"
             ],
             "description": "Reduit le texte.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "affichage-zoom-arriere"
+            "priority": 5,
+            "id": "affichage-zoom-arriere",
+            "level": "standard"
           },
           {
             "label": "Zoom par defaut",
@@ -197,9 +244,9 @@
               "0"
             ],
             "description": "Restaure la taille initiale.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "affichage-zoom-par-defaut"
+            "priority": 6,
+            "id": "affichage-zoom-par-defaut",
+            "level": "standard"
           },
           {
             "label": "Plein ecran",
@@ -208,9 +255,80 @@
               "Enter"
             ],
             "description": "Bascule le plein ecran.",
+            "priority": 7,
+            "id": "affichage-plein-ecran",
+            "level": "advanced"
+          }
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Commandes PowerShell",
+        "shortcuts": [
+          {
+            "label": "Aide commande",
+            "keys": [],
+            "description": "Affiche l aide d une commande.",
+            "priority": 1,
+            "id": "commandes-aide",
+            "level": "standard",
+            "command": "Get-Help <commande>"
+          },
+          {
+            "label": "Trouver commande",
+            "keys": [],
+            "description": "Recherche une commande disponible.",
+            "priority": 2,
+            "id": "commandes-trouver",
+            "level": "standard",
+            "command": "Get-Command <nom>"
+          },
+          {
+            "label": "Lister fichiers",
+            "keys": [],
+            "description": "Liste les fichiers du dossier courant.",
+            "priority": 3,
+            "id": "commandes-lister-fichiers",
+            "level": "standard",
+            "command": "Get-ChildItem"
+          },
+          {
+            "label": "Changer dossier",
+            "keys": [],
+            "description": "Change de dossier courant.",
+            "priority": 4,
+            "id": "commandes-changer-dossier",
+            "level": "standard",
+            "command": "Set-Location <chemin>"
+          },
+          {
+            "label": "Lire fichier",
+            "keys": [],
+            "description": "Affiche le contenu d un fichier texte.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "affichage-plein-ecran"
+            "id": "commandes-lire-fichier",
+            "level": "advanced",
+            "command": "Get-Content <fichier>"
+          },
+          {
+            "label": "Lister processus",
+            "keys": [],
+            "description": "Liste les processus en cours.",
+            "priority": 6,
+            "id": "commandes-lister-processus",
+            "level": "advanced",
+            "command": "Get-Process"
+          },
+          {
+            "label": "Arreter processus",
+            "keys": [],
+            "description": "Arrete un processus par nom.",
+            "priority": 7,
+            "id": "commandes-arreter-processus",
+            "level": "expert",
+            "command": "Stop-Process -Name <nom>",
+            "warning": "Peut fermer brutalement une application ou interrompre un travail en cours.",
+            "warningLevel": "danger"
           }
         ]
       }
@@ -241,8 +359,8 @@
             ],
             "description": "Open a tab.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "onglets-nouvel-onglet"
+            "id": "onglets-nouvel-onglet",
+            "level": "standard"
           },
           {
             "label": "Close tab",
@@ -253,8 +371,8 @@
             ],
             "description": "Close the active tab.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "onglets-fermer-onglet"
+            "id": "onglets-fermer-onglet",
+            "level": "standard"
           },
           {
             "label": "Next tab",
@@ -264,8 +382,8 @@
             ],
             "description": "Move to the next tab.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "onglets-onglet-suivant"
+            "id": "onglets-onglet-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous tab",
@@ -276,8 +394,20 @@
             ],
             "description": "Move to the previous tab.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "onglets-onglet-precedent"
+            "id": "onglets-onglet-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Profile list",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Space"
+            ],
+            "description": "Open the profile list.",
+            "priority": 5,
+            "id": "onglets-liste-profils",
+            "level": "advanced"
           },
           {
             "label": "Command palette",
@@ -287,21 +417,32 @@
               "P"
             ],
             "description": "Open the command palette.",
-            "priority": 5,
-            "usageLevel": "advanced",
-            "id": "onglets-palette-de-commandes"
+            "priority": 6,
+            "id": "onglets-palette-de-commandes",
+            "level": "advanced"
           },
           {
             "label": "Settings",
             "keys": [
               "Ctrl",
-              "Shift",
               ","
             ],
             "description": "Open settings.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "onglets-parametres"
+            "priority": 7,
+            "id": "onglets-parametres",
+            "level": "advanced"
+          },
+          {
+            "label": "Settings file",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              ","
+            ],
+            "description": "Open the settings file.",
+            "priority": 8,
+            "id": "onglets-fichier-parametres",
+            "level": "expert"
           }
         ]
       },
@@ -318,8 +459,8 @@
             ],
             "description": "Copy selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Paste",
@@ -330,8 +471,8 @@
             ],
             "description": "Paste into the terminal.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Find",
@@ -342,8 +483,8 @@
             ],
             "description": "Search the buffer.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Interrupt command",
@@ -353,8 +494,8 @@
             ],
             "description": "Interrupt a command.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "edition-interrompre-commande"
+            "id": "edition-interrompre-commande",
+            "level": "standard"
           },
           {
             "label": "Clear display",
@@ -364,8 +505,8 @@
             ],
             "description": "Clear shell display.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "edition-effacer-affichage"
+            "id": "edition-effacer-affichage",
+            "level": "advanced"
           }
         ]
       },
@@ -382,8 +523,32 @@
             ],
             "description": "Create a pane from the current profile.",
             "priority": 1,
-            "usageLevel": "advanced",
-            "id": "affichage-dupliquer-panneau"
+            "id": "affichage-dupliquer-panneau",
+            "level": "advanced"
+          },
+          {
+            "label": "Split horizontal",
+            "keys": [
+              "Alt",
+              "Shift",
+              "-"
+            ],
+            "description": "Create a horizontal pane.",
+            "priority": 2,
+            "id": "affichage-scinder-horizontal",
+            "level": "expert"
+          },
+          {
+            "label": "Split vertical",
+            "keys": [
+              "Alt",
+              "Shift",
+              "+"
+            ],
+            "description": "Create a vertical pane.",
+            "priority": 3,
+            "id": "affichage-scinder-vertical",
+            "level": "expert"
           },
           {
             "label": "Zoom in",
@@ -392,9 +557,9 @@
               "+"
             ],
             "description": "Increase text size.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "affichage-zoom-avant"
+            "priority": 4,
+            "id": "affichage-zoom-avant",
+            "level": "standard"
           },
           {
             "label": "Zoom out",
@@ -403,9 +568,9 @@
               "-"
             ],
             "description": "Decrease text size.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "affichage-zoom-arriere"
+            "priority": 5,
+            "id": "affichage-zoom-arriere",
+            "level": "standard"
           },
           {
             "label": "Default zoom",
@@ -414,9 +579,9 @@
               "0"
             ],
             "description": "Restore default size.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "affichage-zoom-par-defaut"
+            "priority": 6,
+            "id": "affichage-zoom-par-defaut",
+            "level": "standard"
           },
           {
             "label": "Full screen",
@@ -425,9 +590,80 @@
               "Enter"
             ],
             "description": "Toggle full screen.",
+            "priority": 7,
+            "id": "affichage-plein-ecran",
+            "level": "advanced"
+          }
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "PowerShell commands",
+        "shortcuts": [
+          {
+            "label": "Command help",
+            "keys": [],
+            "description": "Show help for a command.",
+            "priority": 1,
+            "id": "commandes-aide",
+            "level": "standard",
+            "command": "Get-Help <command>"
+          },
+          {
+            "label": "Find command",
+            "keys": [],
+            "description": "Find an available command.",
+            "priority": 2,
+            "id": "commandes-trouver",
+            "level": "standard",
+            "command": "Get-Command <name>"
+          },
+          {
+            "label": "List files",
+            "keys": [],
+            "description": "List files in the current folder.",
+            "priority": 3,
+            "id": "commandes-lister-fichiers",
+            "level": "standard",
+            "command": "Get-ChildItem"
+          },
+          {
+            "label": "Change folder",
+            "keys": [],
+            "description": "Change the current folder.",
+            "priority": 4,
+            "id": "commandes-changer-dossier",
+            "level": "standard",
+            "command": "Set-Location <path>"
+          },
+          {
+            "label": "Read file",
+            "keys": [],
+            "description": "Show a text file's content.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "affichage-plein-ecran"
+            "id": "commandes-lire-fichier",
+            "level": "advanced",
+            "command": "Get-Content <file>"
+          },
+          {
+            "label": "List processes",
+            "keys": [],
+            "description": "List running processes.",
+            "priority": 6,
+            "id": "commandes-lister-processus",
+            "level": "advanced",
+            "command": "Get-Process"
+          },
+          {
+            "label": "Stop process",
+            "keys": [],
+            "description": "Stop a process by name.",
+            "priority": 7,
+            "id": "commandes-arreter-processus",
+            "level": "expert",
+            "command": "Stop-Process -Name <name>",
+            "warning": "May force-close an app or interrupt work in progress.",
+            "warningLevel": "danger"
           }
         ]
       }

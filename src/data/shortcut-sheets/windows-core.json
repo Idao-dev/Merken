@@ -22,8 +22,8 @@
             ],
             "description": "Copie la selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Coller",
@@ -33,8 +33,8 @@
             ],
             "description": "Colle le presse-papiers.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Couper",
@@ -44,8 +44,8 @@
             ],
             "description": "Coupe la selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "edition-couper"
+            "id": "edition-couper",
+            "level": "standard"
           },
           {
             "label": "Annuler",
@@ -55,8 +55,8 @@
             ],
             "description": "Annule l action recente.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Tout selectionner",
@@ -66,8 +66,8 @@
             ],
             "description": "Selectionne le contenu disponible.",
             "priority": 5,
-            "usageLevel": "essential",
-            "id": "edition-tout-selectionner"
+            "id": "edition-tout-selectionner",
+            "level": "standard"
           },
           {
             "label": "Rechercher",
@@ -77,8 +77,8 @@
             ],
             "description": "Ouvre la recherche locale.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Coller sans mise en forme",
@@ -89,8 +89,8 @@
             ],
             "description": "Colle du texte brut si l app le permet.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "edition-coller-sans-mise-en-forme"
+            "id": "edition-coller-sans-mise-en-forme",
+            "level": "advanced"
           },
           {
             "label": "Historique presse-papiers",
@@ -100,8 +100,8 @@
             ],
             "description": "Ouvre les elements recents du presse-papiers.",
             "priority": 8,
-            "usageLevel": "advanced",
-            "id": "edition-historique-presse-papiers"
+            "id": "edition-historique-presse-papiers",
+            "level": "advanced"
           }
         ]
       },
@@ -116,8 +116,8 @@
             ],
             "description": "Ouvre ou ferme Demarrer.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "systeme-menu-demarrer"
+            "id": "systeme-menu-demarrer",
+            "level": "standard"
           },
           {
             "label": "Rechercher Windows",
@@ -127,8 +127,8 @@
             ],
             "description": "Ouvre la recherche Windows.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "systeme-rechercher-windows"
+            "id": "systeme-rechercher-windows",
+            "level": "standard"
           },
           {
             "label": "Executer",
@@ -138,8 +138,8 @@
             ],
             "description": "Ouvre la boite Executer.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "systeme-executer"
+            "id": "systeme-executer",
+            "level": "standard"
           },
           {
             "label": "Parametres",
@@ -149,8 +149,8 @@
             ],
             "description": "Ouvre les parametres.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "systeme-parametres"
+            "id": "systeme-parametres",
+            "level": "standard"
           },
           {
             "label": "Verrouiller",
@@ -160,8 +160,30 @@
             ],
             "description": "Verrouille la session.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "systeme-verrouiller"
+            "id": "systeme-verrouiller",
+            "level": "standard"
+          },
+          {
+            "label": "Reglages rapides",
+            "keys": [
+              "Win",
+              "A"
+            ],
+            "description": "Ouvre les reglages rapides.",
+            "priority": 6,
+            "id": "systeme-reglages-rapides",
+            "level": "standard"
+          },
+          {
+            "label": "Notifications",
+            "keys": [
+              "Win",
+              "N"
+            ],
+            "description": "Ouvre le centre de notifications.",
+            "priority": 7,
+            "id": "systeme-notifications",
+            "level": "advanced"
           },
           {
             "label": "Menu rapide",
@@ -170,9 +192,9 @@
               "X"
             ],
             "description": "Ouvre le menu des outils systeme.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "systeme-menu-rapide"
+            "priority": 8,
+            "id": "systeme-menu-rapide",
+            "level": "advanced"
           },
           {
             "label": "Gestionnaire des taches",
@@ -182,9 +204,9 @@
               "Esc"
             ],
             "description": "Ouvre le gestionnaire des taches.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "systeme-gestionnaire-des-taches"
+            "priority": 9,
+            "id": "systeme-gestionnaire-des-taches",
+            "level": "advanced"
           },
           {
             "label": "Capture de zone",
@@ -194,9 +216,9 @@
               "S"
             ],
             "description": "Lance la capture de zone.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "systeme-capture-de-zone"
+            "priority": 10,
+            "id": "systeme-capture-de-zone",
+            "level": "standard"
           },
           {
             "label": "Emoji et symboles",
@@ -205,9 +227,9 @@
               "."
             ],
             "description": "Ouvre le panneau emoji.",
-            "priority": 9,
-            "usageLevel": "common",
-            "id": "systeme-emoji-et-symboles"
+            "priority": 11,
+            "id": "systeme-emoji-et-symboles",
+            "level": "standard"
           },
           {
             "label": "A propos du systeme",
@@ -216,9 +238,9 @@
               "Pause"
             ],
             "description": "Ouvre la page Systeme > Informations.",
-            "priority": 10,
-            "usageLevel": "expert",
-            "id": "systeme-a-propos"
+            "priority": 12,
+            "id": "systeme-a-propos",
+            "level": "expert"
           }
         ]
       },
@@ -232,13 +254,13 @@
               "Win",
               "R"
             ],
-            "command": "devmgmt.msc",
             "description": "Ouvre le gestionnaire de peripheriques depuis Executer.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 1,
-            "usageLevel": "expert",
-            "id": "outils-systeme-gestionnaire-peripheriques"
+            "id": "outils-systeme-gestionnaire-peripheriques",
+            "level": "expert",
+            "command": "devmgmt.msc",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           },
           {
             "label": "Options d'alimentation",
@@ -246,13 +268,13 @@
               "Win",
               "R"
             ],
-            "command": "powercfg.cpl",
             "description": "Ouvre les options d'alimentation depuis Executer.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 2,
-            "usageLevel": "expert",
-            "id": "outils-systeme-options-alimentation"
+            "id": "outils-systeme-options-alimentation",
+            "level": "expert",
+            "command": "powercfg.cpl",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           },
           {
             "label": "Alimentation avancee",
@@ -260,13 +282,13 @@
               "Win",
               "R"
             ],
-            "command": "control.exe powercfg.cpl,,3",
             "description": "Ouvre les parametres avances du mode de gestion d'alimentation.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 3,
-            "usageLevel": "expert",
-            "id": "outils-systeme-alimentation-avancee"
+            "id": "outils-systeme-alimentation-avancee",
+            "level": "expert",
+            "command": "control.exe powercfg.cpl,,3",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           },
           {
             "label": "Parametres systeme avances",
@@ -274,13 +296,13 @@
               "Win",
               "R"
             ],
-            "command": "SystemPropertiesAdvanced.exe",
             "description": "Ouvre les proprietes systeme avancees.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 4,
-            "usageLevel": "expert",
-            "id": "outils-systeme-parametres-systeme-avances"
+            "id": "outils-systeme-parametres-systeme-avances",
+            "level": "expert",
+            "command": "SystemPropertiesAdvanced.exe",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           },
           {
             "label": "Connexions reseau",
@@ -288,13 +310,13 @@
               "Win",
               "R"
             ],
-            "command": "control.exe netconnections",
             "description": "Ouvre les connexions reseau.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 5,
-            "usageLevel": "expert",
-            "id": "outils-systeme-connexions-reseau"
+            "id": "outils-systeme-connexions-reseau",
+            "level": "expert",
+            "command": "control.exe netconnections",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           },
           {
             "label": "Programmes et fonctionnalites",
@@ -302,13 +324,13 @@
               "Win",
               "R"
             ],
-            "command": "appwiz.cpl",
             "description": "Ouvre la liste des programmes installes.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 6,
-            "usageLevel": "expert",
-            "id": "outils-systeme-programmes-fonctionnalites"
+            "id": "outils-systeme-programmes-fonctionnalites",
+            "level": "expert",
+            "command": "appwiz.cpl",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           },
           {
             "label": "Fonctionnalites Windows",
@@ -316,13 +338,13 @@
               "Win",
               "R"
             ],
-            "command": "OptionalFeatures.exe",
             "description": "Ouvre l'activation des fonctionnalites Windows.",
-            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
-            "warningLevel": "danger",
             "priority": 7,
-            "usageLevel": "expert",
-            "id": "outils-systeme-fonctionnalites-windows"
+            "id": "outils-systeme-fonctionnalites-windows",
+            "level": "expert",
+            "command": "OptionalFeatures.exe",
+            "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
+            "warningLevel": "danger"
           }
         ]
       },
@@ -338,8 +360,8 @@
             ],
             "description": "Passe a une autre fenetre.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "fenetres-changer-de-fenetre"
+            "id": "fenetres-changer-de-fenetre",
+            "level": "standard"
           },
           {
             "label": "Vue des taches",
@@ -349,8 +371,8 @@
             ],
             "description": "Affiche fenetres et bureaux.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "fenetres-vue-des-taches"
+            "id": "fenetres-vue-des-taches",
+            "level": "standard"
           },
           {
             "label": "Afficher le bureau",
@@ -360,8 +382,31 @@
             ],
             "description": "Affiche ou masque le bureau.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "fenetres-afficher-le-bureau"
+            "id": "fenetres-afficher-le-bureau",
+            "level": "standard"
+          },
+          {
+            "label": "Reduire tout",
+            "keys": [
+              "Win",
+              "M"
+            ],
+            "description": "Reduit toutes les fenetres.",
+            "priority": 4,
+            "id": "fenetres-reduire-tout",
+            "level": "advanced"
+          },
+          {
+            "label": "Restaurer tout",
+            "keys": [
+              "Win",
+              "Shift",
+              "M"
+            ],
+            "description": "Restaure les fenetres reduites.",
+            "priority": 5,
+            "id": "fenetres-restaurer-tout",
+            "level": "advanced"
           },
           {
             "label": "Fermer fenetre",
@@ -370,9 +415,9 @@
               "F4"
             ],
             "description": "Ferme la fenetre active.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "fenetres-fermer-fenetre"
+            "priority": 6,
+            "id": "fenetres-fermer-fenetre",
+            "level": "standard"
           },
           {
             "label": "Ancrer a gauche",
@@ -381,9 +426,9 @@
               "Left"
             ],
             "description": "Place la fenetre a gauche.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "fenetres-ancrer-a-gauche"
+            "priority": 7,
+            "id": "fenetres-ancrer-a-gauche",
+            "level": "standard"
           },
           {
             "label": "Ancrer a droite",
@@ -392,9 +437,9 @@
               "Right"
             ],
             "description": "Place la fenetre a droite.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "fenetres-ancrer-a-droite"
+            "priority": 8,
+            "id": "fenetres-ancrer-a-droite",
+            "level": "standard"
           },
           {
             "label": "Agrandir",
@@ -403,9 +448,9 @@
               "Up"
             ],
             "description": "Agrandit la fenetre.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "fenetres-agrandir"
+            "priority": 9,
+            "id": "fenetres-agrandir",
+            "level": "standard"
           },
           {
             "label": "Reduire ou restaurer",
@@ -414,9 +459,33 @@
               "Down"
             ],
             "description": "Reduit ou restaure la fenetre.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "fenetres-reduire-ou-restaurer"
+            "priority": 10,
+            "id": "fenetres-reduire-ou-restaurer",
+            "level": "standard"
+          },
+          {
+            "label": "Ecran gauche",
+            "keys": [
+              "Win",
+              "Shift",
+              "Left"
+            ],
+            "description": "Deplace la fenetre vers l ecran gauche.",
+            "priority": 11,
+            "id": "fenetres-deplacer-ecran-gauche",
+            "level": "advanced"
+          },
+          {
+            "label": "Ecran droite",
+            "keys": [
+              "Win",
+              "Shift",
+              "Right"
+            ],
+            "description": "Deplace la fenetre vers l ecran droite.",
+            "priority": 12,
+            "id": "fenetres-deplacer-ecran-droite",
+            "level": "advanced"
           },
           {
             "label": "Nouveau bureau",
@@ -426,9 +495,9 @@
               "D"
             ],
             "description": "Cree un bureau virtuel.",
-            "priority": 9,
-            "usageLevel": "advanced",
-            "id": "fenetres-nouveau-bureau"
+            "priority": 13,
+            "id": "fenetres-nouveau-bureau",
+            "level": "advanced"
           },
           {
             "label": "Bureau suivant",
@@ -438,9 +507,9 @@
               "Right"
             ],
             "description": "Passe au bureau suivant.",
-            "priority": 10,
-            "usageLevel": "advanced",
-            "id": "fenetres-bureau-suivant"
+            "priority": 14,
+            "id": "fenetres-bureau-suivant",
+            "level": "advanced"
           },
           {
             "label": "Bureau precedent",
@@ -450,9 +519,9 @@
               "Left"
             ],
             "description": "Passe au bureau precedent.",
-            "priority": 11,
-            "usageLevel": "advanced",
-            "id": "fenetres-bureau-precedent"
+            "priority": 15,
+            "id": "fenetres-bureau-precedent",
+            "level": "advanced"
           },
           {
             "label": "Fermer bureau",
@@ -462,9 +531,9 @@
               "F4"
             ],
             "description": "Ferme le bureau virtuel actif.",
-            "priority": 12,
-            "usageLevel": "expert",
-            "id": "fenetres-fermer-bureau"
+            "priority": 16,
+            "id": "fenetres-fermer-bureau",
+            "level": "expert"
           }
         ]
       }
@@ -493,8 +562,8 @@
             ],
             "description": "Copy the selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Paste",
@@ -504,8 +573,8 @@
             ],
             "description": "Paste clipboard content.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Cut",
@@ -515,8 +584,8 @@
             ],
             "description": "Cut the selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "edition-couper"
+            "id": "edition-couper",
+            "level": "standard"
           },
           {
             "label": "Undo",
@@ -526,8 +595,8 @@
             ],
             "description": "Undo the latest action.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Select all",
@@ -537,8 +606,8 @@
             ],
             "description": "Select available content.",
             "priority": 5,
-            "usageLevel": "essential",
-            "id": "edition-tout-selectionner"
+            "id": "edition-tout-selectionner",
+            "level": "standard"
           },
           {
             "label": "Find",
@@ -548,8 +617,8 @@
             ],
             "description": "Open local search.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Paste without formatting",
@@ -560,8 +629,8 @@
             ],
             "description": "Paste plain text when supported.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "edition-coller-sans-mise-en-forme"
+            "id": "edition-coller-sans-mise-en-forme",
+            "level": "advanced"
           },
           {
             "label": "Clipboard history",
@@ -571,8 +640,8 @@
             ],
             "description": "Open recent clipboard items.",
             "priority": 8,
-            "usageLevel": "advanced",
-            "id": "edition-historique-presse-papiers"
+            "id": "edition-historique-presse-papiers",
+            "level": "advanced"
           }
         ]
       },
@@ -587,8 +656,8 @@
             ],
             "description": "Open or close Start.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "systeme-menu-demarrer"
+            "id": "systeme-menu-demarrer",
+            "level": "standard"
           },
           {
             "label": "Windows search",
@@ -598,8 +667,8 @@
             ],
             "description": "Open Windows search.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "systeme-rechercher-windows"
+            "id": "systeme-rechercher-windows",
+            "level": "standard"
           },
           {
             "label": "Run",
@@ -609,8 +678,8 @@
             ],
             "description": "Open the Run dialog.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "systeme-executer"
+            "id": "systeme-executer",
+            "level": "standard"
           },
           {
             "label": "Settings",
@@ -620,8 +689,8 @@
             ],
             "description": "Open Settings.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "systeme-parametres"
+            "id": "systeme-parametres",
+            "level": "standard"
           },
           {
             "label": "Lock",
@@ -631,8 +700,30 @@
             ],
             "description": "Lock the session.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "systeme-verrouiller"
+            "id": "systeme-verrouiller",
+            "level": "standard"
+          },
+          {
+            "label": "Quick settings",
+            "keys": [
+              "Win",
+              "A"
+            ],
+            "description": "Open quick settings.",
+            "priority": 6,
+            "id": "systeme-reglages-rapides",
+            "level": "standard"
+          },
+          {
+            "label": "Notifications",
+            "keys": [
+              "Win",
+              "N"
+            ],
+            "description": "Open the notification center.",
+            "priority": 7,
+            "id": "systeme-notifications",
+            "level": "advanced"
           },
           {
             "label": "Quick Link menu",
@@ -641,9 +732,9 @@
               "X"
             ],
             "description": "Open the system tools menu.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "systeme-menu-rapide"
+            "priority": 8,
+            "id": "systeme-menu-rapide",
+            "level": "advanced"
           },
           {
             "label": "Task Manager",
@@ -653,9 +744,9 @@
               "Esc"
             ],
             "description": "Open Task Manager.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "systeme-gestionnaire-des-taches"
+            "priority": 9,
+            "id": "systeme-gestionnaire-des-taches",
+            "level": "advanced"
           },
           {
             "label": "Area screenshot",
@@ -665,9 +756,9 @@
               "S"
             ],
             "description": "Start area capture.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "systeme-capture-de-zone"
+            "priority": 10,
+            "id": "systeme-capture-de-zone",
+            "level": "standard"
           },
           {
             "label": "Emoji and symbols",
@@ -676,9 +767,9 @@
               "."
             ],
             "description": "Open the emoji panel.",
-            "priority": 9,
-            "usageLevel": "common",
-            "id": "systeme-emoji-et-symboles"
+            "priority": 11,
+            "id": "systeme-emoji-et-symboles",
+            "level": "standard"
           },
           {
             "label": "System About",
@@ -687,9 +778,9 @@
               "Pause"
             ],
             "description": "Open the System > About page.",
-            "priority": 10,
-            "usageLevel": "expert",
-            "id": "systeme-a-propos"
+            "priority": 12,
+            "id": "systeme-a-propos",
+            "level": "expert"
           }
         ]
       },
@@ -703,13 +794,13 @@
               "Win",
               "R"
             ],
-            "command": "devmgmt.msc",
             "description": "Open Device Manager from Run.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 1,
-            "usageLevel": "expert",
-            "id": "outils-systeme-gestionnaire-peripheriques"
+            "id": "outils-systeme-gestionnaire-peripheriques",
+            "level": "expert",
+            "command": "devmgmt.msc",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           },
           {
             "label": "Power Options",
@@ -717,13 +808,13 @@
               "Win",
               "R"
             ],
-            "command": "powercfg.cpl",
             "description": "Open Power Options from Run.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 2,
-            "usageLevel": "expert",
-            "id": "outils-systeme-options-alimentation"
+            "id": "outils-systeme-options-alimentation",
+            "level": "expert",
+            "command": "powercfg.cpl",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           },
           {
             "label": "Advanced power settings",
@@ -731,13 +822,13 @@
               "Win",
               "R"
             ],
-            "command": "control.exe powercfg.cpl,,3",
             "description": "Open advanced power plan settings.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 3,
-            "usageLevel": "expert",
-            "id": "outils-systeme-alimentation-avancee"
+            "id": "outils-systeme-alimentation-avancee",
+            "level": "expert",
+            "command": "control.exe powercfg.cpl,,3",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           },
           {
             "label": "Advanced system settings",
@@ -745,13 +836,13 @@
               "Win",
               "R"
             ],
-            "command": "SystemPropertiesAdvanced.exe",
             "description": "Open advanced system properties.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 4,
-            "usageLevel": "expert",
-            "id": "outils-systeme-parametres-systeme-avances"
+            "id": "outils-systeme-parametres-systeme-avances",
+            "level": "expert",
+            "command": "SystemPropertiesAdvanced.exe",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           },
           {
             "label": "Network Connections",
@@ -759,13 +850,13 @@
               "Win",
               "R"
             ],
-            "command": "control.exe netconnections",
             "description": "Open Network Connections.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 5,
-            "usageLevel": "expert",
-            "id": "outils-systeme-connexions-reseau"
+            "id": "outils-systeme-connexions-reseau",
+            "level": "expert",
+            "command": "control.exe netconnections",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           },
           {
             "label": "Programs and Features",
@@ -773,13 +864,13 @@
               "Win",
               "R"
             ],
-            "command": "appwiz.cpl",
             "description": "Open the installed programs list.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 6,
-            "usageLevel": "expert",
-            "id": "outils-systeme-programmes-fonctionnalites"
+            "id": "outils-systeme-programmes-fonctionnalites",
+            "level": "expert",
+            "command": "appwiz.cpl",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           },
           {
             "label": "Windows Features",
@@ -787,13 +878,13 @@
               "Win",
               "R"
             ],
-            "command": "OptionalFeatures.exe",
             "description": "Open Windows features.",
-            "warning": "* Advanced system tool: review every change before applying it.",
-            "warningLevel": "danger",
             "priority": 7,
-            "usageLevel": "expert",
-            "id": "outils-systeme-fonctionnalites-windows"
+            "id": "outils-systeme-fonctionnalites-windows",
+            "level": "expert",
+            "command": "OptionalFeatures.exe",
+            "warning": "* Advanced system tool: review every change before applying it.",
+            "warningLevel": "danger"
           }
         ]
       },
@@ -809,8 +900,8 @@
             ],
             "description": "Switch to another window.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "fenetres-changer-de-fenetre"
+            "id": "fenetres-changer-de-fenetre",
+            "level": "standard"
           },
           {
             "label": "Task view",
@@ -820,8 +911,8 @@
             ],
             "description": "Show windows and desktops.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "fenetres-vue-des-taches"
+            "id": "fenetres-vue-des-taches",
+            "level": "standard"
           },
           {
             "label": "Show desktop",
@@ -831,8 +922,31 @@
             ],
             "description": "Show or hide the desktop.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "fenetres-afficher-le-bureau"
+            "id": "fenetres-afficher-le-bureau",
+            "level": "standard"
+          },
+          {
+            "label": "Minimize all",
+            "keys": [
+              "Win",
+              "M"
+            ],
+            "description": "Minimize all windows.",
+            "priority": 4,
+            "id": "fenetres-reduire-tout",
+            "level": "advanced"
+          },
+          {
+            "label": "Restore all",
+            "keys": [
+              "Win",
+              "Shift",
+              "M"
+            ],
+            "description": "Restore minimized windows.",
+            "priority": 5,
+            "id": "fenetres-restaurer-tout",
+            "level": "advanced"
           },
           {
             "label": "Close window",
@@ -841,9 +955,9 @@
               "F4"
             ],
             "description": "Close the active window.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "fenetres-fermer-fenetre"
+            "priority": 6,
+            "id": "fenetres-fermer-fenetre",
+            "level": "standard"
           },
           {
             "label": "Snap left",
@@ -852,9 +966,9 @@
               "Left"
             ],
             "description": "Snap the window left.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "fenetres-ancrer-a-gauche"
+            "priority": 7,
+            "id": "fenetres-ancrer-a-gauche",
+            "level": "standard"
           },
           {
             "label": "Snap right",
@@ -863,9 +977,9 @@
               "Right"
             ],
             "description": "Snap the window right.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "fenetres-ancrer-a-droite"
+            "priority": 8,
+            "id": "fenetres-ancrer-a-droite",
+            "level": "standard"
           },
           {
             "label": "Maximize",
@@ -874,9 +988,9 @@
               "Up"
             ],
             "description": "Maximize the window.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "fenetres-agrandir"
+            "priority": 9,
+            "id": "fenetres-agrandir",
+            "level": "standard"
           },
           {
             "label": "Minimize or restore",
@@ -885,9 +999,33 @@
               "Down"
             ],
             "description": "Minimize or restore the window.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "fenetres-reduire-ou-restaurer"
+            "priority": 10,
+            "id": "fenetres-reduire-ou-restaurer",
+            "level": "standard"
+          },
+          {
+            "label": "Left monitor",
+            "keys": [
+              "Win",
+              "Shift",
+              "Left"
+            ],
+            "description": "Move the window to the left monitor.",
+            "priority": 11,
+            "id": "fenetres-deplacer-ecran-gauche",
+            "level": "advanced"
+          },
+          {
+            "label": "Right monitor",
+            "keys": [
+              "Win",
+              "Shift",
+              "Right"
+            ],
+            "description": "Move the window to the right monitor.",
+            "priority": 12,
+            "id": "fenetres-deplacer-ecran-droite",
+            "level": "advanced"
           },
           {
             "label": "New desktop",
@@ -897,9 +1035,9 @@
               "D"
             ],
             "description": "Create a virtual desktop.",
-            "priority": 9,
-            "usageLevel": "advanced",
-            "id": "fenetres-nouveau-bureau"
+            "priority": 13,
+            "id": "fenetres-nouveau-bureau",
+            "level": "advanced"
           },
           {
             "label": "Next desktop",
@@ -909,9 +1047,9 @@
               "Right"
             ],
             "description": "Switch to the next desktop.",
-            "priority": 10,
-            "usageLevel": "advanced",
-            "id": "fenetres-bureau-suivant"
+            "priority": 14,
+            "id": "fenetres-bureau-suivant",
+            "level": "advanced"
           },
           {
             "label": "Previous desktop",
@@ -921,9 +1059,9 @@
               "Left"
             ],
             "description": "Switch to the previous desktop.",
-            "priority": 11,
-            "usageLevel": "advanced",
-            "id": "fenetres-bureau-precedent"
+            "priority": 15,
+            "id": "fenetres-bureau-precedent",
+            "level": "advanced"
           },
           {
             "label": "Close desktop",
@@ -933,9 +1071,9 @@
               "F4"
             ],
             "description": "Close the active virtual desktop.",
-            "priority": 12,
-            "usageLevel": "expert",
-            "id": "fenetres-fermer-bureau"
+            "priority": 16,
+            "id": "fenetres-fermer-bureau",
+            "level": "expert"
           }
         ]
       }

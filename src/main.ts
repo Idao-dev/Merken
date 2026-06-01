@@ -172,7 +172,7 @@ function useActiveApp(nextActiveApp: ActiveApp, context: string): void {
 function updateSettings(next: Partial<UserSettings>): void {
   settings = { ...settings, ...next };
   saveSettings(settings);
-  render();
+  renderSettingsStateChange();
 }
 
 function saveShortcutSheetPreference(family: string, preference: ShortcutSheetPreference): void {
@@ -192,7 +192,7 @@ function updateShortcutSheetLevel(family: string, level: ShortcutDisplayLevel): 
     mode: "level",
     level
   });
-  render();
+  renderPreservingSettingsScroll();
 }
 
 function ensureCustomPreferenceForFamily(family: string): ShortcutSheetPreference | null {
@@ -670,7 +670,13 @@ function renderSheetBadges(family: string): string {
   return sheetBadgeKeys(family)
     .map((badgeKey) => {
       const badge = labels.sheetBadge[badgeKey];
-      const className = badgeKey === "windows-native" ? "sheet-badge sheet-badge-native" : "sheet-badge sheet-badge-browser";
+      const badgeClassName =
+        badgeKey === "windows-native"
+          ? "sheet-badge-native"
+          : badgeKey.startsWith("office-")
+            ? "sheet-badge-office"
+            : "sheet-badge-browser";
+      const className = `sheet-badge ${badgeClassName}`;
 
       return `<span class="${escapeAttribute(className)}" title="${escapeAttribute(badge.help)}" aria-label="${escapeAttribute(badge.help)}">${escapeHtml(badge.label)}</span>`;
     })
@@ -874,6 +880,15 @@ function renderPreservingSettingsScroll(): void {
 
   render();
   restoreSettingsScroll(scrollSnapshot);
+}
+
+function renderSettingsStateChange(): void {
+  if (isSettingsWindow) {
+    renderPreservingSettingsScroll();
+    return;
+  }
+
+  render();
 }
 
 function render(): void {
@@ -1571,7 +1586,7 @@ function bindEvents(): void {
       }
 
       selectedSettingsSheetFamily = family;
-      render();
+      renderPreservingSettingsScroll();
     });
   });
 

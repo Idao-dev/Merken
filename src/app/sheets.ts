@@ -7,7 +7,6 @@ import type {
   ShortcutEntry,
   ShortcutSheet,
   ShortcutSheetPreference,
-  UsageLevel,
   UserSettings
 } from "../types";
 
@@ -55,7 +54,11 @@ const windowsNativeSheetFamilies = new Set([
 const systemShortcutWarningExemptFamilies = new Set(["windows-core", "file-explorer"]);
 
 const sheetFamilyBadges = new Map<string, SheetBadgeKey[]>([
-  ["browsers", ["browser-edge", "browser-chrome", "browser-firefox", "browser-brave"]]
+  ["browsers", ["browser-edge", "browser-chrome", "browser-firefox", "browser-brave"]],
+  ["excel", ["office-365", "office-2024", "office-2021"]],
+  ["word", ["office-365", "office-2024", "office-2021"]],
+  ["powerpoint", ["office-365", "office-2024", "office-2021"]],
+  ["outlook", ["office-365", "office-2024", "office-2021"]]
 ]);
 
 const manualSheetLabels = new Map<string, string>([
@@ -231,7 +234,7 @@ export function availableShortcutLevels(sheet: ShortcutSheet): Record<ShortcutDi
 
   for (const category of sheet.categories) {
     for (const shortcut of category.shortcuts) {
-      available[displayLevelForUsage(shortcut.usageLevel)] = true;
+      available[shortcut.level] = true;
     }
   }
 
@@ -283,9 +286,7 @@ export function customPreferenceFromLevel(sheet: ShortcutSheet, level: ShortcutD
     mode: "custom",
     level: resolvedLevel,
     includeShortcutIds: sheet.categories.flatMap((category) =>
-      category.shortcuts
-        .filter((shortcut) => displayLevelForUsage(shortcut.usageLevel) === resolvedLevel)
-        .map((shortcut) => shortcut.id)
+      category.shortcuts.filter((shortcut) => shortcut.level === resolvedLevel).map((shortcut) => shortcut.id)
     ),
     categoryIds: [],
     excludeShortcutIds: []
@@ -395,7 +396,7 @@ export function visibleShortcuts(sheet: ShortcutSheet, preference: ShortcutSheet
               return isShortcutIncluded(category, shortcut, resolvedPreference);
             }
 
-            return displayLevelForUsage(shortcut.usageLevel) === resolvedPreference.level;
+            return shortcut.level === resolvedPreference.level;
           })
           .sort((a, b) => a.priority - b.priority)
       }))
@@ -443,10 +444,6 @@ function shortcutLayoutWeight(shortcut: ShortcutEntry): number {
   }
 
   return weight;
-}
-
-function displayLevelForUsage(usageLevel: UsageLevel): ShortcutDisplayLevel {
-  return usageLevel === "essential" || usageLevel === "common" ? "standard" : usageLevel;
 }
 
 function shortcutKeysSignature(keys: string[]): string {

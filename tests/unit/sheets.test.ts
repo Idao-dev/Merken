@@ -34,7 +34,7 @@ function syntheticCategory(id: string, count: number, command = false): Shortcut
       command: command ? "SystemPropertiesAdvanced.exe" : undefined,
       description: "Synthetic shortcut.",
       priority: index + 1,
-      usageLevel: "common"
+      level: "standard"
     }))
   };
 }
@@ -104,13 +104,19 @@ describe("shortcut sheet selection", () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it("classifies every shortcut with a usage level", () => {
-    const usageLevels = new Set(["essential", "common", "advanced", "expert"]);
+  it("classifies every shortcut with a display level and no legacy level metadata", () => {
+    const shortcutLevels = new Set(["standard", "advanced", "expert"]);
+    const legacyLevelField = "usage" + "Level";
+    const legacyLevelValues = new Set(["ess" + "ential", "com" + "mon"]);
 
     for (const sheet of sheets) {
       for (const category of sheet.categories) {
         for (const shortcut of category.shortcuts) {
-          expect(usageLevels.has(shortcut.usageLevel), `${sheet.id}:${category.id}:${shortcut.label}`).toBe(true);
+          const context = `${sheet.id}:${category.id}:${shortcut.label}`;
+
+          expect(shortcutLevels.has(shortcut.level), context).toBe(true);
+          expect(legacyLevelValues.has(shortcut.level), context).toBe(false);
+          expect(Object.prototype.hasOwnProperty.call(shortcut, legacyLevelField), context).toBe(false);
         }
       }
     }
@@ -237,6 +243,34 @@ describe("shortcut sheet selection", () => {
     );
   });
 
+  it("does not auto-detect cmd as the PowerShell sheet", () => {
+    expect(findSheetForProcess("cmd.exe", "fr")).toBeNull();
+  });
+
+  it("keeps Terminal settings shortcuts distinct", () => {
+    const terminal = sheets.find((sheet) => sheet.id === "terminal-powershell-fr");
+    const tabsCategory = terminal?.categories.find((category) => category.id === "onglets");
+
+    expect(tabsCategory?.shortcuts.find((shortcut) => shortcut.id === "onglets-parametres")?.keys).toEqual(["Ctrl", ","]);
+    expect(tabsCategory?.shortcuts.find((shortcut) => shortcut.id === "onglets-fichier-parametres")?.keys).toEqual([
+      "Ctrl",
+      "Shift",
+      ","
+    ]);
+  });
+
+  it("keeps PowerShell commands copyable without fake keyboard keys", () => {
+    const terminal = sheets.find((sheet) => sheet.id === "terminal-powershell-fr");
+    const commandsCategory = terminal?.categories.find((category) => category.id === "commandes");
+    const stopProcess = commandsCategory?.shortcuts.find((shortcut) => shortcut.id === "commandes-arreter-processus");
+
+    expect(commandsCategory?.shortcuts).toHaveLength(7);
+    expect(commandsCategory?.shortcuts.every((shortcut) => shortcut.keys.length === 0)).toBe(true);
+    expect(commandsCategory?.shortcuts.every((shortcut) => Boolean(shortcut.command))).toBe(true);
+    expect(stopProcess?.command).toBe("Stop-Process -Name <nom>");
+    expect(stopProcess?.warningLevel).toBe("danger");
+  });
+
   it("does not keep a browser sheet when the current process changes", () => {
     expect(selectSheet(defaultSettings, { processName: "firefox.exe", title: null, sheetId: null }).id).toBe("browsers-fr");
     expect(selectSheet(defaultSettings, { processName: "excel.exe", title: null, sheetId: null }).id).toBe("excel-fr");
@@ -328,7 +362,10 @@ describe("shortcut sheet selection", () => {
   it("identifies sheet badges", () => {
     expect(sheetBadgeKeys("windows-core")).toEqual(["windows-native"]);
     expect(sheetBadgeKeys("browsers")).toEqual(["browser-edge", "browser-chrome", "browser-firefox", "browser-brave"]);
-    expect(sheetBadgeKeys("excel")).toEqual([]);
+    expect(sheetBadgeKeys("excel")).toEqual(["office-365", "office-2024", "office-2021"]);
+    expect(sheetBadgeKeys("word")).toEqual(["office-365", "office-2024", "office-2021"]);
+    expect(sheetBadgeKeys("powerpoint")).toEqual(["office-365", "office-2024", "office-2021"]);
+    expect(sheetBadgeKeys("outlook")).toEqual(["office-365", "office-2024", "office-2021"]);
   });
 
   it("uses the current language when a manual family has variants", () => {
@@ -376,7 +413,7 @@ describe("shortcut sheet selection", () => {
               keys: ["Ctrl", "S"],
               description: "Synthetic shortcut.",
               priority: 1,
-              usageLevel: "common",
+              level: "standard",
               id: "navigation-synthetic"
             }
           ]

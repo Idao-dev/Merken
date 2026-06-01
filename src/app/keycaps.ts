@@ -12,17 +12,34 @@ const keycapSymbols: Record<string, string> = {
   Backspace: "⌫",
   Delete: "⌦",
   Space: "␣",
+  Home: "⇱",
+  End: "⇲",
   Left: "←",
   Right: "→",
   Up: "↑",
   Down: "↓",
   Arrow: "↑↓←→",
-  Arrows: "↑↓←→"
+  Arrows: "↑↓←→",
+  LeftClick: "Left click",
+  RightClick: "Right click",
+  Wheel: "Wheel",
+  Drag: "Drag"
+};
+
+const keycapAccessibleLabels: Record<string, string> = {
+  LeftClick: "Left click",
+  RightClick: "Right click",
+  Wheel: "Mouse wheel",
+  Drag: "Drag"
 };
 
 const keycapClasses: Record<string, string> = {
   Tab: "key-tab",
-  Space: "key-space"
+  Space: "key-space",
+  LeftClick: "key-mouse key-mouse-left",
+  RightClick: "key-mouse key-mouse-right",
+  Wheel: "key-mouse key-mouse-wheel",
+  Drag: "key-mouse key-mouse-drag"
 };
 
 export function keycapPresentation(key: string): KeycapPresentation {
@@ -39,7 +56,7 @@ export function keycapPresentation(key: string): KeycapPresentation {
 
   return {
     label: symbol,
-    accessibleLabel: key,
+    accessibleLabel: keycapAccessibleLabels[key] ?? key,
     isSymbol: true,
     className: keycapClasses[key] ?? ""
   };

@@ -20,8 +20,8 @@
             ],
             "description": "Cree un document.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "general-nouveau-document"
+            "id": "general-nouveau-document",
+            "level": "standard"
           },
           {
             "label": "Ouvrir",
@@ -31,8 +31,8 @@
             ],
             "description": "Ouvre un document.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "general-ouvrir"
+            "id": "general-ouvrir",
+            "level": "standard"
           },
           {
             "label": "Enregistrer",
@@ -42,8 +42,8 @@
             ],
             "description": "Enregistre le document.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "general-enregistrer"
+            "id": "general-enregistrer",
+            "level": "standard"
           },
           {
             "label": "Imprimer",
@@ -53,8 +53,8 @@
             ],
             "description": "Ouvre l impression.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "general-imprimer"
+            "id": "general-imprimer",
+            "level": "standard"
           },
           {
             "label": "Fermer",
@@ -64,8 +64,18 @@
             ],
             "description": "Ferme le document.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "general-fermer"
+            "id": "general-fermer",
+            "level": "standard"
+          },
+          {
+            "label": "Enregistrer sous",
+            "keys": [
+              "F12"
+            ],
+            "description": "Ouvre Enregistrer sous.",
+            "priority": 6,
+            "id": "general-enregistrer-sous",
+            "level": "advanced"
           },
           {
             "label": "Recherche commande",
@@ -74,9 +84,9 @@
               "Q"
             ],
             "description": "Recherche une commande.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "general-recherche-commande"
+            "priority": 7,
+            "id": "general-recherche-commande",
+            "level": "advanced"
           }
         ]
       },
@@ -92,8 +102,8 @@
             ],
             "description": "Copie la selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Coller",
@@ -103,8 +113,8 @@
             ],
             "description": "Colle le presse-papiers.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Couper",
@@ -114,8 +124,20 @@
             ],
             "description": "Coupe la selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "edition-couper"
+            "id": "edition-couper",
+            "level": "standard"
+          },
+          {
+            "label": "Coller texte seul",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Colle sans mise en forme.",
+            "priority": 4,
+            "id": "edition-coller-texte",
+            "level": "standard"
           },
           {
             "label": "Annuler",
@@ -124,9 +146,9 @@
               "Z"
             ],
             "description": "Annule l action recente.",
-            "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "priority": 5,
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Retablir",
@@ -135,9 +157,9 @@
               "Y"
             ],
             "description": "Retablit l action.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "priority": 6,
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Rechercher",
@@ -146,9 +168,9 @@
               "F"
             ],
             "description": "Recherche dans le document.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "priority": 7,
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Remplacer",
@@ -157,9 +179,9 @@
               "H"
             ],
             "description": "Ouvre le remplacement.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "edition-remplacer"
+            "priority": 8,
+            "id": "edition-remplacer",
+            "level": "advanced"
           },
           {
             "label": "Atteindre",
@@ -168,9 +190,9 @@
               "G"
             ],
             "description": "Va a une cible.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "edition-atteindre"
+            "priority": 9,
+            "id": "edition-atteindre",
+            "level": "advanced"
           }
         ]
       },
@@ -186,8 +208,8 @@
             ],
             "description": "Active le gras.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "format-gras"
+            "id": "format-gras",
+            "level": "standard"
           },
           {
             "label": "Italique",
@@ -197,8 +219,8 @@
             ],
             "description": "Active l italique.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "format-italique"
+            "id": "format-italique",
+            "level": "standard"
           },
           {
             "label": "Souligne",
@@ -208,8 +230,8 @@
             ],
             "description": "Active le souligne.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "format-souligne"
+            "id": "format-souligne",
+            "level": "standard"
           },
           {
             "label": "Gauche",
@@ -219,8 +241,8 @@
             ],
             "description": "Aligne a gauche.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "format-gauche"
+            "id": "format-gauche",
+            "level": "standard"
           },
           {
             "label": "Centrer",
@@ -230,8 +252,8 @@
             ],
             "description": "Centre le paragraphe.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "format-centrer"
+            "id": "format-centrer",
+            "level": "standard"
           },
           {
             "label": "Droite",
@@ -241,8 +263,8 @@
             ],
             "description": "Aligne a droite.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "format-droite"
+            "id": "format-droite",
+            "level": "advanced"
           },
           {
             "label": "Justifier",
@@ -252,8 +274,8 @@
             ],
             "description": "Justifie le paragraphe.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "format-justifier"
+            "id": "format-justifier",
+            "level": "advanced"
           },
           {
             "label": "Copier format",
@@ -264,8 +286,8 @@
             ],
             "description": "Copie la mise en forme.",
             "priority": 8,
-            "usageLevel": "advanced",
-            "id": "format-copier-format"
+            "id": "format-copier-format",
+            "level": "advanced"
           },
           {
             "label": "Coller format",
@@ -276,8 +298,8 @@
             ],
             "description": "Applique la mise en forme.",
             "priority": 9,
-            "usageLevel": "advanced",
-            "id": "format-coller-format"
+            "id": "format-coller-format",
+            "level": "advanced"
           },
           {
             "label": "Effacer format",
@@ -287,8 +309,76 @@
             ],
             "description": "Retire le format direct.",
             "priority": 10,
-            "usageLevel": "advanced",
-            "id": "format-effacer-format"
+            "id": "format-effacer-format",
+            "level": "advanced"
+          },
+          {
+            "label": "Police plus",
+            "keys": [
+              "Ctrl",
+              "]"
+            ],
+            "description": "Augmente la taille de police.",
+            "priority": 11,
+            "id": "format-police-plus",
+            "level": "advanced"
+          },
+          {
+            "label": "Police moins",
+            "keys": [
+              "Ctrl",
+              "["
+            ],
+            "description": "Reduit la taille de police.",
+            "priority": 12,
+            "id": "format-police-moins",
+            "level": "advanced"
+          },
+          {
+            "label": "Titre 1",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "1"
+            ],
+            "description": "Applique le style Titre 1.",
+            "priority": 13,
+            "id": "format-titre-1",
+            "level": "advanced"
+          },
+          {
+            "label": "Titre 2",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "2"
+            ],
+            "description": "Applique le style Titre 2.",
+            "priority": 14,
+            "id": "format-titre-2",
+            "level": "advanced"
+          },
+          {
+            "label": "Interligne simple",
+            "keys": [
+              "Ctrl",
+              "1"
+            ],
+            "description": "Applique un interligne simple.",
+            "priority": 15,
+            "id": "format-interligne-simple",
+            "level": "advanced"
+          },
+          {
+            "label": "Interligne double",
+            "keys": [
+              "Ctrl",
+              "2"
+            ],
+            "description": "Applique un interligne double.",
+            "priority": 16,
+            "id": "format-interligne-double",
+            "level": "advanced"
           }
         ]
       },
@@ -304,8 +394,8 @@
             ],
             "description": "Va au debut.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-debut-document"
+            "id": "navigation-debut-document",
+            "level": "advanced"
           },
           {
             "label": "Fin document",
@@ -315,8 +405,8 @@
             ],
             "description": "Va a la fin.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-fin-document"
+            "id": "navigation-fin-document",
+            "level": "advanced"
           },
           {
             "label": "Mot precedent",
@@ -326,8 +416,8 @@
             ],
             "description": "Va au mot precedent.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "navigation-mot-precedent"
+            "id": "navigation-mot-precedent",
+            "level": "standard"
           },
           {
             "label": "Mot suivant",
@@ -337,8 +427,8 @@
             ],
             "description": "Va au mot suivant.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-mot-suivant"
+            "id": "navigation-mot-suivant",
+            "level": "standard"
           },
           {
             "label": "Selection mot precedent",
@@ -349,8 +439,8 @@
             ],
             "description": "Etend la selection.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "navigation-selection-mot-precedent"
+            "id": "navigation-selection-mot-precedent",
+            "level": "advanced"
           },
           {
             "label": "Selection mot suivant",
@@ -361,8 +451,8 @@
             ],
             "description": "Etend la selection.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "navigation-selection-mot-suivant"
+            "id": "navigation-selection-mot-suivant",
+            "level": "advanced"
           },
           {
             "label": "Saut de page",
@@ -372,8 +462,8 @@
             ],
             "description": "Insere un saut de page.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-de-page"
+            "id": "navigation-saut-de-page",
+            "level": "advanced"
           },
           {
             "label": "Lien",
@@ -383,8 +473,41 @@
             ],
             "description": "Insere ou modifie un lien.",
             "priority": 8,
-            "usageLevel": "common",
-            "id": "navigation-lien"
+            "id": "navigation-lien",
+            "level": "standard"
+          },
+          {
+            "label": "Orthographe",
+            "keys": [
+              "F7"
+            ],
+            "description": "Lance la verification orthographique.",
+            "priority": 9,
+            "id": "navigation-orthographe",
+            "level": "advanced"
+          },
+          {
+            "label": "Suivi modifications",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "E"
+            ],
+            "description": "Active ou desactive le suivi des modifications.",
+            "priority": 10,
+            "id": "navigation-suivi-modifications",
+            "level": "expert"
+          },
+          {
+            "label": "Codes champs",
+            "keys": [
+              "Alt",
+              "F9"
+            ],
+            "description": "Affiche ou masque les codes de champs.",
+            "priority": 11,
+            "id": "navigation-codes-champs",
+            "level": "expert"
           }
         ]
       }
@@ -411,8 +534,8 @@
             ],
             "description": "Create a document.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "general-nouveau-document"
+            "id": "general-nouveau-document",
+            "level": "standard"
           },
           {
             "label": "Open",
@@ -422,8 +545,8 @@
             ],
             "description": "Open a document.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "general-ouvrir"
+            "id": "general-ouvrir",
+            "level": "standard"
           },
           {
             "label": "Save",
@@ -433,8 +556,8 @@
             ],
             "description": "Save the document.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "general-enregistrer"
+            "id": "general-enregistrer",
+            "level": "standard"
           },
           {
             "label": "Print",
@@ -444,8 +567,8 @@
             ],
             "description": "Open print options.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "general-imprimer"
+            "id": "general-imprimer",
+            "level": "standard"
           },
           {
             "label": "Close document",
@@ -455,8 +578,18 @@
             ],
             "description": "Close the document.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "general-fermer"
+            "id": "general-fermer",
+            "level": "standard"
+          },
+          {
+            "label": "Save as",
+            "keys": [
+              "F12"
+            ],
+            "description": "Open Save As.",
+            "priority": 6,
+            "id": "general-enregistrer-sous",
+            "level": "advanced"
           },
           {
             "label": "Command search",
@@ -465,9 +598,9 @@
               "Q"
             ],
             "description": "Search for a command.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "general-recherche-commande"
+            "priority": 7,
+            "id": "general-recherche-commande",
+            "level": "advanced"
           }
         ]
       },
@@ -483,8 +616,8 @@
             ],
             "description": "Copy the selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Paste",
@@ -494,8 +627,8 @@
             ],
             "description": "Paste clipboard content.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Cut",
@@ -505,8 +638,20 @@
             ],
             "description": "Cut the selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "edition-couper"
+            "id": "edition-couper",
+            "level": "standard"
+          },
+          {
+            "label": "Paste text only",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "V"
+            ],
+            "description": "Paste without formatting.",
+            "priority": 4,
+            "id": "edition-coller-texte",
+            "level": "standard"
           },
           {
             "label": "Undo",
@@ -515,9 +660,9 @@
               "Z"
             ],
             "description": "Undo the latest action.",
-            "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "priority": 5,
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Redo",
@@ -526,9 +671,9 @@
               "Y"
             ],
             "description": "Redo the action.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "priority": 6,
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Find",
@@ -537,9 +682,9 @@
               "F"
             ],
             "description": "Search the document.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "priority": 7,
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Replace",
@@ -548,9 +693,9 @@
               "H"
             ],
             "description": "Open replace.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "edition-remplacer"
+            "priority": 8,
+            "id": "edition-remplacer",
+            "level": "advanced"
           },
           {
             "label": "Go to",
@@ -559,9 +704,9 @@
               "G"
             ],
             "description": "Go to a target.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "edition-atteindre"
+            "priority": 9,
+            "id": "edition-atteindre",
+            "level": "advanced"
           }
         ]
       },
@@ -577,8 +722,8 @@
             ],
             "description": "Toggle bold.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "format-gras"
+            "id": "format-gras",
+            "level": "standard"
           },
           {
             "label": "Italic",
@@ -588,8 +733,8 @@
             ],
             "description": "Toggle italic.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "format-italique"
+            "id": "format-italique",
+            "level": "standard"
           },
           {
             "label": "Underline",
@@ -599,8 +744,8 @@
             ],
             "description": "Toggle underline.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "format-souligne"
+            "id": "format-souligne",
+            "level": "standard"
           },
           {
             "label": "Align left",
@@ -610,8 +755,8 @@
             ],
             "description": "Align left.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "format-gauche"
+            "id": "format-gauche",
+            "level": "standard"
           },
           {
             "label": "Center",
@@ -621,8 +766,8 @@
             ],
             "description": "Center paragraph.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "format-centrer"
+            "id": "format-centrer",
+            "level": "standard"
           },
           {
             "label": "Align right",
@@ -632,8 +777,8 @@
             ],
             "description": "Align right.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "format-droite"
+            "id": "format-droite",
+            "level": "advanced"
           },
           {
             "label": "Justify",
@@ -643,8 +788,8 @@
             ],
             "description": "Justify paragraph.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "format-justifier"
+            "id": "format-justifier",
+            "level": "advanced"
           },
           {
             "label": "Copy formatting",
@@ -655,8 +800,8 @@
             ],
             "description": "Copy formatting.",
             "priority": 8,
-            "usageLevel": "advanced",
-            "id": "format-copier-format"
+            "id": "format-copier-format",
+            "level": "advanced"
           },
           {
             "label": "Paste formatting",
@@ -667,8 +812,8 @@
             ],
             "description": "Apply formatting.",
             "priority": 9,
-            "usageLevel": "advanced",
-            "id": "format-coller-format"
+            "id": "format-coller-format",
+            "level": "advanced"
           },
           {
             "label": "Clear formatting",
@@ -678,8 +823,76 @@
             ],
             "description": "Remove direct formatting.",
             "priority": 10,
-            "usageLevel": "advanced",
-            "id": "format-effacer-format"
+            "id": "format-effacer-format",
+            "level": "advanced"
+          },
+          {
+            "label": "Font larger",
+            "keys": [
+              "Ctrl",
+              "]"
+            ],
+            "description": "Increase font size.",
+            "priority": 11,
+            "id": "format-police-plus",
+            "level": "advanced"
+          },
+          {
+            "label": "Font smaller",
+            "keys": [
+              "Ctrl",
+              "["
+            ],
+            "description": "Decrease font size.",
+            "priority": 12,
+            "id": "format-police-moins",
+            "level": "advanced"
+          },
+          {
+            "label": "Heading 1",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "1"
+            ],
+            "description": "Apply Heading 1.",
+            "priority": 13,
+            "id": "format-titre-1",
+            "level": "advanced"
+          },
+          {
+            "label": "Heading 2",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "2"
+            ],
+            "description": "Apply Heading 2.",
+            "priority": 14,
+            "id": "format-titre-2",
+            "level": "advanced"
+          },
+          {
+            "label": "Single spacing",
+            "keys": [
+              "Ctrl",
+              "1"
+            ],
+            "description": "Apply single spacing.",
+            "priority": 15,
+            "id": "format-interligne-simple",
+            "level": "advanced"
+          },
+          {
+            "label": "Double spacing",
+            "keys": [
+              "Ctrl",
+              "2"
+            ],
+            "description": "Apply double spacing.",
+            "priority": 16,
+            "id": "format-interligne-double",
+            "level": "advanced"
           }
         ]
       },
@@ -695,8 +908,8 @@
             ],
             "description": "Go to the start.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-debut-document"
+            "id": "navigation-debut-document",
+            "level": "advanced"
           },
           {
             "label": "Document end",
@@ -706,8 +919,8 @@
             ],
             "description": "Go to the end.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-fin-document"
+            "id": "navigation-fin-document",
+            "level": "advanced"
           },
           {
             "label": "Previous word",
@@ -717,8 +930,8 @@
             ],
             "description": "Move to previous word.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "navigation-mot-precedent"
+            "id": "navigation-mot-precedent",
+            "level": "standard"
           },
           {
             "label": "Next word",
@@ -728,8 +941,8 @@
             ],
             "description": "Move to next word.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-mot-suivant"
+            "id": "navigation-mot-suivant",
+            "level": "standard"
           },
           {
             "label": "Select previous word",
@@ -740,8 +953,8 @@
             ],
             "description": "Extend selection.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "navigation-selection-mot-precedent"
+            "id": "navigation-selection-mot-precedent",
+            "level": "advanced"
           },
           {
             "label": "Select next word",
@@ -752,8 +965,8 @@
             ],
             "description": "Extend selection.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "navigation-selection-mot-suivant"
+            "id": "navigation-selection-mot-suivant",
+            "level": "advanced"
           },
           {
             "label": "Page break",
@@ -763,8 +976,8 @@
             ],
             "description": "Insert a page break.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-de-page"
+            "id": "navigation-saut-de-page",
+            "level": "advanced"
           },
           {
             "label": "Hyperlink",
@@ -774,8 +987,41 @@
             ],
             "description": "Insert or edit a link.",
             "priority": 8,
-            "usageLevel": "common",
-            "id": "navigation-lien"
+            "id": "navigation-lien",
+            "level": "standard"
+          },
+          {
+            "label": "Spelling",
+            "keys": [
+              "F7"
+            ],
+            "description": "Run spelling check.",
+            "priority": 9,
+            "id": "navigation-orthographe",
+            "level": "advanced"
+          },
+          {
+            "label": "Track changes",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "E"
+            ],
+            "description": "Toggle track changes.",
+            "priority": 10,
+            "id": "navigation-suivi-modifications",
+            "level": "expert"
+          },
+          {
+            "label": "Field codes",
+            "keys": [
+              "Alt",
+              "F9"
+            ],
+            "description": "Show or hide field codes.",
+            "priority": 11,
+            "id": "navigation-codes-champs",
+            "level": "expert"
           }
         ]
       }

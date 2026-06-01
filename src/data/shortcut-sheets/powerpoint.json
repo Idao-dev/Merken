@@ -20,8 +20,8 @@
             ],
             "description": "Cree une presentation.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "general-nouvelle-presentation"
+            "id": "general-nouvelle-presentation",
+            "level": "advanced"
           },
           {
             "label": "Ouvrir",
@@ -31,8 +31,8 @@
             ],
             "description": "Ouvre une presentation.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "general-ouvrir"
+            "id": "general-ouvrir",
+            "level": "advanced"
           },
           {
             "label": "Enregistrer",
@@ -42,8 +42,8 @@
             ],
             "description": "Enregistre la presentation.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "general-enregistrer"
+            "id": "general-enregistrer",
+            "level": "standard"
           },
           {
             "label": "Imprimer",
@@ -53,8 +53,19 @@
             ],
             "description": "Ouvre l impression.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "general-imprimer"
+            "id": "general-imprimer",
+            "level": "advanced"
+          },
+          {
+            "label": "Fermer",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme la presentation.",
+            "priority": 5,
+            "id": "general-fermer",
+            "level": "advanced"
           },
           {
             "label": "Recherche commande",
@@ -63,9 +74,9 @@
               "Q"
             ],
             "description": "Recherche une commande.",
-            "priority": 5,
-            "usageLevel": "advanced",
-            "id": "general-recherche-commande"
+            "priority": 6,
+            "id": "general-recherche-commande",
+            "level": "advanced"
           }
         ]
       },
@@ -81,8 +92,8 @@
             ],
             "description": "Ajoute une diapositive.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "diapos-nouvelle-diapositive"
+            "id": "diapos-nouvelle-diapositive",
+            "level": "standard"
           },
           {
             "label": "Dupliquer",
@@ -92,8 +103,8 @@
             ],
             "description": "Duplique la selection.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "diapos-dupliquer"
+            "id": "diapos-dupliquer",
+            "level": "advanced"
           },
           {
             "label": "Copier",
@@ -103,8 +114,8 @@
             ],
             "description": "Copie la selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "diapos-copier"
+            "id": "diapos-copier",
+            "level": "standard"
           },
           {
             "label": "Coller",
@@ -114,8 +125,8 @@
             ],
             "description": "Colle la selection.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "diapos-coller"
+            "id": "diapos-coller",
+            "level": "standard"
           },
           {
             "label": "Couper",
@@ -125,8 +136,8 @@
             ],
             "description": "Coupe la selection.",
             "priority": 5,
-            "usageLevel": "essential",
-            "id": "diapos-couper"
+            "id": "diapos-couper",
+            "level": "standard"
           },
           {
             "label": "Annuler",
@@ -136,8 +147,19 @@
             ],
             "description": "Annule l action.",
             "priority": 6,
-            "usageLevel": "essential",
-            "id": "diapos-annuler"
+            "id": "diapos-annuler",
+            "level": "standard"
+          },
+          {
+            "label": "Retablir",
+            "keys": [
+              "Ctrl",
+              "Y"
+            ],
+            "description": "Retablit l action.",
+            "priority": 7,
+            "id": "diapos-retablir",
+            "level": "standard"
           },
           {
             "label": "Grouper",
@@ -146,9 +168,9 @@
               "G"
             ],
             "description": "Groupe les objets.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "diapos-grouper"
+            "priority": 8,
+            "id": "diapos-grouper",
+            "level": "advanced"
           },
           {
             "label": "Dissocier",
@@ -158,9 +180,33 @@
               "G"
             ],
             "description": "Dissocie les objets.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "diapos-dissocier"
+            "priority": 9,
+            "id": "diapos-dissocier",
+            "level": "advanced"
+          },
+          {
+            "label": "Avancer plan",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "]"
+            ],
+            "description": "Avance l objet dans l ordre.",
+            "priority": 10,
+            "id": "diapos-avancer-plan",
+            "level": "advanced"
+          },
+          {
+            "label": "Reculer plan",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "["
+            ],
+            "description": "Recule l objet dans l ordre.",
+            "priority": 11,
+            "id": "diapos-reculer-plan",
+            "level": "advanced"
           }
         ]
       },
@@ -176,8 +222,8 @@
             ],
             "description": "Active le gras.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "texte-gras"
+            "id": "texte-gras",
+            "level": "standard"
           },
           {
             "label": "Italique",
@@ -187,8 +233,8 @@
             ],
             "description": "Active l italique.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "texte-italique"
+            "id": "texte-italique",
+            "level": "standard"
           },
           {
             "label": "Souligne",
@@ -198,8 +244,8 @@
             ],
             "description": "Active le souligne.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "texte-souligne"
+            "id": "texte-souligne",
+            "level": "standard"
           },
           {
             "label": "Lien",
@@ -209,8 +255,8 @@
             ],
             "description": "Insere ou modifie un lien.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "texte-lien"
+            "id": "texte-lien",
+            "level": "standard"
           },
           {
             "label": "Rechercher",
@@ -220,8 +266,8 @@
             ],
             "description": "Recherche dans la presentation.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "texte-rechercher"
+            "id": "texte-rechercher",
+            "level": "standard"
           },
           {
             "label": "Remplacer",
@@ -231,8 +277,8 @@
             ],
             "description": "Ouvre le remplacement.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "texte-remplacer"
+            "id": "texte-remplacer",
+            "level": "advanced"
           },
           {
             "label": "Tout selectionner",
@@ -242,8 +288,8 @@
             ],
             "description": "Selectionne selon le contexte.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "texte-tout-selectionner"
+            "id": "texte-tout-selectionner",
+            "level": "advanced"
           }
         ]
       },
@@ -258,8 +304,8 @@
             ],
             "description": "Lance depuis le debut.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "presentation-depuis-le-debut"
+            "id": "presentation-depuis-le-debut",
+            "level": "standard"
           },
           {
             "label": "Depuis la diapo",
@@ -269,8 +315,8 @@
             ],
             "description": "Lance depuis la diapo active.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "presentation-depuis-la-diapo"
+            "id": "presentation-depuis-la-diapo",
+            "level": "advanced"
           },
           {
             "label": "Mode presentateur",
@@ -280,8 +326,8 @@
             ],
             "description": "Lance le mode presentateur.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "presentation-mode-presentateur"
+            "id": "presentation-mode-presentateur",
+            "level": "advanced"
           },
           {
             "label": "Suivant",
@@ -290,8 +336,8 @@
             ],
             "description": "Passe au suivant.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "presentation-suivant"
+            "id": "presentation-suivant",
+            "level": "standard"
           },
           {
             "label": "Precedent",
@@ -300,8 +346,49 @@
             ],
             "description": "Revient au precedent.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "presentation-precedent"
+            "id": "presentation-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Premiere diapo",
+            "keys": [
+              "Home"
+            ],
+            "description": "Revient a la premiere diapo.",
+            "priority": 6,
+            "id": "presentation-premiere-diapo",
+            "level": "advanced"
+          },
+          {
+            "label": "Derniere diapo",
+            "keys": [
+              "End"
+            ],
+            "description": "Va a la derniere diapo.",
+            "priority": 7,
+            "id": "presentation-derniere-diapo",
+            "level": "advanced"
+          },
+          {
+            "label": "Aller diapo",
+            "keys": [
+              "Enter"
+            ],
+            "description": "Va a une diapo precise.",
+            "priority": 8,
+            "id": "presentation-aller-diapo",
+            "level": "advanced"
+          },
+          {
+            "label": "Toutes diapos",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Affiche la liste des diapositives.",
+            "priority": 9,
+            "id": "presentation-toutes-diapos",
+            "level": "advanced"
           },
           {
             "label": "Ecran noir",
@@ -309,9 +396,9 @@
               "B"
             ],
             "description": "Affiche un ecran noir.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "presentation-ecran-noir"
+            "priority": 10,
+            "id": "presentation-ecran-noir",
+            "level": "advanced"
           },
           {
             "label": "Ecran blanc",
@@ -319,9 +406,9 @@
               "W"
             ],
             "description": "Affiche un ecran blanc.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "presentation-ecran-blanc"
+            "priority": 11,
+            "id": "presentation-ecran-blanc",
+            "level": "advanced"
           },
           {
             "label": "Quitter",
@@ -329,9 +416,9 @@
               "Esc"
             ],
             "description": "Termine le diaporama.",
-            "priority": 8,
-            "usageLevel": "essential",
-            "id": "presentation-quitter"
+            "priority": 12,
+            "id": "presentation-quitter",
+            "level": "standard"
           },
           {
             "label": "Pointeur laser",
@@ -340,9 +427,42 @@
               "L"
             ],
             "description": "Active le pointeur laser.",
-            "priority": 9,
-            "usageLevel": "advanced",
-            "id": "presentation-pointeur-laser"
+            "priority": 13,
+            "id": "presentation-pointeur-laser",
+            "level": "advanced"
+          },
+          {
+            "label": "Stylo",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Active le stylo pendant le diaporama.",
+            "priority": 14,
+            "id": "presentation-stylo",
+            "level": "expert"
+          },
+          {
+            "label": "Gomme",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Active la gomme d annotation.",
+            "priority": 15,
+            "id": "presentation-gomme",
+            "level": "expert"
+          },
+          {
+            "label": "Fleche",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Retablit le pointeur fleche.",
+            "priority": 16,
+            "id": "presentation-fleche",
+            "level": "expert"
           }
         ]
       }
@@ -369,8 +489,8 @@
             ],
             "description": "Create a presentation.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "general-nouvelle-presentation"
+            "id": "general-nouvelle-presentation",
+            "level": "advanced"
           },
           {
             "label": "Open",
@@ -380,8 +500,8 @@
             ],
             "description": "Open a presentation.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "general-ouvrir"
+            "id": "general-ouvrir",
+            "level": "advanced"
           },
           {
             "label": "Save",
@@ -391,8 +511,8 @@
             ],
             "description": "Save the presentation.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "general-enregistrer"
+            "id": "general-enregistrer",
+            "level": "standard"
           },
           {
             "label": "Print",
@@ -402,8 +522,19 @@
             ],
             "description": "Open print options.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "general-imprimer"
+            "id": "general-imprimer",
+            "level": "advanced"
+          },
+          {
+            "label": "Close",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the presentation.",
+            "priority": 5,
+            "id": "general-fermer",
+            "level": "advanced"
           },
           {
             "label": "Command search",
@@ -412,9 +543,9 @@
               "Q"
             ],
             "description": "Search for a command.",
-            "priority": 5,
-            "usageLevel": "advanced",
-            "id": "general-recherche-commande"
+            "priority": 6,
+            "id": "general-recherche-commande",
+            "level": "advanced"
           }
         ]
       },
@@ -430,8 +561,8 @@
             ],
             "description": "Add a slide.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "diapos-nouvelle-diapositive"
+            "id": "diapos-nouvelle-diapositive",
+            "level": "standard"
           },
           {
             "label": "Duplicate",
@@ -441,8 +572,8 @@
             ],
             "description": "Duplicate selection.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "diapos-dupliquer"
+            "id": "diapos-dupliquer",
+            "level": "advanced"
           },
           {
             "label": "Copy",
@@ -452,8 +583,8 @@
             ],
             "description": "Copy selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "diapos-copier"
+            "id": "diapos-copier",
+            "level": "standard"
           },
           {
             "label": "Paste",
@@ -463,8 +594,8 @@
             ],
             "description": "Paste selection.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "diapos-coller"
+            "id": "diapos-coller",
+            "level": "standard"
           },
           {
             "label": "Cut",
@@ -474,8 +605,8 @@
             ],
             "description": "Cut selection.",
             "priority": 5,
-            "usageLevel": "essential",
-            "id": "diapos-couper"
+            "id": "diapos-couper",
+            "level": "standard"
           },
           {
             "label": "Undo",
@@ -485,8 +616,19 @@
             ],
             "description": "Undo action.",
             "priority": 6,
-            "usageLevel": "essential",
-            "id": "diapos-annuler"
+            "id": "diapos-annuler",
+            "level": "standard"
+          },
+          {
+            "label": "Redo",
+            "keys": [
+              "Ctrl",
+              "Y"
+            ],
+            "description": "Redo action.",
+            "priority": 7,
+            "id": "diapos-retablir",
+            "level": "standard"
           },
           {
             "label": "Group",
@@ -495,9 +637,9 @@
               "G"
             ],
             "description": "Group objects.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "diapos-grouper"
+            "priority": 8,
+            "id": "diapos-grouper",
+            "level": "advanced"
           },
           {
             "label": "Ungroup",
@@ -507,9 +649,33 @@
               "G"
             ],
             "description": "Ungroup objects.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "diapos-dissocier"
+            "priority": 9,
+            "id": "diapos-dissocier",
+            "level": "advanced"
+          },
+          {
+            "label": "Bring forward",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "]"
+            ],
+            "description": "Move the object forward.",
+            "priority": 10,
+            "id": "diapos-avancer-plan",
+            "level": "advanced"
+          },
+          {
+            "label": "Send backward",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "["
+            ],
+            "description": "Move the object backward.",
+            "priority": 11,
+            "id": "diapos-reculer-plan",
+            "level": "advanced"
           }
         ]
       },
@@ -525,8 +691,8 @@
             ],
             "description": "Toggle bold.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "texte-gras"
+            "id": "texte-gras",
+            "level": "standard"
           },
           {
             "label": "Italic",
@@ -536,8 +702,8 @@
             ],
             "description": "Toggle italic.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "texte-italique"
+            "id": "texte-italique",
+            "level": "standard"
           },
           {
             "label": "Underline",
@@ -547,8 +713,8 @@
             ],
             "description": "Toggle underline.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "texte-souligne"
+            "id": "texte-souligne",
+            "level": "standard"
           },
           {
             "label": "Link",
@@ -558,8 +724,8 @@
             ],
             "description": "Insert or edit a link.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "texte-lien"
+            "id": "texte-lien",
+            "level": "standard"
           },
           {
             "label": "Find",
@@ -569,8 +735,8 @@
             ],
             "description": "Search the presentation.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "texte-rechercher"
+            "id": "texte-rechercher",
+            "level": "standard"
           },
           {
             "label": "Replace",
@@ -580,8 +746,8 @@
             ],
             "description": "Open replace.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "texte-remplacer"
+            "id": "texte-remplacer",
+            "level": "advanced"
           },
           {
             "label": "Select all",
@@ -591,8 +757,8 @@
             ],
             "description": "Select based on context.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "texte-tout-selectionner"
+            "id": "texte-tout-selectionner",
+            "level": "advanced"
           }
         ]
       },
@@ -607,8 +773,8 @@
             ],
             "description": "Start from the beginning.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "presentation-depuis-le-debut"
+            "id": "presentation-depuis-le-debut",
+            "level": "standard"
           },
           {
             "label": "From current slide",
@@ -618,8 +784,8 @@
             ],
             "description": "Start from current slide.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "presentation-depuis-la-diapo"
+            "id": "presentation-depuis-la-diapo",
+            "level": "advanced"
           },
           {
             "label": "Presenter view",
@@ -629,8 +795,8 @@
             ],
             "description": "Start presenter view.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "presentation-mode-presentateur"
+            "id": "presentation-mode-presentateur",
+            "level": "advanced"
           },
           {
             "label": "Next",
@@ -639,8 +805,8 @@
             ],
             "description": "Move next.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "presentation-suivant"
+            "id": "presentation-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous",
@@ -649,8 +815,49 @@
             ],
             "description": "Move previous.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "presentation-precedent"
+            "id": "presentation-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "First slide",
+            "keys": [
+              "Home"
+            ],
+            "description": "Return to the first slide.",
+            "priority": 6,
+            "id": "presentation-premiere-diapo",
+            "level": "advanced"
+          },
+          {
+            "label": "Last slide",
+            "keys": [
+              "End"
+            ],
+            "description": "Go to the last slide.",
+            "priority": 7,
+            "id": "presentation-derniere-diapo",
+            "level": "advanced"
+          },
+          {
+            "label": "Go to slide",
+            "keys": [
+              "Enter"
+            ],
+            "description": "Go to a specific slide.",
+            "priority": 8,
+            "id": "presentation-aller-diapo",
+            "level": "advanced"
+          },
+          {
+            "label": "All slides",
+            "keys": [
+              "Ctrl",
+              "S"
+            ],
+            "description": "Show the slide list.",
+            "priority": 9,
+            "id": "presentation-toutes-diapos",
+            "level": "advanced"
           },
           {
             "label": "Black screen",
@@ -658,9 +865,9 @@
               "B"
             ],
             "description": "Show a black screen.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "presentation-ecran-noir"
+            "priority": 10,
+            "id": "presentation-ecran-noir",
+            "level": "advanced"
           },
           {
             "label": "White screen",
@@ -668,9 +875,9 @@
               "W"
             ],
             "description": "Show a white screen.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "presentation-ecran-blanc"
+            "priority": 11,
+            "id": "presentation-ecran-blanc",
+            "level": "advanced"
           },
           {
             "label": "End slideshow",
@@ -678,9 +885,9 @@
               "Esc"
             ],
             "description": "End the slideshow.",
-            "priority": 8,
-            "usageLevel": "essential",
-            "id": "presentation-quitter"
+            "priority": 12,
+            "id": "presentation-quitter",
+            "level": "standard"
           },
           {
             "label": "Laser pointer",
@@ -689,9 +896,42 @@
               "L"
             ],
             "description": "Start the laser pointer.",
-            "priority": 9,
-            "usageLevel": "advanced",
-            "id": "presentation-pointeur-laser"
+            "priority": 13,
+            "id": "presentation-pointeur-laser",
+            "level": "advanced"
+          },
+          {
+            "label": "Pen",
+            "keys": [
+              "Ctrl",
+              "P"
+            ],
+            "description": "Use the pen during the slideshow.",
+            "priority": 14,
+            "id": "presentation-stylo",
+            "level": "expert"
+          },
+          {
+            "label": "Eraser",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Use the annotation eraser.",
+            "priority": 15,
+            "id": "presentation-gomme",
+            "level": "expert"
+          },
+          {
+            "label": "Arrow",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Restore the arrow pointer.",
+            "priority": 16,
+            "id": "presentation-fleche",
+            "level": "expert"
           }
         ]
       }

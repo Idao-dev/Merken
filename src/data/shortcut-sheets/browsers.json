@@ -23,8 +23,8 @@
             ],
             "description": "Ouvre un nouvel onglet.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "onglets-nouvel-onglet"
+            "id": "onglets-nouvel-onglet",
+            "level": "standard"
           },
           {
             "label": "Fermer onglet",
@@ -34,8 +34,8 @@
             ],
             "description": "Ferme l onglet actif.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "onglets-fermer-onglet"
+            "id": "onglets-fermer-onglet",
+            "level": "standard"
           },
           {
             "label": "Rouvrir onglet",
@@ -46,8 +46,8 @@
             ],
             "description": "Restaure un onglet ferme.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "onglets-rouvrir-onglet"
+            "id": "onglets-rouvrir-onglet",
+            "level": "standard"
           },
           {
             "label": "Nouvelle fenetre",
@@ -57,8 +57,8 @@
             ],
             "description": "Ouvre une fenetre.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "onglets-nouvelle-fenetre"
+            "id": "onglets-nouvelle-fenetre",
+            "level": "standard"
           },
           {
             "label": "Prive Chromium",
@@ -69,8 +69,8 @@
             ],
             "description": "Ouvre une fenetre privee Chromium.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "onglets-prive-chromium"
+            "id": "onglets-prive-chromium",
+            "level": "standard"
           },
           {
             "label": "Prive Firefox",
@@ -81,8 +81,8 @@
             ],
             "description": "Ouvre une fenetre privee Firefox.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "onglets-prive-firefox"
+            "id": "onglets-prive-firefox",
+            "level": "standard"
           },
           {
             "label": "Onglet suivant",
@@ -92,8 +92,8 @@
             ],
             "description": "Passe a l onglet suivant.",
             "priority": 7,
-            "usageLevel": "essential",
-            "id": "onglets-onglet-suivant"
+            "id": "onglets-onglet-suivant",
+            "level": "standard"
           },
           {
             "label": "Onglet precedent",
@@ -104,8 +104,8 @@
             ],
             "description": "Revient a l onglet precedent.",
             "priority": 8,
-            "usageLevel": "common",
-            "id": "onglets-onglet-precedent"
+            "id": "onglets-onglet-precedent",
+            "level": "standard"
           },
           {
             "label": "Onglet numero",
@@ -115,8 +115,8 @@
             ],
             "description": "Passe a l onglet numerote.",
             "priority": 9,
-            "usageLevel": "advanced",
-            "id": "onglets-onglet-numero"
+            "id": "onglets-onglet-numero",
+            "level": "advanced"
           },
           {
             "label": "Dernier onglet",
@@ -126,8 +126,20 @@
             ],
             "description": "Passe au dernier onglet.",
             "priority": 10,
-            "usageLevel": "advanced",
-            "id": "onglets-dernier-onglet"
+            "id": "onglets-dernier-onglet",
+            "level": "advanced"
+          },
+          {
+            "label": "Fermer fenetre",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "W"
+            ],
+            "description": "Ferme la fenetre avec ses onglets.",
+            "priority": 11,
+            "id": "onglets-fermer-fenetre",
+            "level": "advanced"
           }
         ]
       },
@@ -143,8 +155,8 @@
             ],
             "description": "Active adresse ou recherche.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-barre-d-adresse"
+            "id": "navigation-barre-d-adresse",
+            "level": "standard"
           },
           {
             "label": "Actualiser",
@@ -154,8 +166,8 @@
             ],
             "description": "Recharge la page.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "navigation-actualiser"
+            "id": "navigation-actualiser",
+            "level": "standard"
           },
           {
             "label": "Actualiser sans cache",
@@ -166,8 +178,8 @@
             ],
             "description": "Recharge sans cache.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-actualiser-sans-cache"
+            "id": "navigation-actualiser-sans-cache",
+            "level": "advanced"
           },
           {
             "label": "Retour",
@@ -177,8 +189,8 @@
             ],
             "description": "Revient a la page precedente.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-retour"
+            "id": "navigation-retour",
+            "level": "standard"
           },
           {
             "label": "Avancer",
@@ -188,8 +200,8 @@
             ],
             "description": "Passe a la page suivante.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-avancer"
+            "id": "navigation-avancer",
+            "level": "standard"
           },
           {
             "label": "Rechercher page",
@@ -199,8 +211,8 @@
             ],
             "description": "Recherche dans la page.",
             "priority": 6,
-            "usageLevel": "essential",
-            "id": "navigation-rechercher-page"
+            "id": "navigation-rechercher-page",
+            "level": "standard"
           },
           {
             "label": "Historique",
@@ -210,8 +222,8 @@
             ],
             "description": "Ouvre l historique.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "navigation-historique"
+            "id": "navigation-historique",
+            "level": "standard"
           },
           {
             "label": "Telechargements",
@@ -221,13 +233,88 @@
             ],
             "description": "Ouvre les telechargements.",
             "priority": 8,
-            "usageLevel": "common",
-            "id": "navigation-telechargements"
+            "id": "navigation-telechargements",
+            "level": "standard"
+          },
+          {
+            "label": "Accueil",
+            "keys": [
+              "Alt",
+              "Home"
+            ],
+            "description": "Ouvre la page d accueil.",
+            "priority": 9,
+            "id": "navigation-accueil",
+            "level": "advanced"
+          },
+          {
+            "label": "Resultat suivant",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Passe au resultat suivant de recherche.",
+            "priority": 10,
+            "id": "navigation-resultat-suivant",
+            "level": "advanced"
+          },
+          {
+            "label": "Resultat precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "G"
+            ],
+            "description": "Revient au resultat precedent.",
+            "priority": 11,
+            "id": "navigation-resultat-precedent",
+            "level": "advanced"
+          },
+          {
+            "label": "Defiler bas",
+            "keys": [
+              "Space"
+            ],
+            "description": "Descend d un ecran.",
+            "priority": 12,
+            "id": "navigation-defiler-bas",
+            "level": "standard"
+          },
+          {
+            "label": "Defiler haut",
+            "keys": [
+              "Shift",
+              "Space"
+            ],
+            "description": "Remonte d un ecran.",
+            "priority": 13,
+            "id": "navigation-defiler-haut",
+            "level": "standard"
+          },
+          {
+            "label": "Haut de page",
+            "keys": [
+              "Home"
+            ],
+            "description": "Va en haut de la page.",
+            "priority": 14,
+            "id": "navigation-haut-page",
+            "level": "advanced"
+          },
+          {
+            "label": "Bas de page",
+            "keys": [
+              "End"
+            ],
+            "description": "Va en bas de la page.",
+            "priority": 15,
+            "id": "navigation-bas-page",
+            "level": "advanced"
           }
         ]
       },
       {
-        "id": "outils",
+        "id": "outils-favori",
         "title": "Page et outils",
         "shortcuts": [
           {
@@ -238,8 +325,32 @@
             ],
             "description": "Ajoute la page aux favoris.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "outils-favori"
+            "id": "outils-favori",
+            "level": "standard"
+          },
+          {
+            "label": "Barre favoris",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "B"
+            ],
+            "description": "Affiche ou masque la barre des favoris.",
+            "priority": 2,
+            "id": "outils-barre-favoris",
+            "level": "advanced"
+          },
+          {
+            "label": "Gestionnaire favoris",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "O"
+            ],
+            "description": "Ouvre la gestion des favoris.",
+            "priority": 3,
+            "id": "outils-gestionnaire-favoris",
+            "level": "advanced"
           },
           {
             "label": "Imprimer",
@@ -248,9 +359,9 @@
               "P"
             ],
             "description": "Ouvre l impression.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "outils-imprimer"
+            "priority": 4,
+            "id": "outils-imprimer",
+            "level": "standard"
           },
           {
             "label": "Enregistrer page",
@@ -259,9 +370,9 @@
               "S"
             ],
             "description": "Enregistre la page.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "outils-enregistrer-page"
+            "priority": 5,
+            "id": "outils-enregistrer-page",
+            "level": "advanced"
           },
           {
             "label": "Ouvrir fichier",
@@ -270,9 +381,9 @@
               "O"
             ],
             "description": "Ouvre un fichier local.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "outils-ouvrir-fichier"
+            "priority": 6,
+            "id": "outils-ouvrir-fichier",
+            "level": "advanced"
           },
           {
             "label": "Zoom avant",
@@ -281,9 +392,9 @@
               "+"
             ],
             "description": "Agrandit la page.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "outils-zoom-avant"
+            "priority": 7,
+            "id": "outils-zoom-avant",
+            "level": "standard"
           },
           {
             "label": "Zoom arriere",
@@ -292,9 +403,9 @@
               "-"
             ],
             "description": "Reduit la page.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "outils-zoom-arriere"
+            "priority": 8,
+            "id": "outils-zoom-arriere",
+            "level": "standard"
           },
           {
             "label": "Zoom par defaut",
@@ -303,9 +414,9 @@
               "0"
             ],
             "description": "Restaure le zoom.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "outils-zoom-par-defaut"
+            "priority": 9,
+            "id": "outils-zoom-par-defaut",
+            "level": "standard"
           },
           {
             "label": "Plein ecran",
@@ -313,9 +424,20 @@
               "F11"
             ],
             "description": "Bascule le plein ecran.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "outils-plein-ecran"
+            "priority": 10,
+            "id": "outils-plein-ecran",
+            "level": "standard"
+          },
+          {
+            "label": "Source page",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Affiche le code source de la page.",
+            "priority": 11,
+            "id": "outils-source-page",
+            "level": "expert"
           },
           {
             "label": "Outils developpeur",
@@ -323,9 +445,9 @@
               "F12"
             ],
             "description": "Ouvre les outils developpeur.",
-            "priority": 9,
-            "usageLevel": "expert",
-            "id": "outils-outils-developpeur"
+            "priority": 12,
+            "id": "outils-outils-developpeur",
+            "level": "expert"
           },
           {
             "label": "Effacer donnees",
@@ -334,10 +456,57 @@
               "Shift",
               "Delete"
             ],
-            "description": "Ouvre l effacement recent.",
-            "priority": 10,
-            "usageLevel": "advanced",
-            "id": "outils-effacer-donnees"
+            "description": "Ouvre l effacement des donnees; avertir avant suppression historique/cookies.",
+            "priority": 13,
+            "id": "outils-effacer-donnees",
+            "level": "expert",
+            "warning": "Peut mener a supprimer historique, cookies ou donnees de navigation.",
+            "warningLevel": "danger"
+          },
+          {
+            "label": "Lien arriere-plan",
+            "keys": [
+              "Ctrl",
+              "LeftClick"
+            ],
+            "description": "Ouvre un lien dans un nouvel onglet en arriere-plan.",
+            "priority": 14,
+            "id": "outils-ouvrir-lien-arriere-plan",
+            "level": "expert"
+          },
+          {
+            "label": "Lien actif",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "LeftClick"
+            ],
+            "description": "Ouvre un lien dans un nouvel onglet actif.",
+            "priority": 15,
+            "id": "outils-ouvrir-lien-actif",
+            "level": "expert"
+          },
+          {
+            "label": "Lien fenetre",
+            "keys": [
+              "Shift",
+              "LeftClick"
+            ],
+            "description": "Ouvre un lien dans une nouvelle fenetre.",
+            "priority": 16,
+            "id": "outils-ouvrir-lien-fenetre",
+            "level": "expert"
+          },
+          {
+            "label": "Zoom molette",
+            "keys": [
+              "Ctrl",
+              "Wheel"
+            ],
+            "description": "Zoome avec la molette.",
+            "priority": 17,
+            "id": "outils-zoom-molette",
+            "level": "expert"
           }
         ]
       }
@@ -367,8 +536,8 @@
             ],
             "description": "Open a new tab.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "onglets-nouvel-onglet"
+            "id": "onglets-nouvel-onglet",
+            "level": "standard"
           },
           {
             "label": "Close tab",
@@ -378,8 +547,8 @@
             ],
             "description": "Close the active tab.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "onglets-fermer-onglet"
+            "id": "onglets-fermer-onglet",
+            "level": "standard"
           },
           {
             "label": "Reopen tab",
@@ -390,8 +559,8 @@
             ],
             "description": "Restore a closed tab.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "onglets-rouvrir-onglet"
+            "id": "onglets-rouvrir-onglet",
+            "level": "standard"
           },
           {
             "label": "New window",
@@ -401,8 +570,8 @@
             ],
             "description": "Open a window.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "onglets-nouvelle-fenetre"
+            "id": "onglets-nouvelle-fenetre",
+            "level": "standard"
           },
           {
             "label": "Private Chromium",
@@ -413,8 +582,8 @@
             ],
             "description": "Open a Chromium private window.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "onglets-prive-chromium"
+            "id": "onglets-prive-chromium",
+            "level": "standard"
           },
           {
             "label": "Private Firefox",
@@ -425,8 +594,8 @@
             ],
             "description": "Open a Firefox private window.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "onglets-prive-firefox"
+            "id": "onglets-prive-firefox",
+            "level": "standard"
           },
           {
             "label": "Next tab",
@@ -436,8 +605,8 @@
             ],
             "description": "Move to the next tab.",
             "priority": 7,
-            "usageLevel": "essential",
-            "id": "onglets-onglet-suivant"
+            "id": "onglets-onglet-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous tab",
@@ -448,8 +617,8 @@
             ],
             "description": "Move to the previous tab.",
             "priority": 8,
-            "usageLevel": "common",
-            "id": "onglets-onglet-precedent"
+            "id": "onglets-onglet-precedent",
+            "level": "standard"
           },
           {
             "label": "Numbered tab",
@@ -459,8 +628,8 @@
             ],
             "description": "Move to the numbered tab.",
             "priority": 9,
-            "usageLevel": "advanced",
-            "id": "onglets-onglet-numero"
+            "id": "onglets-onglet-numero",
+            "level": "advanced"
           },
           {
             "label": "Last tab",
@@ -470,8 +639,20 @@
             ],
             "description": "Move to the last tab.",
             "priority": 10,
-            "usageLevel": "advanced",
-            "id": "onglets-dernier-onglet"
+            "id": "onglets-dernier-onglet",
+            "level": "advanced"
+          },
+          {
+            "label": "Close window",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "W"
+            ],
+            "description": "Close the window and its tabs.",
+            "priority": 11,
+            "id": "onglets-fermer-fenetre",
+            "level": "advanced"
           }
         ]
       },
@@ -487,8 +668,8 @@
             ],
             "description": "Focus address or search.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-barre-d-adresse"
+            "id": "navigation-barre-d-adresse",
+            "level": "standard"
           },
           {
             "label": "Reload",
@@ -498,8 +679,8 @@
             ],
             "description": "Reload the page.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "navigation-actualiser"
+            "id": "navigation-actualiser",
+            "level": "standard"
           },
           {
             "label": "Hard reload",
@@ -510,8 +691,8 @@
             ],
             "description": "Reload without cache.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-actualiser-sans-cache"
+            "id": "navigation-actualiser-sans-cache",
+            "level": "advanced"
           },
           {
             "label": "Back",
@@ -521,8 +702,8 @@
             ],
             "description": "Go back.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-retour"
+            "id": "navigation-retour",
+            "level": "standard"
           },
           {
             "label": "Forward",
@@ -532,8 +713,8 @@
             ],
             "description": "Go forward.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-avancer"
+            "id": "navigation-avancer",
+            "level": "standard"
           },
           {
             "label": "Find in page",
@@ -543,8 +724,8 @@
             ],
             "description": "Search in the page.",
             "priority": 6,
-            "usageLevel": "essential",
-            "id": "navigation-rechercher-page"
+            "id": "navigation-rechercher-page",
+            "level": "standard"
           },
           {
             "label": "History",
@@ -554,8 +735,8 @@
             ],
             "description": "Open history.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "navigation-historique"
+            "id": "navigation-historique",
+            "level": "standard"
           },
           {
             "label": "Downloads",
@@ -565,13 +746,88 @@
             ],
             "description": "Open downloads.",
             "priority": 8,
-            "usageLevel": "common",
-            "id": "navigation-telechargements"
+            "id": "navigation-telechargements",
+            "level": "standard"
+          },
+          {
+            "label": "Home",
+            "keys": [
+              "Alt",
+              "Home"
+            ],
+            "description": "Open the home page.",
+            "priority": 9,
+            "id": "navigation-accueil",
+            "level": "advanced"
+          },
+          {
+            "label": "Next result",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Go to the next find result.",
+            "priority": 10,
+            "id": "navigation-resultat-suivant",
+            "level": "advanced"
+          },
+          {
+            "label": "Previous result",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "G"
+            ],
+            "description": "Go to the previous find result.",
+            "priority": 11,
+            "id": "navigation-resultat-precedent",
+            "level": "advanced"
+          },
+          {
+            "label": "Scroll down",
+            "keys": [
+              "Space"
+            ],
+            "description": "Scroll down one screen.",
+            "priority": 12,
+            "id": "navigation-defiler-bas",
+            "level": "standard"
+          },
+          {
+            "label": "Scroll up",
+            "keys": [
+              "Shift",
+              "Space"
+            ],
+            "description": "Scroll up one screen.",
+            "priority": 13,
+            "id": "navigation-defiler-haut",
+            "level": "standard"
+          },
+          {
+            "label": "Page top",
+            "keys": [
+              "Home"
+            ],
+            "description": "Go to the top of the page.",
+            "priority": 14,
+            "id": "navigation-haut-page",
+            "level": "advanced"
+          },
+          {
+            "label": "Page bottom",
+            "keys": [
+              "End"
+            ],
+            "description": "Go to the bottom of the page.",
+            "priority": 15,
+            "id": "navigation-bas-page",
+            "level": "advanced"
           }
         ]
       },
       {
-        "id": "outils",
+        "id": "outils-favori",
         "title": "Page and tools",
         "shortcuts": [
           {
@@ -582,8 +838,32 @@
             ],
             "description": "Bookmark the page.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "outils-favori"
+            "id": "outils-favori",
+            "level": "standard"
+          },
+          {
+            "label": "Favorites bar",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "B"
+            ],
+            "description": "Show or hide the bookmarks bar.",
+            "priority": 2,
+            "id": "outils-barre-favoris",
+            "level": "advanced"
+          },
+          {
+            "label": "Bookmark manager",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "O"
+            ],
+            "description": "Open bookmark management.",
+            "priority": 3,
+            "id": "outils-gestionnaire-favoris",
+            "level": "advanced"
           },
           {
             "label": "Print",
@@ -592,9 +872,9 @@
               "P"
             ],
             "description": "Open print options.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "outils-imprimer"
+            "priority": 4,
+            "id": "outils-imprimer",
+            "level": "standard"
           },
           {
             "label": "Save page",
@@ -603,9 +883,9 @@
               "S"
             ],
             "description": "Save the page.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "outils-enregistrer-page"
+            "priority": 5,
+            "id": "outils-enregistrer-page",
+            "level": "advanced"
           },
           {
             "label": "Open file",
@@ -614,9 +894,9 @@
               "O"
             ],
             "description": "Open a local file.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "outils-ouvrir-fichier"
+            "priority": 6,
+            "id": "outils-ouvrir-fichier",
+            "level": "advanced"
           },
           {
             "label": "Zoom in",
@@ -625,9 +905,9 @@
               "+"
             ],
             "description": "Zoom in.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "outils-zoom-avant"
+            "priority": 7,
+            "id": "outils-zoom-avant",
+            "level": "standard"
           },
           {
             "label": "Zoom out",
@@ -636,9 +916,9 @@
               "-"
             ],
             "description": "Zoom out.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "outils-zoom-arriere"
+            "priority": 8,
+            "id": "outils-zoom-arriere",
+            "level": "standard"
           },
           {
             "label": "Default zoom",
@@ -647,9 +927,9 @@
               "0"
             ],
             "description": "Reset zoom.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "outils-zoom-par-defaut"
+            "priority": 9,
+            "id": "outils-zoom-par-defaut",
+            "level": "standard"
           },
           {
             "label": "Full screen",
@@ -657,9 +937,20 @@
               "F11"
             ],
             "description": "Toggle full screen.",
-            "priority": 8,
-            "usageLevel": "common",
-            "id": "outils-plein-ecran"
+            "priority": 10,
+            "id": "outils-plein-ecran",
+            "level": "standard"
+          },
+          {
+            "label": "Page source",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Show page source.",
+            "priority": 11,
+            "id": "outils-source-page",
+            "level": "expert"
           },
           {
             "label": "Developer tools",
@@ -667,9 +958,9 @@
               "F12"
             ],
             "description": "Open developer tools.",
-            "priority": 9,
-            "usageLevel": "expert",
-            "id": "outils-outils-developpeur"
+            "priority": 12,
+            "id": "outils-outils-developpeur",
+            "level": "expert"
           },
           {
             "label": "Clear data",
@@ -678,10 +969,57 @@
               "Shift",
               "Delete"
             ],
-            "description": "Open recent data cleanup.",
-            "priority": 10,
-            "usageLevel": "advanced",
-            "id": "outils-effacer-donnees"
+            "description": "Open browsing data cleanup; warn before deleting history/cookies.",
+            "priority": 13,
+            "id": "outils-effacer-donnees",
+            "level": "expert",
+            "warning": "May lead to deleting history, cookies, or browsing data.",
+            "warningLevel": "danger"
+          },
+          {
+            "label": "Background link",
+            "keys": [
+              "Ctrl",
+              "LeftClick"
+            ],
+            "description": "Open a link in a background tab.",
+            "priority": 14,
+            "id": "outils-ouvrir-lien-arriere-plan",
+            "level": "expert"
+          },
+          {
+            "label": "Active link",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "LeftClick"
+            ],
+            "description": "Open a link in an active new tab.",
+            "priority": 15,
+            "id": "outils-ouvrir-lien-actif",
+            "level": "expert"
+          },
+          {
+            "label": "Window link",
+            "keys": [
+              "Shift",
+              "LeftClick"
+            ],
+            "description": "Open a link in a new window.",
+            "priority": 16,
+            "id": "outils-ouvrir-lien-fenetre",
+            "level": "expert"
+          },
+          {
+            "label": "Wheel zoom",
+            "keys": [
+              "Ctrl",
+              "Wheel"
+            ],
+            "description": "Zoom with the mouse wheel.",
+            "priority": 17,
+            "id": "outils-zoom-molette",
+            "level": "expert"
           }
         ]
       }

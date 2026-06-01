@@ -19,8 +19,8 @@
             ],
             "description": "Lance ou met en pause.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "lecture-lecture-pause"
+            "id": "lecture-lecture-pause",
+            "level": "standard"
           },
           {
             "label": "Stop",
@@ -29,8 +29,8 @@
             ],
             "description": "Arrete la lecture.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "lecture-stop"
+            "id": "lecture-stop",
+            "level": "standard"
           },
           {
             "label": "Suivant",
@@ -39,8 +39,8 @@
             ],
             "description": "Passe au media suivant.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "lecture-suivant"
+            "id": "lecture-suivant",
+            "level": "standard"
           },
           {
             "label": "Precedent",
@@ -49,8 +49,8 @@
             ],
             "description": "Revient au media precedent.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "lecture-precedent"
+            "id": "lecture-precedent",
+            "level": "standard"
           },
           {
             "label": "Plein ecran",
@@ -59,8 +59,18 @@
             ],
             "description": "Bascule le plein ecran.",
             "priority": 5,
-            "usageLevel": "essential",
-            "id": "lecture-plein-ecran"
+            "id": "lecture-plein-ecran",
+            "level": "standard"
+          },
+          {
+            "label": "Quitter plein ecran",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Sort du plein ecran.",
+            "priority": 6,
+            "id": "lecture-quitter-plein-ecran",
+            "level": "standard"
           },
           {
             "label": "Muet",
@@ -68,9 +78,9 @@
               "M"
             ],
             "description": "Coupe ou retablit le son.",
-            "priority": 6,
-            "usageLevel": "essential",
-            "id": "lecture-muet"
+            "priority": 7,
+            "id": "lecture-muet",
+            "level": "standard"
           },
           {
             "label": "Temps",
@@ -78,9 +88,9 @@
               "T"
             ],
             "description": "Affiche le temps.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "lecture-temps"
+            "priority": 8,
+            "id": "lecture-temps",
+            "level": "advanced"
           }
         ]
       },
@@ -96,8 +106,8 @@
             ],
             "description": "Recule legerement.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-saut-court-arriere"
+            "id": "navigation-saut-court-arriere",
+            "level": "standard"
           },
           {
             "label": "Saut court avant",
@@ -107,8 +117,8 @@
             ],
             "description": "Avance legerement.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-saut-court-avant"
+            "id": "navigation-saut-court-avant",
+            "level": "standard"
           },
           {
             "label": "Saut moyen arriere",
@@ -118,8 +128,8 @@
             ],
             "description": "Recule davantage.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-moyen-arriere"
+            "id": "navigation-saut-moyen-arriere",
+            "level": "advanced"
           },
           {
             "label": "Saut moyen avant",
@@ -129,8 +139,8 @@
             ],
             "description": "Avance davantage.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-moyen-avant"
+            "id": "navigation-saut-moyen-avant",
+            "level": "advanced"
           },
           {
             "label": "Saut long arriere",
@@ -140,8 +150,8 @@
             ],
             "description": "Recule fortement.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-long-arriere"
+            "id": "navigation-saut-long-arriere",
+            "level": "advanced"
           },
           {
             "label": "Saut long avant",
@@ -151,8 +161,8 @@
             ],
             "description": "Avance fortement.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-long-avant"
+            "id": "navigation-saut-long-avant",
+            "level": "advanced"
           },
           {
             "label": "Image suivante",
@@ -161,8 +171,8 @@
             ],
             "description": "Avance image par image.",
             "priority": 7,
-            "usageLevel": "expert",
-            "id": "navigation-image-suivante"
+            "id": "navigation-image-suivante",
+            "level": "advanced"
           }
         ]
       },
@@ -178,8 +188,8 @@
             ],
             "description": "Augmente le volume.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "audio-volume-plus"
+            "id": "audio-volume-plus",
+            "level": "standard"
           },
           {
             "label": "Volume moins",
@@ -189,8 +199,8 @@
             ],
             "description": "Diminue le volume.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "audio-volume-moins"
+            "id": "audio-volume-moins",
+            "level": "standard"
           },
           {
             "label": "Sous-titres",
@@ -199,8 +209,8 @@
             ],
             "description": "Change les sous-titres.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "audio-sous-titres"
+            "id": "audio-sous-titres",
+            "level": "advanced"
           },
           {
             "label": "Piste audio",
@@ -209,8 +219,8 @@
             ],
             "description": "Change la piste audio.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "audio-piste-audio"
+            "id": "audio-piste-audio",
+            "level": "advanced"
           },
           {
             "label": "Plus rapide",
@@ -219,8 +229,8 @@
             ],
             "description": "Augmente la vitesse.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "audio-plus-rapide"
+            "id": "audio-plus-rapide",
+            "level": "advanced"
           },
           {
             "label": "Plus lent",
@@ -229,8 +239,8 @@
             ],
             "description": "Diminue la vitesse.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "audio-plus-lent"
+            "id": "audio-plus-lent",
+            "level": "advanced"
           },
           {
             "label": "Vitesse normale",
@@ -239,8 +249,8 @@
             ],
             "description": "Restaure la vitesse.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "audio-vitesse-normale"
+            "id": "audio-vitesse-normale",
+            "level": "advanced"
           }
         ]
       },
@@ -256,8 +266,8 @@
             ],
             "description": "Ouvre un media.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "fichiers-ouvrir-fichier"
+            "id": "fichiers-ouvrir-fichier",
+            "level": "standard"
           },
           {
             "label": "Quitter",
@@ -267,8 +277,8 @@
             ],
             "description": "Ferme VLC.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "fichiers-quitter"
+            "id": "fichiers-quitter",
+            "level": "standard"
           }
         ]
       }
@@ -294,8 +304,8 @@
             ],
             "description": "Play or pause.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "lecture-lecture-pause"
+            "id": "lecture-lecture-pause",
+            "level": "standard"
           },
           {
             "label": "Stop",
@@ -304,8 +314,8 @@
             ],
             "description": "Stop playback.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "lecture-stop"
+            "id": "lecture-stop",
+            "level": "standard"
           },
           {
             "label": "Next media",
@@ -314,8 +324,8 @@
             ],
             "description": "Move to next media.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "lecture-suivant"
+            "id": "lecture-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous media",
@@ -324,8 +334,8 @@
             ],
             "description": "Move to previous media.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "lecture-precedent"
+            "id": "lecture-precedent",
+            "level": "standard"
           },
           {
             "label": "Full screen",
@@ -334,8 +344,18 @@
             ],
             "description": "Toggle full screen.",
             "priority": 5,
-            "usageLevel": "essential",
-            "id": "lecture-plein-ecran"
+            "id": "lecture-plein-ecran",
+            "level": "standard"
+          },
+          {
+            "label": "Exit full screen",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Leave full screen.",
+            "priority": 6,
+            "id": "lecture-quitter-plein-ecran",
+            "level": "standard"
           },
           {
             "label": "Mute",
@@ -343,9 +363,9 @@
               "M"
             ],
             "description": "Mute or restore sound.",
-            "priority": 6,
-            "usageLevel": "essential",
-            "id": "lecture-muet"
+            "priority": 7,
+            "id": "lecture-muet",
+            "level": "standard"
           },
           {
             "label": "Time display",
@@ -353,9 +373,9 @@
               "T"
             ],
             "description": "Show time.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "lecture-temps"
+            "priority": 8,
+            "id": "lecture-temps",
+            "level": "advanced"
           }
         ]
       },
@@ -371,8 +391,8 @@
             ],
             "description": "Seek back slightly.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-saut-court-arriere"
+            "id": "navigation-saut-court-arriere",
+            "level": "standard"
           },
           {
             "label": "Short jump forward",
@@ -382,8 +402,8 @@
             ],
             "description": "Seek forward slightly.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-saut-court-avant"
+            "id": "navigation-saut-court-avant",
+            "level": "standard"
           },
           {
             "label": "Medium jump backward",
@@ -393,8 +413,8 @@
             ],
             "description": "Seek back further.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-moyen-arriere"
+            "id": "navigation-saut-moyen-arriere",
+            "level": "advanced"
           },
           {
             "label": "Medium jump forward",
@@ -404,8 +424,8 @@
             ],
             "description": "Seek forward further.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-moyen-avant"
+            "id": "navigation-saut-moyen-avant",
+            "level": "advanced"
           },
           {
             "label": "Long jump backward",
@@ -415,8 +435,8 @@
             ],
             "description": "Seek back strongly.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-long-arriere"
+            "id": "navigation-saut-long-arriere",
+            "level": "advanced"
           },
           {
             "label": "Long jump forward",
@@ -426,8 +446,8 @@
             ],
             "description": "Seek forward strongly.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "navigation-saut-long-avant"
+            "id": "navigation-saut-long-avant",
+            "level": "advanced"
           },
           {
             "label": "Next frame",
@@ -436,8 +456,8 @@
             ],
             "description": "Advance frame by frame.",
             "priority": 7,
-            "usageLevel": "expert",
-            "id": "navigation-image-suivante"
+            "id": "navigation-image-suivante",
+            "level": "advanced"
           }
         ]
       },
@@ -453,8 +473,8 @@
             ],
             "description": "Increase volume.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "audio-volume-plus"
+            "id": "audio-volume-plus",
+            "level": "standard"
           },
           {
             "label": "Volume down",
@@ -464,8 +484,8 @@
             ],
             "description": "Decrease volume.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "audio-volume-moins"
+            "id": "audio-volume-moins",
+            "level": "standard"
           },
           {
             "label": "Subtitles",
@@ -474,8 +494,8 @@
             ],
             "description": "Change subtitles.",
             "priority": 3,
-            "usageLevel": "advanced",
-            "id": "audio-sous-titres"
+            "id": "audio-sous-titres",
+            "level": "advanced"
           },
           {
             "label": "Audio track",
@@ -484,8 +504,8 @@
             ],
             "description": "Change audio track.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "audio-piste-audio"
+            "id": "audio-piste-audio",
+            "level": "advanced"
           },
           {
             "label": "Faster",
@@ -494,8 +514,8 @@
             ],
             "description": "Increase speed.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "audio-plus-rapide"
+            "id": "audio-plus-rapide",
+            "level": "advanced"
           },
           {
             "label": "Slower",
@@ -504,8 +524,8 @@
             ],
             "description": "Decrease speed.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "audio-plus-lent"
+            "id": "audio-plus-lent",
+            "level": "advanced"
           },
           {
             "label": "Normal speed",
@@ -514,8 +534,8 @@
             ],
             "description": "Restore normal speed.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "audio-vitesse-normale"
+            "id": "audio-vitesse-normale",
+            "level": "advanced"
           }
         ]
       },
@@ -531,8 +551,8 @@
             ],
             "description": "Open media.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "fichiers-ouvrir-fichier"
+            "id": "fichiers-ouvrir-fichier",
+            "level": "standard"
           },
           {
             "label": "Quit",
@@ -542,8 +562,8 @@
             ],
             "description": "Close VLC.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "fichiers-quitter"
+            "id": "fichiers-quitter",
+            "level": "standard"
           }
         ]
       }

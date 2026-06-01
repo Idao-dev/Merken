@@ -9,8 +9,34 @@ describe("keycap presentation", () => {
     expect(keycapPresentation("Backspace")).toMatchObject({ label: "⌫", accessibleLabel: "Backspace", isSymbol: true });
     expect(keycapPresentation("Delete")).toMatchObject({ label: "⌦", accessibleLabel: "Delete", isSymbol: true });
     expect(keycapPresentation("Space")).toMatchObject({ label: "␣", accessibleLabel: "Space", isSymbol: true, className: "key-space" });
+    expect(keycapPresentation("Home")).toMatchObject({ label: "⇱", accessibleLabel: "Home", isSymbol: true });
+    expect(keycapPresentation("End")).toMatchObject({ label: "⇲", accessibleLabel: "End", isSymbol: true });
     expect(keycapPresentation("Left")).toMatchObject({ label: "←", accessibleLabel: "Left", isSymbol: true });
     expect(keycapPresentation("Arrows")).toMatchObject({ label: "↑↓←→", accessibleLabel: "Arrows", isSymbol: true });
+    expect(keycapPresentation("LeftClick")).toMatchObject({
+      label: "Left click",
+      accessibleLabel: "Left click",
+      isSymbol: true,
+      className: "key-mouse key-mouse-left"
+    });
+    expect(keycapPresentation("RightClick")).toMatchObject({
+      label: "Right click",
+      accessibleLabel: "Right click",
+      isSymbol: true,
+      className: "key-mouse key-mouse-right"
+    });
+    expect(keycapPresentation("Wheel")).toMatchObject({
+      label: "Wheel",
+      accessibleLabel: "Mouse wheel",
+      isSymbol: true,
+      className: "key-mouse key-mouse-wheel"
+    });
+    expect(keycapPresentation("Drag")).toMatchObject({
+      label: "Drag",
+      accessibleLabel: "Drag",
+      isSymbol: true,
+      className: "key-mouse key-mouse-drag"
+    });
   });
 
   it("keeps Esc, Win and text modifiers as text", () => {

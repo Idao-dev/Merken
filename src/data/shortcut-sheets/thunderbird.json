@@ -20,8 +20,8 @@
             ],
             "description": "Cree un message.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "messages-nouveau-message"
+            "id": "messages-nouveau-message",
+            "level": "standard"
           },
           {
             "label": "Repondre",
@@ -31,8 +31,8 @@
             ],
             "description": "Repond au message.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "messages-repondre"
+            "id": "messages-repondre",
+            "level": "standard"
           },
           {
             "label": "Repondre a tous",
@@ -43,8 +43,8 @@
             ],
             "description": "Repond a tous.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "messages-repondre-a-tous"
+            "id": "messages-repondre-a-tous",
+            "level": "standard"
           },
           {
             "label": "Transferer",
@@ -54,8 +54,31 @@
             ],
             "description": "Transfere le message.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "messages-transferer"
+            "id": "messages-transferer",
+            "level": "standard"
+          },
+          {
+            "label": "Repondre liste",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "L"
+            ],
+            "description": "Repond a une liste de diffusion.",
+            "priority": 5,
+            "id": "messages-repondre-liste",
+            "level": "advanced"
+          },
+          {
+            "label": "Modifier comme neuf",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Reouvre le message comme nouveau.",
+            "priority": 6,
+            "id": "messages-modifier-comme-neuf",
+            "level": "advanced"
           },
           {
             "label": "Archiver",
@@ -63,9 +86,9 @@
               "A"
             ],
             "description": "Archive le message.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "messages-archiver"
+            "priority": 7,
+            "id": "messages-archiver",
+            "level": "standard"
           },
           {
             "label": "Supprimer",
@@ -73,9 +96,22 @@
               "Delete"
             ],
             "description": "Supprime le message.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "messages-supprimer"
+            "priority": 8,
+            "id": "messages-supprimer",
+            "level": "standard"
+          },
+          {
+            "label": "Supprimer sans corbeille",
+            "keys": [
+              "Shift",
+              "Delete"
+            ],
+            "description": "Supprime sans corbeille.",
+            "priority": 9,
+            "id": "messages-supprimer-sans-corbeille",
+            "level": "expert",
+            "warning": "Supprime le message sans passer par la corbeille.",
+            "warningLevel": "danger"
           },
           {
             "label": "Lu non lu",
@@ -83,9 +119,9 @@
               "M"
             ],
             "description": "Change l etat lu.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "messages-lu-non-lu"
+            "priority": 10,
+            "id": "messages-lu-non-lu",
+            "level": "standard"
           },
           {
             "label": "Indesirable",
@@ -93,9 +129,41 @@
               "J"
             ],
             "description": "Change le statut indesirable.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "messages-indesirable"
+            "priority": 11,
+            "id": "messages-indesirable",
+            "level": "advanced"
+          },
+          {
+            "label": "Non indesirable",
+            "keys": [
+              "Shift",
+              "J"
+            ],
+            "description": "Retire le statut indesirable.",
+            "priority": 12,
+            "id": "messages-non-indesirable",
+            "level": "advanced"
+          },
+          {
+            "label": "Etoile",
+            "keys": [
+              "S"
+            ],
+            "description": "Ajoute ou retire une etoile.",
+            "priority": 13,
+            "id": "messages-etoile",
+            "level": "advanced"
+          },
+          {
+            "label": "Copier en glissant",
+            "keys": [
+              "Ctrl",
+              "Drag"
+            ],
+            "description": "Copie un message vers un dossier.",
+            "priority": 14,
+            "id": "messages-copier-glisser",
+            "level": "expert"
           }
         ]
       },
@@ -110,8 +178,29 @@
             ],
             "description": "Releve les messages.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-recevoir-messages"
+            "id": "navigation-recevoir-messages",
+            "level": "standard"
+          },
+          {
+            "label": "Recevoir tous",
+            "keys": [
+              "Shift",
+              "F5"
+            ],
+            "description": "Releve tous les comptes.",
+            "priority": 2,
+            "id": "navigation-recevoir-tous",
+            "level": "advanced"
+          },
+          {
+            "label": "Ouvrir message",
+            "keys": [
+              "Enter"
+            ],
+            "description": "Ouvre le message selectionne.",
+            "priority": 3,
+            "id": "navigation-ouvrir-message",
+            "level": "standard"
           },
           {
             "label": "Recherche globale",
@@ -120,9 +209,9 @@
               "K"
             ],
             "description": "Recherche partout.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-recherche-globale"
+            "priority": 4,
+            "id": "navigation-recherche-globale",
+            "level": "standard"
           },
           {
             "label": "Filtre rapide",
@@ -132,9 +221,32 @@
               "K"
             ],
             "description": "Active le filtre rapide.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-filtre-rapide"
+            "priority": 5,
+            "id": "navigation-filtre-rapide",
+            "level": "advanced"
+          },
+          {
+            "label": "Recherche avancee",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F"
+            ],
+            "description": "Ouvre la recherche avancee.",
+            "priority": 6,
+            "id": "navigation-recherche-avancee",
+            "level": "advanced"
+          },
+          {
+            "label": "Rechercher message",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Recherche dans le message courant.",
+            "priority": 7,
+            "id": "navigation-rechercher-message",
+            "level": "standard"
           },
           {
             "label": "Message suivant",
@@ -142,9 +254,9 @@
               "F"
             ],
             "description": "Passe au message suivant.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-message-suivant"
+            "priority": 8,
+            "id": "navigation-message-suivant",
+            "level": "standard"
           },
           {
             "label": "Message precedent",
@@ -152,9 +264,63 @@
               "B"
             ],
             "description": "Revient au message precedent.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-message-precedent"
+            "priority": 9,
+            "id": "navigation-message-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Non lu suivant",
+            "keys": [
+              "N"
+            ],
+            "description": "Passe au message non lu suivant.",
+            "priority": 10,
+            "id": "navigation-non-lu-suivant",
+            "level": "standard"
+          },
+          {
+            "label": "Non lu precedent",
+            "keys": [
+              "P"
+            ],
+            "description": "Revient au message non lu precedent.",
+            "priority": 11,
+            "id": "navigation-non-lu-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Onglet suivant",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Passe a l onglet suivant.",
+            "priority": 12,
+            "id": "navigation-onglet-suivant",
+            "level": "standard"
+          },
+          {
+            "label": "Onglet precedent",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Revient a l onglet precedent.",
+            "priority": 13,
+            "id": "navigation-onglet-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Dernier onglet",
+            "keys": [
+              "Ctrl",
+              "9"
+            ],
+            "description": "Passe au dernier onglet.",
+            "priority": 14,
+            "id": "navigation-dernier-onglet",
+            "level": "advanced"
           },
           {
             "label": "Carnet d adresses",
@@ -164,9 +330,64 @@
               "B"
             ],
             "description": "Ouvre le carnet d adresses.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "navigation-carnet-d-adresses"
+            "priority": 15,
+            "id": "navigation-carnet-d-adresses",
+            "level": "advanced"
+          },
+          {
+            "label": "Fichiers enregistres",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Ouvre les fichiers enregistres.",
+            "priority": 16,
+            "id": "navigation-fichiers-enregistres",
+            "level": "advanced"
+          },
+          {
+            "label": "Volet message",
+            "keys": [
+              "F8"
+            ],
+            "description": "Affiche ou masque le volet message.",
+            "priority": 17,
+            "id": "navigation-volet-message",
+            "level": "advanced"
+          },
+          {
+            "label": "Fermer onglet",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Ferme l onglet ou la fenetre.",
+            "priority": 18,
+            "id": "navigation-fermer-onglet",
+            "level": "standard"
+          },
+          {
+            "label": "Restaurer onglet",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "T"
+            ],
+            "description": "Restaure le dernier onglet ferme.",
+            "priority": 19,
+            "id": "navigation-restaurer-onglet",
+            "level": "advanced"
+          },
+          {
+            "label": "Quitter",
+            "keys": [
+              "Ctrl",
+              "Q"
+            ],
+            "description": "Ferme Thunderbird.",
+            "priority": 20,
+            "id": "navigation-quitter",
+            "level": "standard"
           }
         ]
       },
@@ -182,8 +403,20 @@
             ],
             "description": "Envoie le message.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "redaction-envoyer"
+            "id": "redaction-envoyer",
+            "level": "standard"
+          },
+          {
+            "label": "Envoyer plus tard",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Enter"
+            ],
+            "description": "Place le message en envoi differe.",
+            "priority": 2,
+            "id": "redaction-envoyer-plus-tard",
+            "level": "advanced"
           },
           {
             "label": "Brouillon",
@@ -192,9 +425,9 @@
               "S"
             ],
             "description": "Enregistre en brouillon.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "redaction-brouillon"
+            "priority": 3,
+            "id": "redaction-brouillon",
+            "level": "standard"
           },
           {
             "label": "Piece jointe",
@@ -204,9 +437,21 @@
               "A"
             ],
             "description": "Ajoute une piece jointe.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "redaction-piece-jointe"
+            "priority": 4,
+            "id": "redaction-piece-jointe",
+            "level": "standard"
+          },
+          {
+            "label": "Orthographe",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "P"
+            ],
+            "description": "Lance la verification orthographique.",
+            "priority": 5,
+            "id": "redaction-orthographe",
+            "level": "advanced"
           },
           {
             "label": "Gras",
@@ -215,9 +460,9 @@
               "B"
             ],
             "description": "Active le gras.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "redaction-gras"
+            "priority": 6,
+            "id": "redaction-gras",
+            "level": "standard"
           },
           {
             "label": "Italique",
@@ -226,9 +471,20 @@
               "I"
             ],
             "description": "Active l italique.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "redaction-italique"
+            "priority": 7,
+            "id": "redaction-italique",
+            "level": "standard"
+          },
+          {
+            "label": "Souligne",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Active le souligne.",
+            "priority": 8,
+            "id": "redaction-souligne",
+            "level": "standard"
           },
           {
             "label": "Lien",
@@ -237,9 +493,9 @@
               "K"
             ],
             "description": "Insere ou modifie un lien.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "redaction-lien"
+            "priority": 9,
+            "id": "redaction-lien",
+            "level": "advanced"
           }
         ]
       }
@@ -266,8 +522,8 @@
             ],
             "description": "Create a message.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "messages-nouveau-message"
+            "id": "messages-nouveau-message",
+            "level": "standard"
           },
           {
             "label": "Reply",
@@ -277,8 +533,8 @@
             ],
             "description": "Reply to the message.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "messages-repondre"
+            "id": "messages-repondre",
+            "level": "standard"
           },
           {
             "label": "Reply all",
@@ -289,8 +545,8 @@
             ],
             "description": "Reply to all.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "messages-repondre-a-tous"
+            "id": "messages-repondre-a-tous",
+            "level": "standard"
           },
           {
             "label": "Forward",
@@ -300,8 +556,31 @@
             ],
             "description": "Forward the message.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "messages-transferer"
+            "id": "messages-transferer",
+            "level": "standard"
+          },
+          {
+            "label": "Reply list",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "L"
+            ],
+            "description": "Reply to a mailing list.",
+            "priority": 5,
+            "id": "messages-repondre-liste",
+            "level": "advanced"
+          },
+          {
+            "label": "Edit as new",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Reopen the message as new.",
+            "priority": 6,
+            "id": "messages-modifier-comme-neuf",
+            "level": "advanced"
           },
           {
             "label": "Archive",
@@ -309,9 +588,9 @@
               "A"
             ],
             "description": "Archive the message.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "messages-archiver"
+            "priority": 7,
+            "id": "messages-archiver",
+            "level": "standard"
           },
           {
             "label": "Delete",
@@ -319,9 +598,22 @@
               "Delete"
             ],
             "description": "Delete the message.",
-            "priority": 6,
-            "usageLevel": "common",
-            "id": "messages-supprimer"
+            "priority": 8,
+            "id": "messages-supprimer",
+            "level": "standard"
+          },
+          {
+            "label": "Delete without trash",
+            "keys": [
+              "Shift",
+              "Delete"
+            ],
+            "description": "Delete without trash.",
+            "priority": 9,
+            "id": "messages-supprimer-sans-corbeille",
+            "level": "expert",
+            "warning": "Deletes the message without moving it to trash.",
+            "warningLevel": "danger"
           },
           {
             "label": "Read unread",
@@ -329,9 +621,9 @@
               "M"
             ],
             "description": "Toggle read state.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "messages-lu-non-lu"
+            "priority": 10,
+            "id": "messages-lu-non-lu",
+            "level": "standard"
           },
           {
             "label": "Junk",
@@ -339,9 +631,41 @@
               "J"
             ],
             "description": "Toggle junk status.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "messages-indesirable"
+            "priority": 11,
+            "id": "messages-indesirable",
+            "level": "advanced"
+          },
+          {
+            "label": "Not junk",
+            "keys": [
+              "Shift",
+              "J"
+            ],
+            "description": "Remove junk status.",
+            "priority": 12,
+            "id": "messages-non-indesirable",
+            "level": "advanced"
+          },
+          {
+            "label": "Star",
+            "keys": [
+              "S"
+            ],
+            "description": "Add or remove a star.",
+            "priority": 13,
+            "id": "messages-etoile",
+            "level": "advanced"
+          },
+          {
+            "label": "Copy by dragging",
+            "keys": [
+              "Ctrl",
+              "Drag"
+            ],
+            "description": "Copy a message to a folder.",
+            "priority": 14,
+            "id": "messages-copier-glisser",
+            "level": "expert"
           }
         ]
       },
@@ -356,8 +680,29 @@
             ],
             "description": "Check messages.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "navigation-recevoir-messages"
+            "id": "navigation-recevoir-messages",
+            "level": "standard"
+          },
+          {
+            "label": "Get all",
+            "keys": [
+              "Shift",
+              "F5"
+            ],
+            "description": "Check all accounts.",
+            "priority": 2,
+            "id": "navigation-recevoir-tous",
+            "level": "advanced"
+          },
+          {
+            "label": "Open message",
+            "keys": [
+              "Enter"
+            ],
+            "description": "Open the selected message.",
+            "priority": 3,
+            "id": "navigation-ouvrir-message",
+            "level": "standard"
           },
           {
             "label": "Global search",
@@ -366,9 +711,9 @@
               "K"
             ],
             "description": "Search globally.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "navigation-recherche-globale"
+            "priority": 4,
+            "id": "navigation-recherche-globale",
+            "level": "standard"
           },
           {
             "label": "Quick filter",
@@ -378,9 +723,32 @@
               "K"
             ],
             "description": "Focus quick filter.",
-            "priority": 3,
-            "usageLevel": "advanced",
-            "id": "navigation-filtre-rapide"
+            "priority": 5,
+            "id": "navigation-filtre-rapide",
+            "level": "advanced"
+          },
+          {
+            "label": "Advanced search",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F"
+            ],
+            "description": "Open advanced search.",
+            "priority": 6,
+            "id": "navigation-recherche-avancee",
+            "level": "advanced"
+          },
+          {
+            "label": "Find message",
+            "keys": [
+              "Ctrl",
+              "F"
+            ],
+            "description": "Search in the current message.",
+            "priority": 7,
+            "id": "navigation-rechercher-message",
+            "level": "standard"
           },
           {
             "label": "Next message",
@@ -388,9 +756,9 @@
               "F"
             ],
             "description": "Move to next message.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "navigation-message-suivant"
+            "priority": 8,
+            "id": "navigation-message-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous message",
@@ -398,9 +766,63 @@
               "B"
             ],
             "description": "Move to previous message.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-message-precedent"
+            "priority": 9,
+            "id": "navigation-message-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Next unread",
+            "keys": [
+              "N"
+            ],
+            "description": "Move to the next unread message.",
+            "priority": 10,
+            "id": "navigation-non-lu-suivant",
+            "level": "standard"
+          },
+          {
+            "label": "Previous unread",
+            "keys": [
+              "P"
+            ],
+            "description": "Move to the previous unread message.",
+            "priority": 11,
+            "id": "navigation-non-lu-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Next tab",
+            "keys": [
+              "Ctrl",
+              "Tab"
+            ],
+            "description": "Move to the next tab.",
+            "priority": 12,
+            "id": "navigation-onglet-suivant",
+            "level": "standard"
+          },
+          {
+            "label": "Previous tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Tab"
+            ],
+            "description": "Move to the previous tab.",
+            "priority": 13,
+            "id": "navigation-onglet-precedent",
+            "level": "standard"
+          },
+          {
+            "label": "Last tab",
+            "keys": [
+              "Ctrl",
+              "9"
+            ],
+            "description": "Move to the last tab.",
+            "priority": 14,
+            "id": "navigation-dernier-onglet",
+            "level": "advanced"
           },
           {
             "label": "Address book",
@@ -410,9 +832,64 @@
               "B"
             ],
             "description": "Open the address book.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "navigation-carnet-d-adresses"
+            "priority": 15,
+            "id": "navigation-carnet-d-adresses",
+            "level": "advanced"
+          },
+          {
+            "label": "Saved files",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Open saved files.",
+            "priority": 16,
+            "id": "navigation-fichiers-enregistres",
+            "level": "advanced"
+          },
+          {
+            "label": "Message pane",
+            "keys": [
+              "F8"
+            ],
+            "description": "Show or hide the message pane.",
+            "priority": 17,
+            "id": "navigation-volet-message",
+            "level": "advanced"
+          },
+          {
+            "label": "Close tab",
+            "keys": [
+              "Ctrl",
+              "W"
+            ],
+            "description": "Close the tab or window.",
+            "priority": 18,
+            "id": "navigation-fermer-onglet",
+            "level": "standard"
+          },
+          {
+            "label": "Restore tab",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "T"
+            ],
+            "description": "Restore the last closed tab.",
+            "priority": 19,
+            "id": "navigation-restaurer-onglet",
+            "level": "advanced"
+          },
+          {
+            "label": "Quit",
+            "keys": [
+              "Ctrl",
+              "Q"
+            ],
+            "description": "Close Thunderbird.",
+            "priority": 20,
+            "id": "navigation-quitter",
+            "level": "standard"
           }
         ]
       },
@@ -428,8 +905,20 @@
             ],
             "description": "Send the message.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "redaction-envoyer"
+            "id": "redaction-envoyer",
+            "level": "standard"
+          },
+          {
+            "label": "Send later",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "Enter"
+            ],
+            "description": "Queue the message for later sending.",
+            "priority": 2,
+            "id": "redaction-envoyer-plus-tard",
+            "level": "advanced"
           },
           {
             "label": "Save draft",
@@ -438,9 +927,9 @@
               "S"
             ],
             "description": "Save as draft.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "redaction-brouillon"
+            "priority": 3,
+            "id": "redaction-brouillon",
+            "level": "standard"
           },
           {
             "label": "Attach file",
@@ -450,9 +939,21 @@
               "A"
             ],
             "description": "Add an attachment.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "redaction-piece-jointe"
+            "priority": 4,
+            "id": "redaction-piece-jointe",
+            "level": "standard"
+          },
+          {
+            "label": "Spelling",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "P"
+            ],
+            "description": "Run spell check.",
+            "priority": 5,
+            "id": "redaction-orthographe",
+            "level": "advanced"
           },
           {
             "label": "Bold",
@@ -461,9 +962,9 @@
               "B"
             ],
             "description": "Toggle bold.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "redaction-gras"
+            "priority": 6,
+            "id": "redaction-gras",
+            "level": "standard"
           },
           {
             "label": "Italic",
@@ -472,9 +973,20 @@
               "I"
             ],
             "description": "Toggle italic.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "redaction-italique"
+            "priority": 7,
+            "id": "redaction-italique",
+            "level": "standard"
+          },
+          {
+            "label": "Underline",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Toggle underline.",
+            "priority": 8,
+            "id": "redaction-souligne",
+            "level": "standard"
           },
           {
             "label": "Link",
@@ -483,9 +995,9 @@
               "K"
             ],
             "description": "Insert or edit a link.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "redaction-lien"
+            "priority": 9,
+            "id": "redaction-lien",
+            "level": "advanced"
           }
         ]
       }

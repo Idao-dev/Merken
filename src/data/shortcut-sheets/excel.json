@@ -20,8 +20,8 @@
             ],
             "description": "Cree un classeur.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "general-nouveau-classeur"
+            "id": "general-nouveau-classeur",
+            "level": "standard"
           },
           {
             "label": "Ouvrir",
@@ -31,8 +31,8 @@
             ],
             "description": "Ouvre un classeur.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "general-ouvrir"
+            "id": "general-ouvrir",
+            "level": "standard"
           },
           {
             "label": "Enregistrer",
@@ -42,8 +42,8 @@
             ],
             "description": "Enregistre le classeur.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "general-enregistrer"
+            "id": "general-enregistrer",
+            "level": "standard"
           },
           {
             "label": "Fermer",
@@ -53,8 +53,8 @@
             ],
             "description": "Ferme le classeur.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "general-fermer"
+            "id": "general-fermer",
+            "level": "standard"
           },
           {
             "label": "Imprimer",
@@ -64,8 +64,18 @@
             ],
             "description": "Ouvre l impression.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "general-imprimer"
+            "id": "general-imprimer",
+            "level": "advanced"
+          },
+          {
+            "label": "Enregistrer sous",
+            "keys": [
+              "F12"
+            ],
+            "description": "Ouvre Enregistrer sous.",
+            "priority": 6,
+            "id": "general-enregistrer-sous",
+            "level": "advanced"
           },
           {
             "label": "Recherche commande",
@@ -74,9 +84,9 @@
               "Q"
             ],
             "description": "Recherche une commande.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "general-recherche-commande"
+            "priority": 7,
+            "id": "general-recherche-commande",
+            "level": "advanced"
           }
         ]
       },
@@ -92,8 +102,8 @@
             ],
             "description": "Copie la selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Coller",
@@ -103,8 +113,8 @@
             ],
             "description": "Colle la selection.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Couper",
@@ -114,8 +124,8 @@
             ],
             "description": "Coupe la selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "edition-couper"
+            "id": "edition-couper",
+            "level": "standard"
           },
           {
             "label": "Annuler",
@@ -125,8 +135,8 @@
             ],
             "description": "Annule l action recente.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Retablir",
@@ -136,8 +146,8 @@
             ],
             "description": "Retablit l action.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Rechercher",
@@ -147,8 +157,8 @@
             ],
             "description": "Recherche dans le classeur.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Remplacer",
@@ -158,8 +168,52 @@
             ],
             "description": "Ouvre le remplacement.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "edition-remplacer"
+            "id": "edition-remplacer",
+            "level": "advanced"
+          },
+          {
+            "label": "Gras",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Active le gras.",
+            "priority": 8,
+            "id": "edition-gras",
+            "level": "advanced"
+          },
+          {
+            "label": "Italique",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Active l italique.",
+            "priority": 9,
+            "id": "edition-italique",
+            "level": "advanced"
+          },
+          {
+            "label": "Souligne",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Active le souligne.",
+            "priority": 10,
+            "id": "edition-souligne",
+            "level": "advanced"
+          },
+          {
+            "label": "Format cellule",
+            "keys": [
+              "Ctrl",
+              "1"
+            ],
+            "description": "Ouvre le format de cellule.",
+            "priority": 11,
+            "id": "edition-format-cellule",
+            "level": "advanced"
           }
         ]
       },
@@ -174,8 +228,19 @@
             ],
             "description": "Modifie la cellule active.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "cellules-modifier-cellule"
+            "id": "cellules-modifier-cellule",
+            "level": "standard"
+          },
+          {
+            "label": "Nouvelle ligne",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Insere un retour dans la cellule.",
+            "priority": 2,
+            "id": "cellules-nouvelle-ligne",
+            "level": "advanced"
           },
           {
             "label": "Atteindre",
@@ -184,9 +249,9 @@
               "G"
             ],
             "description": "Ouvre Atteindre.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "cellules-atteindre"
+            "priority": 3,
+            "id": "cellules-atteindre",
+            "level": "standard"
           },
           {
             "label": "Debut feuille",
@@ -194,10 +259,10 @@
               "Ctrl",
               "Home"
             ],
-            "description": "Va au debut de la feuille.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "cellules-debut-feuille"
+            "description": "Va au debut de la feuille. Variante portable: Ctrl + Fn + Left.",
+            "priority": 4,
+            "id": "cellules-debut-feuille",
+            "level": "advanced"
           },
           {
             "label": "Derniere cellule",
@@ -205,10 +270,10 @@
               "Ctrl",
               "End"
             ],
-            "description": "Va a la derniere cellule utilisee.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "cellules-derniere-cellule"
+            "description": "Va a la derniere cellule utilisee. Variante portable: Ctrl + Fn + Right.",
+            "priority": 5,
+            "id": "cellules-derniere-cellule",
+            "level": "advanced"
           },
           {
             "label": "Bord region",
@@ -217,9 +282,9 @@
               "Arrow"
             ],
             "description": "Saute au bord des donnees.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "cellules-bord-region"
+            "priority": 6,
+            "id": "cellules-bord-region",
+            "level": "standard"
           },
           {
             "label": "Etendre selection",
@@ -229,9 +294,31 @@
               "Arrow"
             ],
             "description": "Etend la selection.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "cellules-etendre-selection"
+            "priority": 7,
+            "id": "cellules-etendre-selection",
+            "level": "advanced"
+          },
+          {
+            "label": "Selectionner ligne",
+            "keys": [
+              "Shift",
+              "Space"
+            ],
+            "description": "Selectionne la ligne active.",
+            "priority": 8,
+            "id": "cellules-selectionner-ligne",
+            "level": "advanced"
+          },
+          {
+            "label": "Selectionner colonne",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Selectionne la colonne active.",
+            "priority": 9,
+            "id": "cellules-selectionner-colonne",
+            "level": "advanced"
           },
           {
             "label": "Inserer",
@@ -241,9 +328,9 @@
               "+"
             ],
             "description": "Insere cellules, lignes ou colonnes.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "cellules-inserer"
+            "priority": 10,
+            "id": "cellules-inserer",
+            "level": "advanced"
           },
           {
             "label": "Supprimer",
@@ -252,9 +339,31 @@
               "-"
             ],
             "description": "Supprime cellules, lignes ou colonnes.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "cellules-supprimer"
+            "priority": 11,
+            "id": "cellules-supprimer",
+            "level": "advanced"
+          },
+          {
+            "label": "Feuille suivante",
+            "keys": [
+              "Ctrl",
+              "PageDown"
+            ],
+            "description": "Passe a la feuille suivante.",
+            "priority": 12,
+            "id": "cellules-feuille-suivante",
+            "level": "advanced"
+          },
+          {
+            "label": "Feuille precedente",
+            "keys": [
+              "Ctrl",
+              "PageUp"
+            ],
+            "description": "Revient a la feuille precedente.",
+            "priority": 13,
+            "id": "cellules-feuille-precedente",
+            "level": "advanced"
           }
         ]
       },
@@ -270,8 +379,8 @@
             ],
             "description": "Insere une somme.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "formules-somme-automatique"
+            "id": "formules-somme-automatique",
+            "level": "standard"
           },
           {
             "label": "Inserer fonction",
@@ -281,8 +390,8 @@
             ],
             "description": "Ouvre l assistant fonction.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "formules-inserer-fonction"
+            "id": "formules-inserer-fonction",
+            "level": "standard"
           },
           {
             "label": "Reference absolue",
@@ -291,8 +400,8 @@
             ],
             "description": "Bascule les references.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "formules-reference-absolue"
+            "id": "formules-reference-absolue",
+            "level": "standard"
           },
           {
             "label": "Afficher formules",
@@ -302,8 +411,8 @@
             ],
             "description": "Affiche ou masque les formules.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "formules-afficher-formules"
+            "id": "formules-afficher-formules",
+            "level": "advanced"
           },
           {
             "label": "Recalculer",
@@ -312,8 +421,8 @@
             ],
             "description": "Recalcule le classeur.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "formules-recalculer"
+            "id": "formules-recalculer",
+            "level": "advanced"
           },
           {
             "label": "Filtre",
@@ -324,8 +433,8 @@
             ],
             "description": "Active ou retire les filtres.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "formules-filtre"
+            "id": "formules-filtre",
+            "level": "advanced"
           },
           {
             "label": "Creer tableau",
@@ -335,8 +444,402 @@
             ],
             "description": "Cree un tableau.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "formules-creer-tableau"
+            "id": "formules-creer-tableau",
+            "level": "standard"
+          },
+          {
+            "label": "Date",
+            "keys": [
+              "Ctrl",
+              ";"
+            ],
+            "description": "Insere la date courante.",
+            "priority": 8,
+            "id": "formules-date",
+            "level": "advanced"
+          },
+          {
+            "label": "Heure",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              ";"
+            ],
+            "description": "Insere l heure courante.",
+            "priority": 9,
+            "id": "formules-heure",
+            "level": "advanced"
+          },
+          {
+            "label": "Formule du dessus",
+            "keys": [
+              "Ctrl",
+              "'"
+            ],
+            "description": "Copie la formule de la cellule au-dessus.",
+            "priority": 10,
+            "id": "formules-copier-dessus",
+            "level": "advanced"
+          },
+          {
+            "label": "Collage special",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "V"
+            ],
+            "description": "Ouvre le collage special.",
+            "priority": 11,
+            "id": "formules-collage-special",
+            "level": "advanced"
+          },
+          {
+            "label": "Calculer feuille",
+            "keys": [
+              "Shift",
+              "F9"
+            ],
+            "description": "Recalcule la feuille active.",
+            "priority": 12,
+            "id": "formules-calculer-feuille",
+            "level": "expert"
+          },
+          {
+            "label": "Power Query",
+            "keys": [
+              "Alt",
+              "F12"
+            ],
+            "description": "Ouvre l editeur Power Query.",
+            "priority": 13,
+            "id": "donnees-power-query",
+            "level": "expert"
+          },
+          {
+            "label": "Arreter actualisation",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Stoppe une actualisation en cours.",
+            "priority": 14,
+            "id": "donnees-arreter-actualisation",
+            "level": "advanced"
+          },
+          {
+            "label": "Actualiser feuille",
+            "keys": [
+              "Ctrl",
+              "F5"
+            ],
+            "description": "Actualise les donnees externes de la feuille.",
+            "priority": 15,
+            "id": "donnees-actualiser-feuille",
+            "level": "advanced"
+          },
+          {
+            "label": "Actualiser tout",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "F5"
+            ],
+            "description": "Actualise toutes les connexions du classeur.",
+            "priority": 16,
+            "id": "donnees-actualiser-tout",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot menu",
+            "keys": [
+              "Shift",
+              "F10"
+            ],
+            "description": "Ouvre le menu contextuel Power Pivot.",
+            "priority": 17,
+            "id": "donnees-power-pivot-menu",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot table",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Selectionne la table Power Pivot.",
+            "priority": 18,
+            "id": "donnees-power-pivot-table",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot colonne",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Selectionne la colonne Power Pivot.",
+            "priority": 19,
+            "id": "donnees-power-pivot-colonne",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot ligne",
+            "keys": [
+              "Shift",
+              "Space"
+            ],
+            "description": "Selectionne la ligne Power Pivot.",
+            "priority": 20,
+            "id": "donnees-power-pivot-ligne",
+            "level": "expert"
+          }
+        ]
+      },
+      {
+        "id": "vba",
+        "title": "VBA",
+        "shortcuts": [
+          {
+            "label": "Editeur VBA",
+            "keys": [
+              "Alt",
+              "F11"
+            ],
+            "description": "Ouvre ou revient a l editeur VBA.",
+            "priority": 1,
+            "id": "vba-editeur",
+            "level": "expert"
+          },
+          {
+            "label": "Macros",
+            "keys": [
+              "Alt",
+              "F8"
+            ],
+            "description": "Ouvre la liste des macros.",
+            "priority": 2,
+            "id": "vba-macros",
+            "level": "expert"
+          },
+          {
+            "label": "Explorateur objets",
+            "keys": [
+              "F2"
+            ],
+            "description": "Ouvre l explorateur d objets.",
+            "priority": 3,
+            "id": "vba-explorateur-objets",
+            "level": "expert"
+          },
+          {
+            "label": "Proprietes",
+            "keys": [
+              "F4"
+            ],
+            "description": "Ouvre la fenetre Proprietes.",
+            "priority": 4,
+            "id": "vba-proprietes",
+            "level": "expert"
+          },
+          {
+            "label": "Executer",
+            "keys": [
+              "F5"
+            ],
+            "description": "Lance la procedure active.",
+            "priority": 5,
+            "id": "vba-executer",
+            "level": "expert",
+            "warning": "Execute du code VBA dans le classeur actif.",
+            "warningLevel": "danger"
+          },
+          {
+            "label": "Pas a pas",
+            "keys": [
+              "F8"
+            ],
+            "description": "Execute l instruction suivante.",
+            "priority": 6,
+            "id": "vba-pas-a-pas",
+            "level": "expert"
+          },
+          {
+            "label": "Pas par-dessus",
+            "keys": [
+              "Shift",
+              "F8"
+            ],
+            "description": "Execute l appel sans entrer dedans.",
+            "priority": 7,
+            "id": "vba-pas-par-dessus",
+            "level": "expert"
+          },
+          {
+            "label": "Sortir procedure",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F8"
+            ],
+            "description": "Termine la procedure courante.",
+            "priority": 8,
+            "id": "vba-sortir-procedure",
+            "level": "expert"
+          },
+          {
+            "label": "Jusqu au curseur",
+            "keys": [
+              "Ctrl",
+              "F8"
+            ],
+            "description": "Execute jusqu a la ligne du curseur.",
+            "priority": 9,
+            "id": "vba-jusqu-au-curseur",
+            "level": "expert"
+          },
+          {
+            "label": "Point d arret",
+            "keys": [
+              "F9"
+            ],
+            "description": "Active ou retire un point d arret.",
+            "priority": 10,
+            "id": "vba-point-arret",
+            "level": "expert"
+          },
+          {
+            "label": "Effacer points d arret",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F9"
+            ],
+            "description": "Supprime tous les points d arret.",
+            "priority": 11,
+            "id": "vba-effacer-points-arret",
+            "level": "expert"
+          },
+          {
+            "label": "Interrompre",
+            "keys": [
+              "Ctrl",
+              "Break"
+            ],
+            "description": "Stoppe l execution du code.",
+            "priority": 12,
+            "id": "vba-interrompre",
+            "level": "expert"
+          },
+          {
+            "label": "Immediate",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Ouvre la fenetre Immediate.",
+            "priority": 13,
+            "id": "vba-immediate",
+            "level": "expert"
+          },
+          {
+            "label": "Projet",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Ouvre l explorateur de projet.",
+            "priority": 14,
+            "id": "vba-projet",
+            "level": "expert"
+          },
+          {
+            "label": "Definition",
+            "keys": [
+              "Shift",
+              "F2"
+            ],
+            "description": "Va a la definition du symbole.",
+            "priority": 15,
+            "id": "vba-definition",
+            "level": "expert"
+          },
+          {
+            "label": "Derniere position",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F2"
+            ],
+            "description": "Revient a la position precedente.",
+            "priority": 16,
+            "id": "vba-derniere-position",
+            "level": "expert"
+          },
+          {
+            "label": "Liste proprietes",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Affiche proprietes et methodes.",
+            "priority": 17,
+            "id": "vba-liste-proprietes",
+            "level": "expert"
+          },
+          {
+            "label": "Completion",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Complete l identifiant courant.",
+            "priority": 18,
+            "id": "vba-completion",
+            "level": "expert"
+          },
+          {
+            "label": "Info rapide",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Affiche l information rapide.",
+            "priority": 19,
+            "id": "vba-info-rapide",
+            "level": "expert"
+          },
+          {
+            "label": "Info parametres",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "I"
+            ],
+            "description": "Affiche l aide des parametres.",
+            "priority": 20,
+            "id": "vba-info-parametres",
+            "level": "expert"
+          },
+          {
+            "label": "Importer fichier",
+            "keys": [
+              "Ctrl",
+              "M"
+            ],
+            "description": "Importe un fichier dans le projet.",
+            "priority": 21,
+            "id": "vba-importer",
+            "level": "expert"
+          },
+          {
+            "label": "Exporter fichier",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Exporte le module actif.",
+            "priority": 22,
+            "id": "vba-exporter",
+            "level": "expert"
           }
         ]
       }
@@ -363,8 +866,8 @@
             ],
             "description": "Create a workbook.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "general-nouveau-classeur"
+            "id": "general-nouveau-classeur",
+            "level": "standard"
           },
           {
             "label": "Open",
@@ -374,8 +877,8 @@
             ],
             "description": "Open a workbook.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "general-ouvrir"
+            "id": "general-ouvrir",
+            "level": "standard"
           },
           {
             "label": "Save",
@@ -385,8 +888,8 @@
             ],
             "description": "Save the workbook.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "general-enregistrer"
+            "id": "general-enregistrer",
+            "level": "standard"
           },
           {
             "label": "Close workbook",
@@ -396,8 +899,8 @@
             ],
             "description": "Close the workbook.",
             "priority": 4,
-            "usageLevel": "common",
-            "id": "general-fermer"
+            "id": "general-fermer",
+            "level": "standard"
           },
           {
             "label": "Print",
@@ -407,8 +910,18 @@
             ],
             "description": "Open print options.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "general-imprimer"
+            "id": "general-imprimer",
+            "level": "advanced"
+          },
+          {
+            "label": "Save as",
+            "keys": [
+              "F12"
+            ],
+            "description": "Open Save As.",
+            "priority": 6,
+            "id": "general-enregistrer-sous",
+            "level": "advanced"
           },
           {
             "label": "Command search",
@@ -417,9 +930,9 @@
               "Q"
             ],
             "description": "Search for a command.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "general-recherche-commande"
+            "priority": 7,
+            "id": "general-recherche-commande",
+            "level": "advanced"
           }
         ]
       },
@@ -435,8 +948,8 @@
             ],
             "description": "Copy the selection.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "edition-copier"
+            "id": "edition-copier",
+            "level": "standard"
           },
           {
             "label": "Paste",
@@ -446,8 +959,8 @@
             ],
             "description": "Paste the selection.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "edition-coller"
+            "id": "edition-coller",
+            "level": "standard"
           },
           {
             "label": "Cut",
@@ -457,8 +970,8 @@
             ],
             "description": "Cut the selection.",
             "priority": 3,
-            "usageLevel": "essential",
-            "id": "edition-couper"
+            "id": "edition-couper",
+            "level": "standard"
           },
           {
             "label": "Undo",
@@ -468,8 +981,8 @@
             ],
             "description": "Undo the latest action.",
             "priority": 4,
-            "usageLevel": "essential",
-            "id": "edition-annuler"
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Redo",
@@ -479,8 +992,8 @@
             ],
             "description": "Redo the action.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Find",
@@ -490,8 +1003,8 @@
             ],
             "description": "Search the workbook.",
             "priority": 6,
-            "usageLevel": "common",
-            "id": "edition-rechercher"
+            "id": "edition-rechercher",
+            "level": "standard"
           },
           {
             "label": "Replace",
@@ -501,8 +1014,52 @@
             ],
             "description": "Open replace.",
             "priority": 7,
-            "usageLevel": "advanced",
-            "id": "edition-remplacer"
+            "id": "edition-remplacer",
+            "level": "advanced"
+          },
+          {
+            "label": "Bold",
+            "keys": [
+              "Ctrl",
+              "B"
+            ],
+            "description": "Toggle bold.",
+            "priority": 8,
+            "id": "edition-gras",
+            "level": "advanced"
+          },
+          {
+            "label": "Italic",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Toggle italic.",
+            "priority": 9,
+            "id": "edition-italique",
+            "level": "advanced"
+          },
+          {
+            "label": "Underline",
+            "keys": [
+              "Ctrl",
+              "U"
+            ],
+            "description": "Toggle underline.",
+            "priority": 10,
+            "id": "edition-souligne",
+            "level": "advanced"
+          },
+          {
+            "label": "Format cell",
+            "keys": [
+              "Ctrl",
+              "1"
+            ],
+            "description": "Open cell formatting.",
+            "priority": 11,
+            "id": "edition-format-cellule",
+            "level": "advanced"
           }
         ]
       },
@@ -517,8 +1074,19 @@
             ],
             "description": "Edit the active cell.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "cellules-modifier-cellule"
+            "id": "cellules-modifier-cellule",
+            "level": "standard"
+          },
+          {
+            "label": "New line",
+            "keys": [
+              "Alt",
+              "Enter"
+            ],
+            "description": "Insert a line break in the cell.",
+            "priority": 2,
+            "id": "cellules-nouvelle-ligne",
+            "level": "advanced"
           },
           {
             "label": "Go to",
@@ -527,9 +1095,9 @@
               "G"
             ],
             "description": "Open Go To.",
-            "priority": 2,
-            "usageLevel": "common",
-            "id": "cellules-atteindre"
+            "priority": 3,
+            "id": "cellules-atteindre",
+            "level": "standard"
           },
           {
             "label": "Sheet start",
@@ -537,10 +1105,10 @@
               "Ctrl",
               "Home"
             ],
-            "description": "Go to the sheet start.",
-            "priority": 3,
-            "usageLevel": "common",
-            "id": "cellules-debut-feuille"
+            "description": "Go to the sheet start. Laptop variant: Ctrl + Fn + Left.",
+            "priority": 4,
+            "id": "cellules-debut-feuille",
+            "level": "advanced"
           },
           {
             "label": "Last cell",
@@ -548,10 +1116,10 @@
               "Ctrl",
               "End"
             ],
-            "description": "Go to the last used cell.",
-            "priority": 4,
-            "usageLevel": "advanced",
-            "id": "cellules-derniere-cellule"
+            "description": "Go to the last used cell. Laptop variant: Ctrl + Fn + Right.",
+            "priority": 5,
+            "id": "cellules-derniere-cellule",
+            "level": "advanced"
           },
           {
             "label": "Region edge",
@@ -560,9 +1128,9 @@
               "Arrow"
             ],
             "description": "Jump to the data edge.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "cellules-bord-region"
+            "priority": 6,
+            "id": "cellules-bord-region",
+            "level": "standard"
           },
           {
             "label": "Extend selection",
@@ -572,9 +1140,31 @@
               "Arrow"
             ],
             "description": "Extend selection.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "cellules-etendre-selection"
+            "priority": 7,
+            "id": "cellules-etendre-selection",
+            "level": "advanced"
+          },
+          {
+            "label": "Select row",
+            "keys": [
+              "Shift",
+              "Space"
+            ],
+            "description": "Select the active row.",
+            "priority": 8,
+            "id": "cellules-selectionner-ligne",
+            "level": "advanced"
+          },
+          {
+            "label": "Select column",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Select the active column.",
+            "priority": 9,
+            "id": "cellules-selectionner-colonne",
+            "level": "advanced"
           },
           {
             "label": "Insert",
@@ -584,9 +1174,9 @@
               "+"
             ],
             "description": "Insert cells, rows, or columns.",
-            "priority": 7,
-            "usageLevel": "advanced",
-            "id": "cellules-inserer"
+            "priority": 10,
+            "id": "cellules-inserer",
+            "level": "advanced"
           },
           {
             "label": "Delete",
@@ -595,9 +1185,31 @@
               "-"
             ],
             "description": "Delete cells, rows, or columns.",
-            "priority": 8,
-            "usageLevel": "advanced",
-            "id": "cellules-supprimer"
+            "priority": 11,
+            "id": "cellules-supprimer",
+            "level": "advanced"
+          },
+          {
+            "label": "Next sheet",
+            "keys": [
+              "Ctrl",
+              "PageDown"
+            ],
+            "description": "Move to the next sheet.",
+            "priority": 12,
+            "id": "cellules-feuille-suivante",
+            "level": "advanced"
+          },
+          {
+            "label": "Previous sheet",
+            "keys": [
+              "Ctrl",
+              "PageUp"
+            ],
+            "description": "Move to the previous sheet.",
+            "priority": 13,
+            "id": "cellules-feuille-precedente",
+            "level": "advanced"
           }
         ]
       },
@@ -613,8 +1225,8 @@
             ],
             "description": "Insert a sum.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "formules-somme-automatique"
+            "id": "formules-somme-automatique",
+            "level": "standard"
           },
           {
             "label": "Insert function",
@@ -624,8 +1236,8 @@
             ],
             "description": "Open the function wizard.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "formules-inserer-fonction"
+            "id": "formules-inserer-fonction",
+            "level": "standard"
           },
           {
             "label": "Absolute reference",
@@ -634,8 +1246,8 @@
             ],
             "description": "Toggle references.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "formules-reference-absolue"
+            "id": "formules-reference-absolue",
+            "level": "standard"
           },
           {
             "label": "Show formulas",
@@ -645,8 +1257,8 @@
             ],
             "description": "Show or hide formulas.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "formules-afficher-formules"
+            "id": "formules-afficher-formules",
+            "level": "advanced"
           },
           {
             "label": "Calculate",
@@ -655,8 +1267,8 @@
             ],
             "description": "Recalculate the workbook.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "formules-recalculer"
+            "id": "formules-recalculer",
+            "level": "advanced"
           },
           {
             "label": "Filter",
@@ -667,8 +1279,8 @@
             ],
             "description": "Toggle filters.",
             "priority": 6,
-            "usageLevel": "advanced",
-            "id": "formules-filtre"
+            "id": "formules-filtre",
+            "level": "advanced"
           },
           {
             "label": "Create table",
@@ -678,8 +1290,402 @@
             ],
             "description": "Create a table.",
             "priority": 7,
-            "usageLevel": "common",
-            "id": "formules-creer-tableau"
+            "id": "formules-creer-tableau",
+            "level": "standard"
+          },
+          {
+            "label": "Date",
+            "keys": [
+              "Ctrl",
+              ";"
+            ],
+            "description": "Insert the current date.",
+            "priority": 8,
+            "id": "formules-date",
+            "level": "advanced"
+          },
+          {
+            "label": "Time",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              ";"
+            ],
+            "description": "Insert the current time.",
+            "priority": 9,
+            "id": "formules-heure",
+            "level": "advanced"
+          },
+          {
+            "label": "Formula above",
+            "keys": [
+              "Ctrl",
+              "'"
+            ],
+            "description": "Copy the formula from the cell above.",
+            "priority": 10,
+            "id": "formules-copier-dessus",
+            "level": "advanced"
+          },
+          {
+            "label": "Paste special",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "V"
+            ],
+            "description": "Open Paste Special.",
+            "priority": 11,
+            "id": "formules-collage-special",
+            "level": "advanced"
+          },
+          {
+            "label": "Calculate sheet",
+            "keys": [
+              "Shift",
+              "F9"
+            ],
+            "description": "Recalculate the active sheet.",
+            "priority": 12,
+            "id": "formules-calculer-feuille",
+            "level": "expert"
+          },
+          {
+            "label": "Power Query",
+            "keys": [
+              "Alt",
+              "F12"
+            ],
+            "description": "Open the Power Query Editor.",
+            "priority": 13,
+            "id": "donnees-power-query",
+            "level": "expert"
+          },
+          {
+            "label": "Stop refresh",
+            "keys": [
+              "Esc"
+            ],
+            "description": "Stop a running refresh.",
+            "priority": 14,
+            "id": "donnees-arreter-actualisation",
+            "level": "advanced"
+          },
+          {
+            "label": "Refresh sheet",
+            "keys": [
+              "Ctrl",
+              "F5"
+            ],
+            "description": "Refresh external data in the sheet.",
+            "priority": 15,
+            "id": "donnees-actualiser-feuille",
+            "level": "advanced"
+          },
+          {
+            "label": "Refresh all",
+            "keys": [
+              "Ctrl",
+              "Alt",
+              "F5"
+            ],
+            "description": "Refresh all workbook connections.",
+            "priority": 16,
+            "id": "donnees-actualiser-tout",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot menu",
+            "keys": [
+              "Shift",
+              "F10"
+            ],
+            "description": "Open the Power Pivot context menu.",
+            "priority": 17,
+            "id": "donnees-power-pivot-menu",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot table",
+            "keys": [
+              "Ctrl",
+              "A"
+            ],
+            "description": "Select the Power Pivot table.",
+            "priority": 18,
+            "id": "donnees-power-pivot-table",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot column",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Select the Power Pivot column.",
+            "priority": 19,
+            "id": "donnees-power-pivot-colonne",
+            "level": "expert"
+          },
+          {
+            "label": "Power Pivot row",
+            "keys": [
+              "Shift",
+              "Space"
+            ],
+            "description": "Select the Power Pivot row.",
+            "priority": 20,
+            "id": "donnees-power-pivot-ligne",
+            "level": "expert"
+          }
+        ]
+      },
+      {
+        "id": "vba",
+        "title": "VBA",
+        "shortcuts": [
+          {
+            "label": "VBA editor",
+            "keys": [
+              "Alt",
+              "F11"
+            ],
+            "description": "Open or return to the VBA editor.",
+            "priority": 1,
+            "id": "vba-editeur",
+            "level": "expert"
+          },
+          {
+            "label": "Macros",
+            "keys": [
+              "Alt",
+              "F8"
+            ],
+            "description": "Open the macro list.",
+            "priority": 2,
+            "id": "vba-macros",
+            "level": "expert"
+          },
+          {
+            "label": "Object Browser",
+            "keys": [
+              "F2"
+            ],
+            "description": "Open the Object Browser.",
+            "priority": 3,
+            "id": "vba-explorateur-objets",
+            "level": "expert"
+          },
+          {
+            "label": "Properties",
+            "keys": [
+              "F4"
+            ],
+            "description": "Open the Properties window.",
+            "priority": 4,
+            "id": "vba-proprietes",
+            "level": "expert"
+          },
+          {
+            "label": "Run",
+            "keys": [
+              "F5"
+            ],
+            "description": "Run the active procedure.",
+            "priority": 5,
+            "id": "vba-executer",
+            "level": "expert",
+            "warning": "Runs VBA code in the active workbook.",
+            "warningLevel": "danger"
+          },
+          {
+            "label": "Step into",
+            "keys": [
+              "F8"
+            ],
+            "description": "Execute the next statement.",
+            "priority": 6,
+            "id": "vba-pas-a-pas",
+            "level": "expert"
+          },
+          {
+            "label": "Step over",
+            "keys": [
+              "Shift",
+              "F8"
+            ],
+            "description": "Execute the call without stepping into it.",
+            "priority": 7,
+            "id": "vba-pas-par-dessus",
+            "level": "expert"
+          },
+          {
+            "label": "Step out",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F8"
+            ],
+            "description": "Finish the current procedure.",
+            "priority": 8,
+            "id": "vba-sortir-procedure",
+            "level": "expert"
+          },
+          {
+            "label": "Run to cursor",
+            "keys": [
+              "Ctrl",
+              "F8"
+            ],
+            "description": "Run to the cursor line.",
+            "priority": 9,
+            "id": "vba-jusqu-au-curseur",
+            "level": "expert"
+          },
+          {
+            "label": "Breakpoint",
+            "keys": [
+              "F9"
+            ],
+            "description": "Toggle a breakpoint.",
+            "priority": 10,
+            "id": "vba-point-arret",
+            "level": "expert"
+          },
+          {
+            "label": "Clear breakpoints",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F9"
+            ],
+            "description": "Clear all breakpoints.",
+            "priority": 11,
+            "id": "vba-effacer-points-arret",
+            "level": "expert"
+          },
+          {
+            "label": "Break",
+            "keys": [
+              "Ctrl",
+              "Break"
+            ],
+            "description": "Stop code execution.",
+            "priority": 12,
+            "id": "vba-interrompre",
+            "level": "expert"
+          },
+          {
+            "label": "Immediate",
+            "keys": [
+              "Ctrl",
+              "G"
+            ],
+            "description": "Open the Immediate window.",
+            "priority": 13,
+            "id": "vba-immediate",
+            "level": "expert"
+          },
+          {
+            "label": "Project",
+            "keys": [
+              "Ctrl",
+              "R"
+            ],
+            "description": "Open Project Explorer.",
+            "priority": 14,
+            "id": "vba-projet",
+            "level": "expert"
+          },
+          {
+            "label": "Definition",
+            "keys": [
+              "Shift",
+              "F2"
+            ],
+            "description": "Go to the symbol definition.",
+            "priority": 15,
+            "id": "vba-definition",
+            "level": "expert"
+          },
+          {
+            "label": "Last position",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "F2"
+            ],
+            "description": "Return to the previous position.",
+            "priority": 16,
+            "id": "vba-derniere-position",
+            "level": "expert"
+          },
+          {
+            "label": "Member list",
+            "keys": [
+              "Ctrl",
+              "J"
+            ],
+            "description": "Show properties and methods.",
+            "priority": 17,
+            "id": "vba-liste-proprietes",
+            "level": "expert"
+          },
+          {
+            "label": "Complete word",
+            "keys": [
+              "Ctrl",
+              "Space"
+            ],
+            "description": "Complete the current identifier.",
+            "priority": 18,
+            "id": "vba-completion",
+            "level": "expert"
+          },
+          {
+            "label": "Quick info",
+            "keys": [
+              "Ctrl",
+              "I"
+            ],
+            "description": "Show quick information.",
+            "priority": 19,
+            "id": "vba-info-rapide",
+            "level": "expert"
+          },
+          {
+            "label": "Parameter info",
+            "keys": [
+              "Ctrl",
+              "Shift",
+              "I"
+            ],
+            "description": "Show parameter help.",
+            "priority": 20,
+            "id": "vba-info-parametres",
+            "level": "expert"
+          },
+          {
+            "label": "Import file",
+            "keys": [
+              "Ctrl",
+              "M"
+            ],
+            "description": "Import a file into the project.",
+            "priority": 21,
+            "id": "vba-importer",
+            "level": "expert"
+          },
+          {
+            "label": "Export file",
+            "keys": [
+              "Ctrl",
+              "E"
+            ],
+            "description": "Export the active module.",
+            "priority": 22,
+            "id": "vba-exporter",
+            "level": "expert"
           }
         ]
       }

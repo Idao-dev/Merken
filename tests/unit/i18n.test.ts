@@ -73,6 +73,9 @@ describe("interface labels", () => {
     expect(fr.settings.windowsNativeBadge).toBe("Win");
     expect(fr.settings.windowsNativeBadgeHelp).toBe("Natif Windows");
     expect(fr.sheetBadge["windows-native"].label).toBe("Win");
+    expect(fr.sheetBadge["office-365"].label).toBe("365");
+    expect(fr.sheetBadge["office-2024"].label).toBe("2024");
+    expect(fr.sheetBadge["office-2021"].label).toBe("2021");
     expect(fr.sheetBadge["browser-brave"].label).toBe("Brave");
     expect(fr.settings.shortcutWarningMode).toBe("Messages de prevention");
     expect(fr.shortcutWarningMode.all).toBe("Tous les messages");
@@ -82,6 +85,9 @@ describe("interface labels", () => {
     expect(fr.settings.shortcutCopyHelp).toBe("Copier la commande");
     expect(fr.settings.shortcutBaselineWarning).toContain("Raccourcis de base");
     expect(en.settings.windowsNativeBadgeHelp).toBe("Native Windows");
+    expect(en.sheetBadge["office-365"].help).toContain("Microsoft 365");
+    expect(en.sheetBadge["office-2024"].help).toContain("Office 2024");
+    expect(en.sheetBadge["office-2021"].help).toContain("Office 2021");
     expect(en.sheetBadge["browser-edge"].help).toContain("Microsoft Edge");
     expect(en.settings.shortcutCopy).toBe("Copy");
     expect(en.settings.shortcutCopied).toBe("Copied");

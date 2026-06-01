@@ -20,8 +20,8 @@
             ],
             "description": "Affiche l element suivant.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-element-suivant"
+            "id": "navigation-element-suivant",
+            "level": "standard"
           },
           {
             "label": "Element precedent",
@@ -30,8 +30,8 @@
             ],
             "description": "Affiche l element precedent.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "navigation-element-precedent"
+            "id": "navigation-element-precedent",
+            "level": "standard"
           },
           {
             "label": "Retour",
@@ -40,8 +40,8 @@
             ],
             "description": "Revient a l ecran precedent.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "navigation-retour"
+            "id": "navigation-retour",
+            "level": "standard"
           },
           {
             "label": "Diaporama",
@@ -50,8 +50,8 @@
             ],
             "description": "Lance un diaporama.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-diaporama"
+            "id": "navigation-diaporama",
+            "level": "advanced"
           },
           {
             "label": "Commandes",
@@ -60,8 +60,8 @@
             ],
             "description": "Affiche ou masque les commandes.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-commandes"
+            "id": "navigation-commandes",
+            "level": "standard"
           }
         ]
       },
@@ -77,8 +77,8 @@
             ],
             "description": "Agrandit la photo.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "photo-zoom-avant"
+            "id": "photo-zoom-avant",
+            "level": "standard"
           },
           {
             "label": "Zoom arriere",
@@ -88,8 +88,8 @@
             ],
             "description": "Reduit le zoom.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "photo-zoom-arriere"
+            "id": "photo-zoom-arriere",
+            "level": "standard"
           },
           {
             "label": "Zoom initial",
@@ -99,8 +99,18 @@
             ],
             "description": "Revient au zoom initial.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "photo-zoom-initial"
+            "id": "photo-zoom-initial",
+            "level": "standard"
+          },
+          {
+            "label": "Deplacer zoom",
+            "keys": [
+              "Arrows"
+            ],
+            "description": "Deplace la photo zoomee.",
+            "priority": 4,
+            "id": "photo-deplacer-zoom",
+            "level": "advanced"
           },
           {
             "label": "Rotation",
@@ -109,9 +119,9 @@
               "R"
             ],
             "description": "Fait pivoter la photo.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "photo-rotation"
+            "priority": 5,
+            "id": "photo-rotation",
+            "level": "standard"
           },
           {
             "label": "Copier",
@@ -120,9 +130,9 @@
               "C"
             ],
             "description": "Copie la photo.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "photo-copier"
+            "priority": 6,
+            "id": "photo-copier",
+            "level": "standard"
           },
           {
             "label": "Imprimer",
@@ -131,9 +141,9 @@
               "P"
             ],
             "description": "Ouvre l impression.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "photo-imprimer"
+            "priority": 7,
+            "id": "photo-imprimer",
+            "level": "advanced"
           },
           {
             "label": "Enregistrer",
@@ -142,9 +152,9 @@
               "S"
             ],
             "description": "Enregistre les modifications.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "photo-enregistrer"
+            "priority": 8,
+            "id": "photo-enregistrer",
+            "level": "standard"
           }
         ]
       },
@@ -159,8 +169,8 @@
             ],
             "description": "Ouvre ou applique l amelioration.",
             "priority": 1,
-            "usageLevel": "advanced",
-            "id": "edition-ameliorer"
+            "id": "edition-ameliorer",
+            "level": "advanced"
           },
           {
             "label": "Annuler",
@@ -170,8 +180,8 @@
             ],
             "description": "Annule une modification.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "edition-annuler"
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Retablir",
@@ -181,8 +191,8 @@
             ],
             "description": "Retablit une modification.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "Voir original",
@@ -192,8 +202,8 @@
             ],
             "description": "Compare avec l original.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "edition-voir-original"
+            "id": "edition-voir-original",
+            "level": "advanced"
           },
           {
             "label": "Redimensionner zone",
@@ -203,8 +213,8 @@
             ],
             "description": "Redimensionne une zone de recadrage.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "edition-redimensionner-zone"
+            "id": "edition-redimensionner-zone",
+            "level": "advanced"
           }
         ]
       }
@@ -231,8 +241,8 @@
             ],
             "description": "Show the next item.",
             "priority": 1,
-            "usageLevel": "essential",
-            "id": "navigation-element-suivant"
+            "id": "navigation-element-suivant",
+            "level": "standard"
           },
           {
             "label": "Previous item",
@@ -241,8 +251,8 @@
             ],
             "description": "Show the previous item.",
             "priority": 2,
-            "usageLevel": "essential",
-            "id": "navigation-element-precedent"
+            "id": "navigation-element-precedent",
+            "level": "standard"
           },
           {
             "label": "Back",
@@ -251,8 +261,8 @@
             ],
             "description": "Return to the previous screen.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "navigation-retour"
+            "id": "navigation-retour",
+            "level": "standard"
           },
           {
             "label": "Slideshow",
@@ -261,8 +271,8 @@
             ],
             "description": "Start a slideshow.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "navigation-diaporama"
+            "id": "navigation-diaporama",
+            "level": "advanced"
           },
           {
             "label": "Commands",
@@ -271,8 +281,8 @@
             ],
             "description": "Show or hide commands.",
             "priority": 5,
-            "usageLevel": "common",
-            "id": "navigation-commandes"
+            "id": "navigation-commandes",
+            "level": "standard"
           }
         ]
       },
@@ -288,8 +298,8 @@
             ],
             "description": "Zoom into the photo.",
             "priority": 1,
-            "usageLevel": "common",
-            "id": "photo-zoom-avant"
+            "id": "photo-zoom-avant",
+            "level": "standard"
           },
           {
             "label": "Zoom out",
@@ -299,8 +309,8 @@
             ],
             "description": "Zoom out.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "photo-zoom-arriere"
+            "id": "photo-zoom-arriere",
+            "level": "standard"
           },
           {
             "label": "Reset zoom",
@@ -310,8 +320,18 @@
             ],
             "description": "Reset zoom.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "photo-zoom-initial"
+            "id": "photo-zoom-initial",
+            "level": "standard"
+          },
+          {
+            "label": "Pan zoom",
+            "keys": [
+              "Arrows"
+            ],
+            "description": "Move around a zoomed photo.",
+            "priority": 4,
+            "id": "photo-deplacer-zoom",
+            "level": "advanced"
           },
           {
             "label": "Rotate",
@@ -320,9 +340,9 @@
               "R"
             ],
             "description": "Rotate the photo.",
-            "priority": 4,
-            "usageLevel": "common",
-            "id": "photo-rotation"
+            "priority": 5,
+            "id": "photo-rotation",
+            "level": "standard"
           },
           {
             "label": "Copy",
@@ -331,9 +351,9 @@
               "C"
             ],
             "description": "Copy the photo.",
-            "priority": 5,
-            "usageLevel": "common",
-            "id": "photo-copier"
+            "priority": 6,
+            "id": "photo-copier",
+            "level": "standard"
           },
           {
             "label": "Print",
@@ -342,9 +362,9 @@
               "P"
             ],
             "description": "Open print options.",
-            "priority": 6,
-            "usageLevel": "advanced",
-            "id": "photo-imprimer"
+            "priority": 7,
+            "id": "photo-imprimer",
+            "level": "advanced"
           },
           {
             "label": "Save",
@@ -353,9 +373,9 @@
               "S"
             ],
             "description": "Save edits.",
-            "priority": 7,
-            "usageLevel": "common",
-            "id": "photo-enregistrer"
+            "priority": 8,
+            "id": "photo-enregistrer",
+            "level": "standard"
           }
         ]
       },
@@ -370,8 +390,8 @@
             ],
             "description": "Open or apply enhancement.",
             "priority": 1,
-            "usageLevel": "advanced",
-            "id": "edition-ameliorer"
+            "id": "edition-ameliorer",
+            "level": "advanced"
           },
           {
             "label": "Undo edit",
@@ -381,8 +401,8 @@
             ],
             "description": "Undo an edit.",
             "priority": 2,
-            "usageLevel": "common",
-            "id": "edition-annuler"
+            "id": "edition-annuler",
+            "level": "standard"
           },
           {
             "label": "Redo edit",
@@ -392,8 +412,8 @@
             ],
             "description": "Redo an edit.",
             "priority": 3,
-            "usageLevel": "common",
-            "id": "edition-retablir"
+            "id": "edition-retablir",
+            "level": "standard"
           },
           {
             "label": "View original",
@@ -403,8 +423,8 @@
             ],
             "description": "Compare with the original.",
             "priority": 4,
-            "usageLevel": "advanced",
-            "id": "edition-voir-original"
+            "id": "edition-voir-original",
+            "level": "advanced"
           },
           {
             "label": "Resize area",
@@ -414,8 +434,8 @@
             ],
             "description": "Resize crop or focus area.",
             "priority": 5,
-            "usageLevel": "advanced",
-            "id": "edition-redimensionner-zone"
+            "id": "edition-redimensionner-zone",
+            "level": "advanced"
           }
         ]
       }
