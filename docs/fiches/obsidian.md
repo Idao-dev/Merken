@@ -17,6 +17,12 @@ Documentation sheet for useful Obsidian shortcuts on Windows and Linux.
 - Raccourcis exclus: navigation caractere par caractere, suppression caractere par caractere et raccourcis purement textuels universels trop verbeux pour une fiche rapide.
 - Risques: `Ctrl` + `Shift` + `K` supprime la ligne courante sans selection; a garder en Avance avec libelle clair.
 
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: fiche conservee comme selection existante; aucune correction de touche localisee n'est promue sans source localisee ou validation explicite.
+- Les sections Francais et English restent separees: ne pas deduire une touche FR depuis une source EN traduite.
+- Les touches de ponctuation, les actions souris et les sequences `Alt` doivent etre reverifiees par langue de logiciel et disposition AZERTY/QWERTY avant ajout de `keysByLayout`.
+
 ## Inventaire complet
 
 | Action source | Touches | Source | Selection Merken | Raison |

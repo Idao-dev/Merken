@@ -7,6 +7,8 @@ Documentation sheet for useful Word shortcuts on Windows.
 ## Sources
 
 - https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-word-95ef89dd-7142-4b50-afb2-f762f663ceb2
+- https://support.microsoft.com/fr-fr/office/raccourcis-clavier-dans-word-95ef89dd-7142-4b50-afb2-f762f663ceb2
+- https://support.microsoft.com/fr-fr/office/raccourci-clavier-pour-gras-modifi%C3%A9-dans-word-apr%C3%A8s-la-mise-%C3%A0-jour-1e3b680b-1569-4f21-b8ac-ebb0b98a0465
 
 ## Notes de recherche
 
@@ -16,6 +18,13 @@ Documentation sheet for useful Word shortcuts on Windows.
 - Raccourcis Fn / touches F: `F7`, `F8`, `F12` et certaines combinaisons de touches F peuvent demander `Fn` selon le clavier. Sur portable sans touches `Home`/`End` dediees, `Ctrl` + `Home` et `Ctrl` + `End` correspondent souvent a `Ctrl` + `Fn` + `Left` et `Ctrl` + `Fn` + `Right`.
 - Raccourcis exclus: commandes de publipostage, champs, references, tables avancees et sequences Ruban longues.
 - Risques: `Ctrl` + `Enter` insere une rupture structurelle de page; a garder en Avance.
+
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: les sections Francais et English utilisent les pages Microsoft localisees quand les touches divergent.
+- Divergence verifiee: la table Word desktop FR indique `Ctrl` + `G` pour Gras, alors que la page EN indique `Ctrl` + `B`; le JSON FR garde donc `Ctrl` + `G`.
+- Conflit officiel note: Microsoft documente aussi `Ctrl` + `G` pour Atteindre et a publie une note de resolution du changement de raccourci Gras en version 2412; cette fiche doit etre reverifiee dans Word FR installe si le comportement local differe.
+- Les touches de ponctuation (`[`, `]`) et les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
 
 ## Inventaire complet
 
@@ -32,7 +41,7 @@ Documentation sheet for useful Word shortcuts on Windows.
 | Coller texte seulement | `Ctrl` + `Shift` + `V` | Microsoft Word shortcuts | Standard | Tres utile pour nettoyer la mise en forme. |
 | Annuler / retablir | `Ctrl` + `Z` / `Y` | Microsoft Word shortcuts | Standard | Edition courante. |
 | Rechercher / remplacer / atteindre | `Ctrl` + `F` / `H` / `G` | Microsoft Word shortcuts | Standard / Avance | Recherche et navigation. |
-| Gras / italique / souligne | `Ctrl` + `B` / `I` / `U` | Microsoft Word shortcuts | Standard | Mise en forme courante. |
+| Gras / italique / souligne | FR: `Ctrl` + `G`; EN: `Ctrl` + `B`; `Ctrl` + `I` / `U` | Microsoft Word shortcuts | Standard | Mise en forme courante. |
 | Alignement gauche / centre | `Ctrl` + `L` / `E` | Microsoft Word shortcuts | Standard | Mise en forme courante. |
 | Alignement droite / justifie | `Ctrl` + `R` / `J` | Microsoft Word shortcuts | Avance | Mise en forme moins systematique. |
 | Copier / coller format | `Ctrl` + `Shift` + `C` / `V` | Microsoft Word shortcuts | Avance | Mise en forme avancee. |
@@ -85,7 +94,7 @@ Documentation sheet for useful Word shortcuts on Windows.
 
 | ID | Action | Touches | Description | Niveau |
 | --- | --- | --- | --- | --- |
-| `format-gras` | Gras | `Ctrl` + `B` | Active le gras. | Standard |
+| `format-gras` | Gras | `Ctrl` + `G` | Active le gras. | Standard |
 | `format-italique` | Italique | `Ctrl` + `I` | Active l italique. | Standard |
 | `format-souligne` | Souligne | `Ctrl` + `U` | Active le souligne. | Standard |
 | `format-gauche` | Gauche | `Ctrl` + `L` | Aligne a gauche. | Standard |

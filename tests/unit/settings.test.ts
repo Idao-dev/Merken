@@ -36,17 +36,29 @@ describe("settings persistence", () => {
         language: "javascript:alert(1)",
         textSize: "xl onmouseover=alert(1)",
         blur: "<strong>",
+        shortcutLanguage: "javascript:alert(1)",
+        keyboardLayout: "colemak",
+        shortcutLanguageOverrides: {
+          excel: "en",
+          word: "de",
+          "bad\"family": "fr",
+          settings: "en"
+        },
         sheetMode: "manual",
         manualSheetId: "windows-core\" autofocus",
         shortcutPlacementPreset: "bottom-right<script>",
         shortcutWarningMode: "dangerous<script>",
-        shortcutCustomPosition: { x: Number.NaN, y: 12 }
+        shortcutCustomPosition: { x: Number.NaN, y: 12 },
+        trayIconVisible: "yes"
       })
     );
 
     const settings = loadSettings(memoryStorage);
 
     expect(settings.language).toBe("fr");
+    expect(settings.shortcutLanguage).toBe("fr");
+    expect(settings.keyboardLayout).toBe("azerty");
+    expect("shortcutLanguageOverrides" in settings).toBe(false);
     expect(settings.textSize).toBe("md");
     expect(settings.blur).toBe("medium");
     expect(settings.sheetMode).toBe("manual");
@@ -54,6 +66,7 @@ describe("settings persistence", () => {
     expect(settings.shortcutPlacementPreset).toBe("top-right");
     expect(settings.shortcutWarningMode).toBe("all");
     expect(settings.shortcutCustomPosition).toBeNull();
+    expect(settings.trayIconVisible).toBe(true);
   });
 
   it("filters unsafe custom shortcut preference identifiers", () => {
@@ -112,8 +125,30 @@ describe("settings persistence", () => {
     expect(settings.shortcutPlacementPreset).toBe("top-right");
     expect(settings.shortcutCustomPosition).toBeNull();
     expect(settings.shortcutWarningMode).toBe("all");
-    expect(settings.trayVisibilityPromptDismissed).toBe(false);
+    expect(settings.trayIconVisible).toBe(true);
+    expect(settings.shortcutLanguage).toBe("fr");
+    expect(settings.keyboardLayout).toBe("azerty");
     expect(settings.shortcutSheetPreferences).toEqual({});
+  });
+
+  it("adds shortcut language and keyboard defaults to old English settings", () => {
+    const oldSettings = {
+      language: "en",
+      theme: "dark",
+      textSize: "md",
+      blur: "medium",
+      sheetMode: "auto",
+      manualSheetId: "windows-core",
+      expertMode: false,
+      startWithWindows: true
+    };
+    memoryStorage.setItem("merken.settings.v1", JSON.stringify(oldSettings));
+    const settings = loadSettings(memoryStorage);
+
+    expect(settings.language).toBe("en");
+    expect(settings.shortcutLanguage).toBe("en");
+    expect(settings.keyboardLayout).toBe("qwerty");
+    expect("shortcutLanguageOverrides" in settings).toBe(false);
   });
 
   it("migrates the removed Settings sheet to Windows core", () => {

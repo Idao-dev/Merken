@@ -3,6 +3,7 @@ import type {
   LanguageCode,
   SheetMode,
   ShortcutDisplayLevel,
+  ShortcutKeyboardLayout,
   ShortcutPlacementPreset,
   ShortcutWarningMode,
   ShortcutSheetPreference,
@@ -13,6 +14,7 @@ import type {
 
 const shortcutDisplayLevels: ShortcutDisplayLevel[] = ["standard", "advanced", "expert"];
 const languageCodes: LanguageCode[] = ["fr", "en"];
+export const shortcutKeyboardLayouts: ShortcutKeyboardLayout[] = ["azerty", "qwerty"];
 const themeModes: ThemeMode[] = ["dark", "colorblind"];
 const textSizes: TextSize[] = ["xs", "sm", "md", "lg", "xl"];
 const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
@@ -40,6 +42,8 @@ const legacyExpertSheetFamilies = [
 
 export const defaultSettings: UserSettings = {
   language: "fr",
+  shortcutLanguage: "fr",
+  keyboardLayout: "azerty",
   theme: "dark",
   textSize: "md",
   blur: "medium",
@@ -51,7 +55,7 @@ export const defaultSettings: UserSettings = {
   shortcutPlacementPreset: "top-right",
   shortcutCustomPosition: null,
   shortcutWarningMode: "all",
-  trayVisibilityPromptDismissed: false
+  trayIconVisible: true
 };
 
 export const settingsStorageKey = "merken.settings.v1";
@@ -61,6 +65,7 @@ type SettingsStorage = Pick<Storage, "getItem" | "setItem">;
 type StoredSettings = Partial<UserSettings> & {
   expertMode?: boolean;
   shortcutSheetPreferences?: unknown;
+  shortcutLanguageOverrides?: unknown;
   theme?: unknown;
 };
 
@@ -73,10 +78,23 @@ export function loadSettings(storage: SettingsStorage = localStorage): UserSetti
 
   try {
     const stored = JSON.parse(raw) as StoredSettings;
-    const { expertMode: _expertMode, shortcutSheetPreferences: _shortcutSheetPreferences, ...storedSettings } = stored;
+    const {
+      expertMode: _expertMode,
+      shortcutSheetPreferences: _shortcutSheetPreferences,
+      shortcutLanguageOverrides: _shortcutLanguageOverrides,
+      ...storedSettings
+    } = stored;
+    const inheritedShortcutLanguage = oneOf(
+      stored.shortcutLanguage,
+      languageCodes,
+      oneOf(stored.language, languageCodes, defaultSettings.shortcutLanguage)
+    );
     const parsed: UserSettings = {
       ...defaultSettings,
       ...storedSettings,
+      shortcutLanguage: inheritedShortcutLanguage,
+      keyboardLayout:
+        (stored.keyboardLayout as ShortcutKeyboardLayout | undefined) ?? defaultKeyboardLayoutForLanguage(inheritedShortcutLanguage),
       shortcutSheetPreferences: normalizeShortcutSheetPreferences(stored)
     };
 
@@ -139,8 +157,17 @@ function normalizeShortcutSheetPreference(preference: unknown): ShortcutSheetPre
 }
 
 function normalizeSettings(settings: UserSettings): UserSettings {
+  const language = oneOf(settings.language, languageCodes, defaultSettings.language);
+  const shortcutLanguage = oneOf(settings.shortcutLanguage, languageCodes, language);
+
   return {
-    language: oneOf(settings.language, languageCodes, defaultSettings.language),
+    language,
+    shortcutLanguage,
+    keyboardLayout: oneOf(
+      settings.keyboardLayout,
+      shortcutKeyboardLayouts,
+      defaultKeyboardLayoutForLanguage(shortcutLanguage)
+    ),
     theme: oneOf(settings.theme, themeModes, defaultSettings.theme),
     textSize: oneOf(settings.textSize, textSizes, defaultSettings.textSize),
     blur: oneOf(settings.blur, blurLevels, defaultSettings.blur),
@@ -158,11 +185,15 @@ function normalizeSettings(settings: UserSettings): UserSettings {
     ),
     shortcutCustomPosition: normalizeShortcutCustomPosition(settings.shortcutCustomPosition),
     shortcutWarningMode: oneOf(settings.shortcutWarningMode, shortcutWarningModes, defaultSettings.shortcutWarningMode),
-    trayVisibilityPromptDismissed:
-      typeof settings.trayVisibilityPromptDismissed === "boolean"
-        ? settings.trayVisibilityPromptDismissed
-        : defaultSettings.trayVisibilityPromptDismissed
+    trayIconVisible:
+      typeof settings.trayIconVisible === "boolean"
+        ? settings.trayIconVisible
+        : defaultSettings.trayIconVisible
   };
+}
+
+function defaultKeyboardLayoutForLanguage(language: LanguageCode): ShortcutKeyboardLayout {
+  return language === "fr" ? "azerty" : "qwerty";
 }
 
 function normalizeShortcutCustomPosition(value: unknown): UserSettings["shortcutCustomPosition"] {

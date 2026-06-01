@@ -16,6 +16,12 @@ Documentation sheet for the Windows Photos app.
 - Raccourcis exclus: raccourcis generiques d app sans comportement Photo verifie, et commandes d edition trop dependantes du mode ouvert.
 - Risques: aucun raccourci destructif direct retenu; `Ctrl` + `S` peut ecraser des modifications selon le flux de l application.
 
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: fiche conservee comme selection existante; aucune correction de touche localisee n'est promue sans source localisee ou validation explicite.
+- Les sections Francais et English restent separees: ne pas deduire une touche FR depuis une source EN traduite.
+- Les touches de ponctuation, les actions souris et les sequences `Alt` doivent etre reverifiees par langue de logiciel et disposition AZERTY/QWERTY avant ajout de `keysByLayout`.
+
 ## Inventaire complet
 
 | Action source | Touches | Source | Selection Merken | Raison |

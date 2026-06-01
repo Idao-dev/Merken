@@ -175,7 +175,7 @@
             "label": "Gras",
             "keys": [
               "Ctrl",
-              "B"
+              "G"
             ],
             "description": "Active le gras.",
             "priority": 8,

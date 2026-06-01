@@ -7,6 +7,7 @@ Documentation sheet for useful Excel shortcuts on Windows.
 ## Sources
 
 - https://support.microsoft.com/en-us/office/keyboard-shortcuts-in-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f
+- https://support.microsoft.com/fr-fr/office/raccourcis-clavier-dans-excel-1798d9d5-842a-42b8-9c99-9b7213f0040f
 - https://support.microsoft.com/en-us/office/about-power-query-in-excel-7104fbee-9e62-4cb9-a02e-5bfb1a6c536a
 - https://support.microsoft.com/en-us/office/manage-queries-power-query-76f93a6d-37d9-46b5-bc40-d5f2162401f5
 - https://support.microsoft.com/en-us/office/get-started-with-power-pivot-in-microsoft-excel-fdfcf944-7876-424a-8437-1a6c1043a80b
@@ -25,6 +26,12 @@ Documentation sheet for useful Excel shortcuts on Windows.
 - Raccourcis exclus: sequences Ruban longues (`Alt`, puis plusieurs lettres), commandes Power Query sans raccourci clavier stable, commandes Power Pivot destructives peu utiles en overlay.
 - Risques: insertion/suppression de cellules, refresh de donnees externes, macros, VBA et Power Pivot peuvent modifier le classeur ou executer du code; a conserver en Avance/Expert avec libelles clairs.
 
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: les sections Francais et English utilisent les pages Microsoft localisees quand les touches divergent.
+- Divergence verifiee: Excel FR indique `Ctrl` + `G` pour Gras, alors que la page EN indique `Ctrl` + `B`; le JSON FR garde donc `Ctrl` + `G`.
+- Les touches de ponctuation (`;`, `'`, `` ` ``, `+`, `-`, `=`) et les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
+
 ## Inventaire complet
 
 | Action source | Touches | Source | Selection Merken | Raison |
@@ -40,7 +47,7 @@ Documentation sheet for useful Excel shortcuts on Windows.
 | Annuler / retablir | `Ctrl` + `Z` / `Y` | Microsoft Excel shortcuts | Standard | Edition courante. |
 | Rechercher | `Ctrl` + `F` | Microsoft Excel shortcuts | Standard | Recherche courante. |
 | Remplacer | `Ctrl` + `H` | Microsoft Excel shortcuts | Avance | Edition globale. |
-| Gras / italique / souligne | `Ctrl` + `B` / `I` / `U` | Microsoft Excel shortcuts | Avance | Mise en forme utile mais secondaire dans Excel. |
+| Gras / italique / souligne | FR: `Ctrl` + `G`; EN: `Ctrl` + `B`; `Ctrl` + `I` / `U` | Microsoft Excel shortcuts | Avance | Mise en forme utile mais secondaire dans Excel. |
 | Format de cellule | `Ctrl` + `1` | Microsoft Excel shortcuts | Avance | Panneau central mais dense. |
 | Modifier cellule | `F2` | Microsoft Excel shortcuts | Standard | Edition de cellule. |
 | Nouvelle ligne cellule | `Alt` + `Enter` | Microsoft Excel shortcuts | Avance | Edition de cellule. |
@@ -127,7 +134,7 @@ Documentation sheet for useful Excel shortcuts on Windows.
 | `edition-retablir` | Retablir | `Ctrl` + `Y` | Retablit l action. | Standard |
 | `edition-rechercher` | Rechercher | `Ctrl` + `F` | Recherche dans le classeur. | Standard |
 | `edition-remplacer` | Remplacer | `Ctrl` + `H` | Ouvre le remplacement. | Avance |
-| `edition-gras` | Gras | `Ctrl` + `B` | Active le gras. | Avance |
+| `edition-gras` | Gras | `Ctrl` + `G` | Active le gras. | Avance |
 | `edition-italique` | Italique | `Ctrl` + `I` | Active l italique. | Avance |
 | `edition-souligne` | Souligne | `Ctrl` + `U` | Active le souligne. | Avance |
 | `edition-format-cellule` | Format cellule | `Ctrl` + `1` | Ouvre le format de cellule. | Avance |

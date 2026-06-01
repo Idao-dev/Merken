@@ -171,7 +171,13 @@ Réglages minimum :
    * toujours OS ;
    * choix manuel d’un logiciel.
 
-6. **À propos**
+6. **Langues et clavier**
+
+   * langue de l’interface Merken ;
+   * langue du logiciel ciblé, utilisée pour choisir la variante de fiche ;
+   * disposition clavier, par exemple AZERTY ou QWERTY, utilisée pour les variantes physiques de touches.
+
+7. **À propos**
 
    * nom du logiciel ;
    * version ;
@@ -213,7 +219,7 @@ Fonctions incluses :
 * panneau flottant ;
 * fiche Windows ;
 * options de base ;
-* français + anglais au minimum ;
+* français + anglais au minimum pour l’interface et les fiches disponibles ;
 * architecture extensible pour ajouter d’autres fiches.
 * détection du logiciel au premier plan
 
@@ -227,8 +233,8 @@ Fonctions :
 * panneau flottant adapté au logiciel de premier plan ;
 * fiche sur les logiciel de la suit office ;
 * niveau d'affichage par fiche : standard, avance ou expert, avec remplacement du contenu affiche et personnalisation par theme ou raccourci ;
-* rejoue de l'espagnole, portugais, italien, allemand ;
-* adaptation des touches selon la langue de l'os et du clavier avec détection automatique et manuel via option
+* ajout progressif de l'espagnol, du portugais, de l'italien et de l'allemand quand les sources localisees sont disponibles ;
+* adaptation des fiches selon la langue du logiciel et adaptation des touches selon la disposition clavier choisie manuellement.
 
 ### Phase 3 — macOS
 
@@ -263,12 +269,13 @@ Une fiche contient :
 
 * nom du système ou logiciel ;
 * OS concerné ;
-* langue ;
+* langue du logiciel ;
 * catégories ;
 * raccourcis ;
 * description courte ;
 * priorité d’affichage ;
-* éventuelles variantes Windows/macOS/Linux.
+* éventuelles variantes Windows/macOS/Linux ;
+* éventuelles variantes de disposition clavier, uniquement quand elles sont verifiees.
 
 Exemple logique :
 

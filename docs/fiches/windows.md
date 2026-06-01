@@ -22,6 +22,12 @@ Documentation sheet for general Windows shortcuts.
 - Raccourcis exclus: `Win` + `E` est documente dans la fiche Explorateur; les raccourcis de Game Bar, accessibilite, bureaux a distance et presse-papiers historique avance ne sont pas tous retenus pour eviter une fiche systeme trop bruyante.
 - Risques: les commandes `Win` + `R` ouvrant des panneaux systeme restent en Expert, car elles touchent a la configuration, au reseau, aux programmes installes ou aux fonctionnalites Windows.
 
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: fiche conservee comme selection existante; aucune correction de touche localisee n'est promue sans source localisee ou validation explicite.
+- Les sections Francais et English restent separees: ne pas deduire une touche FR depuis une source EN traduite.
+- Les touches de ponctuation, les actions souris et les sequences `Alt` doivent etre reverifiees par langue de logiciel et disposition AZERTY/QWERTY avant ajout de `keysByLayout`.
+
 ## Inventaire complet
 
 | Action source | Touches / commande | Source | Selection Merken | Raison |

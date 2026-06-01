@@ -17,7 +17,7 @@ Merken affiche notamment des raccourcis clavier pour Windows et certaines applic
 - Niveaux par fiche : standard, avance ou expert. Chaque niveau remplace le contenu affiche pour garder le panneau court et lisible.
 - Personnalisation par theme ou par raccourci, avec apercu immediat dans le panneau de raccourcis.
 - Placement du panneau par preset ou ajustement manuel.
-- Options organisees par onglets : langue, apparence, fiches, personnalisation, demarrage Windows, informations et mises a jour.
+- Options organisees par onglets : langues, disposition clavier, apparence, fiches, personnalisation, demarrage Windows, informations et mises a jour.
 - Verification manuelle des mises a jour depuis GitHub Releases. L'installateur peut installer la mise a jour signee ; la version portable renvoie vers la derniere release.
 
 ### Lancer en local
@@ -68,7 +68,7 @@ Merken displays keyboard shortcuts for Windows and compatible applications, incl
 - Per-sheet levels: standard, advanced, or expert. Each level replaces the visible content so the panel stays short and readable.
 - Theme-level and shortcut-level customization, with an immediate preview in the shortcut panel.
 - Panel placement through presets or manual adjustment.
-- Tabbed options for language, appearance, sheets, customization, Windows startup, app information, and updates.
+- Tabbed options for languages, keyboard layout, appearance, sheets, customization, Windows startup, app information, and updates.
 - Manual update checks through GitHub Releases. The installer can install signed updates; the portable build links to the latest release.
 
 ### Run Locally

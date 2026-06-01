@@ -41,6 +41,7 @@ Une fiche applicative est un objet `ShortcutSheet` :
 - Le fichier JSON porte le nom de la famille, par exemple `excel.json`.
 - Un fichier JSON contient toutes les variantes de langue disponibles pour une meme famille.
 - Les langues actuellement supportees par les types sont `fr`, `en`, `es`, `de`, `pt` et `it`.
+- Les touches peuvent differer entre deux langues de logiciel; les IDs restent stables, pas les raccourcis.
 
 ## Champs obligatoires
 
@@ -49,6 +50,32 @@ Une fiche applicative est un objet `ShortcutSheet` :
 - `platform` vaut `windows`, `macos`, `linux` ou `cross-platform`.
 - `categories` regroupe les raccourcis par theme court.
 - Chaque raccourci contient `id`, `label`, `keys`, `description`, `priority` et `level`.
+- `keysByLayout` est optionnel et sert uniquement aux variantes clavier verifiees, par exemple AZERTY/QWERTY. Le rendu utilise `keysByLayout[disposition]` puis revient a `keys`. Ne pas le renseigner quand les touches sont identiques ou non verifiees.
+
+Exemple schematique pour une variante de disposition clavier verifiee :
+
+```json
+"keys": ["Ctrl", "`"],
+"keysByLayout": {
+  "azerty": ["Ctrl", "<touche AZERTY verifiee>"],
+  "qwerty": ["Ctrl", "`"]
+}
+```
+
+## Langue logiciel / clavier
+
+Chaque fiche Markdown doit contenir une section `Langue logiciel / clavier`.
+
+Cette section doit indiquer :
+
+- la source officielle FR utilisee pour les raccourcis FR ;
+- la source officielle EN utilisee pour les raccourcis EN ;
+- si la source mentionne une disposition clavier, notamment `US keyboard layout` ;
+- les divergences FR/EN, par exemple `Ctrl` + `G` en FR contre `Ctrl` + `B` en EN ;
+- les divergences AZERTY/QWERTY retenues dans `keysByLayout` ;
+- les conflits entre sources officielles, avec la page exacte retenue ou le statut `non promu JSON`.
+
+Ne jamais deduire une touche francaise depuis une source anglaise traduite. Une traduction de libelle peut garder le meme ID, mais la touche doit venir d'une source localisee ou d'une validation explicite.
 
 ## Priorite et niveaux
 

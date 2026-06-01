@@ -7,12 +7,12 @@ import { relaunch } from "@tauri-apps/plugin-process";
 import { check, type Update } from "@tauri-apps/plugin-updater";
 import { labelsFor, supportedLanguages, type AutostartStatus, type SettingsTab, type UpdateStatus } from "./app/i18n";
 import { keycapPresentation } from "./app/keycaps";
-import { defaultSettings, loadSettings, saveSettings, settingsStorageKey } from "./app/settings";
+import { defaultSettings, loadSettings, saveSettings, settingsStorageKey, shortcutKeyboardLayouts } from "./app/settings";
 import {
   availableShortcutLevels,
   customPreferenceFromLevel,
   ensureCustomPreference,
-  findSheetForFamily,
+  findSheetForSettingsFamily,
   isShortcutIncluded,
   layoutShortcutCategories,
   manualSheetOptions,
@@ -22,6 +22,7 @@ import {
   sheetShortcutPreference,
   shouldShowShortcutBaselineWarning,
   sharedCommandKeys,
+  shortcutKeysForLayout,
   shortcutThemeState,
   shortcutDisplayLevels,
   updateCustomCategoryPreference,
@@ -80,6 +81,7 @@ let pendingUpdate: Update | null = null;
 let updateVersion: string | null = null;
 let aboutModalOpen = false;
 let resetConfirmationOpen = false;
+let trayIconVisibilityStatus: AutostartStatus = "syncing";
 let placementSnapshot: Pick<UserSettings, "shortcutPlacementMode" | "shortcutPlacementPreset" | "shortcutCustomPosition"> | null = null;
 let closeCaptureBound = false;
 let shortcutMoveListenerBound = false;
@@ -148,6 +150,8 @@ function debugSheetSelection(context: string, selectedSheet: ShortcutSheet): voi
   debugActiveAppLog(context, {
     activeApp,
     language: settings.language,
+    shortcutLanguage: settings.shortcutLanguage,
+    keyboardLayout: settings.keyboardLayout,
     panelMode,
     selectedSheetId: selectedSheet.id,
     sheetMode: settings.sheetMode
@@ -196,7 +200,7 @@ function updateShortcutSheetLevel(family: string, level: ShortcutDisplayLevel): 
 }
 
 function ensureCustomPreferenceForFamily(family: string): ShortcutSheetPreference | null {
-  const sheet = findSheetForFamily(family, settings.language);
+  const sheet = findSheetForSettingsFamily(family, settings);
 
   if (!sheet) {
     return null;
@@ -229,7 +233,7 @@ async function openCustomizationForFamily(family: string): Promise<void> {
 }
 
 function applyCustomizationTarget(family: string | null): void {
-  if (!isSettingsWindow || !family || !findSheetForFamily(family, settings.language)) {
+  if (!isSettingsWindow || !family || !findSheetForSettingsFamily(family, settings)) {
     return;
   }
 
@@ -242,7 +246,7 @@ function applyCustomizationTarget(family: string | null): void {
 }
 
 function updateCustomCategory(family: string, categoryId: string, checked: boolean): void {
-  const sheet = findSheetForFamily(family, settings.language);
+  const sheet = findSheetForSettingsFamily(family, settings);
   const category = sheet?.categories.find((candidate) => candidate.id === categoryId);
 
   if (!sheet || !category) {
@@ -256,7 +260,7 @@ function updateCustomCategory(family: string, categoryId: string, checked: boole
 }
 
 function updateCustomShortcut(family: string, categoryId: string, shortcutId: string, checked: boolean): void {
-  const sheet = findSheetForFamily(family, settings.language);
+  const sheet = findSheetForSettingsFamily(family, settings);
   const category = sheet?.categories.find((candidate) => candidate.id === categoryId);
   const shortcut = category?.shortcuts.find((candidate) => candidate.id === shortcutId);
 
@@ -413,14 +417,44 @@ async function setStartWithWindows(enabled: boolean): Promise<void> {
   await syncAutostart();
 }
 
-async function openTaskbarSettings(): Promise<void> {
-  updateSettings({ trayVisibilityPromptDismissed: true });
+async function syncTrayIconVisibility(): Promise<void> {
+  if (!isSettingsWindow) {
+    return;
+  }
+
+  trayIconVisibilityStatus = "syncing";
+  render();
 
   try {
-    await invoke("open_taskbar_settings");
+    await invoke("set_tray_icon_visibility", { visible: settings.trayIconVisible });
+    trayIconVisibilityStatus = settings.trayIconVisible ? "enabled" : "disabled";
   } catch (error) {
-    console.warn("Unable to open Windows taskbar settings.", error);
+    trayIconVisibilityStatus = "unavailable";
+    console.warn("Unable to sync the Windows tray icon visibility.", error);
   }
+
+  render();
+}
+
+async function setTrayIconVisible(enabled: boolean): Promise<void> {
+  const previous = settings.trayIconVisible;
+
+  settings = { ...settings, trayIconVisible: enabled };
+  saveSettings(settings);
+  trayIconVisibilityStatus = "syncing";
+  renderSettingsStateChange();
+
+  try {
+    await invoke("set_tray_icon_visibility", { visible: enabled });
+    trayIconVisibilityStatus = enabled ? "enabled" : "disabled";
+  } catch (error) {
+    settings = { ...settings, trayIconVisible: previous };
+    saveSettings(settings);
+    trayIconVisibilityStatus = "unavailable";
+    console.warn("Unable to change the Windows tray icon visibility.", error);
+  }
+
+  renderSettingsStateChange();
 }
 
 async function openLatestRelease(): Promise<void> {
@@ -486,7 +520,7 @@ async function showSettingsWindow(): Promise<void> {
 }
 
 async function showShortcutPreviewForFamily(family: string): Promise<void> {
-  const sheet = findSheetForFamily(family, settings.language);
+  const sheet = findSheetForSettingsFamily(family, settings);
 
   if (!sheet) {
     return;
@@ -760,7 +794,7 @@ function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): st
 }
 
 function renderShortcutCategory(category: ShortcutSheet["categories"][number]): string {
-  const commandKeys = sharedCommandKeys(category);
+  const commandKeys = sharedCommandKeys(category, settings.keyboardLayout);
   const commandKeyHeader = commandKeys ? `<div class="section-keys">${commandKeys.map(renderKey).join("")}</div>` : "";
   const listClassName = commandKeys ? "shortcut-list shortcut-command-list" : "shortcut-list";
 
@@ -784,7 +818,7 @@ function renderShortcutCategory(category: ShortcutSheet["categories"][number]): 
               `
               : `
                 <article class="shortcut-row">
-                  <div class="keys">${shortcut.keys.map(renderKey).join("")}</div>
+                  <div class="keys">${shortcutKeysForLayout(shortcut, settings.keyboardLayout).map(renderKey).join("")}</div>
                   <span class="shortcut-text">
                     <strong>${escapeHtml(shortcut.label)}</strong>
                     ${renderShortcutCommand(shortcut.command)}
@@ -1086,12 +1120,32 @@ function renderSettingsTab(): string {
   return `
       <section class="settings-group">
         <h2>${escapeHtml(labels.sections.functioning)}</h2>
-        ${renderSelectRow(labels.settings.language, "language", supportedLanguages, settings.language, (language) => labelsFor(language).languageName)}
+        ${renderSelectRow(
+          labels.settings.language,
+          "language",
+          supportedLanguages,
+          settings.language,
+          (language) => labelsFor(language).languageName,
+          labels.settings.languageHelp
+        )}
+        ${renderSelectRow(
+          labels.settings.shortcutLanguage,
+          "shortcutLanguage",
+          supportedLanguages,
+          settings.shortcutLanguage,
+          (language) => labelsFor(language).languageName,
+          labels.settings.shortcutLanguageHelp
+        )}
+        ${renderSelectRow(
+          labels.settings.keyboardLayout,
+          "keyboardLayout",
+          shortcutKeyboardLayouts,
+          settings.keyboardLayout,
+          (layout) => labels.keyboardLayout[layout],
+          labels.settings.keyboardLayoutHelp
+        )}
         ${renderToggleRow(labels.settings.startWithWindows, "startWithWindows", settings.startWithWindows, labels.autostart[autostartStatus])}
-        <button type="button" class="link-button settings-update" id="open-taskbar-settings">
-          <span>${escapeHtml(labels.settings.trayVisibility)}</span>
-          <small>${escapeHtml(labels.settings.trayVisibilityHelp)}</small>
-        </button>
+        ${renderToggleRow(labels.settings.trayIconVisible, "trayIconVisible", settings.trayIconVisible, labels.autostart[trayIconVisibilityStatus])}
         ${renderSelectRow(
           labels.settings.shortcutWarningMode,
           "shortcutWarningMode",
@@ -1111,7 +1165,7 @@ function renderSettingsTab(): string {
 function renderSheetLibraryRows(): string {
   return manualSheetOptions(settings.language)
     .map((option) => {
-      const sheet = findSheetForFamily(option.key, settings.language);
+      const sheet = findSheetForSettingsFamily(option.key, settings);
 
       if (!sheet) {
         return "";
@@ -1131,7 +1185,7 @@ function renderSheetLibraryRows(): string {
 
 function renderCustomizationTab(): string {
   const labels = labelsFor(settings.language);
-  const sheet = findSheetForFamily(selectedCustomizationSheetFamily, settings.language) ?? getCurrentSettingsFallbackSheet();
+  const sheet = findSheetForSettingsFamily(selectedCustomizationSheetFamily, settings) ?? getCurrentSettingsFallbackSheet();
   const family = sheetFamily(sheet.id);
   const preference = ensureCustomPreference(sheet, sheetShortcutPreference(settings, sheet));
 
@@ -1190,7 +1244,7 @@ function renderCustomizationEditor(sheet: ShortcutSheet, preference: ShortcutShe
                       data-custom-shortcut="${escapeAttribute(shortcut.id)}"
                       ${isShortcutIncluded(category, shortcut, preference) ? "checked" : ""}
                     />
-                    <span class="keys">${shortcut.keys.map(renderKey).join("")}</span>
+                    <span class="keys">${shortcutKeysForLayout(shortcut, settings.keyboardLayout).map(renderKey).join("")}</span>
                     <span class="custom-shortcut-label">
                       <strong>${escapeHtml(shortcut.label)}</strong>
                       ${renderShortcutCommand(shortcut.command)}
@@ -1207,7 +1261,7 @@ function renderCustomizationEditor(sheet: ShortcutSheet, preference: ShortcutShe
 }
 
 function getCurrentSettingsFallbackSheet(): ShortcutSheet {
-  return findSheetForFamily(selectedSettingsSheetFamily, settings.language) ?? selectSheet(settings, activeApp);
+  return findSheetForSettingsFamily(selectedSettingsSheetFamily, settings) ?? selectSheet(settings, activeApp);
 }
 
 function renderSelectRow<T extends string>(
@@ -1215,15 +1269,30 @@ function renderSelectRow<T extends string>(
   name: string,
   values: T[],
   selected: T,
-  labelForValue: (value: T) => string
+  labelForValue: (value: T) => string,
+  help?: string
 ): string {
+  const selectId = `setting-${name}`;
+
   return `
     <label class="settings-row">
-      <span>${escapeHtml(label)}</span>
-      <select name="${escapeAttribute(name)}">
+      <span class="settings-row-label">
+        <span>${escapeHtml(label)}</span>
+        ${help ? renderSettingHelp(`${selectId}-help`, help) : ""}
+      </span>
+      <select name="${escapeAttribute(name)}" id="${escapeAttribute(selectId)}" ${help ? `aria-describedby="${escapeAttribute(`${selectId}-help`)}"` : ""}>
         ${values.map((value) => `<option value="${escapeAttribute(value)}" ${selected === value ? "selected" : ""}>${escapeHtml(labelForValue(value))}</option>`).join("")}
       </select>
     </label>
+  `;
+}
+
+function renderSettingHelp(id: string, text: string): string {
+  return `
+    <span class="settings-help">
+      <span class="settings-help-trigger" tabindex="0" aria-describedby="${escapeAttribute(id)}">?</span>
+      <span class="settings-help-tooltip" id="${escapeAttribute(id)}" role="tooltip">${escapeHtml(text)}</span>
+    </span>
   `;
 }
 
@@ -1261,6 +1330,7 @@ function resetSettingsToDefaults(): void {
   resetConfirmationOpen = false;
   saveSettings(settings);
   void setTrayLanguage(settings.language);
+  void syncTrayIconVisibility();
   render();
 }
 
@@ -1638,10 +1708,6 @@ function bindEvents(): void {
     });
   });
 
-  document.querySelector("#open-taskbar-settings")?.addEventListener("click", () => {
-    void openTaskbarSettings();
-  });
-
   document.querySelector("#open-repository")?.addEventListener("click", () => {
     void openRepository();
   });
@@ -1692,6 +1758,11 @@ function bindEvents(): void {
 
     if (target.name === "startWithWindows") {
       void setStartWithWindows(Boolean(value));
+      return;
+    }
+
+    if (target.name === "trayIconVisible") {
+      void setTrayIconVisible(Boolean(value));
       return;
     }
 
@@ -1832,3 +1903,4 @@ void setTrayLanguage(settings.language);
 render();
 void syncPendingShortcutsOpenRequest();
 void syncAutostart();
+void syncTrayIconVisibility();

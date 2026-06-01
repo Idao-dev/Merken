@@ -5,6 +5,7 @@ import type {
   ShortcutCategory,
   ShortcutDisplayLevel,
   ShortcutEntry,
+  ShortcutKeyboardLayout,
   ShortcutSheet,
   ShortcutSheetPreference,
   UserSettings
@@ -127,21 +128,33 @@ export function shouldShowShortcutBaselineWarning(family: string): boolean {
   return !systemShortcutWarningExemptFamilies.has(family);
 }
 
-export function sharedCommandKeys(category: ShortcutCategory): string[] | null {
+export function shortcutLanguageForFamily(settings: UserSettings): LanguageCode {
+  return settings.shortcutLanguage;
+}
+
+export function shortcutKeysForLayout(shortcut: ShortcutEntry, keyboardLayout: ShortcutKeyboardLayout): string[] {
+  return shortcut.keysByLayout?.[keyboardLayout] ?? shortcut.keys;
+}
+
+export function sharedCommandKeys(category: ShortcutCategory, keyboardLayout: ShortcutKeyboardLayout): string[] | null {
   if (category.shortcuts.length === 0 || category.shortcuts.some((shortcut) => !shortcut.command)) {
     return null;
   }
 
   const [firstShortcut] = category.shortcuts;
-  const signature = shortcutKeysSignature(firstShortcut.keys);
+  const firstKeys = shortcutKeysForLayout(firstShortcut, keyboardLayout);
+  const signature = shortcutKeysSignature(firstKeys);
 
-  return category.shortcuts.every((shortcut) => shortcutKeysSignature(shortcut.keys) === signature) ? [...firstShortcut.keys] : null;
+  return category.shortcuts.every((shortcut) => shortcutKeysSignature(shortcutKeysForLayout(shortcut, keyboardLayout)) === signature)
+    ? [...firstKeys]
+    : null;
 }
 
 export function findSheetForFamily(family: string, language: LanguageCode): ShortcutSheet | null {
   return (
     sheets.find((sheet) => sheetFamily(sheet.id) === family && sheet.language === language) ??
     sheets.find((sheet) => sheetFamily(sheet.id) === family && sheet.language === "fr") ??
+    sheets.find((sheet) => sheetFamily(sheet.id) === family) ??
     null
   );
 }
@@ -178,7 +191,11 @@ export function getFallbackSheet(language: LanguageCode): ShortcutSheet {
   );
 }
 
-export function findSheetForProcess(processName: string | null, language: LanguageCode): ShortcutSheet | null {
+export function findSheetForSettingsFamily(family: string, settings: UserSettings): ShortcutSheet | null {
+  return findSheetForFamily(family, shortcutLanguageForFamily(settings));
+}
+
+function findFamilyForProcess(processName: string | null): string | null {
   if (!processName) {
     return null;
   }
@@ -188,41 +205,39 @@ export function findSheetForProcess(processName: string | null, language: Langua
     sheets
       .find((sheet) => sheet.appNames.some((appName) => appName.toLowerCase() === normalizedProcess))
       ?.id;
-  const familyKey = family ? sheetFamily(family) : null;
 
-  if (!familyKey) {
-    return null;
-  }
+  return family ? sheetFamily(family) : null;
+}
 
-  return (
-    sheets.find((sheet) => sheetFamily(sheet.id) === familyKey && sheet.language === language) ??
-    sheets.find((sheet) => sheetFamily(sheet.id) === familyKey && sheet.language === "fr") ??
-    null
-  );
+export function findSheetForProcess(processName: string | null, language: LanguageCode): ShortcutSheet | null {
+  const family = findFamilyForProcess(processName);
+
+  return family ? findSheetForFamily(family, language) : null;
 }
 
 export function selectSheet(settings: UserSettings, activeApp: ActiveApp | null): ShortcutSheet {
   if (settings.sheetMode === "manual") {
     const manualFamily = sheetFamily(settings.manualSheetId);
     return (
-      sheets.find((sheet) => sheetFamily(sheet.id) === manualFamily && sheet.language === settings.language) ??
+      findSheetForSettingsFamily(manualFamily, settings) ??
       sheets.find((sheet) => sheet.id === settings.manualSheetId) ??
-      getFallbackSheet(settings.language)
+      getFallbackSheet(shortcutLanguageForFamily(settings))
     );
   }
 
   if (settings.sheetMode === "auto") {
     const explicitFamily = activeApp?.sheetId ? sheetFamily(activeApp.sheetId) : null;
     const explicitSheet = explicitFamily
-      ? sheets.find((sheet) => sheetFamily(sheet.id) === explicitFamily && sheet.language === settings.language) ??
+      ? findSheetForSettingsFamily(explicitFamily, settings) ??
         sheets.find((sheet) => sheet.id === activeApp?.sheetId)
       : null;
-    const processSheet = findSheetForProcess(activeApp?.processName ?? null, settings.language);
+    const processFamily = findFamilyForProcess(activeApp?.processName ?? null);
+    const processSheet = processFamily ? findSheetForSettingsFamily(processFamily, settings) : null;
 
-    return explicitSheet ?? processSheet ?? getFallbackSheet(settings.language);
+    return explicitSheet ?? processSheet ?? getFallbackSheet(shortcutLanguageForFamily(settings));
   }
 
-  return getFallbackSheet(settings.language);
+  return getFallbackSheet(shortcutLanguageForFamily(settings));
 }
 
 export function availableShortcutLevels(sheet: ShortcutSheet): Record<ShortcutDisplayLevel, boolean> {
@@ -435,7 +450,7 @@ function shortcutLayoutWeight(shortcut: ShortcutEntry): number {
     weight += 0.2;
   }
 
-  if (shortcut.keys.length >= 3) {
+  if (shortcutKeyCount(shortcut) >= 3) {
     weight += 0.1;
   }
 
@@ -444,6 +459,13 @@ function shortcutLayoutWeight(shortcut: ShortcutEntry): number {
   }
 
   return weight;
+}
+
+function shortcutKeyCount(shortcut: ShortcutEntry): number {
+  return Math.max(
+    shortcut.keys.length,
+    ...Object.values(shortcut.keysByLayout ?? {}).map((keys) => keys.length)
+  );
 }
 
 function shortcutKeysSignature(keys: string[]): string {

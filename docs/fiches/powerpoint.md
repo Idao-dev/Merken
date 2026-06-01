@@ -7,6 +7,7 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 ## Sources
 
 - https://support.microsoft.com/en-us/accessibility/powerpoint/use-keyboard-shortcuts-to-create-powerpoint-presentations
+- https://support.microsoft.com/fr-fr/office/utiliser-les-raccourcis-clavier-pour-cr%C3%A9er-des-pr%C3%A9sentations-powerpoint-ebb3d20e-dcd4-444f-a38e-bb5c5ed180f4
 - https://support.microsoft.com/en-us/office/use-keyboard-shortcuts-to-deliver-powerpoint-presentations-1524ffce-bd2a-45f4-9a7f-f18b992b93a0
 
 ## Notes de recherche
@@ -17,6 +18,12 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 - Raccourcis Fn / touches F: `F5`, `Shift` + `F5`, `Alt` + `F5` et `F1` peuvent demander `Fn` selon le clavier.
 - Raccourcis exclus: sequences Ruban longues, raccourcis media tres fins et commandes de selection trop contextuelles.
 - Risques: peu de raccourcis destructifs directs; `Ctrl` + `A` est contextuel et peut selectionner tous les objets ou tout le texte selon le focus.
+
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: les sections Francais et English utilisent les pages Microsoft localisees quand les touches divergent.
+- Conflit officiel note: la page PowerPoint FR contient des mentions differentes de Gras (`Ctrl` + `B` dans un resume, `Ctrl` + `G` dans la section Windows de mise en forme du texte). La fiche retient `Ctrl` + `G` pour PowerPoint FR, car c'est la table detaillee de creation Windows.
+- Les touches de ponctuation (`[`, `]`) et les sequences Ruban `Alt` restent a verifier par langue de logiciel et disposition clavier avant ajout de `keysByLayout`.
 
 ## Inventaire complet
 
@@ -34,7 +41,7 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 | Annuler / retablir | `Ctrl` + `Z` / `Y` | Microsoft PowerPoint shortcuts | Standard | Edition courante. |
 | Grouper / dissocier | `Ctrl` + `G` / `Ctrl` + `Shift` + `G` | Microsoft PowerPoint shortcuts | Avance | Objets multiples. |
 | Avancer / reculer objet | `Ctrl` + `Shift` + `]` / `[` | Microsoft PowerPoint shortcuts | Avance | Ordre des objets. |
-| Gras / italique / souligne | `Ctrl` + `B` / `I` / `U` | Microsoft PowerPoint shortcuts | Standard | Mise en forme. |
+| Gras / italique / souligne | FR: `Ctrl` + `G`; EN: `Ctrl` + `B`; `Ctrl` + `I` / `U` | Microsoft PowerPoint shortcuts | Standard | Mise en forme. |
 | Lien | `Ctrl` + `K` | Microsoft PowerPoint shortcuts | Standard | Lien courant. |
 | Rechercher / remplacer | `Ctrl` + `F` / `H` | Microsoft PowerPoint shortcuts | Standard / Avance | Recherche. |
 | Tout selectionner | `Ctrl` + `A` | Microsoft PowerPoint shortcuts | Avance | Contextuel selon le focus. |
@@ -87,7 +94,7 @@ Documentation sheet for useful PowerPoint shortcuts on Windows.
 
 | ID | Action | Touches | Description | Niveau |
 | --- | --- | --- | --- | --- |
-| `texte-gras` | Gras | `Ctrl` + `B` | Active le gras. | Standard |
+| `texte-gras` | Gras | `Ctrl` + `G` | Active le gras. | Standard |
 | `texte-italique` | Italique | `Ctrl` + `I` | Active l italique. | Standard |
 | `texte-souligne` | Souligne | `Ctrl` + `U` | Active le souligne. | Standard |
 | `texte-lien` | Lien | `Ctrl` + `K` | Insere ou modifie un lien. | Standard |

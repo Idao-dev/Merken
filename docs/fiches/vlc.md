@@ -16,6 +16,12 @@ Documentation sheet for useful VLC shortcuts on Windows.
 - Raccourcis exclus: les captures "Full List" de la documentation officielle ne sont pas reutilisees comme tableau complet, car elles ne sont pas exposees en texte exploitable et beaucoup d actions sont trop specifiques.
 - Risques: pas de raccourci destructif retenu; `Ctrl` + `Q` ferme l application et reste Standard seulement parce qu il est explicite et courant.
 
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: fiche conservee comme selection existante; aucune correction de touche localisee n'est promue sans source localisee ou validation explicite.
+- Les sections Francais et English restent separees: ne pas deduire une touche FR depuis une source EN traduite.
+- Les touches de ponctuation, les actions souris et les sequences `Alt` doivent etre reverifiees par langue de logiciel et disposition AZERTY/QWERTY avant ajout de `keysByLayout`.
+
 ## Inventaire complet
 
 | Action source | Touches | Source | Selection Merken | Raison |

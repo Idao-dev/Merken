@@ -3,6 +3,7 @@ import { defaultSettings } from "../../src/app/settings";
 import {
   availableShortcutLevels,
   customPreferenceFromLevel,
+  findSheetForFamily,
   findSheetForProcess,
   getFallbackSheet,
   isShortcutIncluded,
@@ -16,12 +17,13 @@ import {
   sheets,
   shouldShowShortcutBaselineWarning,
   sharedCommandKeys,
+  shortcutKeysForLayout,
   shortcutThemeState,
   updateCustomCategoryPreference,
   updateCustomShortcutPreference,
   visibleShortcuts
 } from "../../src/app/sheets";
-import type { ShortcutCategory, ShortcutSheet } from "../../src/types";
+import type { ShortcutCategory, ShortcutEntry, ShortcutSheet } from "../../src/types";
 
 function syntheticCategory(id: string, count: number, command = false): ShortcutCategory {
   return {
@@ -37,6 +39,10 @@ function syntheticCategory(id: string, count: number, command = false): Shortcut
       level: "standard"
     }))
   };
+}
+
+function findShortcut(sheet: ShortcutSheet, shortcutId: string): ShortcutEntry | undefined {
+  return sheet.categories.flatMap((category) => category.shortcuts).find((shortcut) => shortcut.id === shortcutId);
 }
 
 describe("shortcut sheet selection", () => {
@@ -71,6 +77,8 @@ describe("shortcut sheet selection", () => {
 
   it("keeps Phase 1 settings defaults explicit", () => {
     expect(defaultSettings.language).toBe("fr");
+    expect(defaultSettings.shortcutLanguage).toBe("fr");
+    expect(defaultSettings.keyboardLayout).toBe("azerty");
     expect(defaultSettings.theme).toBe("dark");
     expect(defaultSettings.startWithWindows).toBe(true);
     expect(defaultSettings.sheetMode).toBe("auto");
@@ -157,8 +165,8 @@ describe("shortcut sheet selection", () => {
     const toolsCategory = windows.categories.find((category) => category.id === "outils-systeme");
     const systemCategory = windows.categories.find((category) => category.id === "systeme");
 
-    expect(sharedCommandKeys(toolsCategory!)).toEqual(["Win", "R"]);
-    expect(sharedCommandKeys(systemCategory!)).toBeNull();
+    expect(sharedCommandKeys(toolsCategory!, "azerty")).toEqual(["Win", "R"]);
+    expect(sharedCommandKeys(systemCategory!, "azerty")).toBeNull();
   });
 
   it("requires stable shortcut ids", () => {
@@ -198,47 +206,56 @@ describe("shortcut sheet selection", () => {
     }
   });
 
-  it("uses the current language for detected Office apps", () => {
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "excel.exe", title: null, sheetId: null }).id).toBe(
+  it("keeps interface language separate from shortcut language", () => {
+    const sheet = selectSheet(
+      { ...defaultSettings, language: "en", shortcutLanguage: "fr" },
+      { processName: "excel.exe", title: null, sheetId: null }
+    );
+
+    expect(sheet.id).toBe("excel-fr");
+  });
+
+  it("uses the shortcut language for detected Office apps", () => {
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "excel.exe", title: null, sheetId: null }).id).toBe(
       "excel-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "winword.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "winword.exe", title: null, sheetId: null }).id).toBe(
       "word-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "powerpnt.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "powerpnt.exe", title: null, sheetId: null }).id).toBe(
       "powerpoint-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "outlook.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "outlook.exe", title: null, sheetId: null }).id).toBe(
       "outlook-en"
     );
   });
 
-  it("uses the current language for new detected app families", () => {
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "explorer.exe", title: null, sheetId: null }).id).toBe(
+  it("uses the shortcut language for new detected app families", () => {
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "explorer.exe", title: null, sheetId: null }).id).toBe(
       "file-explorer-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "systemsettings.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "systemsettings.exe", title: null, sheetId: null }).id).toBe(
       "windows-core-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "microsoft.photos.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "microsoft.photos.exe", title: null, sheetId: null }).id).toBe(
       "photos-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "microsoft.media.player.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "microsoft.media.player.exe", title: null, sheetId: null }).id).toBe(
       "media-player-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "windowsterminal.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "windowsterminal.exe", title: null, sheetId: null }).id).toBe(
       "terminal-powershell-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "firefox.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "firefox.exe", title: null, sheetId: null }).id).toBe(
       "browsers-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "thunderbird.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "thunderbird.exe", title: null, sheetId: null }).id).toBe(
       "thunderbird-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "obsidian.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "obsidian.exe", title: null, sheetId: null }).id).toBe(
       "obsidian-en"
     );
-    expect(selectSheet({ ...defaultSettings, language: "en" }, { processName: "vlc.exe", title: null, sheetId: null }).id).toBe(
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "vlc.exe", title: null, sheetId: null }).id).toBe(
       "vlc-en"
     );
   });
@@ -293,13 +310,44 @@ describe("shortcut sheet selection", () => {
     expect(selectSheet(defaultSettings, excelOpenRequest.activeApp).id).toBe("excel-fr");
   });
 
-  it("translates explicit active sheet ids to the current language", () => {
+  it("translates explicit active sheet ids to the shortcut language", () => {
     const sheet = selectSheet(
-      { ...defaultSettings, language: "en" },
+      { ...defaultSettings, shortcutLanguage: "en" },
       { processName: "excel.exe", title: null, sheetId: "excel-fr" }
     );
 
     expect(sheet.id).toBe("excel-en");
+  });
+
+  it("falls back to French when a requested sheet language is absent", () => {
+    expect(findSheetForFamily("excel", "es")?.id).toBe("excel-fr");
+  });
+
+  it("resolves keyboard layout overrides before base keys", () => {
+    const shortcut: ShortcutEntry = {
+      id: "synthetic-layout",
+      label: "Synthetic layout",
+      keys: ["Ctrl", "`"],
+      keysByLayout: {
+        azerty: ["Ctrl", "Alt", "7"],
+        qwerty: ["Ctrl", "`"]
+      },
+      description: "Synthetic shortcut.",
+      priority: 1,
+      level: "advanced"
+    };
+
+    expect(shortcutKeysForLayout(shortcut, "azerty")).toEqual(["Ctrl", "Alt", "7"]);
+    expect(shortcutKeysForLayout(shortcut, "qwerty")).toEqual(["Ctrl", "`"]);
+  });
+
+  it("keeps localized Office bold shortcuts distinct between French and English", () => {
+    expect(findShortcut(findSheetForFamily("excel", "fr")!, "edition-gras")?.keys).toEqual(["Ctrl", "G"]);
+    expect(findShortcut(findSheetForFamily("excel", "en")!, "edition-gras")?.keys).toEqual(["Ctrl", "B"]);
+    expect(findShortcut(findSheetForFamily("powerpoint", "fr")!, "texte-gras")?.keys).toEqual(["Ctrl", "G"]);
+    expect(findShortcut(findSheetForFamily("powerpoint", "en")!, "texte-gras")?.keys).toEqual(["Ctrl", "B"]);
+    expect(findShortcut(findSheetForFamily("word", "fr")!, "format-gras")?.keys).toEqual(["Ctrl", "G"]);
+    expect(findShortcut(findSheetForFamily("word", "en")!, "format-gras")?.keys).toEqual(["Ctrl", "B"]);
   });
 
   it("honors manual sheet mode", () => {
@@ -368,14 +416,14 @@ describe("shortcut sheet selection", () => {
     expect(sheetBadgeKeys("outlook")).toEqual(["office-365", "office-2024", "office-2021"]);
   });
 
-  it("uses the current language when a manual family has variants", () => {
-    const sheet = selectSheet({ ...defaultSettings, language: "en", sheetMode: "manual", manualSheetId: "windows-core" }, null);
+  it("uses the shortcut language when a manual family has variants", () => {
+    const sheet = selectSheet({ ...defaultSettings, shortcutLanguage: "en", sheetMode: "manual", manualSheetId: "windows-core" }, null);
 
     expect(sheet.id).toBe("windows-core-en");
   });
 
-  it("uses the current language for manual Office families", () => {
-    const sheet = selectSheet({ ...defaultSettings, language: "en", sheetMode: "manual", manualSheetId: "word" }, null);
+  it("uses the shortcut language for manual Office families", () => {
+    const sheet = selectSheet({ ...defaultSettings, shortcutLanguage: "en", sheetMode: "manual", manualSheetId: "word" }, null);
 
     expect(sheet.id).toBe("word-en");
   });

@@ -7,8 +7,9 @@
 - Les fiches doivent rester courtes et utiles.
 - Le produit final vise un installateur unique pour l'utilisateur.
 - Les mises a jour doivent etre disponibles sans compte utilisateur et rester comprehensibles.
-- Le changement de langue dans les options doit s'appliquer immediatement a l'interface visible et aux fiches affichees.
-- Les options sont organisees par onglets pour rester lisibles quand les reglages par logiciel seront ajoutes.
+- La langue de l'interface pilote uniquement Merken; la langue du logiciel pilote la variante de fiche affichee, avec fallback vers la fiche disponible.
+- La disposition clavier est un reglage distinct de la langue du logiciel et sert aux variantes de touches physiques, notamment AZERTY/QWERTY.
+- Les options sont organisees par onglets pour rester lisibles quand de nouveaux reglages sont ajoutes.
 - Le reglage "Transparence du panneau" pilote l'opacite visuelle, les bordures et le flou arriere-plan, mais son rendu depend de Windows, WebView2 et du support `backdrop-filter`.
 - Chaque fiche peut memoriser son niveau d'affichage : standard, avance ou expert. Les niveaux ne sont pas cumulatifs.
 - La personnalisation fine par theme ou raccourci se gere dans l'onglet Personnalisation, avec apercu immediat dans la fenetre reelle des raccourcis placee a cote d'Options.
@@ -28,6 +29,6 @@
 - Prevoir des variantes d'icone adaptees par plateforme : Windows, macOS et Linux.
 - A plus long terme, envisager des variantes visuelles par logiciel si Merken affiche des fiches specialisees.
 - Licence.
-- Exactitude des raccourcis par langue et logiciel.
+- Exactitude des raccourcis par langue de logiciel et disposition clavier.
 - Niveau visuel attendu pour l'effet verre.
 - Politique de mise a jour automatique configurable, si elle est ajoutee plus tard.

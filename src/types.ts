@@ -22,6 +22,8 @@ export type ShortcutWarningLevel = "info" | "danger";
 
 export type ShortcutWarningMode = "all" | "danger-only" | "off";
 
+export type ShortcutKeyboardLayout = "azerty" | "qwerty";
+
 export type SheetBadgeKey =
   | "windows-native"
   | "office-365"
@@ -41,6 +43,7 @@ export interface ShortcutEntry {
   id: string;
   label: string;
   keys: string[];
+  keysByLayout?: Partial<Record<ShortcutKeyboardLayout, string[]>>;
   command?: string;
   description: string;
   warning?: string;
@@ -74,6 +77,8 @@ export interface ShortcutSheetPreference {
 
 export interface UserSettings {
   language: LanguageCode;
+  shortcutLanguage: LanguageCode;
+  keyboardLayout: ShortcutKeyboardLayout;
   theme: ThemeMode;
   textSize: TextSize;
   blur: BlurLevel;
@@ -85,7 +90,7 @@ export interface UserSettings {
   shortcutPlacementPreset: ShortcutPlacementPreset;
   shortcutCustomPosition: ShortcutCustomPosition | null;
   shortcutWarningMode: ShortcutWarningMode;
-  trayVisibilityPromptDismissed: boolean;
+  trayIconVisible: boolean;
 }
 
 export interface ActiveApp {

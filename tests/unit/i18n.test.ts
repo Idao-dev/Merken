@@ -16,7 +16,12 @@ describe("interface labels", () => {
   it("localizes options in English", () => {
     const labels = labelsFor("en");
 
-    expect(labels.settings.language).toBe("Language");
+    expect(labels.settings.language).toBe("Interface language");
+    expect(labels.settings.shortcutLanguage).toBe("Software language");
+    expect(labels.settings.keyboardLayout).toBe("Keyboard layout");
+    expect(labels.settings.languageHelp).toContain("Merken menus");
+    expect(labels.settings.shortcutLanguageHelp).toContain("active software");
+    expect(labels.settings.keyboardLayoutHelp).toContain("Physical keyboard layout");
     expect(labels.settings.about).toBe("About");
     expect(labels.tabs.appearance).toBe("Appearance");
     expect(labels.sections.functioning).toBe("Operation");
@@ -56,14 +61,21 @@ describe("interface labels", () => {
     expect(en.shortcutPlacementPreset.center).toBe("Center");
   });
 
-  it("localizes taskbar icon visibility guidance", () => {
+  it("localizes tray icon visibility setting", () => {
     const fr = labelsFor("fr");
     const en = labelsFor("en");
 
-    expect(fr.settings.trayVisibility).toBe("Icone Merken visible");
-    expect(fr.settings.trayVisibilityHelp).toContain("reglage Windows");
-    expect(en.settings.trayVisibility).toBe("Visible Merken icon");
-    expect(en.settings.trayVisibilityHelp).toContain("Windows taskbar icon settings");
+    expect(fr.settings.language).toBe("Langue de l'interface");
+    expect(fr.settings.shortcutLanguage).toBe("Langue du logiciel");
+    expect(fr.settings.keyboardLayout).toBe("Disposition clavier");
+    expect(fr.settings.languageHelp).toContain("Merken uniquement");
+    expect(fr.settings.shortcutLanguageHelp).toContain("logiciel actif");
+    expect(fr.settings.keyboardLayoutHelp).toContain("Disposition physique");
+    expect(fr.keyboardLayout.azerty).toBe("AZERTY");
+    expect(fr.keyboardLayout.qwerty).toBe("QWERTY");
+    expect(en.keyboardLayout.azerty).toBe("AZERTY");
+    expect(fr.settings.trayIconVisible).toBe("Icone Merken toujours visible");
+    expect(en.settings.trayIconVisible).toBe("Merken icon always visible");
   });
 
   it("localizes sheet badges and shortcut prevention labels", () => {

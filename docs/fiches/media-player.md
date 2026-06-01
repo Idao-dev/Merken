@@ -18,6 +18,12 @@ Documentation sheet for Windows media playback apps.
 - Raccourcis exclus: commandes anciennes Windows Media Player non confirmees dans Media Player moderne.
 - Risques: aucun raccourci destructif retenu.
 
+## Langue logiciel / clavier
+
+- Statut audit 2026-06-01: fiche conservee comme selection existante; aucune correction de touche localisee n'est promue sans source localisee ou validation explicite.
+- Les sections Francais et English restent separees: ne pas deduire une touche FR depuis une source EN traduite.
+- Les touches de ponctuation, les actions souris et les sequences `Alt` doivent etre reverifiees par langue de logiciel et disposition AZERTY/QWERTY avant ajout de `keysByLayout`.
+
 ## Inventaire complet
 
 | Action source | Touches | Source | Selection Merken | Raison |

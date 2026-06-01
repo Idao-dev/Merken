@@ -4,6 +4,7 @@ import type {
   SheetMode,
   SheetBadgeKey,
   ShortcutDisplayChoice,
+  ShortcutKeyboardLayout,
   ShortcutPlacementPreset,
   ShortcutWarningMode,
   TextSize,
@@ -31,6 +32,11 @@ interface Labels {
   };
   settings: {
     language: string;
+    shortcutLanguage: string;
+    keyboardLayout: string;
+    languageHelp: string;
+    shortcutLanguageHelp: string;
+    keyboardLayoutHelp: string;
     textSize: string;
     transparency: string;
     theme: string;
@@ -67,8 +73,7 @@ interface Labels {
     windowsNativeBadge: string;
     windowsNativeBadgeHelp: string;
     shortcutBaselineWarning: string;
-    trayVisibility: string;
-    trayVisibilityHelp: string;
+    trayIconVisible: string;
   };
   modal: {
     aboutTitle: string;
@@ -90,6 +95,7 @@ interface Labels {
   sheetMode: Record<SheetMode, string>;
   shortcutDisplayChoice: Record<ShortcutDisplayChoice, string>;
   shortcutWarningMode: Record<ShortcutWarningMode, string>;
+  keyboardLayout: Record<ShortcutKeyboardLayout, string>;
   shortcutPlacementPreset: Record<ShortcutPlacementPreset, string>;
   sheetBadge: Record<SheetBadgeKey, { label: string; help: string }>;
 }
@@ -119,7 +125,14 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       shortcutPlacement: "Emplacement des raccourcis"
     },
     settings: {
-      language: "Langue",
+      language: "Langue de l'interface",
+      shortcutLanguage: "Langue du logiciel",
+      keyboardLayout: "Disposition clavier",
+      languageHelp: "Langue des menus et reglages de Merken uniquement.",
+      shortcutLanguageHelp:
+        "Langue utilisee dans le logiciel actif. Exemple : Excel en francais peut utiliser Ctrl+G pour Gras, alors qu'Excel en anglais utilise Ctrl+B.",
+      keyboardLayoutHelp:
+        "Disposition physique du clavier. Utile surtout pour les touches de ponctuation ou deplacees entre AZERTY et QWERTY. Ne change pas la langue du logiciel.",
       textSize: "Taille",
       transparency: "Transparence du panneau",
       theme: "Theme",
@@ -156,8 +169,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       windowsNativeBadge: "Win",
       windowsNativeBadgeHelp: "Natif Windows",
       shortcutBaselineWarning: "* Raccourcis de base : les modifications dans le logiciel ne sont pas detectees.",
-      trayVisibility: "Icone Merken visible",
-      trayVisibilityHelp: "Ouvre le reglage Windows des icones de barre des taches."
+      trayIconVisible: "Icone Merken toujours visible"
     },
     modal: {
       aboutTitle: "A propos de Merken",
@@ -212,6 +224,10 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       "danger-only": "Risques importants",
       off: "Aucun message"
     },
+    keyboardLayout: {
+      azerty: "AZERTY",
+      qwerty: "QWERTY"
+    },
     shortcutPlacementPreset: {
       "top-left": "Haut gauche",
       "top-right": "Haut droit",
@@ -252,7 +268,14 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       shortcutPlacement: "Shortcut placement"
     },
     settings: {
-      language: "Language",
+      language: "Interface language",
+      shortcutLanguage: "Software language",
+      keyboardLayout: "Keyboard layout",
+      languageHelp: "Language used by Merken menus and settings only.",
+      shortcutLanguageHelp:
+        "Language used in the active software. For example, French Excel can use Ctrl+G for Bold, while English Excel uses Ctrl+B.",
+      keyboardLayoutHelp:
+        "Physical keyboard layout. Mostly useful for punctuation keys or keys placed differently between AZERTY and QWERTY. It does not change the software language.",
       textSize: "Size",
       transparency: "Panel transparency",
       theme: "Theme",
@@ -289,8 +312,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       windowsNativeBadge: "Win",
       windowsNativeBadgeHelp: "Native Windows",
       shortcutBaselineWarning: "* Default shortcuts: changes inside the software are not detected.",
-      trayVisibility: "Visible Merken icon",
-      trayVisibilityHelp: "Opens the Windows taskbar icon settings."
+      trayIconVisible: "Merken icon always visible"
     },
     modal: {
       aboutTitle: "About Merken",
@@ -344,6 +366,10 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       all: "All messages",
       "danger-only": "Important risks",
       off: "No messages"
+    },
+    keyboardLayout: {
+      azerty: "AZERTY",
+      qwerty: "QWERTY"
     },
     shortcutPlacementPreset: {
       "top-left": "Top left",
