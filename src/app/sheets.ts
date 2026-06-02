@@ -419,53 +419,60 @@ export function visibleShortcuts(sheet: ShortcutSheet, preference: ShortcutSheet
   };
 }
 
-export type ShortcutCategoryColumns = [ShortcutCategory[], ShortcutCategory[]];
+export type ShortcutRowLayout = "compact" | "stacked";
 
-export function layoutShortcutCategories(categories: ShortcutCategory[]): ShortcutCategoryColumns {
-  const columns: ShortcutCategoryColumns = [[], []];
-  const columnWeights = [0, 0];
+const adaptiveShortcutCellWidth = 256;
+const shortcutCompactGapWidth = 8;
+const shortcutKeyGapWidth = 4;
+const shortcutKeyMinWidth = 24;
+const shortcutMinimumKeySlots = 2;
 
-  for (const category of categories) {
-    const targetColumn = columnWeights[0] <= columnWeights[1] ? 0 : 1;
-
-    columns[targetColumn].push(category);
-    columnWeights[targetColumn] += shortcutCategoryLayoutWeight(category);
-  }
-
-  return columns;
+export function layoutShortcutCategories(categories: ShortcutCategory[]): ShortcutCategory[] {
+  return [...categories];
 }
 
-function shortcutCategoryLayoutWeight(category: ShortcutCategory): number {
-  return category.shortcuts.reduce((weight, shortcut) => weight + shortcutLayoutWeight(shortcut), 0) + 0.65;
+export function shortcutRowLayout(
+  shortcut: ShortcutEntry,
+  keyboardLayout: ShortcutKeyboardLayout,
+  cellWidth = adaptiveShortcutCellWidth
+): ShortcutRowLayout {
+  const compactLabelWidth = cellWidth - estimateShortcutKeysWidth(shortcutKeysForLayout(shortcut, keyboardLayout)) - shortcutCompactGapWidth;
+
+  return estimateShortcutTextWidth(shortcut.label) > compactLabelWidth ? "stacked" : "compact";
 }
 
-function shortcutLayoutWeight(shortcut: ShortcutEntry): number {
-  let weight = shortcut.command ? 1.75 : 1;
+function estimateShortcutKeysWidth(keys: string[]): number {
+  const minimumWidth = shortcutKeyMinWidth * shortcutMinimumKeySlots + shortcutKeyGapWidth * (shortcutMinimumKeySlots - 1);
 
-  if (shortcut.command && shortcut.command.length > 18) {
-    weight += 0.25;
+  if (keys.length === 0) {
+    return minimumWidth;
   }
 
-  if (shortcut.label.length > 24) {
-    weight += 0.2;
-  }
+  const actualWidth =
+    keys.reduce((width, key) => width + Math.max(shortcutKeyMinWidth, estimateShortcutTextWidth(key) + 14), 0) +
+    (keys.length - 1) * shortcutKeyGapWidth;
 
-  if (shortcutKeyCount(shortcut) >= 3) {
-    weight += 0.1;
-  }
-
-  if (shortcut.warningLevel === "danger") {
-    weight += 0.15;
-  }
-
-  return weight;
+  return Math.max(minimumWidth, actualWidth);
 }
 
-function shortcutKeyCount(shortcut: ShortcutEntry): number {
-  return Math.max(
-    shortcut.keys.length,
-    ...Object.values(shortcut.keysByLayout ?? {}).map((keys) => keys.length)
-  );
+function estimateShortcutTextWidth(text: string): number {
+  let width = 0;
+
+  for (const character of text) {
+    if (character === " ") {
+      width += 3.5;
+    } else if ("ijlI.,'`|!".includes(character)) {
+      width += 3.4;
+    } else if ("mwMW@#%&".includes(character)) {
+      width += 8.2;
+    } else if (/[A-Z]/.test(character)) {
+      width += 7;
+    } else {
+      width += 6.1;
+    }
+  }
+
+  return Math.ceil(width);
 }
 
 function shortcutKeysSignature(keys: string[]): string {

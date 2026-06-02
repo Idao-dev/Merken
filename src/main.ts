@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { getName, getVersion } from "@tauri-apps/api/app";
-import { currentMonitor, getCurrentWindow, PhysicalPosition, PhysicalSize, primaryMonitor } from "@tauri-apps/api/window";
+import { currentMonitor, getCurrentWindow, LogicalSize, PhysicalPosition, primaryMonitor } from "@tauri-apps/api/window";
 import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check, type Update } from "@tauri-apps/plugin-updater";
@@ -23,6 +23,7 @@ import {
   shouldShowShortcutBaselineWarning,
   sharedCommandKeys,
   shortcutKeysForLayout,
+  shortcutRowLayout,
   shortcutThemeState,
   shortcutDisplayLevels,
   updateCustomCategoryPreference,
@@ -30,6 +31,20 @@ import {
   visibleShortcuts
 } from "./app/sheets";
 import { distributionFromEnv, repositoryUrl, updateStateClass } from "./app/updates";
+import {
+  canStartWindowDrag,
+  chooseShortcutFit,
+  fitLogicalWindowSize,
+  isPointerOnScrollbar,
+  settingsWindowPreferredSize,
+  sameShortcutFitState,
+  shortcutFitDefaultState,
+  shortcutWindowSizeForRenderedPanel,
+  type LogicalWindowSize,
+  type ShortcutFitContent,
+  type ShortcutFitState,
+  type WindowWorkArea
+} from "./app/windowSizing";
 import "./styles.css";
 import type {
   ActiveApp,
@@ -93,6 +108,10 @@ let shortcutDragSaveTimer: number | null = null;
 let shortcutDragClearTimer: number | null = null;
 let shortcutAutoHideTimer: number | null = null;
 let shortcutPreviewMovedManually = false;
+let responsiveWindowResizeBound = false;
+let lastAppliedWindowSize: LogicalWindowSize | null = null;
+let currentShortcutFitState: ShortcutFitState = shortcutFitDefaultState;
+let devicePixelRatioMediaCleanup: (() => void) | null = null;
 let appInfo = {
   name: "Merken",
   version: "0.1.0"
@@ -115,7 +134,6 @@ const settingsTabs: SettingsTab[] = ["general", "appearance", "sheets", "customi
 const shortcutDisplayChoices: ShortcutDisplayChoice[] = [...shortcutDisplayLevels, "custom"];
 const customizationTargetStorageKey = "merken.customizationTarget.v1";
 const shortcutPreviewMovedStorageKey = "merken.shortcutPreviewMoved.v1";
-const shortcutsWindowMaxSize = { width: 540, height: 680 };
 const distribution = distributionFromEnv(import.meta.env.VITE_MERKEN_DISTRIBUTION);
 
 function debugActiveAppLog(message: string, details?: unknown): void {
@@ -290,26 +308,78 @@ async function setPanelKeepVisible(keepVisible: boolean): Promise<void> {
   }
 }
 
+function nextAnimationFrame(): Promise<void> {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame(() => resolve());
+  });
+}
+
 function cssPixels(value: string): number {
   return Number.parseFloat(value) || 0;
 }
 
-function measurePanelWindowSize(): { width: number; height: number } | null {
+function measureRenderedPanelWindowSize(targetSize?: LogicalWindowSize): LogicalWindowSize | null {
   const panel = document.querySelector<HTMLElement>(".panel");
 
   if (!panel) {
     return null;
   }
 
-  const rect = panel.getBoundingClientRect();
-  const style = getComputedStyle(panel);
-  const width = Math.ceil(rect.width + cssPixels(style.marginLeft) + cssPixels(style.marginRight));
-  const height = Math.ceil(rect.height + cssPixels(style.marginTop) + cssPixels(style.marginBottom));
+  const previousWidth = panel.style.width;
+  const previousMaxHeight = panel.style.maxHeight;
 
-  return {
-    width: Math.min(shortcutsWindowMaxSize.width, Math.max(1, width)),
-    height: Math.min(shortcutsWindowMaxSize.height, Math.max(1, height))
-  };
+  if (targetSize) {
+    panel.style.width = `${Math.max(1, targetSize.width - 18)}px`;
+    panel.style.maxHeight = "none";
+  }
+
+  try {
+    const rect = panel.getBoundingClientRect();
+    const style = getComputedStyle(panel);
+
+    return {
+      width: Math.ceil(Math.max(1, rect.width + cssPixels(style.marginLeft) + cssPixels(style.marginRight))),
+      height: Math.ceil(Math.max(1, rect.height + cssPixels(style.marginTop) + cssPixels(style.marginBottom)))
+    };
+  } finally {
+    if (targetSize) {
+      panel.style.width = previousWidth;
+      panel.style.maxHeight = previousMaxHeight;
+    }
+  }
+}
+
+async function currentWindowWorkArea(): Promise<WindowWorkArea | null> {
+  try {
+    const monitor = (await currentMonitor()) ?? (await primaryMonitor());
+
+    if (!monitor) {
+      return null;
+    }
+
+    return {
+      size: {
+        width: monitor.workArea.size.width,
+        height: monitor.workArea.size.height
+      },
+      scaleFactor: monitor.scaleFactor || (await currentWindow.scaleFactor())
+    };
+  } catch {
+    return null;
+  }
+}
+
+function sameLogicalWindowSize(left: LogicalWindowSize | null, right: LogicalWindowSize): boolean {
+  return Boolean(left && Math.abs(left.width - right.width) < 1 && Math.abs(left.height - right.height) < 1);
+}
+
+async function setCurrentWindowLogicalSize(size: LogicalWindowSize): Promise<void> {
+  if (sameLogicalWindowSize(lastAppliedWindowSize, size)) {
+    return;
+  }
+
+  await currentWindow.setSize(new LogicalSize(size.width, size.height));
+  lastAppliedWindowSize = size;
 }
 
 async function resizeShortcutsWindowToPanel(): Promise<void> {
@@ -317,17 +387,55 @@ async function resizeShortcutsWindowToPanel(): Promise<void> {
     return;
   }
 
-  const size = measurePanelWindowSize();
+  try {
+    const workArea = await currentWindowWorkArea();
+    const fitChanged = updateShortcutFitState(workArea);
 
-  if (!size) {
+    if (fitChanged) {
+      render();
+    }
+
+    await setCurrentWindowLogicalSize(
+      shortcutWindowSizeForRenderedPanel(
+        currentShortcutFitState.desiredSize,
+        measureRenderedPanelWindowSize(currentShortcutFitState.desiredSize)
+      )
+    );
+  } catch (error) {
+    debugActiveAppLog("resize shortcuts window failed", error);
+  }
+}
+
+async function resizeSettingsWindowToWorkArea(): Promise<void> {
+  if (!isSettingsWindow) {
     return;
   }
 
   try {
-    await currentWindow.setSize(new PhysicalSize(size.width, size.height));
+    const size = fitLogicalWindowSize(settingsWindowPreferredSize, settingsWindowPreferredSize, await currentWindowWorkArea());
+
+    await setCurrentWindowLogicalSize(size);
   } catch (error) {
-    debugActiveAppLog("resize shortcuts window failed", error);
+    debugActiveAppLog("resize settings window failed", error);
   }
+}
+
+async function resizeCurrentWindowToLayout(): Promise<void> {
+  if (isShortcutPanelWindow) {
+    await resizeShortcutsWindowToPanel();
+
+    if (isShortcutsPreviewWindow && !shortcutPreviewMovedManually) {
+      await positionShortcutsPreviewWindow();
+    }
+
+    if (isShortcutsWindow && currentShortcutsOpenMode === "shortcuts" && settings.shortcutPlacementMode !== "custom") {
+      await applyShortcutPlacement();
+    }
+
+    return;
+  }
+
+  await resizeSettingsWindowToWorkArea();
 }
 
 async function positionShortcutsPreviewWindow(): Promise<void> {
@@ -754,7 +862,7 @@ function shouldShowWarningLevel(level: ShortcutWarningLevel): boolean {
   return settings.shortcutWarningMode === "all" || level === "danger";
 }
 
-function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): string {
+function shortcutPreventionNoteEntries(family: string, sheet: ShortcutSheet): { level: ShortcutWarningLevel; text: string }[] {
   const labels = labelsFor(settings.language);
   const notes = new Map<string, { level: ShortcutWarningLevel; text: string }>();
 
@@ -778,13 +886,19 @@ function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): st
     }
   }
 
-  if (notes.size === 0) {
+  return [...notes.values()];
+}
+
+function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): string {
+  const notes = shortcutPreventionNoteEntries(family, sheet);
+
+  if (notes.length === 0) {
     return "";
   }
 
   return `
     <div class="shortcut-prevention-notes">
-      ${[...notes.values()]
+      ${notes
         .map(
           (note) => `<p class="shortcut-prevention-note shortcut-prevention-note-${escapeAttribute(note.level)}">${escapeHtml(note.text)}</p>`
         )
@@ -793,7 +907,7 @@ function renderShortcutPreventionNotes(family: string, sheet: ShortcutSheet): st
   `;
 }
 
-function renderShortcutCategory(category: ShortcutSheet["categories"][number]): string {
+function renderShortcutCategory(category: ShortcutSheet["categories"][number], cellWidth: number): string {
   const commandKeys = sharedCommandKeys(category, settings.keyboardLayout);
   const commandKeyHeader = commandKeys ? `<div class="section-keys">${commandKeys.map(renderKey).join("")}</div>` : "";
   const listClassName = commandKeys ? "shortcut-list shortcut-command-list" : "shortcut-list";
@@ -816,15 +930,7 @@ function renderShortcutCategory(category: ShortcutSheet["categories"][number]): 
                   </span>
                 </article>
               `
-              : `
-                <article class="shortcut-row">
-                  <div class="keys">${shortcutKeysForLayout(shortcut, settings.keyboardLayout).map(renderKey).join("")}</div>
-                  <span class="shortcut-text">
-                    <strong>${escapeHtml(shortcut.label)}</strong>
-                    ${renderShortcutCommand(shortcut.command)}
-                  </span>
-                </article>
-              `
+              : renderShortcutRow(shortcut, cellWidth)
           )
           .join("")}
       </div>
@@ -832,16 +938,23 @@ function renderShortcutCategory(category: ShortcutSheet["categories"][number]): 
   `;
 }
 
-function renderShortcutCategories(sheet: ShortcutSheet): string {
-  return layoutShortcutCategories(sheet.categories)
-    .map(
-      (column, index) => `
-        <div class="shortcut-column" data-shortcut-column="${index + 1}">
-          ${column.map(renderShortcutCategory).join("")}
-        </div>
-      `
-    )
-    .join("");
+function renderShortcutRow(shortcut: ShortcutSheet["categories"][number]["shortcuts"][number], cellWidth: number): string {
+  const rowLayout = shortcutRowLayout(shortcut, settings.keyboardLayout, cellWidth);
+  const rowClassName = ["shortcut-row", rowLayout === "stacked" ? "shortcut-row-stacked" : ""].filter(Boolean).join(" ");
+
+  return `
+    <article class="${escapeAttribute(rowClassName)}">
+      <div class="keys">${shortcutKeysForLayout(shortcut, settings.keyboardLayout).map(renderKey).join("")}</div>
+      <span class="shortcut-text">
+        <strong>${escapeHtml(shortcut.label)}</strong>
+        ${renderShortcutCommand(shortcut.command)}
+      </span>
+    </article>
+  `;
+}
+
+function renderShortcutCategories(sheet: ShortcutSheet, cellWidth: number): string {
+  return layoutShortcutCategories(sheet.categories).map((category) => renderShortcutCategory(category, cellWidth)).join("");
 }
 
 function renderShortcutChoiceSwitch(
@@ -925,20 +1038,82 @@ function renderSettingsStateChange(): void {
   render();
 }
 
-function render(): void {
-  const labels = labelsFor(settings.language);
+function currentVisibleShortcutSheet(): { family: string; selectedSheet: ShortcutSheet; sheet: ShortcutSheet } {
   const selectedSheet = selectSheet(settings, activeApp);
-  debugSheetSelection("render selected sheet", selectedSheet);
   const selectedSheetPreference = sheetShortcutPreference(settings, selectedSheet);
   const selectedSheetFamily = sheetFamily(selectedSheet.id);
-  const sheet = visibleShortcuts(selectedSheet, selectedSheetPreference);
-  const isPlacement = panelMode === "placement";
-  const categories = renderShortcutCategories(sheet);
-  const shortcutPreventionNotes = !isPlacement ? renderShortcutPreventionNotes(selectedSheetFamily, sheet) : "";
 
-  app.className = `${themeClass(settings.theme)} ${textSizeClass(settings.textSize)} ${blurClass(settings.blur)}`;
+  return {
+    family: selectedSheetFamily,
+    selectedSheet,
+    sheet: visibleShortcuts(selectedSheet, selectedSheetPreference)
+  };
+}
+
+function shortcutFitContentForSheet(family: string, sheet: ShortcutSheet): ShortcutFitContent {
+  return {
+    categoryShortcutCounts: sheet.categories.map((category) => category.shortcuts.length),
+    noteCount: shortcutPreventionNoteEntries(family, sheet).length
+  };
+}
+
+function updateShortcutFitState(workArea: WindowWorkArea | null): boolean {
+  if (!isShortcutPanelWindow) {
+    return false;
+  }
+
+  const { family, sheet } = currentVisibleShortcutSheet();
+  const nextFitState = chooseShortcutFit(shortcutFitContentForSheet(family, sheet), workArea);
+
+  if (sameShortcutFitState(currentShortcutFitState, nextFitState)) {
+    return false;
+  }
+
+  currentShortcutFitState = nextFitState;
+  return true;
+}
+
+function shortcutPanelStyle(fitState: ShortcutFitState): string {
+  const panelWidth = Math.max(1, fitState.desiredSize.width - 18);
+  const panelHeight = Math.max(1, fitState.desiredSize.height - 18);
+
+  return [
+    `--shortcut-column-count: ${fitState.columnCount}`,
+    `--shortcut-panel-max-width: ${panelWidth}px`,
+    `--shortcut-panel-max-height: ${panelHeight}px`,
+    `--shortcut-fit-cell-width: ${fitState.cellWidth}px`
+  ].join("; ");
+}
+
+function render(): void {
+  const labels = labelsFor(settings.language);
+  const { family: selectedSheetFamily, selectedSheet, sheet } = currentVisibleShortcutSheet();
+  const isPlacement = panelMode === "placement";
+  const shortcutFitState = currentShortcutFitState;
+  const categories = renderShortcutCategories(sheet, shortcutFitState.cellWidth);
+  const shortcutPreventionNotes = !isPlacement ? renderShortcutPreventionNotes(selectedSheetFamily, sheet) : "";
+  const panelClassName = [
+    "panel",
+    isSettingsWindow ? "panel-settings" : "panel-shortcuts",
+    isPlacement ? "panel-placement" : "",
+    !isSettingsWindow ? `shortcut-density-${shortcutFitState.density}` : "",
+    !isSettingsWindow ? `shortcut-columns-${shortcutFitState.columnCount}` : ""
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const panelStyleAttribute = !isSettingsWindow ? ` style="${escapeAttribute(shortcutPanelStyle(shortcutFitState))}"` : "";
+
+  debugSheetSelection("render selected sheet", selectedSheet);
+
+  app.className = [
+    themeClass(settings.theme),
+    textSizeClass(settings.textSize),
+    blurClass(settings.blur)
+  ]
+    .filter(Boolean)
+    .join(" ");
   app.innerHTML = `
-    <section class="panel ${isSettingsWindow ? "panel-settings" : "panel-shortcuts"} ${isPlacement ? "panel-placement" : ""}" aria-label="Merken">
+    <section class="${escapeAttribute(panelClassName)}"${panelStyleAttribute} aria-label="Merken">
       ${
         isSettingsWindow
           ? renderSettings()
@@ -1338,6 +1513,55 @@ function isInteractiveElement(target: EventTarget | null): boolean {
   return target instanceof Element && Boolean(target.closest("button, select, input, a, label, textarea, [data-settings-tab]"));
 }
 
+function isScrollbarPointerDown(event: PointerEvent): boolean {
+  if (!(event.target instanceof Element)) {
+    return false;
+  }
+
+  let element: Element | null = event.target;
+
+  while (element) {
+    if (element instanceof HTMLElement) {
+      const style = getComputedStyle(element);
+      const scrollableOverflow = ["auto", "scroll", "overlay"];
+      const scrollable =
+        scrollableOverflow.includes(style.overflowY) ||
+        scrollableOverflow.includes(style.overflowX) ||
+        scrollableOverflow.includes(style.overflow);
+
+      if (
+        scrollable &&
+        isPointerOnScrollbar({
+          clientHeight: element.clientHeight,
+          clientWidth: element.clientWidth,
+          clientX: event.clientX,
+          clientY: event.clientY,
+          rect: element.getBoundingClientRect(),
+          scrollHeight: element.scrollHeight,
+          scrollWidth: element.scrollWidth
+        })
+      ) {
+        return true;
+      }
+    }
+
+    element = element.parentElement;
+  }
+
+  return false;
+}
+
+function shouldStartWindowDrag(event: Event): event is PointerEvent {
+  return (
+    event instanceof PointerEvent &&
+    canStartWindowDrag({
+      button: event.button,
+      isInteractiveTarget: isInteractiveElement(event.target),
+      isScrollbarTarget: isScrollbarPointerDown(event)
+    })
+  );
+}
+
 async function startWindowDrag(): Promise<void> {
   try {
     await invoke("start_native_drag");
@@ -1591,7 +1815,58 @@ async function hideShortcutsWindow(): Promise<void> {
   }
 }
 
+function bindResponsiveWindowResize(): void {
+  if (responsiveWindowResizeBound) {
+    return;
+  }
+
+  responsiveWindowResizeBound = true;
+  bindDevicePixelRatioChange();
+  window.addEventListener("resize", () => {
+    void resizeCurrentWindowToLayout();
+  });
+  void currentWindow
+    .onScaleChanged(() => {
+      void resizeCurrentWindowToLayout();
+    })
+    .catch((error) => {
+      debugActiveAppLog("bind scale resize failed", error);
+    });
+  void currentWindow
+    .onFocusChanged(({ payload: focused }) => {
+      if (focused) {
+        void resizeCurrentWindowToLayout();
+      }
+    })
+    .catch((error) => {
+      debugActiveAppLog("bind focus resize failed", error);
+    });
+}
+
+function bindDevicePixelRatioChange(): void {
+  if (!window.matchMedia) {
+    return;
+  }
+
+  const bindCurrentRatio = () => {
+    devicePixelRatioMediaCleanup?.();
+
+    const ratio = window.devicePixelRatio || 1;
+    const media = window.matchMedia(`(resolution: ${ratio}dppx)`);
+    const handleChange = () => {
+      void resizeCurrentWindowToLayout();
+      bindCurrentRatio();
+    };
+
+    media.addEventListener("change", handleChange);
+    devicePixelRatioMediaCleanup = () => media.removeEventListener("change", handleChange);
+  };
+
+  bindCurrentRatio();
+}
+
 function bindEvents(): void {
+  bindResponsiveWindowResize();
   bindShortcutMoveListener();
   bindShortcutFocusAutoHide();
 
@@ -1611,14 +1886,14 @@ function bindEvents(): void {
   }
 
   document.querySelector(".panel-settings")?.addEventListener("pointerdown", (event) => {
-    if (event instanceof PointerEvent && event.button === 0 && !isInteractiveElement(event.target)) {
+    if (shouldStartWindowDrag(event)) {
       event.preventDefault();
       void startWindowDrag();
     }
   });
 
   document.querySelector(".panel-shortcuts")?.addEventListener("pointerdown", (event) => {
-    if (event instanceof PointerEvent && event.button === 0 && !isInteractiveElement(event.target)) {
+    if (shouldStartWindowDrag(event)) {
       event.preventDefault();
       void startShortcutPanelDrag();
     }
@@ -1884,7 +2159,7 @@ window.addEventListener("storage", (event) => {
   if (event.key === settingsStorageKey) {
     settings = loadSettings();
     render();
-    void resizeShortcutsWindowToPanel();
+    void resizeCurrentWindowToLayout();
   }
 
   if (event.key === customizationTargetStorageKey && event.newValue) {
@@ -1901,6 +2176,7 @@ applyCustomizationTarget(localStorage.getItem(customizationTargetStorageKey));
 await Promise.all([refreshActiveApp(), refreshAppInfo()]);
 void setTrayLanguage(settings.language);
 render();
+void resizeCurrentWindowToLayout();
 void syncPendingShortcutsOpenRequest();
 void syncAutostart();
 void syncTrayIconVisibility();

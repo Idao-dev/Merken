@@ -73,6 +73,7 @@ body {
 .panel {
   position: relative;
   width: min(100vw - 18px, 500px);
+  max-height: calc(100vh - 18px);
   margin: 9px;
   overflow: hidden;
   border: 1px solid rgb(255 255 255 / 16%);
@@ -209,17 +210,10 @@ kbd {
 
 .content {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: 18px;
-  padding: 14px 14px 8px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--shortcut-section-gap, 12px);
+  padding: var(--shortcut-content-padding, 14px 14px 8px);
   overflow: hidden;
-}
-
-.shortcut-column {
-  display: grid;
-  align-content: start;
-  gap: 12px;
-  min-width: 0;
 }
 
 .shortcut-section {
@@ -230,16 +224,16 @@ kbd {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  margin: 0 0 6px;
+  gap: var(--shortcut-header-gap, 8px);
+  margin: 0 0 var(--shortcut-header-margin, 6px);
 }
 
 .shortcut-section h2 {
   margin: 0;
-  color: var(--text-muted);
-  font-size: 0.72em;
-  font-weight: 700;
-  letter-spacing: 0;
+  color: color-mix(in srgb, var(--text-secondary) 86%, var(--text-primary));
+  font-size: 0.78em;
+  font-weight: 800;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
 }
 
@@ -258,16 +252,18 @@ kbd {
 
 .shortcut-list {
   display: grid;
-  gap: 3px;
+  grid-template-columns: repeat(var(--shortcut-column-count, 2), minmax(0, 1fr));
+  column-gap: var(--shortcut-column-gap, 20px);
+  row-gap: var(--shortcut-row-gap, 3px);
 }
 
 .shortcut-row {
   display: grid;
-  grid-template-columns: minmax(88px, auto) minmax(0, 1fr);
+  grid-template-columns: max-content minmax(0, 1fr);
   align-items: center;
-  gap: 10px;
-  min-height: 28px;
-  padding: 3px 0;
+  gap: var(--shortcut-row-column-gap, 8px);
+  min-height: var(--shortcut-row-min-height, 28px);
+  padding: var(--shortcut-row-padding, 3px 0);
 }
 
 .shortcut-text {
@@ -287,6 +283,26 @@ kbd {
   white-space: nowrap;
 }
 
+.shortcut-row-stacked {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  gap: 5px;
+  min-height: var(--shortcut-stacked-min-height, 42px);
+  padding: var(--shortcut-stacked-padding, 4px 0 5px);
+}
+
+.shortcut-row-stacked .keys {
+  flex-wrap: wrap;
+  align-self: start;
+}
+
+.shortcut-row-stacked strong {
+  overflow: visible;
+  line-height: 1.18;
+  text-overflow: clip;
+  white-space: normal;
+}
+
 .shortcut-command {
   min-width: 0;
   overflow: hidden;
@@ -298,20 +314,26 @@ kbd {
   white-space: nowrap;
 }
 
+.shortcut-row-stacked .shortcut-command {
+  overflow-wrap: anywhere;
+  text-overflow: clip;
+  white-space: normal;
+}
+
 .shortcut-command code {
   font-family: "Cascadia Mono", Consolas, monospace;
   font-size: 0.95em;
 }
 
 .shortcut-command-list {
-  gap: 7px;
+  row-gap: 7px;
 }
 
 .shortcut-command-row {
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  min-height: 40px;
-  padding: 1px 0 4px;
+  min-height: var(--shortcut-command-row-min-height, 40px);
+  padding: var(--shortcut-command-row-padding, 1px 0 4px);
 }
 
 .shortcut-command-row strong {
@@ -362,15 +384,16 @@ kbd {
 .keys {
   display: flex;
   flex-wrap: nowrap;
-  gap: 4px;
+  gap: var(--shortcut-key-gap, 4px);
+  min-width: 52px;
 }
 
 kbd {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
-  padding: 3px 6px 4px;
+  min-width: var(--shortcut-key-min-width, 24px);
+  padding: var(--shortcut-key-padding, 3px 6px 4px);
   border: 1px solid rgb(255 255 255 / 18%);
   border-radius: 6px;
   background: linear-gradient(rgb(255 255 255 / 18%), rgb(255 255 255 / 8%));
@@ -501,10 +524,88 @@ kbd {
 }
 
 .panel-shortcuts {
+  --shortcut-column-count: 2;
+  --shortcut-panel-max-width: 560px;
+  --shortcut-panel-max-height: 742px;
+  --shortcut-section-gap: 12px;
+  --shortcut-content-padding: 14px 14px 8px;
+  --shortcut-header-gap: 8px;
+  --shortcut-header-margin: 6px;
+  --shortcut-column-gap: 20px;
+  --shortcut-row-gap: 3px;
+  --shortcut-row-column-gap: 8px;
+  --shortcut-row-min-height: 28px;
+  --shortcut-row-padding: 3px 0;
+  --shortcut-stacked-min-height: 42px;
+  --shortcut-stacked-padding: 4px 0 5px;
+  --shortcut-command-row-min-height: 40px;
+  --shortcut-command-row-padding: 1px 0 4px;
+  --shortcut-key-gap: 4px;
+  --shortcut-key-min-width: 24px;
+  --shortcut-key-padding: 3px 6px 4px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  width: min(100vw - 18px, var(--shortcut-panel-max-width));
+  max-height: min(100vh - 18px, var(--shortcut-panel-max-height));
   cursor: move;
 }
 
+.panel-shortcuts.shortcut-density-compact {
+  --shortcut-section-gap: 9px;
+  --shortcut-content-padding: 11px 11px 7px;
+  --shortcut-header-margin: 5px;
+  --shortcut-column-gap: 16px;
+  --shortcut-row-gap: 2px;
+  --shortcut-row-column-gap: 7px;
+  --shortcut-row-min-height: 25px;
+  --shortcut-row-padding: 2px 0;
+  --shortcut-stacked-min-height: 37px;
+  --shortcut-stacked-padding: 3px 0 4px;
+  --shortcut-command-row-min-height: 35px;
+  --shortcut-command-row-padding: 1px 0 3px;
+  --shortcut-key-gap: 3px;
+  --shortcut-key-min-width: 23px;
+  --shortcut-key-padding: 3px 5px;
+  font-size: 0.95em;
+}
+
+.panel-shortcuts.shortcut-density-dense {
+  --shortcut-section-gap: 7px;
+  --shortcut-content-padding: 9px 9px 6px;
+  --shortcut-header-gap: 6px;
+  --shortcut-header-margin: 4px;
+  --shortcut-column-gap: 12px;
+  --shortcut-row-gap: 1px;
+  --shortcut-row-column-gap: 6px;
+  --shortcut-row-min-height: 22px;
+  --shortcut-row-padding: 1px 0;
+  --shortcut-stacked-min-height: 32px;
+  --shortcut-stacked-padding: 2px 0 3px;
+  --shortcut-command-row-min-height: 31px;
+  --shortcut-command-row-padding: 1px 0 2px;
+  --shortcut-key-gap: 3px;
+  --shortcut-key-min-width: 22px;
+  --shortcut-key-padding: 2px 5px 3px;
+  font-size: 0.88em;
+}
+
+.panel-shortcuts .content {
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: color-mix(in srgb, var(--accent) 48%, var(--border)) transparent;
+  scrollbar-width: thin;
+}
+
 .panel-shortcuts .content,
+.settings-sidebar,
+.settings-page,
+.customization-editor,
+.shortcut-prevention-notes,
+.shortcut-prevention-note {
+  cursor: auto;
+}
+
 .panel-shortcuts .shortcut-section,
 .panel-shortcuts .shortcut-row,
 .panel-shortcuts .shortcut-section-header,
@@ -514,28 +615,30 @@ kbd {
 .panel-shortcuts .shortcut-command,
 .panel-shortcuts .shortcut-command-line,
 .panel-shortcuts .keys,
-.panel-shortcuts kbd,
-.shortcut-prevention-notes,
-.shortcut-prevention-note {
+.panel-shortcuts kbd {
   cursor: move;
 }
 
 .panel-settings {
   width: min(100vw - 18px, 1040px);
+  max-height: calc(100vh - 18px);
   cursor: move;
 }
 
 .settings-shell {
   display: grid;
   grid-template-columns: 190px minmax(0, 1fr);
-  min-height: 640px;
+  height: min(640px, calc(100vh - 18px));
+  min-height: 0;
 }
 
 .settings-sidebar {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 0;
   padding: 14px 8px;
+  overflow: auto;
   border-right: 1px solid rgb(255 255 255 / 9%);
   background: rgb(0 0 0 / 16%);
 }
@@ -657,7 +760,7 @@ kbd {
 
 .settings-page {
   min-width: 0;
-  max-height: 640px;
+  min-height: 0;
   padding: 18px 16px;
   overflow: auto;
 }
@@ -1329,7 +1432,7 @@ kbd {
   }
 
   .shortcut-row {
-    grid-template-columns: minmax(104px, auto) minmax(0, 1fr);
+    grid-template-columns: max-content minmax(0, 1fr);
   }
 
   .settings-shell {

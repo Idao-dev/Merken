@@ -4,7 +4,7 @@ use std::{thread, time::Duration};
 use tauri::{
     menu::{Menu, MenuItem},
     tray::{MouseButton, MouseButtonState, TrayIconBuilder, TrayIconEvent},
-    Emitter, Manager, PhysicalPosition, Runtime, State, WebviewWindow, WindowEvent,
+    Emitter, Manager, PhysicalPosition, PhysicalSize, Runtime, State, WebviewWindow, WindowEvent,
 };
 
 #[derive(Clone, Debug, Serialize)]
@@ -587,6 +587,12 @@ fn position_shortcuts_preview_if_ready<R: Runtime>(app: &tauri::AppHandle<R>) ->
 
 fn log_window_lifecycle<R: Runtime>(_app: &tauri::AppHandle<R>, _message: impl AsRef<str>) {}
 
+#[derive(Clone, Copy)]
+struct PhysicalWorkArea {
+    position: PhysicalPosition<i32>,
+    size: PhysicalSize<u32>,
+}
+
 fn position_shortcuts_preview<R: Runtime>(
     settings: &WebviewWindow<R>,
     shortcuts: &WebviewWindow<R>,
@@ -603,13 +609,34 @@ fn position_shortcuts_preview<R: Runtime>(
     };
 
     let work_area = monitor.work_area();
+    let position = calculate_shortcuts_preview_position(
+        settings_position,
+        settings_size,
+        shortcuts_size,
+        PhysicalWorkArea {
+            position: work_area.position,
+            size: work_area.size,
+        },
+        margin,
+    );
+
+    shortcuts.set_position(position)
+}
+
+fn calculate_shortcuts_preview_position(
+    settings_position: PhysicalPosition<i32>,
+    settings_size: PhysicalSize<u32>,
+    shortcuts_size: PhysicalSize<u32>,
+    work_area: PhysicalWorkArea,
+    margin: i32,
+) -> PhysicalPosition<i32> {
     let work_left = work_area.position.x;
     let work_top = work_area.position.y;
     let work_right = work_left + work_area.size.width as i32;
     let work_bottom = work_top + work_area.size.height as i32;
     let shortcuts_width = shortcuts_size.width as i32;
     let shortcuts_height = shortcuts_size.height as i32;
-    let right_x = fallback_x;
+    let right_x = settings_position.x + settings_size.width as i32 + margin;
     let left_x = settings_position.x - shortcuts_width - margin;
     let min_x = work_left;
     let max_x = (work_right - shortcuts_width).max(work_left);
@@ -625,7 +652,7 @@ fn position_shortcuts_preview<R: Runtime>(
     };
     let y = settings_position.y.clamp(min_y, max_y);
 
-    shortcuts.set_position(PhysicalPosition::new(x, y))
+    PhysicalPosition::new(x, y)
 }
 
 #[cfg(test)]
@@ -791,6 +818,70 @@ mod tests {
             ShortcutsMode::Shortcuts,
             false
         ));
+    }
+
+    #[test]
+    fn positions_preview_to_the_right_when_it_fits() {
+        let position = calculate_shortcuts_preview_position(
+            PhysicalPosition::new(100, 80),
+            PhysicalSize::new(500, 600),
+            PhysicalSize::new(300, 500),
+            PhysicalWorkArea {
+                position: PhysicalPosition::new(0, 0),
+                size: PhysicalSize::new(1200, 900),
+            },
+            12,
+        );
+
+        assert_eq!(position, PhysicalPosition::new(612, 80));
+    }
+
+    #[test]
+    fn positions_preview_to_the_left_when_right_does_not_fit() {
+        let position = calculate_shortcuts_preview_position(
+            PhysicalPosition::new(650, 80),
+            PhysicalSize::new(500, 600),
+            PhysicalSize::new(300, 500),
+            PhysicalWorkArea {
+                position: PhysicalPosition::new(0, 0),
+                size: PhysicalSize::new(1200, 900),
+            },
+            12,
+        );
+
+        assert_eq!(position, PhysicalPosition::new(338, 80));
+    }
+
+    #[test]
+    fn clamps_preview_when_neither_side_has_enough_space() {
+        let position = calculate_shortcuts_preview_position(
+            PhysicalPosition::new(250, 80),
+            PhysicalSize::new(500, 600),
+            PhysicalSize::new(360, 500),
+            PhysicalWorkArea {
+                position: PhysicalPosition::new(0, 0),
+                size: PhysicalSize::new(820, 900),
+            },
+            12,
+        );
+
+        assert_eq!(position, PhysicalPosition::new(460, 80));
+    }
+
+    #[test]
+    fn clamps_oversized_preview_inside_the_work_area_origin() {
+        let position = calculate_shortcuts_preview_position(
+            PhysicalPosition::new(40, -30),
+            PhysicalSize::new(500, 600),
+            PhysicalSize::new(900, 1000),
+            PhysicalWorkArea {
+                position: PhysicalPosition::new(0, 0),
+                size: PhysicalSize::new(820, 900),
+            },
+            12,
+        );
+
+        assert_eq!(position, PhysicalPosition::new(0, 0));
     }
 
     #[test]

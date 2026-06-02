@@ -18,6 +18,7 @@ import {
   shouldShowShortcutBaselineWarning,
   sharedCommandKeys,
   shortcutKeysForLayout,
+  shortcutRowLayout,
   shortcutThemeState,
   updateCustomCategoryPreference,
   updateCustomShortcutPreference,
@@ -609,45 +610,7 @@ describe("shortcut sheet selection", () => {
     expect(serialized).not.toContain("Menu Demarrer");
   });
 
-  it("balances Windows expert categories across shortcut columns", () => {
-    const sheet = getFallbackSheet("fr");
-    const expert = visibleShortcuts(sheet, { mode: "level", level: "expert" });
-    const columns = layoutShortcutCategories(expert.categories);
-
-    expect(columns.map((column) => column.map((category) => category.id))).toEqual([
-      ["systeme", "fenetres"],
-      ["outils-systeme"]
-    ]);
-  });
-
-  it("keeps balanced categories stable without reordering shortcuts", () => {
-    const columns = layoutShortcutCategories([
-      syntheticCategory("alpha", 1),
-      syntheticCategory("bravo", 1),
-      syntheticCategory("charlie", 1),
-      syntheticCategory("delta", 1)
-    ]);
-
-    expect(columns.map((column) => column.map((category) => category.id))).toEqual([
-      ["alpha", "charlie"],
-      ["bravo", "delta"]
-    ]);
-  });
-
-  it("gives command categories more layout weight than simple rows", () => {
-    const columns = layoutShortcutCategories([
-      syntheticCategory("commands", 1, true),
-      syntheticCategory("simple-a", 1),
-      syntheticCategory("simple-b", 1)
-    ]);
-
-    expect(columns.map((column) => column.map((category) => category.id))).toEqual([
-      ["commands"],
-      ["simple-a", "simple-b"]
-    ]);
-  });
-
-  it("rebalances custom layouts after empty categories are removed", () => {
+  it("keeps custom layouts free of empty categories", () => {
     const sheet = getFallbackSheet("fr");
     const toolsCategory = sheet.categories.find((category) => category.id === "outils-systeme");
     const windowCategory = sheet.categories.find((category) => category.id === "fenetres");
@@ -662,10 +625,86 @@ describe("shortcut sheet selection", () => {
       level: "standard",
       includeShortcutIds: [deviceManager!.id, closeDesktop!.id]
     });
-    const columns = layoutShortcutCategories(visible.categories);
+    const categories = layoutShortcutCategories(visible.categories);
 
     expect(visible.categories.map((category) => category.id)).toEqual(["outils-systeme", "fenetres"]);
-    expect(columns.flat().map((category) => category.id)).toEqual(["outils-systeme", "fenetres"]);
-    expect(columns.some((column) => column.some((category) => category.shortcuts.length === 0))).toBe(false);
+    expect(categories.map((category) => category.id)).toEqual(["outils-systeme", "fenetres"]);
+    expect(categories.some((category) => category.shortcuts.length === 0)).toBe(false);
+  });
+
+  it("keeps category blocks intact in the production layout", () => {
+    const categories = layoutShortcutCategories([syntheticCategory("bulk", 14), syntheticCategory("tail", 2)]);
+
+    expect(categories.map((category) => category.title)).toEqual(["bulk", "tail"]);
+    expect(categories.map((category) => category.shortcuts.length)).toEqual([14, 2]);
+  });
+
+  it("keeps one-category custom layouts intact", () => {
+    const sheet = getFallbackSheet("fr");
+    const toolsCategory = sheet.categories.find((category) => category.id === "outils-systeme");
+    const deviceManager = toolsCategory?.shortcuts.find((shortcut) => shortcut.id === "outils-systeme-gestionnaire-peripheriques");
+
+    expect(deviceManager).toBeDefined();
+
+    const visible = visibleShortcuts(sheet, {
+      mode: "custom",
+      level: "standard",
+      includeShortcutIds: [deviceManager!.id]
+    });
+    const categories = layoutShortcutCategories(visible.categories);
+
+    expect(visible.categories).toHaveLength(1);
+    expect(categories.some((category) => category.shortcuts.length === 0)).toBe(false);
+  });
+
+  it("classifies long shortcut rows as stacked for the production layout", () => {
+    const sheet = getFallbackSheet("fr");
+    const editCategory = sheet.categories.find((category) => category.id === "edition");
+    const copy = editCategory?.shortcuts.find((shortcut) => shortcut.id === "edition-copier");
+    const pastePlainText = editCategory?.shortcuts.find((shortcut) => shortcut.id === "edition-coller-sans-mise-en-forme");
+    const mediaPlayer = findSheetForFamily("media-player", "fr");
+    const browsers = findSheetForFamily("browsers", "fr");
+
+    expect(copy).toBeDefined();
+    expect(pastePlainText).toBeDefined();
+    expect(mediaPlayer).toBeDefined();
+    expect(browsers).toBeDefined();
+    expect(shortcutRowLayout(copy!, "azerty")).toBe("compact");
+    expect(shortcutRowLayout(pastePlainText!, "azerty")).toBe("stacked");
+    expect(shortcutRowLayout(findShortcut(mediaPlayer!, "lecture-lecture-pause-alternative")!, "azerty")).toBe("compact");
+    expect(shortcutRowLayout(findShortcut(mediaPlayer!, "lecture-plein-ecran-alt")!, "azerty")).toBe("compact");
+    expect(shortcutRowLayout(findShortcut(browsers!, "navigation-actualiser-sans-cache")!, "azerty")).toBe("compact");
+    expect(shortcutRowLayout(findShortcut(browsers!, "outils-gestionnaire-favoris")!, "azerty")).toBe("compact");
+    expect(shortcutRowLayout(findShortcut(browsers!, "outils-gestionnaire-favoris")!, "azerty", 320)).toBe("compact");
+    expect(shortcutRowLayout(findShortcut(browsers!, "outils-gestionnaire-favoris")!, "azerty", 160)).toBe("stacked");
+    expect(
+      shortcutRowLayout(
+        {
+          id: "synthetic-reply-all",
+          label: "Repondre a tous",
+          keys: ["Ctrl", "Shift", "R"],
+          description: "Synthetic shortcut.",
+          priority: 1,
+          level: "standard"
+        },
+        "azerty"
+      )
+    ).toBe("compact");
+  });
+
+  it("reserves at least two key slots before stacking shortcut rows", () => {
+    expect(
+      shortcutRowLayout(
+        {
+          id: "synthetic-single-key-width",
+          label: "A".repeat(29),
+          keys: ["F7"],
+          description: "Synthetic shortcut.",
+          priority: 1,
+          level: "standard"
+        },
+        "azerty"
+      )
+    ).toBe("stacked");
   });
 });
