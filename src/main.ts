@@ -1,6 +1,8 @@
 import "./styles.css";
 
-const downloadUrl = "https://github.com/Idao-dev/Merken/releases/latest";
+const releasesUrl = "https://github.com/Idao-dev/Merken/releases/latest";
+const installerUrl = "https://github.com/Idao-dev/Merken/releases/latest/download/Merken-setup.exe";
+const portableUrl = "https://github.com/Idao-dev/Merken/releases/latest/download/merken.exe";
 const repositoryUrl = "https://github.com/Idao-dev/Merken";
 const assetBaseUrl = import.meta.env.BASE_URL;
 const iconUrl = `${assetBaseUrl}merken-icon.png`;
@@ -31,7 +33,8 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           Sans compte, sans telemetrie, sans connexion obligatoire.
         </p>
         <div class="actions" aria-label="Actions principales">
-          <a class="button primary" href="${downloadUrl}">Telecharger</a>
+          <a class="button primary" href="${installerUrl}">Telecharger l'installateur</a>
+          <a class="button secondary" href="${portableUrl}">Version portable</a>
           <a class="button secondary" href="${repositoryUrl}">Voir le code</a>
         </div>
       </div>
@@ -96,7 +99,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
           des editeurs des logiciels mentionnes.
         </p>
       </div>
-      <a class="button primary" href="${downloadUrl}">Ouvrir les releases</a>
+      <div class="download-actions" aria-label="Telechargements">
+        <a class="button primary" href="${installerUrl}">Installateur Windows</a>
+        <a class="button secondary" href="${portableUrl}">Executable portable</a>
+        <a class="button text-link" href="${releasesUrl}">Toutes les releases</a>
+      </div>
     </section>
   </main>
 

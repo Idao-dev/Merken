@@ -258,8 +258,25 @@ h3 {
   background: #172238;
 }
 
+.download-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
 .download p {
   margin-bottom: 0;
+}
+
+.button.text-link {
+  min-height: 46px;
+  padding: 0 6px;
+  color: #d4deec;
+}
+
+.button.text-link:hover {
+  color: #67d2ff;
 }
 
 .footer {
@@ -294,6 +311,10 @@ h3 {
   .download {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .download-actions {
+    justify-content: flex-start;
   }
 }
 

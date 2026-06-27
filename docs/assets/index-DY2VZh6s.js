@@ -1,8 +1,8 @@
-(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const s of e)if(s.type==="childList")for(const a of s.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&o(a)}).observe(document,{childList:!0,subtree:!0});function d(e){const s={};return e.integrity&&(s.integrity=e.integrity),e.referrerPolicy&&(s.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?s.credentials="include":e.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function o(e){if(e.ep)return;e.ep=!0;const s=d(e);fetch(e.href,s)}})();const c="https://github.com/Idao-dev/Merken/releases/latest",t="https://github.com/Idao-dev/Merken",l="/Merken/",u=`${l}merken-icon.png`,i=n=>`${l}screenshots/${n}`;document.querySelector("#app").innerHTML=`
+(function(){const a=document.createElement("link").relList;if(a&&a.supports&&a.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const s of e)if(s.type==="childList")for(const r of s.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&o(r)}).observe(document,{childList:!0,subtree:!0});function u(e){const s={};return e.integrity&&(s.integrity=e.integrity),e.referrerPolicy&&(s.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?s.credentials="include":e.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function o(e){if(e.ep)return;e.ep=!0;const s=u(e);fetch(e.href,s)}})();const p="https://github.com/Idao-dev/Merken/releases/latest",c="https://github.com/Idao-dev/Merken/releases/latest/download/Merken-setup.exe",l="https://github.com/Idao-dev/Merken/releases/latest/download/merken.exe",t="https://github.com/Idao-dev/Merken",d="/Merken/",h=`${d}merken-icon.png`,n=i=>`${d}screenshots/${i}`;document.querySelector("#app").innerHTML=`
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Merken">
       <span class="brand-mark" aria-hidden="true">
-        <img src="${u}" alt="" />
+        <img src="${h}" alt="" />
       </span>
       <span>Merken</span>
     </a>
@@ -23,13 +23,14 @@
           Sans compte, sans telemetrie, sans connexion obligatoire.
         </p>
         <div class="actions" aria-label="Actions principales">
-          <a class="button primary" href="${c}">Telecharger</a>
+          <a class="button primary" href="${c}">Telecharger l'installateur</a>
+          <a class="button secondary" href="${l}">Version portable</a>
           <a class="button secondary" href="${t}">Voir le code</a>
         </div>
       </div>
       <figure class="hero-visual">
         <img
-          src="${i("shortcuts-panel.png")}"
+          src="${n("shortcuts-panel.png")}"
           alt="Panneau flottant Merken listant des raccourcis clavier Windows"
         />
       </figure>
@@ -71,10 +72,10 @@
       </div>
       <div class="screen-grid">
         <figure>
-          <img src="${i("sheets-settings.png")}" alt="Reglages des fiches Merken avec panneau de raccourcis" />
+          <img src="${n("sheets-settings.png")}" alt="Reglages des fiches Merken avec panneau de raccourcis" />
         </figure>
         <figure>
-          <img src="${i("customization.png")}" alt="Ecran de personnalisation des raccourcis Merken" />
+          <img src="${n("customization.png")}" alt="Ecran de personnalisation des raccourcis Merken" />
         </figure>
       </div>
     </section>
@@ -88,7 +89,11 @@
           des editeurs des logiciels mentionnes.
         </p>
       </div>
-      <a class="button primary" href="${c}">Ouvrir les releases</a>
+      <div class="download-actions" aria-label="Telechargements">
+        <a class="button primary" href="${c}">Installateur Windows</a>
+        <a class="button secondary" href="${l}">Executable portable</a>
+        <a class="button text-link" href="${p}">Toutes les releases</a>
+      </div>
     </section>
   </main>
 
