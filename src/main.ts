@@ -2,11 +2,16 @@ import "./styles.css";
 
 const downloadUrl = "https://github.com/Idao-dev/Merken/releases/latest";
 const repositoryUrl = "https://github.com/Idao-dev/Merken";
+const assetBaseUrl = import.meta.env.BASE_URL;
+const iconUrl = `${assetBaseUrl}merken-icon.png`;
+const screenshotUrl = (fileName: string) => `${assetBaseUrl}screenshots/${fileName}`;
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Merken">
-      <span class="brand-mark" aria-hidden="true">⌘</span>
+      <span class="brand-mark" aria-hidden="true">
+        <img src="${iconUrl}" alt="" />
+      </span>
       <span>Merken</span>
     </a>
     <nav class="nav" aria-label="Navigation principale">
@@ -32,7 +37,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </div>
       <figure class="hero-visual">
         <img
-          src="/screenshots/shortcuts-panel.png"
+          src="${screenshotUrl("shortcuts-panel.png")}"
           alt="Panneau flottant Merken listant des raccourcis clavier Windows"
         />
       </figure>
@@ -74,10 +79,10 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
       </div>
       <div class="screen-grid">
         <figure>
-          <img src="/screenshots/sheets-settings.png" alt="Reglages des fiches Merken avec panneau de raccourcis" />
+          <img src="${screenshotUrl("sheets-settings.png")}" alt="Reglages des fiches Merken avec panneau de raccourcis" />
         </figure>
         <figure>
-          <img src="/screenshots/customization.png" alt="Ecran de personnalisation des raccourcis Merken" />
+          <img src="${screenshotUrl("customization.png")}" alt="Ecran de personnalisation des raccourcis Merken" />
         </figure>
       </div>
     </section>

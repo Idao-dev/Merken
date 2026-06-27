@@ -20,8 +20,8 @@ body {
   min-width: 320px;
   color: #eef4ff;
   background:
-    linear-gradient(180deg, rgba(11, 17, 29, 0.88), rgba(11, 17, 29, 0.98)),
-    url("/screenshots/sheets-settings.png") center top / cover fixed;
+    radial-gradient(circle at 18% 20%, rgba(57, 182, 232, 0.18), transparent 32rem),
+    linear-gradient(145deg, #0b111d 0%, #101827 52%, #172238 100%);
 }
 
 a {
@@ -62,11 +62,16 @@ img {
   width: 34px;
   height: 34px;
   place-items: center;
-  border: 1px solid rgba(83, 190, 244, 0.55);
+  overflow: hidden;
+  border: 1px solid rgba(83, 190, 244, 0.45);
   border-radius: 8px;
   background: #142033;
-  color: #67d2ff;
-  font-size: 1.1rem;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .nav {

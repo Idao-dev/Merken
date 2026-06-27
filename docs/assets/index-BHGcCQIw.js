@@ -1,7 +1,9 @@
-(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))i(e);new MutationObserver(e=>{for(const s of e)if(s.type==="childList")for(const a of s.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&i(a)}).observe(document,{childList:!0,subtree:!0});function o(e){const s={};return e.integrity&&(s.integrity=e.integrity),e.referrerPolicy&&(s.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?s.credentials="include":e.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function i(e){if(e.ep)return;e.ep=!0;const s=o(e);fetch(e.href,s)}})();const n="https://github.com/Idao-dev/Merken/releases/latest",t="https://github.com/Idao-dev/Merken";document.querySelector("#app").innerHTML=`
+(function(){const r=document.createElement("link").relList;if(r&&r.supports&&r.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))o(e);new MutationObserver(e=>{for(const s of e)if(s.type==="childList")for(const a of s.addedNodes)a.tagName==="LINK"&&a.rel==="modulepreload"&&o(a)}).observe(document,{childList:!0,subtree:!0});function d(e){const s={};return e.integrity&&(s.integrity=e.integrity),e.referrerPolicy&&(s.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?s.credentials="include":e.crossOrigin==="anonymous"?s.credentials="omit":s.credentials="same-origin",s}function o(e){if(e.ep)return;e.ep=!0;const s=d(e);fetch(e.href,s)}})();const c="https://github.com/Idao-dev/Merken/releases/latest",t="https://github.com/Idao-dev/Merken",l="/Merken/",u=`${l}merken-icon.png`,i=n=>`${l}screenshots/${n}`;document.querySelector("#app").innerHTML=`
   <header class="topbar">
     <a class="brand" href="#top" aria-label="Merken">
-      <span class="brand-mark" aria-hidden="true">⌘</span>
+      <span class="brand-mark" aria-hidden="true">
+        <img src="${u}" alt="" />
+      </span>
       <span>Merken</span>
     </a>
     <nav class="nav" aria-label="Navigation principale">
@@ -21,13 +23,13 @@
           Sans compte, sans telemetrie, sans connexion obligatoire.
         </p>
         <div class="actions" aria-label="Actions principales">
-          <a class="button primary" href="${n}">Telecharger</a>
+          <a class="button primary" href="${c}">Telecharger</a>
           <a class="button secondary" href="${t}">Voir le code</a>
         </div>
       </div>
       <figure class="hero-visual">
         <img
-          src="/screenshots/shortcuts-panel.png"
+          src="${i("shortcuts-panel.png")}"
           alt="Panneau flottant Merken listant des raccourcis clavier Windows"
         />
       </figure>
@@ -69,10 +71,10 @@
       </div>
       <div class="screen-grid">
         <figure>
-          <img src="/screenshots/sheets-settings.png" alt="Reglages des fiches Merken avec panneau de raccourcis" />
+          <img src="${i("sheets-settings.png")}" alt="Reglages des fiches Merken avec panneau de raccourcis" />
         </figure>
         <figure>
-          <img src="/screenshots/customization.png" alt="Ecran de personnalisation des raccourcis Merken" />
+          <img src="${i("customization.png")}" alt="Ecran de personnalisation des raccourcis Merken" />
         </figure>
       </div>
     </section>
@@ -86,7 +88,7 @@
           des editeurs des logiciels mentionnes.
         </p>
       </div>
-      <a class="button primary" href="${n}">Ouvrir les releases</a>
+      <a class="button primary" href="${c}">Ouvrir les releases</a>
     </section>
   </main>
 
