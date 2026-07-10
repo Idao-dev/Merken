@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
+    "sync-data": "node scripts/sync-site-data.mjs ../Merken",
+    "sync-release": "node scripts/sync-site-release.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview --host 127.0.0.1"
   },
