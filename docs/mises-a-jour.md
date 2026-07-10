@@ -43,7 +43,7 @@ Avant de pousser un tag de release :
 npm run test
 npm run typecheck
 npm run build
-cargo check --manifest-path src-tauri/Cargo.toml
+cargo test --manifest-path src-tauri/Cargo.toml
 npm run tauri:build
 ```
 
@@ -53,4 +53,4 @@ Apres creation de la draft GitHub, verifier :
 - presence de l'installateur `Merken_X.Y.Z_x64-setup.exe` ;
 - presence de la signature `.sig` ;
 - presence de `merken.exe` pour la version portable ;
-- coherence du texte de release avec `CHANGELOG.md`.
+- coherence du texte avec les notes de release GitHub en francais et en anglais.
