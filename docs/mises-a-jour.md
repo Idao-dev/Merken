@@ -17,6 +17,8 @@ La release GitHub est creee en brouillon par la CI. Elle doit etre relue humaine
 
 La publication humaine de la release declenche ensuite le workflow `Publish release site`, qui synchronise la version, les liens de telechargement et les fiches de la page GitHub Pages. Le site n'est pas modifie tant que la release reste en brouillon.
 
+Si GitHub ne propage pas l'evenement de publication, le meme workflow peut etre lance manuellement avec le tag publie, sans reconstruire les artefacts Windows.
+
 ## Fonctionnement utilisateur
 
 Dans les options :
