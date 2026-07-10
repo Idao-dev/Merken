@@ -31,7 +31,7 @@ import {
   updateCustomShortcutPreference,
   visibleShortcuts
 } from "./app/sheets";
-import { distributionFromEnv, repositoryUrl, updateStateClass } from "./app/updates";
+import { distributionFromEnv, isUpdateActionBusy, repositoryUrl, updateStateClass } from "./app/updates";
 import {
   canStartWindowDrag,
   chooseShortcutFit,
@@ -736,6 +736,10 @@ async function installPendingUpdate(): Promise<void> {
 }
 
 async function handleUpdateAction(): Promise<void> {
+  if (isUpdateActionBusy(updateStatus)) {
+    return;
+  }
+
   if (updateStatus === "available") {
     if (distribution === "portable") {
       await openLatestRelease();
@@ -795,6 +799,10 @@ function updateStatusText(): string {
   }
 
   return labels.settings.updateIdle;
+}
+
+function updateActionDisabledAttribute(): string {
+  return isUpdateActionBusy(updateStatus) ? "disabled" : "";
 }
 
 function renderKey(key: string): string {
@@ -1219,7 +1227,7 @@ function renderSettings(): string {
             )
             .join("")}
         </nav>
-        <button type="button" class="settings-sidebar-footer" id="check-update-sidebar">
+        <button type="button" class="settings-sidebar-footer" id="check-update-sidebar" ${updateActionDisabledAttribute()}>
           <span class="settings-sidebar-update-title">
             <span>${escapeHtml(labels.settings.update)}</span>
             <small class="settings-sidebar-version">Version ${escapeHtml(appInfo.version)}</small>
@@ -1297,7 +1305,7 @@ function renderSettingsTab(): string {
         ${renderInfoRow(labels.modal.publisher, "Idao")}
         ${renderInfoRow(labels.modal.license, labels.modal.licenseValue)}
         ${renderLinkRow(labels.settings.repository, repositoryUrl, "open-repository")}
-        <button type="button" class="link-button settings-update" id="check-update">
+        <button type="button" class="link-button settings-update" id="check-update" ${updateActionDisabledAttribute()}>
           <span>${escapeHtml(labels.settings.update)}</span>
           <small class="${escapeAttribute(updateStatusClassName())}">${escapeHtml(updateStatusText())}</small>
         </button>

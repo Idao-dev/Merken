@@ -28,3 +28,7 @@ export function updateStateClass(status: UpdateStatus): string {
 
   return "";
 }
+
+export function isUpdateActionBusy(status: UpdateStatus): boolean {
+  return status === "checking" || status === "installing";
+}

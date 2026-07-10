@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { distributionFromEnv, latestReleaseUrl, repositoryUrl, updateStateClass } from "../../src/app/updates";
+import { distributionFromEnv, isUpdateActionBusy, latestReleaseUrl, repositoryUrl, updateStateClass } from "../../src/app/updates";
 
 describe("update helpers", () => {
   it("defaults to installer distribution", () => {
@@ -17,5 +17,13 @@ describe("update helpers", () => {
     expect(updateStateClass("upToDate")).toBe("state-success");
     expect(updateStateClass("available")).toBe("state-warning");
     expect(updateStateClass("error")).toBe("state-error");
+  });
+
+  it("blocks repeated update actions while a check or install is running", () => {
+    expect(isUpdateActionBusy("checking")).toBe(true);
+    expect(isUpdateActionBusy("installing")).toBe(true);
+    expect(isUpdateActionBusy("available")).toBe(false);
+    expect(isUpdateActionBusy("idle")).toBe(false);
+    expect(isUpdateActionBusy("error")).toBe(false);
   });
 });
