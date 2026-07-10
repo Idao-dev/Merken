@@ -6,6 +6,7 @@ import { disable, enable, isEnabled } from "@tauri-apps/plugin-autostart";
 import { relaunch } from "@tauri-apps/plugin-process";
 import { check, type Update } from "@tauri-apps/plugin-updater";
 import { labelsFor, supportedLanguages, type AutostartStatus, type SettingsTab, type UpdateStatus } from "./app/i18n";
+import { normalizePanelTransparency, panelAppearanceForTransparency } from "./app/appearance";
 import { keycapPresentation } from "./app/keycaps";
 import { defaultSettings, loadSettings, saveSettings, settingsStorageKey, shortcutKeyboardLayouts } from "./app/settings";
 import {
@@ -48,7 +49,6 @@ import {
 import "./styles.css";
 import type {
   ActiveApp,
-  BlurLevel,
   LanguageCode,
   SheetMode,
   ShortcutDisplayChoice,
@@ -125,8 +125,7 @@ interface SettingsScrollSnapshot {
 const appIconUrl = new URL("../src-tauri/icons/32x32.png", import.meta.url).href;
 
 const textSizes: TextSize[] = ["xs", "sm", "md", "lg", "xl"];
-const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
-const themeModes: ThemeMode[] = ["dark", "colorblind"];
+const themeModes: ThemeMode[] = ["dark", "light"];
 const sheetModes: SheetMode[] = ["auto", "os", "manual"];
 const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-right", "bottom-left", "bottom-right", "center"];
 const shortcutWarningModes: ShortcutWarningMode[] = ["all", "danger-only", "off"];
@@ -994,12 +993,20 @@ function textSizeClass(textSize: TextSize): string {
   return `text-${textSize}`;
 }
 
-function blurClass(blur: BlurLevel): string {
-  return `blur-${blur}`;
+function applyPanelTransparency(value: number): void {
+  const appearance = panelAppearanceForTransparency(value);
+
+  app.style.setProperty("--panel-background-opacity", `${appearance.backgroundOpacity}%`);
+  app.style.setProperty("--panel-backdrop-blur", `${appearance.backdropBlur}px`);
+  app.style.setProperty("--panel-saturation", String(appearance.saturation));
 }
 
 function themeClass(theme: ThemeMode): string {
-  return theme === "dark" ? "" : `theme-${theme}`;
+  return theme === "dark" ? "" : "theme-light";
+}
+
+function contrastClass(enhancedContrast: boolean): string {
+  return enhancedContrast ? "theme-enhanced-contrast" : "";
 }
 
 function captureSettingsScroll(): SettingsScrollSnapshot {
@@ -1104,11 +1111,12 @@ function render(): void {
   const panelStyleAttribute = !isSettingsWindow ? ` style="${escapeAttribute(shortcutPanelStyle(shortcutFitState))}"` : "";
 
   debugSheetSelection("render selected sheet", selectedSheet);
+  applyPanelTransparency(settings.panelTransparency);
 
   app.className = [
     themeClass(settings.theme),
-    textSizeClass(settings.textSize),
-    blurClass(settings.blur)
+    contrastClass(settings.enhancedContrast),
+    textSizeClass(settings.textSize)
   ]
     .filter(Boolean)
     .join(" ");
@@ -1238,8 +1246,13 @@ function renderSettingsTab(): string {
       <section class="settings-group">
         <h2>${escapeHtml(labels.sections.display)}</h2>
         ${renderSelectRow(labels.settings.theme, "theme", themeModes, settings.theme, (theme) => labels.theme[theme])}
+        ${renderToggleRow(
+          labels.settings.enhancedContrast,
+          "enhancedContrast",
+          settings.enhancedContrast
+        )}
         ${renderSelectRow(labels.settings.textSize, "textSize", textSizes, settings.textSize, (size) => labels.textSize[size])}
-        ${renderSelectRow(labels.settings.transparency, "blur", blurLevels, settings.blur, (blur) => labels.transparency[blur])}
+        ${renderRangeRow(labels.settings.transparency, "panelTransparency", settings.panelTransparency)}
       </section>
       <section class="settings-group">
         <h2>${escapeHtml(labels.sections.shortcutPlacement)}</h2>
@@ -1511,6 +1524,28 @@ function resetSettingsToDefaults(): void {
 
 function isInteractiveElement(target: EventTarget | null): boolean {
   return target instanceof Element && Boolean(target.closest("button, select, input, a, label, textarea, [data-settings-tab]"));
+}
+
+function renderRangeRow(label: string, name: string, value: number): string {
+  const normalizedValue = normalizePanelTransparency(value);
+
+  return `
+    <label class="settings-row range-row">
+      <span>${escapeHtml(label)}</span>
+      <span class="range-control" style="--range-progress: ${normalizedValue}%">
+        <input
+          type="range"
+          name="${escapeAttribute(name)}"
+          min="0"
+          max="100"
+          step="5"
+          value="${normalizedValue}"
+          aria-label="${escapeAttribute(label)}"
+        />
+        <output data-range-value="${escapeAttribute(name)}">${normalizedValue} %</output>
+      </span>
+    </label>
+  `;
 }
 
 function isScrollbarPointerDown(event: PointerEvent): boolean {
@@ -2007,6 +2042,27 @@ function bindEvents(): void {
     void cancelPlacement();
   });
 
+  document.querySelector("#settings-form")?.addEventListener("input", (event) => {
+    const target = event.target;
+
+    if (!(target instanceof HTMLInputElement) || target.name !== "panelTransparency") {
+      return;
+    }
+
+    const panelTransparency = normalizePanelTransparency(Number(target.value));
+    settings = { ...settings, panelTransparency };
+    saveSettings(settings);
+    applyPanelTransparency(panelTransparency);
+
+    const rangeControl = target.closest<HTMLElement>(".range-control");
+    rangeControl?.style.setProperty("--range-progress", `${panelTransparency}%`);
+    const output = rangeControl?.querySelector<HTMLOutputElement>("[data-range-value='panelTransparency']");
+    if (output) {
+      output.value = `${panelTransparency} %`;
+      output.textContent = `${panelTransparency} %`;
+    }
+  });
+
   document.querySelector("#settings-form")?.addEventListener("change", (event) => {
     const target = event.target as HTMLInputElement | HTMLSelectElement;
     const value = target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value;
@@ -2038,6 +2094,11 @@ function bindEvents(): void {
 
     if (target.name === "trayIconVisible") {
       void setTrayIconVisible(Boolean(value));
+      return;
+    }
+
+    if (target.name === "panelTransparency") {
+      updateSettings({ panelTransparency: normalizePanelTransparency(Number(value)) });
       return;
     }
 

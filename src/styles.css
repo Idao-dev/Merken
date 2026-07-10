@@ -14,6 +14,15 @@
   --warning: #fbbf24;
   --error: #f87171;
   --info: #38bdf8;
+  --on-accent: #ffffff;
+  --border-subtle: rgb(255 255 255 / 16%);
+  --surface-hover: rgb(255 255 255 / 5%);
+  --surface-muted: rgb(0 0 0 / 12%);
+  --control-track: rgb(255 255 255 / 16%);
+  --shadow-color: rgb(0 0 0 / 38%);
+  --panel-background-opacity: 63%;
+  --panel-backdrop-blur: 9px;
+  --panel-saturation: 1.13;
   font-family:
     Inter,
     "Segoe UI",
@@ -24,21 +33,72 @@
   background: transparent;
 }
 
-.theme-colorblind {
-  --bg-main: #020617;
+.theme-light {
+  color-scheme: light;
+  --bg-main: #f3f6fa;
+  --bg-panel: #ffffff;
+  --bg-card: #eef2f7;
+  --border: #cbd5e1;
+  --text-primary: #172033;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --accent: #005a9c;
+  --accent-hover: #004578;
+  --focus: #7c3aed;
+  --success: #0f766e;
+  --warning: #a16207;
+  --error: #b42318;
+  --info: #005a9c;
+  --on-accent: #ffffff;
+  --border-subtle: #e2e8f0;
+  --surface-hover: #f1f5f9;
+  --surface-muted: #f8fafc;
+  --control-track: #cbd5e1;
+  --shadow-color: rgb(15 23 42 / 14%);
+}
+
+.theme-enhanced-contrast {
+  --bg-main: #07101e;
   --bg-panel: #0b1220;
-  --bg-card: #1e293b;
+  --bg-card: #172033;
   --border: #64748b;
   --text-primary: #ffffff;
   --text-secondary: #e2e8f0;
-  --text-muted: #cbd5e1;
-  --accent: #38bdf8;
-  --accent-hover: #7dd3fc;
-  --focus: #fbbf24;
-  --success: #a3e635;
-  --warning: #fbbf24;
+  --text-muted: #a8b4c5;
+  --accent: #7dd3fc;
+  --accent-hover: #bae6fd;
+  --focus: #fde047;
+  --success: #67e8f9;
+  --warning: #fde047;
   --error: #fb7185;
   --info: #67e8f9;
+  --border-subtle: #64748b;
+  --surface-hover: #172033;
+  --surface-muted: #172033;
+  --control-track: #64748b;
+  --shadow-color: rgb(0 0 0 / 52%);
+}
+
+.theme-light.theme-enhanced-contrast {
+  --bg-main: #f8fafc;
+  --bg-panel: #ffffff;
+  --bg-card: #e2e8f0;
+  --border: #475569;
+  --text-primary: #0f172a;
+  --text-secondary: #334155;
+  --text-muted: #64748b;
+  --accent: #005a9c;
+  --accent-hover: #003f6b;
+  --focus: #7c3aed;
+  --success: #0f766e;
+  --warning: #a16207;
+  --error: #b91c1c;
+  --info: #005a9c;
+  --border-subtle: #475569;
+  --surface-hover: #e2e8f0;
+  --surface-muted: #f1f5f9;
+  --control-track: #64748b;
+  --shadow-color: rgb(15 23 42 / 24%);
 }
 
 :focus-visible {
@@ -70,19 +130,26 @@ body {
   color: var(--text-primary);
 }
 
+#app {
+  color: var(--text-primary);
+}
+
 .panel {
   position: relative;
   width: min(100vw - 18px, 500px);
   max-height: calc(100vh - 18px);
   margin: 9px;
   overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 16%);
+  border: 1px solid var(--border-subtle);
   border-radius: 18px;
   background:
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 90%, transparent), color-mix(in srgb, var(--bg-main) 82%, transparent)),
-    color-mix(in srgb, var(--bg-panel) 80%, transparent);
-  box-shadow: 0 18px 48px rgb(0 0 0 / 38%);
-  backdrop-filter: blur(18px) saturate(1.25);
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--bg-panel) var(--panel-background-opacity), transparent),
+      color-mix(in srgb, var(--bg-main) var(--panel-background-opacity), transparent)
+    );
+  box-shadow: 0 18px 48px var(--shadow-color);
+  backdrop-filter: blur(var(--panel-backdrop-blur)) saturate(var(--panel-saturation));
 }
 
 button,
@@ -101,47 +168,6 @@ a,
 kbd {
   cursor: auto;
 }
-
-.blur-none .panel {
-  border-color: rgb(255 255 255 / 22%);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 98%, transparent), color-mix(in srgb, var(--bg-main) 96%, transparent)),
-    color-mix(in srgb, var(--bg-panel) 96%, transparent);
-  backdrop-filter: none;
-}
-
-.blur-light .panel {
-  border-color: rgb(255 255 255 / 18%);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 92%, transparent), color-mix(in srgb, var(--bg-main) 88%, transparent)),
-    color-mix(in srgb, var(--bg-panel) 86%, transparent);
-  backdrop-filter: blur(8px) saturate(1.12);
-}
-
-.blur-medium .panel {
-  border-color: rgb(255 255 255 / 16%);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 84%, transparent), color-mix(in srgb, var(--bg-main) 78%, transparent)),
-    color-mix(in srgb, var(--bg-panel) 78%, transparent);
-  backdrop-filter: blur(18px) saturate(1.25);
-}
-
-.blur-strong .panel {
-  border-color: rgb(255 255 255 / 14%);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 74%, transparent), color-mix(in srgb, var(--bg-main) 68%, transparent)),
-    color-mix(in srgb, var(--bg-panel) 68%, transparent);
-  backdrop-filter: blur(28px) saturate(1.35);
-}
-
-.blur-max .panel {
-  border-color: rgb(255 255 255 / 12%);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--bg-panel) 64%, transparent), color-mix(in srgb, var(--bg-main) 58%, transparent)),
-    color-mix(in srgb, var(--bg-panel) 58%, transparent);
-  backdrop-filter: blur(42px) saturate(1.45);
-}
-
 
 .text-xs {
   font-size: 11px;
@@ -170,7 +196,7 @@ kbd {
   overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
   border-radius: 8px;
-  background: rgb(255 255 255 / 5%);
+  background: var(--surface-hover);
 }
 
 .level-switch button {
@@ -193,19 +219,19 @@ kbd {
 .level-switch button:hover,
 .level-switch button:focus {
   color: var(--text-primary);
-  background: rgb(255 255 255 / 8%);
+  background: var(--surface-hover);
   outline: none;
 }
 
 .level-switch button.active {
   background: color-mix(in srgb, var(--accent) 82%, var(--bg-card));
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .level-switch button:disabled {
   color: color-mix(in srgb, var(--text-muted) 54%, transparent);
   cursor: not-allowed;
-  background: rgb(0 0 0 / 10%);
+  background: var(--surface-muted);
 }
 
 .content {
@@ -639,8 +665,8 @@ kbd {
   min-height: 0;
   padding: 14px 8px;
   overflow: auto;
-  border-right: 1px solid rgb(255 255 255 / 9%);
-  background: rgb(0 0 0 / 16%);
+  border-right: 1px solid var(--border-subtle);
+  background: var(--surface-muted);
 }
 
 .brand {
@@ -711,14 +737,14 @@ kbd {
 
 .settings-tab.active {
   background: color-mix(in srgb, var(--accent) 82%, var(--bg-card));
-  color: #fff;
+  color: var(--on-accent);
 }
 
 .settings-sidebar-footer {
   width: 100%;
   margin-top: auto;
   padding: 10px 8px 0;
-  border-top: 1px solid rgb(255 255 255 / 8%);
+  border-top: 1px solid var(--border-subtle);
   border-right: 0;
   border-bottom: 0;
   border-left: 0;
@@ -938,6 +964,66 @@ kbd {
   color: var(--text-primary);
 }
 
+.range-row {
+  grid-template-columns: minmax(160px, 1fr) minmax(190px, 1.2fr);
+}
+
+.range-control {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.range-control input[type="range"] {
+  width: 100%;
+  min-width: 0;
+  height: 6px;
+  margin: 0;
+  appearance: none;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--accent) 0,
+    var(--accent) var(--range-progress),
+    var(--control-track) var(--range-progress),
+    var(--control-track) 100%
+  );
+  cursor: pointer;
+}
+
+.range-control input[type="range"]::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  appearance: none;
+  border: 2px solid var(--bg-panel);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.range-control input[type="range"]::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--bg-panel);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.range-control input[type="range"]:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 5px;
+}
+
+.range-control output {
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  text-align: right;
+}
+
 .settings-row select:hover,
 .settings-row select:focus,
 .secondary-button:hover,
@@ -967,7 +1053,7 @@ kbd {
   width: 42px;
   height: 24px;
   border-radius: 999px;
-  background: rgb(255 255 255 / 16%);
+  background: var(--control-track);
   transition:
     background 140ms ease,
     border-color 140ms ease;
@@ -1017,7 +1103,7 @@ kbd {
 }
 
 .sheet-family-row.active {
-  background: rgb(255 255 255 / 5%);
+  background: var(--surface-hover);
 }
 
 .sheet-family-name {
@@ -1114,7 +1200,7 @@ kbd {
   gap: 10px;
   min-height: 44px;
   padding: 9px 14px;
-  background: rgb(255 255 255 / 4%);
+  background: var(--surface-hover);
   cursor: pointer;
 }
 
@@ -1239,7 +1325,7 @@ kbd {
   padding: 8px 10px;
   border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 8px;
-  background: rgb(0 0 0 / 12%);
+  background: var(--surface-muted);
   color: var(--text-secondary);
   font-size: 0.78em;
   line-height: 1.35;

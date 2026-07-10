@@ -2,15 +2,11 @@ import { describe, expect, it } from "vitest";
 import { labelsFor } from "../../src/app/i18n";
 
 describe("interface labels", () => {
-  it("localizes transparency levels in French", () => {
+  it("localizes the panel transparency setting in French", () => {
     const labels = labelsFor("fr");
 
     expect(labels.settings.transparency).toBe("Transparence du panneau");
-    expect(labels.transparency.none).toBe("Opaque");
-    expect(labels.transparency.light).toBe("Legere");
-    expect(labels.transparency.medium).toBe("Moyenne");
-    expect(labels.transparency.strong).toBe("Forte");
-    expect(labels.transparency.max).toBe("Maximale");
+    expect("transparency" in labels).toBe(false);
   });
 
   it("localizes options in English", () => {
@@ -19,6 +15,7 @@ describe("interface labels", () => {
     expect(labels.settings.language).toBe("Interface language");
     expect(labels.settings.shortcutLanguage).toBe("Software language");
     expect(labels.settings.keyboardLayout).toBe("Keyboard layout");
+    expect(labels.settings.transparency).toBe("Panel transparency");
     expect(labels.settings.languageHelp).toContain("Merken menus");
     expect(labels.settings.shortcutLanguageHelp).toContain("active software");
     expect(labels.settings.keyboardLayoutHelp).toContain("Physical keyboard layout");
@@ -35,17 +32,19 @@ describe("interface labels", () => {
     expect(labels.shortcutWarningMode["danger-only"]).toBe("Important risks");
     expect(labels.tabs.customization).toBe("Customization");
     expect(labels.theme.dark).toBe("Dark");
-    expect(labels.theme.colorblind).toBe("Colorblind mode");
-    expect(Object.values(labels.theme)).not.toContain("Light");
+    expect(labels.theme.light).toBe("Light");
+    expect("colorblind" in labels.theme).toBe(false);
+    expect(labels.settings.enhancedContrast).toBe("Enhance contrast");
     expect(Object.values(labels.theme)).not.toContain("System");
   });
 
-  it("limits French appearance labels to dark and colorblind modes", () => {
+  it("limits French appearance labels to dark and light modes", () => {
     const labels = labelsFor("fr");
 
     expect(labels.theme.dark).toBe("Sombre");
-    expect(labels.theme.colorblind).toBe("Mode daltonien");
-    expect(Object.values(labels.theme)).not.toContain("Clair");
+    expect(labels.theme.light).toBe("Clair");
+    expect("colorblind" in labels.theme).toBe(false);
+    expect(labels.settings.enhancedContrast).toBe("Renforcer les contrastes");
     expect(Object.values(labels.theme)).not.toContain("Systeme");
   });
 

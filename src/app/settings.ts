@@ -1,5 +1,5 @@
+import { normalizePanelTransparency } from "./appearance";
 import type {
-  BlurLevel,
   LanguageCode,
   SheetMode,
   ShortcutDisplayLevel,
@@ -15,21 +15,22 @@ import type {
 const shortcutDisplayLevels: ShortcutDisplayLevel[] = ["standard", "advanced", "expert"];
 const languageCodes: LanguageCode[] = ["fr", "en"];
 export const shortcutKeyboardLayouts: ShortcutKeyboardLayout[] = ["azerty", "qwerty"];
-const themeModes: ThemeMode[] = ["dark", "colorblind"];
+const themeModes: ThemeMode[] = ["dark", "light"];
 const textSizes: TextSize[] = ["xs", "sm", "md", "lg", "xl"];
-const blurLevels: BlurLevel[] = ["none", "light", "medium", "strong", "max"];
 const sheetModes: SheetMode[] = ["auto", "os", "manual"];
 const shortcutPlacementPresets: ShortcutPlacementPreset[] = ["top-left", "top-right", "bottom-left", "bottom-right", "center"];
 const shortcutWarningModes: ShortcutWarningMode[] = ["all", "danger-only", "off"];
 const identifierPattern = /^[a-z0-9-]+$/;
 const deprecatedSheetFamilies = new Set(["settings"]);
+const migratedSheetFamilies = new Map<string, string>([["terminal-powershell", "powershell"]]);
 
 const legacyExpertSheetFamilies = [
   "windows-core",
   "file-explorer",
   "photos",
   "media-player",
-  "terminal-powershell",
+  "cmd",
+  "powershell",
   "browsers",
   "excel",
   "word",
@@ -45,8 +46,9 @@ export const defaultSettings: UserSettings = {
   shortcutLanguage: "fr",
   keyboardLayout: "azerty",
   theme: "dark",
+  enhancedContrast: false,
   textSize: "md",
-  blur: "medium",
+  panelTransparency: 50,
   sheetMode: "auto",
   manualSheetId: "windows-core",
   shortcutSheetPreferences: {},
@@ -62,11 +64,14 @@ export const settingsStorageKey = "merken.settings.v1";
 
 type SettingsStorage = Pick<Storage, "getItem" | "setItem">;
 
-type StoredSettings = Partial<UserSettings> & {
+type StoredSettings = Omit<Partial<UserSettings>, "theme" | "enhancedContrast" | "panelTransparency"> & {
   expertMode?: boolean;
   shortcutSheetPreferences?: unknown;
   shortcutLanguageOverrides?: unknown;
   theme?: unknown;
+  enhancedContrast?: unknown;
+  panelTransparency?: unknown;
+  blur?: unknown;
 };
 
 export function loadSettings(storage: SettingsStorage = localStorage): UserSettings {
@@ -82,6 +87,7 @@ export function loadSettings(storage: SettingsStorage = localStorage): UserSetti
       expertMode: _expertMode,
       shortcutSheetPreferences: _shortcutSheetPreferences,
       shortcutLanguageOverrides: _shortcutLanguageOverrides,
+      blur: _legacyBlur,
       ...storedSettings
     } = stored;
     const inheritedShortcutLanguage = oneOf(
@@ -89,9 +95,16 @@ export function loadSettings(storage: SettingsStorage = localStorage): UserSetti
       languageCodes,
       oneOf(stored.language, languageCodes, defaultSettings.shortcutLanguage)
     );
+    const legacyColorblind = stored.theme === "colorblind";
     const parsed: UserSettings = {
       ...defaultSettings,
       ...storedSettings,
+      theme: legacyColorblind ? "dark" : oneOf(storedSettings.theme, themeModes, defaultSettings.theme),
+      enhancedContrast:
+        legacyColorblind || typeof stored.enhancedContrast !== "boolean"
+          ? legacyColorblind
+          : stored.enhancedContrast,
+      panelTransparency: normalizePanelTransparency(stored.panelTransparency ?? stored.blur),
       shortcutLanguage: inheritedShortcutLanguage,
       keyboardLayout:
         (stored.keyboardLayout as ShortcutKeyboardLayout | undefined) ?? defaultKeyboardLayoutForLanguage(inheritedShortcutLanguage),
@@ -112,6 +125,7 @@ function normalizeShortcutSheetPreferences(stored: StoredSettings): Record<strin
   if (isRecord(stored.shortcutSheetPreferences) && Object.keys(stored.shortcutSheetPreferences).length > 0) {
     return Object.fromEntries(
       Object.entries(stored.shortcutSheetPreferences)
+        .map(([family, preference]): [string, unknown] => [migratedSheetFamilies.get(family) ?? family, preference])
         .filter(([family]) => isSafeIdentifier(family) && !deprecatedSheetFamilies.has(family))
         .map(([family, preference]) => [family, normalizeShortcutSheetPreference(preference)])
         .filter((entry): entry is [string, ShortcutSheetPreference] => Boolean(entry[1]))
@@ -169,12 +183,11 @@ function normalizeSettings(settings: UserSettings): UserSettings {
       defaultKeyboardLayoutForLanguage(shortcutLanguage)
     ),
     theme: oneOf(settings.theme, themeModes, defaultSettings.theme),
+    enhancedContrast: typeof settings.enhancedContrast === "boolean" ? settings.enhancedContrast : false,
     textSize: oneOf(settings.textSize, textSizes, defaultSettings.textSize),
-    blur: oneOf(settings.blur, blurLevels, defaultSettings.blur),
+    panelTransparency: normalizePanelTransparency(settings.panelTransparency),
     sheetMode: oneOf(settings.sheetMode, sheetModes, defaultSettings.sheetMode),
-    manualSheetId: typeof settings.manualSheetId === "string" && isSafeIdentifier(settings.manualSheetId) && !deprecatedSheetFamilies.has(settings.manualSheetId)
-      ? settings.manualSheetId
-      : defaultSettings.manualSheetId,
+    manualSheetId: normalizeManualSheetId(settings.manualSheetId),
     shortcutSheetPreferences: settings.shortcutSheetPreferences,
     startWithWindows: typeof settings.startWithWindows === "boolean" ? settings.startWithWindows : defaultSettings.startWithWindows,
     shortcutPlacementMode: settings.shortcutPlacementMode === "custom" ? "custom" : "preset",
@@ -194,6 +207,16 @@ function normalizeSettings(settings: UserSettings): UserSettings {
 
 function defaultKeyboardLayoutForLanguage(language: LanguageCode): ShortcutKeyboardLayout {
   return language === "fr" ? "azerty" : "qwerty";
+}
+
+function normalizeManualSheetId(value: unknown): string {
+  if (typeof value !== "string") {
+    return defaultSettings.manualSheetId;
+  }
+
+  const family = migratedSheetFamilies.get(value) ?? value;
+
+  return isSafeIdentifier(family) && !deprecatedSheetFamilies.has(family) ? family : defaultSettings.manualSheetId;
 }
 
 function normalizeShortcutCustomPosition(value: unknown): UserSettings["shortcutCustomPosition"] {

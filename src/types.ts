@@ -1,12 +1,10 @@
 export type LanguageCode = "fr" | "en" | "es" | "de" | "pt" | "it";
 
-export type ThemeMode = "dark" | "colorblind";
+export type ThemeMode = "dark" | "light";
 
 export type SheetMode = "auto" | "os" | "manual";
 
 export type TextSize = "xs" | "sm" | "md" | "lg" | "xl";
-
-export type BlurLevel = "none" | "light" | "medium" | "strong" | "max";
 
 export type ShortcutPlacementMode = "preset" | "custom";
 
@@ -80,8 +78,9 @@ export interface UserSettings {
   shortcutLanguage: LanguageCode;
   keyboardLayout: ShortcutKeyboardLayout;
   theme: ThemeMode;
+  enhancedContrast: boolean;
   textSize: TextSize;
-  blur: BlurLevel;
+  panelTransparency: number;
   sheetMode: SheetMode;
   manualSheetId: string;
   shortcutSheetPreferences: Record<string, ShortcutSheetPreference>;

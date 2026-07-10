@@ -1,5 +1,4 @@
 import type {
-  BlurLevel,
   LanguageCode,
   SheetMode,
   SheetBadgeKey,
@@ -40,6 +39,7 @@ interface Labels {
     textSize: string;
     transparency: string;
     theme: string;
+    enhancedContrast: string;
     sheet: string;
     manualSheet: string;
     sheetLevel: string;
@@ -89,7 +89,6 @@ interface Labels {
     licenseValue: string;
   };
   autostart: Record<AutostartStatus, string>;
-  transparency: Record<BlurLevel, string>;
   theme: Record<ThemeMode, string>;
   textSize: Record<TextSize, string>;
   sheetMode: Record<SheetMode, string>;
@@ -136,6 +135,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       textSize: "Taille",
       transparency: "Transparence du panneau",
       theme: "Theme",
+      enhancedContrast: "Renforcer les contrastes",
       sheet: "Fiche",
       manualSheet: "Choix manuel",
       sheetLevel: "Niveau",
@@ -190,16 +190,9 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       disabled: "Inactif",
       unavailable: "Indisponible"
     },
-    transparency: {
-      none: "Opaque",
-      light: "Legere",
-      medium: "Moyenne",
-      strong: "Forte",
-      max: "Maximale"
-    },
     theme: {
       dark: "Sombre",
-      colorblind: "Mode daltonien"
+      light: "Clair"
     },
     textSize: {
       xs: "Tres petite",
@@ -279,6 +272,7 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       textSize: "Size",
       transparency: "Panel transparency",
       theme: "Theme",
+      enhancedContrast: "Enhance contrast",
       sheet: "Sheet",
       manualSheet: "Manual choice",
       sheetLevel: "Level",
@@ -333,16 +327,9 @@ export const labelsByLanguage: Record<"fr" | "en", Labels> = {
       disabled: "Disabled",
       unavailable: "Unavailable"
     },
-    transparency: {
-      none: "Opaque",
-      light: "Light",
-      medium: "Medium",
-      strong: "High",
-      max: "Maximum"
-    },
     theme: {
       dark: "Dark",
-      colorblind: "Colorblind mode"
+      light: "Light"
     },
     textSize: {
       xs: "Extra small",
