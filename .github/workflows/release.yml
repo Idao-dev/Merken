@@ -1,4 +1,5 @@
 name: Release
+run-name: Release ${{ github.ref_name }}
 
 on:
   push:
@@ -39,6 +40,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Test Rust
+        run: cargo test --manifest-path src-tauri/Cargo.toml
+
       - name: Build installer
         uses: tauri-apps/tauri-action@fce9c6108b31ea247710505d3aaaa893ee6768d4 # v0
         env:
@@ -56,6 +60,24 @@ jobs:
           includeUpdaterJson: true
           updaterJsonPreferNsis: true
 
+      - name: Prepare stable installer asset
+        shell: pwsh
+        run: |
+          $installer = Get-ChildItem -Path src-tauri/target/release/bundle/nsis -Filter "*_x64-setup.exe" |
+            Sort-Object LastWriteTime -Descending |
+            Select-Object -First 1
+          if (-not $installer) {
+            throw "Windows installer asset was not found."
+          }
+          Copy-Item -LiteralPath $installer.FullName -Destination src-tauri/target/release/bundle/nsis/Merken-setup.exe -Force
+
+      - name: Upload stable installer asset
+        uses: softprops/action-gh-release@3bb12739c298aeb8a4eeaf626c5b8d85266b0e65 # v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          draft: true
+          files: src-tauri/target/release/bundle/nsis/Merken-setup.exe
+
       - name: Build portable executable
         run: npm run tauri -- build --no-bundle
         env:
@@ -67,3 +89,52 @@ jobs:
           tag_name: ${{ github.ref_name }}
           draft: true
           files: src-tauri/target/release/merken.exe
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Build and publish GitHub Pages site
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $headers = @{
+            Authorization = "Bearer $env:GITHUB_TOKEN"
+            Accept = "application/vnd.github+json"
+            "X-GitHub-Api-Version" = "2022-11-28"
+          }
+          $release = Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}"
+          $notes = $release.body
+          if ([string]::IsNullOrWhiteSpace($notes)) {
+            $notes = "Consultez la release GitHub pour les changements et les fichiers disponibles."
+          }
+          $metadata = @{
+            version = $release.tag_name.TrimStart("v")
+            tag = $release.tag_name
+            releaseUrl = $release.html_url
+            installerUrl = "https://github.com/${{ github.repository }}/releases/latest/download/Merken-setup.exe"
+            portableUrl = "https://github.com/${{ github.repository }}/releases/latest/download/merken.exe"
+            notes = $notes
+          }
+          $metadataPath = Join-Path $env:GITHUB_WORKSPACE "site-release.json"
+          $metadata | ConvertTo-Json -Depth 4 | Set-Content -Path $metadataPath -Encoding utf8
+
+          Push-Location pages
+          npm ci
+          node scripts/sync-site-data.mjs $env:GITHUB_WORKSPACE
+          node scripts/sync-site-release.mjs $metadataPath
+          npm run build
+          Pop-Location
+
+          git -C pages config user.name "github-actions[bot]"
+          git -C pages config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C pages add docs src/generated
+          git -C pages diff --cached --quiet
+          if ($LASTEXITCODE -ne 0) {
+            git -C pages commit -m "Mettre a jour le site pour ${{ github.ref_name }}"
+            git -C pages push origin gh-pages
+          }
+          Remove-Item -LiteralPath $metadataPath -Force
