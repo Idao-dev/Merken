@@ -15,6 +15,8 @@ Le depot publie les versions avec :
 
 La release GitHub est creee en brouillon par la CI. Elle doit etre relue humainement avant publication.
 
+La publication humaine de la release declenche ensuite le workflow `Publish release site`, qui synchronise la version, les liens de telechargement et les fiches de la page GitHub Pages. Le site n'est pas modifie tant que la release reste en brouillon.
+
 ## Fonctionnement utilisateur
 
 Dans les options :
@@ -54,3 +56,5 @@ Apres creation de la draft GitHub, verifier :
 - presence de la signature `.sig` ;
 - presence de `merken.exe` pour la version portable ;
 - coherence du texte avec les notes de release GitHub en francais et en anglais.
+
+Apres publication, verifier que le workflow `Publish release site` reussit et que la page affiche la nouvelle version.

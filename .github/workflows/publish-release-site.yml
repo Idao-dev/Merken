@@ -1,0 +1,76 @@
+name: Publish release site
+run-name: Publish site ${{ github.event.release.tag_name }}
+
+on:
+  release:
+    types:
+      - published
+
+permissions:
+  contents: write
+
+jobs:
+  publish-site:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout release source
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Checkout GitHub Pages branch
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: gh-pages
+          path: pages
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: pages/package-lock.json
+
+      - name: Build and publish GitHub Pages site
+        shell: pwsh
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $headers = @{
+            Authorization = "Bearer $env:GITHUB_TOKEN"
+            Accept = "application/vnd.github+json"
+            "X-GitHub-Api-Version" = "2022-11-28"
+          }
+          $release = Invoke-RestMethod -Headers $headers -Uri "https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.event.release.tag_name }}"
+          $notes = $release.body
+          if ([string]::IsNullOrWhiteSpace($notes)) {
+            $notes = "Consultez la release GitHub pour les changements et les fichiers disponibles."
+          }
+          $metadata = @{
+            version = $release.tag_name.TrimStart("v")
+            tag = $release.tag_name
+            releaseUrl = "https://github.com/${{ github.repository }}/releases/tag/${{ github.event.release.tag_name }}"
+            installerUrl = "https://github.com/${{ github.repository }}/releases/latest/download/Merken-setup.exe"
+            portableUrl = "https://github.com/${{ github.repository }}/releases/latest/download/merken.exe"
+            notes = $notes
+          }
+          $metadataPath = Join-Path $env:GITHUB_WORKSPACE "site-release.json"
+          $metadata | ConvertTo-Json -Depth 4 | Set-Content -Path $metadataPath -Encoding utf8
+
+          Push-Location pages
+          npm ci
+          node scripts/sync-site-data.mjs $env:GITHUB_WORKSPACE
+          node scripts/sync-site-release.mjs $metadataPath
+          npm run build
+          Pop-Location
+
+          git -C pages config user.name "github-actions[bot]"
+          git -C pages config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C pages add docs src/generated
+          git -C pages diff --cached --quiet
+          if ($LASTEXITCODE -ne 0) {
+            git -C pages commit -m "Mettre a jour le site pour ${{ github.event.release.tag_name }}"
+            git -C pages push origin gh-pages
+          }
+          Remove-Item -LiteralPath $metadataPath -Force
