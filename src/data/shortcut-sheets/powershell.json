@@ -1,0 +1,378 @@
+[
+  {
+    "id": "powershell-fr",
+    "appNames": [
+      "powershell.exe",
+      "pwsh.exe"
+    ],
+    "title": "PowerShell - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "saisie",
+        "title": "Historique et saisie",
+        "shortcuts": [
+          {
+            "id": "saisie-commande-precedente",
+            "label": "Commande precedente",
+            "keys": [
+              "Up"
+            ],
+            "description": "Rappelle la commande precedente.",
+            "priority": 1,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-commande-suivante",
+            "label": "Commande suivante",
+            "keys": [
+              "Down"
+            ],
+            "description": "Avance dans l historique.",
+            "priority": 2,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-autocompletion",
+            "label": "Completer commande",
+            "keys": [
+              "Tab"
+            ],
+            "description": "Complete une commande, un parametre ou un chemin.",
+            "priority": 3,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-interrompre",
+            "label": "Interrompre commande",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Interrompt la commande en cours.",
+            "priority": 4,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-effacer-affichage",
+            "label": "Effacer affichage",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Nettoie l affichage du shell.",
+            "priority": 5,
+            "level": "advanced"
+          }
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Commandes",
+        "shortcuts": [
+          {
+            "id": "commandes-aide",
+            "label": "Aide commande",
+            "keys": [],
+            "description": "Affiche l aide d une commande.",
+            "priority": 1,
+            "level": "standard",
+            "command": "Get-Help <commande>"
+          },
+          {
+            "id": "commandes-trouver",
+            "label": "Trouver commande",
+            "keys": [],
+            "description": "Recherche une commande disponible.",
+            "priority": 2,
+            "level": "standard",
+            "command": "Get-Command <nom>"
+          },
+          {
+            "id": "commandes-lister-fichiers",
+            "label": "Lister fichiers",
+            "keys": [],
+            "description": "Liste les fichiers du dossier courant.",
+            "priority": 3,
+            "level": "standard",
+            "command": "Get-ChildItem"
+          },
+          {
+            "id": "commandes-changer-dossier",
+            "label": "Changer dossier",
+            "keys": [],
+            "description": "Change de dossier courant.",
+            "priority": 4,
+            "level": "standard",
+            "command": "Set-Location <chemin>"
+          },
+          {
+            "id": "commandes-effacer-affichage",
+            "label": "Effacer affichage",
+            "keys": [],
+            "description": "Nettoie l affichage du shell.",
+            "priority": 5,
+            "level": "standard",
+            "command": "Clear-Host"
+          },
+          {
+            "id": "commandes-lire-fichier",
+            "label": "Lire fichier",
+            "keys": [],
+            "description": "Affiche le contenu d un fichier texte.",
+            "priority": 6,
+            "level": "advanced",
+            "command": "Get-Content <fichier>"
+          },
+          {
+            "id": "commandes-rechercher-texte",
+            "label": "Rechercher texte",
+            "keys": [],
+            "description": "Recherche du texte dans des fichiers.",
+            "priority": 7,
+            "level": "advanced",
+            "command": "Select-String -Path <fichier> -Pattern <texte>"
+          },
+          {
+            "id": "commandes-copier-element",
+            "label": "Copier element",
+            "keys": [],
+            "description": "Copie un fichier ou un dossier.",
+            "priority": 8,
+            "level": "advanced",
+            "command": "Copy-Item <source> <destination>"
+          },
+          {
+            "id": "commandes-deplacer-element",
+            "label": "Deplacer element",
+            "keys": [],
+            "description": "Deplace ou renomme un fichier ou un dossier.",
+            "priority": 9,
+            "level": "advanced",
+            "command": "Move-Item <source> <destination>"
+          },
+          {
+            "id": "commandes-lister-processus",
+            "label": "Lister processus",
+            "keys": [],
+            "description": "Liste les processus en cours.",
+            "priority": 10,
+            "level": "advanced",
+            "command": "Get-Process"
+          },
+          {
+            "id": "commandes-supprimer-element",
+            "label": "Supprimer element",
+            "keys": [],
+            "description": "Supprime un fichier ou un dossier.",
+            "priority": 11,
+            "level": "expert",
+            "command": "Remove-Item <chemin>",
+            "warning": "Supprime des fichiers ou dossiers et peut entrainer une perte de donnees.",
+            "warningLevel": "danger"
+          },
+          {
+            "id": "commandes-arreter-processus",
+            "label": "Arreter processus",
+            "keys": [],
+            "description": "Arrete un processus par nom.",
+            "priority": 12,
+            "level": "expert",
+            "command": "Stop-Process -Name <nom>",
+            "warning": "Peut fermer brutalement une application ou interrompre un travail en cours.",
+            "warningLevel": "danger"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "powershell-en",
+    "appNames": [
+      "powershell.exe",
+      "pwsh.exe"
+    ],
+    "title": "PowerShell - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "saisie",
+        "title": "History and input",
+        "shortcuts": [
+          {
+            "id": "saisie-commande-precedente",
+            "label": "Previous command",
+            "keys": [
+              "Up"
+            ],
+            "description": "Recall the previous command.",
+            "priority": 1,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-commande-suivante",
+            "label": "Next command",
+            "keys": [
+              "Down"
+            ],
+            "description": "Move forward in history.",
+            "priority": 2,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-autocompletion",
+            "label": "Complete command",
+            "keys": [
+              "Tab"
+            ],
+            "description": "Complete a command, parameter, or path.",
+            "priority": 3,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-interrompre",
+            "label": "Interrupt command",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Interrupt the running command.",
+            "priority": 4,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-effacer-affichage",
+            "label": "Clear display",
+            "keys": [
+              "Ctrl",
+              "L"
+            ],
+            "description": "Clear shell display.",
+            "priority": 5,
+            "level": "advanced"
+          }
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Commands",
+        "shortcuts": [
+          {
+            "id": "commandes-aide",
+            "label": "Command help",
+            "keys": [],
+            "description": "Show help for a command.",
+            "priority": 1,
+            "level": "standard",
+            "command": "Get-Help <command>"
+          },
+          {
+            "id": "commandes-trouver",
+            "label": "Find command",
+            "keys": [],
+            "description": "Find an available command.",
+            "priority": 2,
+            "level": "standard",
+            "command": "Get-Command <name>"
+          },
+          {
+            "id": "commandes-lister-fichiers",
+            "label": "List files",
+            "keys": [],
+            "description": "List files in the current folder.",
+            "priority": 3,
+            "level": "standard",
+            "command": "Get-ChildItem"
+          },
+          {
+            "id": "commandes-changer-dossier",
+            "label": "Change folder",
+            "keys": [],
+            "description": "Change the current folder.",
+            "priority": 4,
+            "level": "standard",
+            "command": "Set-Location <path>"
+          },
+          {
+            "id": "commandes-effacer-affichage",
+            "label": "Clear display",
+            "keys": [],
+            "description": "Clear shell display.",
+            "priority": 5,
+            "level": "standard",
+            "command": "Clear-Host"
+          },
+          {
+            "id": "commandes-lire-fichier",
+            "label": "Read file",
+            "keys": [],
+            "description": "Show a text file's content.",
+            "priority": 6,
+            "level": "advanced",
+            "command": "Get-Content <file>"
+          },
+          {
+            "id": "commandes-rechercher-texte",
+            "label": "Search text",
+            "keys": [],
+            "description": "Search text in files.",
+            "priority": 7,
+            "level": "advanced",
+            "command": "Select-String -Path <file> -Pattern <text>"
+          },
+          {
+            "id": "commandes-copier-element",
+            "label": "Copy item",
+            "keys": [],
+            "description": "Copy a file or folder.",
+            "priority": 8,
+            "level": "advanced",
+            "command": "Copy-Item <source> <destination>"
+          },
+          {
+            "id": "commandes-deplacer-element",
+            "label": "Move item",
+            "keys": [],
+            "description": "Move or rename a file or folder.",
+            "priority": 9,
+            "level": "advanced",
+            "command": "Move-Item <source> <destination>"
+          },
+          {
+            "id": "commandes-lister-processus",
+            "label": "List processes",
+            "keys": [],
+            "description": "List running processes.",
+            "priority": 10,
+            "level": "advanced",
+            "command": "Get-Process"
+          },
+          {
+            "id": "commandes-supprimer-element",
+            "label": "Remove item",
+            "keys": [],
+            "description": "Delete a file or folder.",
+            "priority": 11,
+            "level": "expert",
+            "command": "Remove-Item <path>",
+            "warning": "Deletes files or folders and may cause data loss.",
+            "warningLevel": "danger"
+          },
+          {
+            "id": "commandes-arreter-processus",
+            "label": "Stop process",
+            "keys": [],
+            "description": "Stop a process by name.",
+            "priority": 12,
+            "level": "expert",
+            "command": "Stop-Process -Name <name>",
+            "warning": "May force-close an app or interrupt work in progress.",
+            "warningLevel": "danger"
+          }
+        ]
+      }
+    ]
+  }
+]

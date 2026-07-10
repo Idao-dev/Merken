@@ -979,7 +979,9 @@ mod active_window {
     }
 
     fn build_active_app(process_name: Option<String>, title: Option<String>) -> ActiveApp {
-        let sheet_id = process_name.as_deref().and_then(map_process_to_sheet);
+        let sheet_id = process_name
+            .as_deref()
+            .and_then(|process_name| map_process_to_sheet(process_name, title.as_deref()));
 
         ActiveApp {
             process_name,
@@ -1094,7 +1096,7 @@ mod active_window {
             || normalized_title.contains("depassement de capacite de la barre d'etat systeme")
     }
 
-    fn map_process_to_sheet(process_name: &str) -> Option<&'static str> {
+    fn map_process_to_sheet(process_name: &str, title: Option<&str>) -> Option<&'static str> {
         match process_name.to_ascii_lowercase().as_str() {
             "applicationframehost.exe" | "searchhost.exe" => Some("windows-core-fr"),
             "explorer.exe" => Some("file-explorer-fr"),
@@ -1103,9 +1105,9 @@ mod active_window {
             "microsoft.media.player.exe" | "wmplayer.exe" | "zunemusic.exe" | "zunevideo.exe" => {
                 Some("media-player-fr")
             }
-            "windowsterminal.exe" | "wt.exe" | "powershell.exe" | "pwsh.exe" => {
-                Some("terminal-powershell-fr")
-            }
+            "cmd.exe" => Some("cmd-fr"),
+            "powershell.exe" | "pwsh.exe" => Some("powershell-fr"),
+            "windowsterminal.exe" | "wt.exe" => map_windows_terminal_title_to_sheet(title),
             "msedge.exe" | "chrome.exe" | "firefox.exe" | "brave.exe" => Some("browsers-fr"),
             "excel.exe" => Some("excel-fr"),
             "winword.exe" => Some("word-fr"),
@@ -1116,6 +1118,23 @@ mod active_window {
             "vlc.exe" => Some("vlc-fr"),
             _ => None,
         }
+    }
+
+    fn map_windows_terminal_title_to_sheet(title: Option<&str>) -> Option<&'static str> {
+        let normalized_title = title?.trim().to_ascii_lowercase();
+
+        if normalized_title.contains("powershell") || normalized_title.contains("pwsh") {
+            return Some("powershell-fr");
+        }
+
+        if normalized_title.contains("cmd")
+            || normalized_title.contains("command prompt")
+            || normalized_title.contains("invite de commandes")
+        {
+            return Some("cmd-fr");
+        }
+
+        None
     }
 
     #[cfg(test)]
@@ -1145,9 +1164,9 @@ mod active_window {
                 ("photos.exe", Some("photos-fr")),
                 ("microsoft.media.player.exe", Some("media-player-fr")),
                 ("wmplayer.exe", Some("media-player-fr")),
-                ("windowsterminal.exe", Some("terminal-powershell-fr")),
-                ("powershell.exe", Some("terminal-powershell-fr")),
-                ("pwsh.exe", Some("terminal-powershell-fr")),
+                ("cmd.exe", Some("cmd-fr")),
+                ("powershell.exe", Some("powershell-fr")),
+                ("pwsh.exe", Some("powershell-fr")),
                 ("msedge.exe", Some("browsers-fr")),
                 ("chrome.exe", Some("browsers-fr")),
                 ("firefox.exe", Some("browsers-fr")),
@@ -1165,7 +1184,7 @@ mod active_window {
 
             for (process_name, expected_sheet_id) in cases {
                 assert_eq!(
-                    map_process_to_sheet(process_name),
+                    map_process_to_sheet(process_name, None),
                     expected_sheet_id,
                     "{process_name}"
                 );
@@ -1174,8 +1193,30 @@ mod active_window {
 
         #[test]
         fn maps_processes_case_insensitively() {
-            assert_eq!(map_process_to_sheet("CHROME.EXE"), Some("browsers-fr"));
-            assert_eq!(map_process_to_sheet("EXCEL.EXE"), Some("excel-fr"));
+            assert_eq!(map_process_to_sheet("CHROME.EXE", None), Some("browsers-fr"));
+            assert_eq!(map_process_to_sheet("EXCEL.EXE", None), Some("excel-fr"));
+        }
+
+        #[test]
+        fn maps_windows_terminal_by_title_when_clear() {
+            assert_eq!(
+                map_process_to_sheet("windowsterminal.exe", Some("PowerShell")),
+                Some("powershell-fr")
+            );
+            assert_eq!(
+                map_process_to_sheet("windowsterminal.exe", Some("pwsh - D:\\Dev")),
+                Some("powershell-fr")
+            );
+            assert_eq!(
+                map_process_to_sheet("windowsterminal.exe", Some("Command Prompt")),
+                Some("cmd-fr")
+            );
+            assert_eq!(
+                map_process_to_sheet("windowsterminal.exe", Some("Invite de commandes")),
+                Some("cmd-fr")
+            );
+            assert_eq!(map_process_to_sheet("windowsterminal.exe", Some("Ubuntu")), None);
+            assert_eq!(map_process_to_sheet("windowsterminal.exe", None), None);
         }
 
         #[test]
@@ -1258,20 +1299,20 @@ mod active_window {
 
         #[test]
         fn keeps_browser_and_non_browser_mappings_distinct() {
-            assert_eq!(map_process_to_sheet("chrome.exe"), Some("browsers-fr"));
-            assert_eq!(map_process_to_sheet("firefox.exe"), Some("browsers-fr"));
-            assert_eq!(map_process_to_sheet("vlc.exe"), Some("vlc-fr"));
+            assert_eq!(map_process_to_sheet("chrome.exe", None), Some("browsers-fr"));
+            assert_eq!(map_process_to_sheet("firefox.exe", None), Some("browsers-fr"));
+            assert_eq!(map_process_to_sheet("vlc.exe", None), Some("vlc-fr"));
             assert_eq!(
-                map_process_to_sheet("explorer.exe"),
+                map_process_to_sheet("explorer.exe", None),
                 Some("file-explorer-fr")
             );
             assert_ne!(
-                map_process_to_sheet("chrome.exe"),
-                map_process_to_sheet("vlc.exe")
+                map_process_to_sheet("chrome.exe", None),
+                map_process_to_sheet("vlc.exe", None)
             );
             assert_ne!(
-                map_process_to_sheet("chrome.exe"),
-                map_process_to_sheet("explorer.exe")
+                map_process_to_sheet("chrome.exe", None),
+                map_process_to_sheet("explorer.exe", None)
             );
         }
 

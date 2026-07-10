@@ -232,13 +232,35 @@
             "level": "standard"
           },
           {
+            "label": "Langue et clavier",
+            "keys": [
+              "Win",
+              "Space"
+            ],
+            "description": "Bascule entre les langues d entree et dispositions clavier.",
+            "priority": 12,
+            "id": "systeme-langue-clavier",
+            "level": "advanced"
+          },
+          {
+            "label": "Disposition clavier",
+            "keys": [
+              "Ctrl",
+              "Shift"
+            ],
+            "description": "Change de disposition clavier si plusieurs dispositions sont disponibles.",
+            "priority": 13,
+            "id": "systeme-disposition-clavier",
+            "level": "expert"
+          },
+          {
             "label": "A propos du systeme",
             "keys": [
               "Win",
               "Pause"
             ],
             "description": "Ouvre la page Systeme > Informations.",
-            "priority": 12,
+            "priority": 14,
             "id": "systeme-a-propos",
             "level": "expert"
           }
@@ -345,6 +367,44 @@
             "command": "OptionalFeatures.exe",
             "warning": "* Outil systeme avance : verifiez chaque changement avant de l'appliquer.",
             "warningLevel": "danger"
+          },
+          {
+            "label": "Invite de commandes",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Ouvre l invite de commandes depuis Executer.",
+            "priority": 8,
+            "id": "outils-systeme-invite-commandes",
+            "level": "advanced",
+            "command": "cmd"
+          },
+          {
+            "label": "PowerShell Windows",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Ouvre Windows PowerShell depuis Executer.",
+            "priority": 9,
+            "id": "outils-systeme-powershell-windows",
+            "level": "advanced",
+            "command": "powershell"
+          },
+          {
+            "label": "PowerShell 7",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Ouvre PowerShell 7 si installe.",
+            "priority": 10,
+            "id": "outils-systeme-powershell-7",
+            "level": "expert",
+            "command": "pwsh",
+            "warning": "Necessite PowerShell 7 installe sur la machine.",
+            "warningLevel": "info"
           }
         ]
       },
@@ -772,13 +832,35 @@
             "level": "standard"
           },
           {
+            "label": "Input language",
+            "keys": [
+              "Win",
+              "Space"
+            ],
+            "description": "Switch input language and keyboard layout.",
+            "priority": 12,
+            "id": "systeme-langue-clavier",
+            "level": "advanced"
+          },
+          {
+            "label": "Keyboard layout",
+            "keys": [
+              "Ctrl",
+              "Shift"
+            ],
+            "description": "Switch keyboard layout when multiple layouts are available.",
+            "priority": 13,
+            "id": "systeme-disposition-clavier",
+            "level": "expert"
+          },
+          {
             "label": "System About",
             "keys": [
               "Win",
               "Pause"
             ],
             "description": "Open the System > About page.",
-            "priority": 12,
+            "priority": 14,
             "id": "systeme-a-propos",
             "level": "expert"
           }
@@ -885,6 +967,44 @@
             "command": "OptionalFeatures.exe",
             "warning": "* Advanced system tool: review every change before applying it.",
             "warningLevel": "danger"
+          },
+          {
+            "label": "Command Prompt",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Open Command Prompt from Run.",
+            "priority": 8,
+            "id": "outils-systeme-invite-commandes",
+            "level": "advanced",
+            "command": "cmd"
+          },
+          {
+            "label": "Windows PowerShell",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Open Windows PowerShell from Run.",
+            "priority": 9,
+            "id": "outils-systeme-powershell-windows",
+            "level": "advanced",
+            "command": "powershell"
+          },
+          {
+            "label": "PowerShell 7",
+            "keys": [
+              "Win",
+              "R"
+            ],
+            "description": "Open PowerShell 7 if installed.",
+            "priority": 10,
+            "id": "outils-systeme-powershell-7",
+            "level": "expert",
+            "command": "pwsh",
+            "warning": "Requires PowerShell 7 to be installed on this machine.",
+            "warningLevel": "info"
           }
         ]
       },

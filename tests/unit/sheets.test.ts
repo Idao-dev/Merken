@@ -56,8 +56,10 @@ describe("shortcut sheet selection", () => {
     "photos-en",
     "media-player-fr",
     "media-player-en",
-    "terminal-powershell-fr",
-    "terminal-powershell-en",
+    "cmd-fr",
+    "cmd-en",
+    "powershell-fr",
+    "powershell-en",
     "browsers-fr",
     "browsers-en",
     "excel-fr",
@@ -81,6 +83,8 @@ describe("shortcut sheet selection", () => {
     expect(defaultSettings.shortcutLanguage).toBe("fr");
     expect(defaultSettings.keyboardLayout).toBe("azerty");
     expect(defaultSettings.theme).toBe("dark");
+    expect(defaultSettings.enhancedContrast).toBe(false);
+    expect(defaultSettings.panelTransparency).toBe(50);
     expect(defaultSettings.startWithWindows).toBe(true);
     expect(defaultSettings.sheetMode).toBe("auto");
     expect(defaultSettings.manualSheetId).toBe("windows-core");
@@ -244,8 +248,12 @@ describe("shortcut sheet selection", () => {
     expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "microsoft.media.player.exe", title: null, sheetId: null }).id).toBe(
       "media-player-en"
     );
-    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "windowsterminal.exe", title: null, sheetId: null }).id).toBe(
-      "terminal-powershell-en"
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "cmd.exe", title: null, sheetId: null }).id).toBe("cmd-en");
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "powershell.exe", title: null, sheetId: null }).id).toBe(
+      "powershell-en"
+    );
+    expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "pwsh.exe", title: null, sheetId: null }).id).toBe(
+      "powershell-en"
     );
     expect(selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "firefox.exe", title: null, sheetId: null }).id).toBe(
       "browsers-en"
@@ -261,30 +269,49 @@ describe("shortcut sheet selection", () => {
     );
   });
 
-  it("does not auto-detect cmd as the PowerShell sheet", () => {
-    expect(findSheetForProcess("cmd.exe", "fr")).toBeNull();
+  it("detects CMD and PowerShell as separate sheets", () => {
+    expect(findSheetForProcess("cmd.exe", "fr")?.id).toBe("cmd-fr");
+    expect(findSheetForProcess("powershell.exe", "fr")?.id).toBe("powershell-fr");
+    expect(findSheetForProcess("pwsh.exe", "fr")?.id).toBe("powershell-fr");
+    expect(findSheetForProcess("windowsterminal.exe", "fr")).toBeNull();
   });
 
-  it("keeps Terminal settings shortcuts distinct", () => {
-    const terminal = sheets.find((sheet) => sheet.id === "terminal-powershell-fr");
-    const tabsCategory = terminal?.categories.find((category) => category.id === "onglets");
-
-    expect(tabsCategory?.shortcuts.find((shortcut) => shortcut.id === "onglets-parametres")?.keys).toEqual(["Ctrl", ","]);
-    expect(tabsCategory?.shortcuts.find((shortcut) => shortcut.id === "onglets-fichier-parametres")?.keys).toEqual([
-      "Ctrl",
-      "Shift",
-      ","
-    ]);
+  it("uses explicit Windows Terminal title mappings from the backend", () => {
+    expect(
+      selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "windowsterminal.exe", title: "PowerShell", sheetId: "powershell-fr" }).id
+    ).toBe("powershell-en");
+    expect(
+      selectSheet({ ...defaultSettings, shortcutLanguage: "en" }, { processName: "windowsterminal.exe", title: "Command Prompt", sheetId: "cmd-fr" }).id
+    ).toBe("cmd-en");
+    expect(selectSheet(defaultSettings, { processName: "windowsterminal.exe", title: "Ubuntu", sheetId: null }).id).toBe("windows-core-fr");
   });
 
-  it("keeps PowerShell commands copyable without fake keyboard keys", () => {
-    const terminal = sheets.find((sheet) => sheet.id === "terminal-powershell-fr");
-    const commandsCategory = terminal?.categories.find((category) => category.id === "commandes");
+  it("keeps CMD commands copyable and marks risky commands", () => {
+    const cmd = sheets.find((sheet) => sheet.id === "cmd-fr");
+    const commandsCategory = cmd?.categories.find((category) => category.id === "commandes");
+    const deleteFile = commandsCategory?.shortcuts.find((shortcut) => shortcut.id === "commandes-supprimer-fichier");
     const stopProcess = commandsCategory?.shortcuts.find((shortcut) => shortcut.id === "commandes-arreter-processus");
 
-    expect(commandsCategory?.shortcuts).toHaveLength(7);
+    expect(commandsCategory?.shortcuts).toHaveLength(12);
     expect(commandsCategory?.shortcuts.every((shortcut) => shortcut.keys.length === 0)).toBe(true);
     expect(commandsCategory?.shortcuts.every((shortcut) => Boolean(shortcut.command))).toBe(true);
+    expect(deleteFile?.command).toBe("del <fichier>");
+    expect(deleteFile?.warningLevel).toBe("danger");
+    expect(stopProcess?.command).toBe("taskkill /IM <nom.exe>");
+    expect(stopProcess?.warningLevel).toBe("danger");
+  });
+
+  it("keeps PowerShell commands copyable and marks risky commands", () => {
+    const powershell = sheets.find((sheet) => sheet.id === "powershell-fr");
+    const commandsCategory = powershell?.categories.find((category) => category.id === "commandes");
+    const removeItem = commandsCategory?.shortcuts.find((shortcut) => shortcut.id === "commandes-supprimer-element");
+    const stopProcess = commandsCategory?.shortcuts.find((shortcut) => shortcut.id === "commandes-arreter-processus");
+
+    expect(commandsCategory?.shortcuts).toHaveLength(12);
+    expect(commandsCategory?.shortcuts.every((shortcut) => shortcut.keys.length === 0)).toBe(true);
+    expect(commandsCategory?.shortcuts.every((shortcut) => Boolean(shortcut.command))).toBe(true);
+    expect(removeItem?.command).toBe("Remove-Item <chemin>");
+    expect(removeItem?.warningLevel).toBe("danger");
     expect(stopProcess?.command).toBe("Stop-Process -Name <nom>");
     expect(stopProcess?.warningLevel).toBe("danger");
   });
@@ -398,7 +425,8 @@ describe("shortcut sheet selection", () => {
     expect(options).toContainEqual({ key: "file-explorer", label: "Explorateur de fichiers" });
     expect(options).toContainEqual({ key: "photos", label: "Photos" });
     expect(options).toContainEqual({ key: "media-player", label: "Lecteur multimedia" });
-    expect(options).toContainEqual({ key: "terminal-powershell", label: "Terminal et PowerShell" });
+    expect(options).toContainEqual({ key: "cmd", label: "Invite de commandes" });
+    expect(options).toContainEqual({ key: "powershell", label: "PowerShell" });
     expect(options).toContainEqual({ key: "browsers", label: "Navigateurs" });
     expect(options).toContainEqual({ key: "thunderbird", label: "Thunderbird" });
     expect(options).toContainEqual({ key: "obsidian", label: "Obsidian" });
@@ -411,7 +439,8 @@ describe("shortcut sheet selection", () => {
     expect(options).toContainEqual({ key: "windows-core", label: "Windows - Essentials" });
     expect(options).toContainEqual({ key: "file-explorer", label: "File Explorer" });
     expect(options).toContainEqual({ key: "media-player", label: "Media Player" });
-    expect(options).toContainEqual({ key: "terminal-powershell", label: "Terminal and PowerShell" });
+    expect(options).toContainEqual({ key: "cmd", label: "Command Prompt" });
+    expect(options).toContainEqual({ key: "powershell", label: "PowerShell" });
     expect(options).toContainEqual({ key: "browsers", label: "Browsers" });
   });
 
@@ -422,7 +451,8 @@ describe("shortcut sheet selection", () => {
     expect(options).toContainEqual({ key: "file-explorer", label: "Explorateur de fichiers - Win" });
     expect(options).toContainEqual({ key: "photos", label: "Photos - Win" });
     expect(options).toContainEqual({ key: "media-player", label: "Lecteur multimedia - Win" });
-    expect(options).toContainEqual({ key: "terminal-powershell", label: "Terminal et PowerShell - Win" });
+    expect(options).toContainEqual({ key: "cmd", label: "Invite de commandes - Win" });
+    expect(options).toContainEqual({ key: "powershell", label: "PowerShell - Win" });
     expect(options).toContainEqual({ key: "excel", label: "Excel" });
   });
 

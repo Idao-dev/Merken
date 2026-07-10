@@ -12,6 +12,8 @@ Documentation sheet for general Windows shortcuts.
 - https://learn.microsoft.com/en-us/windows/win32/shell/executing-control-panel-items
 - https://learn.microsoft.com/en-us/windows/win32/shell/controlpanel-canonical-names
 - https://www.dell.com/support/kbdoc/en-us/000123570/how-to-access-device-manager
+- https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/cmd
+- https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows
 
 ## Notes de recherche
 
@@ -26,6 +28,7 @@ Documentation sheet for general Windows shortcuts.
 
 - Statut audit 2026-06-01: fiche conservee comme selection existante; aucune correction de touche localisee n'est promue sans source localisee ou validation explicite.
 - Les sections Francais et English restent separees: ne pas deduire une touche FR depuis une source EN traduite.
+- Les raccourcis `Win` + `Space` et `Ctrl` + `Shift` sont documentes par les sources Microsoft FR et EN; aucune divergence AZERTY/QWERTY n'est retenue.
 - Les touches de ponctuation, les actions souris et les sequences `Alt` doivent etre reverifiees par langue de logiciel et disposition AZERTY/QWERTY avant ajout de `keysByLayout`.
 
 ## Inventaire complet
@@ -51,6 +54,8 @@ Documentation sheet for general Windows shortcuts.
 | Task Manager | `Ctrl` + `Shift` + `Esc` | Microsoft Windows shortcuts | Avance | Diagnostic. |
 | Snipping | `Win` + `Shift` + `S` | Microsoft Windows shortcuts | Standard | Capture courante. |
 | Emoji panel | `Win` + `.` | Microsoft Windows shortcuts | Standard | Saisie de symboles. |
+| Input language and keyboard layout | `Win` + `Space` | Microsoft Windows shortcuts FR/EN | Avance | Bascule langue d entree et disposition clavier. |
+| Keyboard layout | `Ctrl` + `Shift` | Microsoft Windows shortcuts FR/EN | Expert | Disponible seulement si plusieurs dispositions clavier existent. |
 | File Explorer | `Win` + `E` | Microsoft Windows shortcuts | Non retenu | Couvert par la fiche Explorateur. |
 | System About | `Win` + `Pause` | Microsoft Windows shortcuts | Expert | Information systeme avancee. |
 | Switch windows | `Alt` + `Tab` | Microsoft Windows shortcuts | Standard | Navigation fenetres. |
@@ -75,6 +80,9 @@ Documentation sheet for general Windows shortcuts.
 | Network Connections | `control.exe netconnections` via `Win` + `R` | Microsoft shell docs | Expert | Configuration reseau. |
 | Programs and Features | `appwiz.cpl` via `Win` + `R` | Microsoft control panel commands | Expert | Desinstallation/configuration. |
 | Windows Features | `OptionalFeatures.exe` via `Win` + `R` | Microsoft shell docs | Expert | Activation de composants systeme. |
+| Command Prompt | `cmd` via `Win` + `R` | Microsoft Windows Commands | Avance | Ouvre CMD. |
+| Windows PowerShell | `powershell` via `Win` + `R` | Windows executable connu | Avance | Ouvre Windows PowerShell. |
+| PowerShell 7 | `pwsh` via `Win` + `R` | Microsoft PowerShell install docs | Expert | Depend de l installation de PowerShell 7. |
 
 ## Francais
 
@@ -110,6 +118,8 @@ Documentation sheet for general Windows shortcuts.
 | `systeme-gestionnaire-des-taches` | Gestionnaire des taches | `Ctrl` + `Shift` + `Esc` | Ouvre le gestionnaire des taches. | Avance |
 | `systeme-capture-de-zone` | Capture de zone | `Win` + `Shift` + `S` | Lance la capture de zone. | Standard |
 | `systeme-emoji-et-symboles` | Emoji et symboles | `Win` + `.` | Ouvre le panneau emoji. | Standard |
+| `systeme-langue-clavier` | Langue et clavier | `Win` + `Space` | Bascule entre les langues d entree et dispositions clavier. | Avance |
+| `systeme-disposition-clavier` | Disposition clavier | `Ctrl` + `Shift` | Change de disposition clavier si plusieurs dispositions sont disponibles. | Expert |
 | `systeme-a-propos` | A propos du systeme | `Win` + `Pause` | Ouvre la page Systeme > Informations. | Expert |
 
 ### Outils systeme
@@ -123,6 +133,9 @@ Documentation sheet for general Windows shortcuts.
 | `outils-systeme-connexions-reseau` | Connexions reseau | `Win` + `R` | `control.exe netconnections` | Ouvre les connexions reseau. | Expert |
 | `outils-systeme-programmes-fonctionnalites` | Programmes et fonctionnalites | `Win` + `R` | `appwiz.cpl` | Ouvre la liste des programmes installes. | Expert |
 | `outils-systeme-fonctionnalites-windows` | Fonctionnalites Windows | `Win` + `R` | `OptionalFeatures.exe` | Ouvre l'activation des fonctionnalites Windows. | Expert |
+| `outils-systeme-invite-commandes` | Invite de commandes | `Win` + `R` | `cmd` | Ouvre l invite de commandes depuis Executer. | Avance |
+| `outils-systeme-powershell-windows` | PowerShell Windows | `Win` + `R` | `powershell` | Ouvre Windows PowerShell depuis Executer. | Avance |
+| `outils-systeme-powershell-7` | PowerShell 7 | `Win` + `R` | `pwsh` | Ouvre PowerShell 7 si installe. | Expert |
 
 ### Fenetres
 
@@ -179,6 +192,8 @@ Documentation sheet for general Windows shortcuts.
 | `systeme-gestionnaire-des-taches` | Task Manager | `Ctrl` + `Shift` + `Esc` | Open Task Manager. | Advanced |
 | `systeme-capture-de-zone` | Area screenshot | `Win` + `Shift` + `S` | Start area capture. | Standard |
 | `systeme-emoji-et-symboles` | Emoji and symbols | `Win` + `.` | Open the emoji panel. | Standard |
+| `systeme-langue-clavier` | Input language | `Win` + `Space` | Switch input language and keyboard layout. | Advanced |
+| `systeme-disposition-clavier` | Keyboard layout | `Ctrl` + `Shift` | Switch keyboard layout when multiple layouts are available. | Expert |
 | `systeme-a-propos` | System About | `Win` + `Pause` | Open the System > About page. | Expert |
 
 ### System tools
@@ -192,6 +207,9 @@ Documentation sheet for general Windows shortcuts.
 | `outils-systeme-connexions-reseau` | Network Connections | `Win` + `R` | `control.exe netconnections` | Open Network Connections. | Expert |
 | `outils-systeme-programmes-fonctionnalites` | Programs and Features | `Win` + `R` | `appwiz.cpl` | Open the installed programs list. | Expert |
 | `outils-systeme-fonctionnalites-windows` | Windows Features | `Win` + `R` | `OptionalFeatures.exe` | Open Windows features. | Expert |
+| `outils-systeme-invite-commandes` | Command Prompt | `Win` + `R` | `cmd` | Open Command Prompt from Run. | Advanced |
+| `outils-systeme-powershell-windows` | Windows PowerShell | `Win` + `R` | `powershell` | Open Windows PowerShell from Run. | Advanced |
+| `outils-systeme-powershell-7` | PowerShell 7 | `Win` + `R` | `pwsh` | Open PowerShell 7 if installed. | Expert |
 
 ### Windows
 

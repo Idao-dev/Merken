@@ -1,0 +1,354 @@
+[
+  {
+    "id": "cmd-fr",
+    "appNames": [
+      "cmd.exe"
+    ],
+    "title": "Invite de commandes - Essentiels",
+    "platform": "windows",
+    "language": "fr",
+    "categories": [
+      {
+        "id": "saisie",
+        "title": "Historique et saisie",
+        "shortcuts": [
+          {
+            "id": "saisie-commande-precedente",
+            "label": "Commande precedente",
+            "keys": [
+              "Up"
+            ],
+            "description": "Rappelle la commande precedente.",
+            "priority": 1,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-commande-suivante",
+            "label": "Commande suivante",
+            "keys": [
+              "Down"
+            ],
+            "description": "Avance dans l historique.",
+            "priority": 2,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-autocompletion",
+            "label": "Completer chemin",
+            "keys": [
+              "Tab"
+            ],
+            "description": "Complete un nom de fichier ou de dossier.",
+            "priority": 3,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-interrompre",
+            "label": "Interrompre commande",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Interrompt la commande en cours.",
+            "priority": 4,
+            "level": "standard"
+          }
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Commandes",
+        "shortcuts": [
+          {
+            "id": "commandes-aide",
+            "label": "Aide commande",
+            "keys": [],
+            "description": "Affiche l aide d une commande.",
+            "priority": 1,
+            "level": "standard",
+            "command": "help <commande>"
+          },
+          {
+            "id": "commandes-lister-fichiers",
+            "label": "Lister fichiers",
+            "keys": [],
+            "description": "Liste les fichiers du dossier courant.",
+            "priority": 2,
+            "level": "standard",
+            "command": "dir"
+          },
+          {
+            "id": "commandes-changer-dossier",
+            "label": "Changer dossier",
+            "keys": [],
+            "description": "Change de dossier courant.",
+            "priority": 3,
+            "level": "standard",
+            "command": "cd <chemin>"
+          },
+          {
+            "id": "commandes-effacer-ecran",
+            "label": "Effacer ecran",
+            "keys": [],
+            "description": "Nettoie l affichage de la console.",
+            "priority": 4,
+            "level": "standard",
+            "command": "cls"
+          },
+          {
+            "id": "commandes-lire-fichier",
+            "label": "Lire fichier",
+            "keys": [],
+            "description": "Affiche le contenu d un fichier texte.",
+            "priority": 5,
+            "level": "standard",
+            "command": "type <fichier>"
+          },
+          {
+            "id": "commandes-copier-fichier",
+            "label": "Copier fichier",
+            "keys": [],
+            "description": "Copie un fichier vers une destination.",
+            "priority": 6,
+            "level": "advanced",
+            "command": "copy <source> <destination>"
+          },
+          {
+            "id": "commandes-deplacer-fichier",
+            "label": "Deplacer fichier",
+            "keys": [],
+            "description": "Deplace ou renomme un fichier.",
+            "priority": 7,
+            "level": "advanced",
+            "command": "move <source> <destination>"
+          },
+          {
+            "id": "commandes-rechercher-texte",
+            "label": "Rechercher texte",
+            "keys": [],
+            "description": "Recherche du texte dans des fichiers.",
+            "priority": 8,
+            "level": "advanced",
+            "command": "findstr \"texte\" <fichier>"
+          },
+          {
+            "id": "commandes-configuration-reseau",
+            "label": "Configuration reseau",
+            "keys": [],
+            "description": "Affiche la configuration IP.",
+            "priority": 9,
+            "level": "advanced",
+            "command": "ipconfig"
+          },
+          {
+            "id": "commandes-lister-processus",
+            "label": "Lister processus",
+            "keys": [],
+            "description": "Liste les processus en cours.",
+            "priority": 10,
+            "level": "advanced",
+            "command": "tasklist"
+          },
+          {
+            "id": "commandes-supprimer-fichier",
+            "label": "Supprimer fichier",
+            "keys": [],
+            "description": "Supprime un fichier.",
+            "priority": 11,
+            "level": "expert",
+            "command": "del <fichier>",
+            "warning": "Supprime des fichiers et peut entrainer une perte de donnees.",
+            "warningLevel": "danger"
+          },
+          {
+            "id": "commandes-arreter-processus",
+            "label": "Arreter processus",
+            "keys": [],
+            "description": "Arrete un processus par nom.",
+            "priority": 12,
+            "level": "expert",
+            "command": "taskkill /IM <nom.exe>",
+            "warning": "Peut fermer brutalement une application ou interrompre un travail en cours.",
+            "warningLevel": "danger"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "cmd-en",
+    "appNames": [
+      "cmd.exe"
+    ],
+    "title": "Command Prompt - Essentials",
+    "platform": "windows",
+    "language": "en",
+    "categories": [
+      {
+        "id": "saisie",
+        "title": "History and input",
+        "shortcuts": [
+          {
+            "id": "saisie-commande-precedente",
+            "label": "Previous command",
+            "keys": [
+              "Up"
+            ],
+            "description": "Recall the previous command.",
+            "priority": 1,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-commande-suivante",
+            "label": "Next command",
+            "keys": [
+              "Down"
+            ],
+            "description": "Move forward in history.",
+            "priority": 2,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-autocompletion",
+            "label": "Complete path",
+            "keys": [
+              "Tab"
+            ],
+            "description": "Complete a file or folder name.",
+            "priority": 3,
+            "level": "standard"
+          },
+          {
+            "id": "saisie-interrompre",
+            "label": "Interrupt command",
+            "keys": [
+              "Ctrl",
+              "C"
+            ],
+            "description": "Interrupt the running command.",
+            "priority": 4,
+            "level": "standard"
+          }
+        ]
+      },
+      {
+        "id": "commandes",
+        "title": "Commands",
+        "shortcuts": [
+          {
+            "id": "commandes-aide",
+            "label": "Command help",
+            "keys": [],
+            "description": "Show help for a command.",
+            "priority": 1,
+            "level": "standard",
+            "command": "help <command>"
+          },
+          {
+            "id": "commandes-lister-fichiers",
+            "label": "List files",
+            "keys": [],
+            "description": "List files in the current folder.",
+            "priority": 2,
+            "level": "standard",
+            "command": "dir"
+          },
+          {
+            "id": "commandes-changer-dossier",
+            "label": "Change folder",
+            "keys": [],
+            "description": "Change the current folder.",
+            "priority": 3,
+            "level": "standard",
+            "command": "cd <path>"
+          },
+          {
+            "id": "commandes-effacer-ecran",
+            "label": "Clear screen",
+            "keys": [],
+            "description": "Clear the console display.",
+            "priority": 4,
+            "level": "standard",
+            "command": "cls"
+          },
+          {
+            "id": "commandes-lire-fichier",
+            "label": "Read file",
+            "keys": [],
+            "description": "Show a text file's content.",
+            "priority": 5,
+            "level": "standard",
+            "command": "type <file>"
+          },
+          {
+            "id": "commandes-copier-fichier",
+            "label": "Copy file",
+            "keys": [],
+            "description": "Copy a file to a destination.",
+            "priority": 6,
+            "level": "advanced",
+            "command": "copy <source> <destination>"
+          },
+          {
+            "id": "commandes-deplacer-fichier",
+            "label": "Move file",
+            "keys": [],
+            "description": "Move or rename a file.",
+            "priority": 7,
+            "level": "advanced",
+            "command": "move <source> <destination>"
+          },
+          {
+            "id": "commandes-rechercher-texte",
+            "label": "Search text",
+            "keys": [],
+            "description": "Search text in files.",
+            "priority": 8,
+            "level": "advanced",
+            "command": "findstr \"text\" <file>"
+          },
+          {
+            "id": "commandes-configuration-reseau",
+            "label": "Network configuration",
+            "keys": [],
+            "description": "Show IP configuration.",
+            "priority": 9,
+            "level": "advanced",
+            "command": "ipconfig"
+          },
+          {
+            "id": "commandes-lister-processus",
+            "label": "List processes",
+            "keys": [],
+            "description": "List running processes.",
+            "priority": 10,
+            "level": "advanced",
+            "command": "tasklist"
+          },
+          {
+            "id": "commandes-supprimer-fichier",
+            "label": "Delete file",
+            "keys": [],
+            "description": "Delete a file.",
+            "priority": 11,
+            "level": "expert",
+            "command": "del <file>",
+            "warning": "Deletes files and may cause data loss.",
+            "warningLevel": "danger"
+          },
+          {
+            "id": "commandes-arreter-processus",
+            "label": "Stop process",
+            "keys": [],
+            "description": "Stop a process by image name.",
+            "priority": 12,
+            "level": "expert",
+            "command": "taskkill /IM <name.exe>",
+            "warning": "May force-close an app or interrupt work in progress.",
+            "warningLevel": "danger"
+          }
+        ]
+      }
+    ]
+  }
+]

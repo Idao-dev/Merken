@@ -20,7 +20,8 @@ const sheetFamilyOrder = [
   "file-explorer",
   "photos",
   "media-player",
-  "terminal-powershell",
+  "cmd",
+  "powershell",
   "browsers",
   "excel",
   "word",
@@ -49,7 +50,8 @@ const windowsNativeSheetFamilies = new Set([
   "file-explorer",
   "photos",
   "media-player",
-  "terminal-powershell"
+  "cmd",
+  "powershell"
 ]);
 
 const systemShortcutWarningExemptFamilies = new Set(["windows-core", "file-explorer"]);
@@ -67,7 +69,8 @@ const manualSheetLabels = new Map<string, string>([
   ["file-explorer", "Explorateur de fichiers"],
   ["photos", "Photos"],
   ["media-player", "Lecteur multimedia"],
-  ["terminal-powershell", "Terminal et PowerShell"],
+  ["cmd", "Invite de commandes"],
+  ["powershell", "PowerShell"],
   ["browsers", "Navigateurs"],
   ["word", "Word"],
   ["excel", "Excel"],
@@ -83,7 +86,8 @@ const manualSheetLabelsEn = new Map<string, string>([
   ["file-explorer", "File Explorer"],
   ["photos", "Photos"],
   ["media-player", "Media Player"],
-  ["terminal-powershell", "Terminal and PowerShell"],
+  ["cmd", "Command Prompt"],
+  ["powershell", "PowerShell"],
   ["browsers", "Browsers"],
   ["word", "Word"],
   ["excel", "Excel"],
