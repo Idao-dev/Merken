@@ -1,0 +1,50 @@
+CONTRAT DE LICENCE UTILISATEUR FINAL - MERKEN
+
+Copyright (c) 2026 Eric Boyer. Tous droits reserves.
+
+Merken est distribue gratuitement, avec code source consultable, mais il reste protege par le droit d'auteur. Ce n'est pas une licence open source au sens strict.
+
+Vous pouvez installer et utiliser les versions officielles de Merken gratuitement, a titre personnel ou professionnel.
+
+Sauf accord ecrit prealable de l'auteur, vous ne pouvez pas :
+
+- publier ou redistribuer une version modifiee du logiciel ;
+- revendre le logiciel ;
+- integrer le logiciel, son code, son interface, sa documentation ou ses fichiers de raccourcis dans un autre produit ;
+- exploiter commercialement le logiciel, son code ou ses contenus ;
+- reutiliser tout ou partie du code source dans un autre projet ;
+- supprimer ou modifier les mentions de copyright, de licence ou d'attribution.
+
+Merken est fourni gratuitement, tel quel, sans garantie de fonctionnement permanent, d'absence d'erreur, de disponibilite, de compatibilite avec toutes les configurations ou d'adaptation a un usage particulier.
+
+Dans les limites autorisees par la loi, l'auteur ne pourra pas etre tenu responsable des dommages directs ou indirects lies a l'installation, l'utilisation ou l'impossibilite d'utiliser le logiciel.
+
+Le projet est independant et n'est pas affilie, sponsorise, approuve ni valide par Microsoft ou par les editeurs des logiciels mentionnes.
+
+La licence complete est disponible dans le fichier LICENSE.md du depot officiel.
+
+
+END USER LICENSE AGREEMENT - MERKEN
+
+Copyright (c) 2026 Eric Boyer. All rights reserved.
+
+Merken is distributed free of charge, with viewable source code, but remains protected by copyright. It is not an open source license in the strict sense.
+
+You may install and use official versions of Merken free of charge, for personal or professional use.
+
+Without the author's prior written permission, you may not:
+
+- publish or redistribute a modified version of the software;
+- resell the software;
+- integrate the software, its code, interface, documentation, or shortcut files into another product;
+- commercially exploit the software, its code, or its content;
+- reuse all or part of the source code in another project;
+- remove or alter copyright, license, or attribution notices.
+
+Merken is provided free of charge, as is, without any warranty that it will work permanently, be error-free, remain available, be compatible with every configuration, or fit a particular purpose.
+
+To the extent permitted by law, the author may not be held liable for direct or indirect damages related to installing, using, or being unable to use the software.
+
+Merken is independent and is not affiliated with, sponsored by, approved by, or endorsed by Microsoft or by the publishers of the mentioned software.
+
+The full license is available in the LICENSE.md file of the official repository.

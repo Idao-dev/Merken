@@ -1,26 +1,34 @@
 # Merken
 
-[Francais](#francais) | [English](#english)
+Merken est une application Windows qui affiche un panneau flottant de raccourcis clavier depuis la zone de notification.
 
-## Francais
+Son objectif est simple : garder sous la main les raccourcis utiles de Windows et des logiciels courants, sans compte utilisateur, sans telemetrie et sans connexion obligatoire.
 
-Merken est une application Windows qui affiche un panneau flottant de raccourcis clavier depuis la zone de notification. L'objectif est simple : garder sous la main les raccourcis utiles de Windows et des logiciels courants, sans compte utilisateur, sans telemetrie et sans connexion obligatoire.
+Le projet est une application Tauri 2 : interface TypeScript/Vite, backend Rust et donnees de raccourcis locales.
 
-Le projet est une application Tauri 2 : interface TypeScript/Vite, backend Rust, donnees de raccourcis locales.
+Merken est independant. Il n'est pas affilie, sponsorise, approuve ni valide par Microsoft ou par les editeurs des logiciels mentionnes.
 
-Merken affiche notamment des raccourcis clavier pour Windows et certaines applications compatibles, dont Microsoft Office, Word, Excel et PowerPoint. Le projet est independant et n'est pas affilie, sponsorise, approuve ni valide par Microsoft.
+## Fonctionnalites
 
-### Fonctionnalites
-
-- Fiches locales pour Windows, Explorateur de fichiers, Photos, lecteur multimedia, Terminal/PowerShell, navigateurs, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian et VLC.
-- Detection contextuelle locale : Merken choisit la fiche adaptee a partir du nom du processus actif et du titre de fenetre, sans compte, sans telemetrie et sans journalisation d'usage.
-- Niveaux par fiche : standard, avance ou expert. Chaque niveau remplace le contenu affiche pour garder le panneau court et lisible.
-- Personnalisation par theme ou par raccourci, avec apercu immediat dans le panneau de raccourcis.
+- Fiches locales pour Windows, Explorateur de fichiers, Photos, lecteur multimedia, Invite de commandes, PowerShell, navigateurs, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian et VLC.
+- Detection contextuelle locale a partir du nom du processus actif et du titre de fenetre.
+- Niveaux par fiche : standard, avance ou expert.
+- Personnalisation par theme ou par raccourci, avec apercu immediat.
 - Placement du panneau par preset ou ajustement manuel.
-- Options organisees par onglets : langues, disposition clavier, apparence, fiches, personnalisation, demarrage Windows, informations et mises a jour.
-- Verification manuelle des mises a jour depuis GitHub Releases. L'installateur peut installer la mise a jour signee ; la version portable renvoie vers la derniere release.
+- Themes sombre et clair, renforcement optionnel des contrastes et transparence du panneau reglable de 0 % a 100 %.
+- Options pour la langue, la disposition clavier, l'apparence, les fiches, la personnalisation, le demarrage Windows et les informations de version.
+- Verification manuelle des mises a jour depuis GitHub Releases.
 
-### Lancer en local
+## Installation
+
+Merken est distribue sous deux formes :
+
+- [installateur Windows](https://github.com/Idao-dev/Merken/releases/latest/download/Merken-setup.exe) : installation pour l'utilisateur courant et mises a jour integrees ;
+- [version portable](https://github.com/Idao-dev/Merken/releases/latest/download/merken.exe) : executable autonome, sans installation.
+
+Les versions publiees et leurs notes sont disponibles dans [GitHub Releases](https://github.com/Idao-dev/Merken/releases).
+
+## Developpement
 
 Prerequis : Node.js, npm, Rust et les outils Tauri pour Windows.
 
@@ -29,77 +37,55 @@ npm install
 npm run tauri:dev
 ```
 
-Commandes utiles avant une publication :
+Commandes utiles avant publication :
 
 ```powershell
 npm run test
 npm run typecheck
 npm run build
-cargo check --manifest-path src-tauri/Cargo.toml
+cargo test --manifest-path src-tauri/Cargo.toml
 npm run tauri:build
 ```
 
-### Portable ou installateur
+## Contribution
 
-La version portable est un executable Windows autonome. Elle peut etre lancee sans installation, pratique pour tester ou utiliser Merken ponctuellement. Pour les mises a jour, elle indique qu'une nouvelle version existe et renvoie vers la derniere release GitHub a telecharger.
+Les contributions sont bienvenues lorsqu'elles ameliorent le projet officiel.
 
-L'installateur installe Merken pour l'utilisateur courant, configure l'application comme une application Windows classique et prend en charge les mises a jour integrees.
+Vous pouvez proposer :
 
-### Licence
+- des corrections de bugs ;
+- des ameliorations de l'interface ;
+- de nouvelles fiches de raccourcis ;
+- des corrections de raccourcis existants ;
+- de la documentation ;
+- des traductions.
 
-Merken est gratuit. Son code source est consultable sur GitHub pour la transparence, l'audit, l'apprentissage et les contributions au projet officiel.
+Les contributions doivent rester claires, ciblees et coherentes avec l'interface existante. Avant une modification importante, ouvrez de preference une issue pour valider l'approche.
 
-Le projet accepte les contributions via le depot officiel, mais sa licence n'est pas une licence open source au sens strict. Merken est distribue sous licence proprietaire gratuite, avec code source consultable et tous droits reserves.
+En soumettant une contribution au depot officiel, vous confirmez que vous avez le droit de la proposer et vous acceptez qu'elle puisse etre integree au projet officiel sous la licence du projet.
 
-Toute reprise, redistribution, publication d'une version modifiee ou reutilisation du code dans un autre projet necessite l'accord ecrit prealable de l'auteur.
+## Securite
 
-## English
+Merci de ne pas publier de signalement de securite dans une issue publique. Utilisez une alerte de securite privee GitHub si elle est disponible sur le depot, ou contactez le proprietaire du depot via GitHub.
 
-Merken is a Windows application that shows a floating keyboard-shortcut panel from the system tray. The goal is straightforward: keep useful shortcuts for Windows and common applications close at hand, without user accounts, telemetry, or a required network connection.
+Indiquez si possible :
 
-The project is a Tauri 2 application: TypeScript/Vite frontend, Rust backend, local shortcut data.
+- la version de Merken concernee ;
+- la version de Windows utilisee ;
+- les etapes de reproduction ;
+- l'impact attendu ;
+- les logs ou captures utiles, sans secret ni donnee sensible.
 
-Merken displays keyboard shortcuts for Windows and compatible applications, including Microsoft Office, Word, Excel and PowerPoint. The project is independent and is not affiliated with, sponsored by, approved by, or validated by Microsoft.
+Seule la derniere release stable publiee officiellement est supportee pour les correctifs de securite.
 
-### Features
+Le projet ne propose pas actuellement de programme de bug bounty.
 
-- Local shortcut sheets for Windows, File Explorer, Photos, media player, Terminal/PowerShell, browsers, Excel, Word, PowerPoint, Outlook, Thunderbird, Obsidian, and VLC.
-- Local contextual detection: Merken chooses the relevant sheet from the active process name and window title, without accounts, telemetry, or usage logging.
-- Per-sheet levels: standard, advanced, or expert. Each level replaces the visible content so the panel stays short and readable.
-- Theme-level and shortcut-level customization, with an immediate preview in the shortcut panel.
-- Panel placement through presets or manual adjustment.
-- Tabbed options for languages, keyboard layout, appearance, sheets, customization, Windows startup, app information, and updates.
-- Manual update checks through GitHub Releases. The installer can install signed updates; the portable build links to the latest release.
+## Licence
 
-### Run Locally
+Merken est gratuit. Son code source est consultable pour la transparence, l'audit, l'apprentissage et les contributions au projet officiel.
 
-Requirements: Node.js, npm, Rust, and the Tauri tooling for Windows.
+Le projet n'est pas distribue sous une licence open source au sens strict. Merken est distribue sous licence proprietaire gratuite, avec code source consultable et tous droits reserves.
 
-```powershell
-npm install
-npm run tauri:dev
-```
+Toute reprise, redistribution, publication d'une version modifiee, reutilisation du code dans un autre projet ou exploitation commerciale necessite l'accord ecrit prealable de l'auteur.
 
-Useful checks before publishing:
-
-```powershell
-npm run test
-npm run typecheck
-npm run build
-cargo check --manifest-path src-tauri/Cargo.toml
-npm run tauri:build
-```
-
-### Portable or Installer
-
-The portable version is a standalone Windows executable. It can be started without installation, which is useful for testing or occasional use. For updates, it reports that a new version is available and links to the latest GitHub release to download.
-
-The installer installs Merken for the current user, registers it as a regular Windows application, and supports integrated updates.
-
-### License
-
-Merken is free to use. Its source code is available on GitHub for transparency, audit, learning, and contributions to the official project.
-
-The project accepts contributions through the official repository, but the license is not an open source license in the strict sense. Merken is distributed under a free proprietary license, with viewable source code and all rights reserved.
-
-Any reuse, redistribution, publication of a modified version, or reuse of the code in another project requires the author's prior written permission.
+Voir `LICENSE.md` pour les conditions completes.
